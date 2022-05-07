@@ -1,0 +1,157 @@
+body {
+    background-color: #171D1A;
+    font-family: 'Work Sans', sans-serif;
+    color: #F1F1F1;
+    font-size: 20px
+}
+
+html {
+    overscroll-behavior: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+    padding: 2em
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 2em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: center
+}
+
+.header__menu-button,
+.menu__close-button {
+    background: transparent;
+    appearance: none;
+    border: none;
+    border-bottom: 8px solid #f1f1f1;
+    width: 75px;
+    height: 50px;
+}
+
+a {
+    color: #F1F1F1;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: #FFD11F;
+    }
+}
+
+.footer__central-text p {
+    margin-bottom: 0
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-20px)
+    }
+}
+
+.jg > div {
+    animation: pulse 10s infinite both;
+}
+
+.menu {
+    backdrop-filter: blur(10px);
+
+    /* background-color: rgba(23, 29, 26, .9) */
+    // border-right: 1px solid #f1f1f1;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 2;
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.main-menu__links {
+    color: #f1f1f1;
+    font-size: 42px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    display: inline-block;
+}
+
+.main-menu__list {
+    border-right: 1px solid #f1f1f1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 25%;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin-top: 0;
+    padding: 0 1em 0 3em;
+    justify-content: center;
+    align-items: start;
+    background-color: rgba(23, 29, 26, .9);
+    transform: translateX(-100%)
+}
+
+.menu__close-button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 1
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+.splash-page-one {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative
+}
+
+.splash-pages {
+    background: rgba(23, 29, 26, 0.9);
+    overflow: scroll;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+}
+
+.splash-page-one__scroll-down {
+    position: fixed;
+    bottom: 1em;
+    left: 50%;
+    z-index: 10
+}
+
+.header--closed {
+    display: none
+}
+
+.footer--closed {
+    display: none
+}

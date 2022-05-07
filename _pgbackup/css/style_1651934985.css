@@ -1,0 +1,201 @@
+body {
+  background-color: #171D1A;
+  font-family: 'Work Sans', sans-serif;
+  color: #F1F1F1;
+  font-size: 20px; }
+
+html {
+  -ms-scroll-chaining: none;
+      overscroll-behavior: none; }
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  z-index: 1;
+  padding: 2em;
+  opacity: 0;
+  -webkit-transform: scale3d(1.2, 1.2, 1.2);
+          transform: scale3d(1.2, 1.2, 1.2); }
+
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 2em 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  text-align: center;
+  -webkit-transform: scale3d(1.2, 1.2, 1.2);
+          transform: scale3d(1.2, 1.2, 1.2); }
+
+.header__menu-button,
+.menu__close-button {
+  background: transparent;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  border-bottom: 8px solid #f1f1f1;
+  width: 75px;
+  height: 50px; }
+
+a {
+  color: #F1F1F1;
+  text-decoration: none; }
+  a:hover, a:focus {
+    color: #FFD11F; }
+
+.footer__central-text p {
+  margin-bottom: 0; }
+
+@-webkit-keyframes pulse {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  50% {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px); } }
+
+@keyframes pulse {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  50% {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px); } }
+
+.jg > div {
+  -webkit-animation: pulse 10s infinite both;
+          animation: pulse 10s infinite both; }
+
+.menu {
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  /* background-color: rgba(23, 29, 26, .9) */
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 2;
+  -webkit-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%);
+  opacity: 0; }
+
+.main-menu__links {
+  color: #f1f1f1;
+  font-size: 42px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  display: inline-block; }
+
+.main-menu__list {
+  border-right: 1px solid #f1f1f1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 25%;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style-type: none;
+  margin-top: 0;
+  padding: 0 1em 0 3em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  background-color: rgba(23, 29, 26, 0.9);
+  -webkit-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%); }
+
+.menu__close-button {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 1; }
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none; }
+
+.splash-pages {
+  overflow: scroll;
+  z-index: 50;
+  height: 400vh; }
+
+.splash-page-one__scroll-down {
+  position: fixed;
+  bottom: 1em;
+  left: 50%;
+  z-index: 9999;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%); }
+
+.header--closed {
+  display: none; }
+
+.footer--closed {
+  display: none;
+  opacity: 0; }
+
+.splash-page__main-text {
+  font-size: 40px;
+  margin-bottom: 0.2em; }
+
+.splash-page {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.backdrop-blur {
+  background-color: rgba(23, 29, 26, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
