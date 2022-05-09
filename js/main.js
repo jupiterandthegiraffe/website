@@ -2,6 +2,8 @@ gsap.registerPlugin(SplitText)
 
 const header = document.querySelector('header')
 const footer = document.querySelector('footer')
+let splashTextTimeline = null
+let scrollDownTimeline = null
 
 const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html'
 
@@ -16,9 +18,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
     const splashText = document.querySelector(".splash-page-two .splash-page__main-text")
     const scrollDownText = document.getElementById('keep-going')
-    
-    let splashTextTimeline = null
-    let scrollDownTimeline = null
     
     if (splashText && scrollDownText) {
         const splashTextSplitText = new SplitText(splashText, {type: 'words, lines'})
@@ -118,7 +117,6 @@ Array.from(document.querySelectorAll('a')).forEach(el => {
     el.addEventListener('click', (e) => {
       if (blur) {
         e.preventDefault()
-        console.log(e.target.pathname)
         const animationName = e.target.pathname === '/' || e.target.pathname === '/index.html' ? 'Blur Out' : 'Blur In'
         pgia.play(blur, animationName)
 
@@ -126,7 +124,6 @@ Array.from(document.querySelectorAll('a')).forEach(el => {
           window.location = e.target.href
         }, 500)
       }
-
     })
 })
 
