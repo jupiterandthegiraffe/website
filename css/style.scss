@@ -14,6 +14,23 @@ body {
 html,
 body {
     overscroll-behavior: none;
+    overflow-y: overlay;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(219, 219, 219, .5);
+    opacity: .2;
+    height: 100px;
+    border-radius: 10px;
+
+    &:hover {
+        background: rgba(219, 219, 219, 1);
+    }
 }
 
 header {
@@ -88,7 +105,7 @@ a {
 }
 
 .jg .logo {
-    animation: pulse 10s infinite both
+    // animation: pulse 10s infinite both
 }
 
 .menu {
@@ -144,7 +161,6 @@ a {
 }
 
 .splash-pages {
-    overflow: scroll;
     z-index: 50;
     height: 400vh;
 }
@@ -161,7 +177,7 @@ a {
 .splash-page__main-text {
     font-size: 40px;
     margin-bottom: 0.2em;
-    max-width: calc(1024px - 15px)
+    max-width: 1036px
 }
 
 .splash-page {
@@ -174,7 +190,6 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    pointer-events: none;
 }
 
 .backdrop-blur {
@@ -186,6 +201,9 @@ a {
     right: 0;
     bottom: 0;
     z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .splash-page-one__scroll-down {
@@ -198,6 +216,8 @@ a {
     right: 0;
     padding-top: 50px;
 }
+
+sp
 
 .splash-page-one__scroll-down p {
     position: absolute;
@@ -244,7 +264,7 @@ a {
     border-top: 1px solid var(--color-brand-white);
     margin-top: 180px;
     z-index: 10;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .page-overlay__heading {
@@ -260,11 +280,7 @@ a {
 
 h1 {
     margin-bottom: 100px;
-}
-
-.blur {
-    z-index: -1;
-    filter: blur(10px);
+    text-transform: uppercase;
 }
 
 .page-overlay__content-container {
@@ -273,6 +289,11 @@ h1 {
     margin-bottom: 173px;
     max-width: 1512px;
     margin-inline: auto;
+    position: relative;
+
+    + & {
+        margin-top: 2em;
+    }
 }
 
 .person {
@@ -356,6 +377,10 @@ h1 {
     left: 0;
     right: 0;
     display: block;
+}
+
+.splash-page-one {
+    z-index: 1;
 }
 
 .logo {
@@ -447,10 +472,18 @@ input[type="radio"]:focus + label:before {
     background-color: var(--color-brand-white);
 }
 
+input[type="radio"]:checked + label {
+    font-weight: 800;
+}
+
 input[type="radio"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
     position: absolute;
-    width: 0;
-    height: 0;
+    white-space: nowrap;
+    width: 1px;
 }
 
 .input-wrapper {
@@ -508,4 +541,52 @@ button[type="submit"] {
         background-color: var(--color-brand-white);
         color: var(--color-brand-black);
     }
+}
+
+#budget > * {
+    transition: opacity .3s ease-in-out;
+}
+
+#budget[data-pg-ia-hide] > *,
+#budget.fade-out > * {
+    opacity: 0;
+}
+
+#budget[data-pg-ia-show] > * {
+    opacity: 1;
+}
+
+#transition-text > div {
+    overflow: hidden;
+}
+
+#transition-text {
+    font-size: 40px;
+    text-align: center;
+}
+
+.lead-text--left {
+    text-align: left;
+    margin-left: 0;
+}
+
+.process__image {
+    position: absolute;
+    max-width: 538px;
+    right: 0;
+    top: 50%;
+    width: 25vw;
+    transform: translateY(-50%);
+}
+
+.process {
+    max-width: 900px;
+    position: relative;
+}
+
+.splash-page-one__audio-button {
+    background-color: var(--color-brand-white);
+    color: var(--color-brand-black);
+    border: none;
+    border-radius: 3px;
 }
