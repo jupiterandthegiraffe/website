@@ -1,5 +1,6 @@
 _pgbackup
 _pginfo
+pinegrow.json
 dist
 node_modules
 
