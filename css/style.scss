@@ -20,6 +20,9 @@ body {
 ::-webkit-scrollbar {
     width: 5px;
     background: transparent;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -126,6 +129,7 @@ a {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     display: inline-block;
+    text-transform: uppercase;
 }
 
 .main-menu__list {
@@ -231,12 +235,8 @@ sp
     position: fixed;
     top: 1em;
     left: 50%;
-    display: block;
     z-index: 100;
     transform: translateX(-50%);
-    background: transparent;
-    border: none;
-    cursor: not-allowed;
 }
 
 .audio__active {
@@ -589,4 +589,15 @@ button[type="submit"] {
     color: var(--color-brand-black);
     border: none;
     border-radius: 3px;
+}
+
+.silence-button__button {
+    background: transparent;
+    border: none;
+    cursor: not-allowed;
+    display: block;
+    margin-inline: auto;
+}
+
+.js-audio-text {
 }

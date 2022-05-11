@@ -17,7 +17,12 @@ body {
 
 ::-webkit-scrollbar {
   width: 5px;
-  background: transparent; }
+  background: transparent;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  text-align: center; }
 
 ::-webkit-scrollbar-thumb {
   background-color: rgba(219, 219, 219, 0.5);
@@ -133,7 +138,8 @@ a {
   font-size: 42px;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  display: inline-block; }
+  display: inline-block;
+  text-transform: uppercase; }
 
 .main-menu__list {
   border-right: 1px solid var(--color-brand-white);
@@ -250,14 +256,10 @@ sp
   position: fixed;
   top: 1em;
   left: 50%;
-  display: block;
   z-index: 100;
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-  background: transparent;
-  border: none;
-  cursor: not-allowed; }
+          transform: translateX(-50%); }
 
 .audio__active {
   -webkit-transition: opacity .3s ease-in-out;
@@ -593,3 +595,10 @@ button[type="submit"] {
   color: var(--color-brand-black);
   border: none;
   border-radius: 3px; }
+
+.silence-button__button {
+  background: transparent;
+  border: none;
+  cursor: not-allowed;
+  display: block;
+  margin-inline: auto; }
