@@ -1,9 +1,18 @@
 gsap.registerPlugin(SplitText, DrawSVGPlugin)
 
+let isSafari = false
+
+var ua = navigator.userAgent.toLowerCase(); 
+if (ua.indexOf('safari') != -1) { 
+  if (ua.indexOf('chrome') > -1) {
+    // Chrome
+  } else {
+    isSafari = true
+  }
+}
+
 const header = document.querySelector('header')
 const footer = document.querySelector('footer')
-let splashTextTimeline = null
-let scrollDownTimeline = null
 let menuAudio = false
 
 const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html'
@@ -31,6 +40,10 @@ const topRightAudio = document.getElementById('top-right-audio')
 const bottomRightAudio = document.getElementById('bottom-right-audio')
 const bottomLefttAudio = document.getElementById('bottom-left-audio')
 
+if (isSafari) {
+  audioButton.style.display = 'none' 
+}
+
 const secondaryAudio = [
   topRightAudio,
   bottomRightAudio,
@@ -38,7 +51,6 @@ const secondaryAudio = [
 ]
 
 audioButton.addEventListener('click', () => {
-  console.log('click')
     if (sessionStorage.getItem('audio_on')) {
         sessionStorage.removeItem('audio_on')
         audioButton.classList.add('audio-off')
@@ -54,22 +66,17 @@ audioButton.addEventListener('click', () => {
     }
 })
 
-if (audioFiles && !sessionStorage.getItem('audio_on')) {
-  audioFiles.forEach(audio => {
+if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
+  bgAudioFiles.forEach(audio => {
     audio.pause()
   })
-} else if (audioFiles) {
-  audioFiles.forEach(audio => {
-      audio.play().catch(() => {
-        sessionStorage.removeItem('audio_on')
-        audioButton.classList.add('audio-off')
-      })
-  })
+} else if (bgAudioFiles) {
+  bgAudioFiles.forEach(audio => audio.play())
   audioButton.classList.remove('audio-off')
 }
 
 function startHomePageAudio() {
-  if (sessionStorage.getItem('audio_on')) {
+  if (sessionStorage.getItem('audio_on') && !isSafari) {
     secondaryAudio.forEach(audio => {
       audio.play()
       audio.volume = 0
@@ -127,6 +134,58 @@ function startHomePageAudio() {
   }
 }
 
+const colorModeSelector = document.querySelector('.mode-selector')
+if (colorModeSelector) {
+  colorModeSelector.addEventListener('click', (e) => {
+    if (e.target.classList.contains('mode-selector__button--dark-mode')) {
+      localStorage.removeItem('color_theme')
+      document.documentElement.classList.remove('light-mode')
+    } else {
+      document.documentElement.classList.add('light-mode')
+      localStorage.setItem('color_theme', 'light')
+    }
+  })
+}
+
+// Because of scope, we move these functions outside of homepage as these are controlled by Pinegrow Interacitons
+let svgLogoTimeline = null
+function drawSVG(e, progress) {
+  if (svgLogoTimeline) {
+    svgLogoTimeline.seek(progress * 2);
+  }
+}
+
+function destroyIntro(el) {
+    pgia.scrollSceneManager.removeScene(el, true);
+
+    header.removeAttribute('style')
+    header.removeAttribute('data-pg-ia-hide')
+    footer.removeAttribute('style')
+    footer.removeAttribute('data-pg-ia-hide')
+    document.getElementById('backdrop').removeAttribute('data-pg-ia-hide')
+    document.getElementById('backdrop').style.opacity = ''
+    document.getElementById('backdrop').style.visibility = ''
+
+    removeEl(el);
+    removeEl(document.querySelector('.splash-page-one__scroll-down'))
+    removeEl(document.querySelector('.draw-me').parentNode)
+    document.querySelector('.backdrop-blur').style.opacity = '0'
+    document.querySelector('.backdrop-blur').style.visibility = 'hidden'
+
+    startHomePageAudio()
+}
+
+let splashTextTimeline = null
+let scrollDownTimeline = null
+function splitTextUpdate(e, progress) {
+  if (splashTextTimeline) {
+    splashTextTimeline.seek(progress * 2)
+  }
+  if (scrollDownTimeline) {
+    scrollDownTimeline.seek(progress * 2)
+  }
+}
+
 if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   // First launch of direct to homepage
   document.querySelector('.splash-page-one__scroll-down').style.display = ''
@@ -143,23 +202,25 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   const splashText = document.querySelector(".splash-page-two .splash-page__main-text")
   const scrollDownText = document.getElementById('keep-going')
 
-  const audioText = document.getElementById('audio-text')
-  const audioTextSplitText = new SplitText(audioText, {type: 'words'})
+  if (!isSafari) {
+    const audioText = document.getElementById('audio-text')
+    const audioTextSplitText = new SplitText(audioText, {type: 'words'})
 
-  const audioTextTimeline = gsap.timeline({})
+    const audioTextTimeline = gsap.timeline({})
 
-  audioTextTimeline.to(audioText, {
-    autoAlpha: 1
-  }, ">")
+    audioTextTimeline.to(audioText, {
+      autoAlpha: 1
+    }, ">")
 
 
-  audioTextTimeline.from(audioTextSplitText.words, {
-      y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 25
-  }, ">")
+    audioTextTimeline.from(audioTextSplitText.words, {
+        y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 25
+    }, ">")
 
-  audioTextTimeline.to(audioText, {
-    autoAlpha: 0, duration: 2
-  }, ">5")
+    audioTextTimeline.to(audioText, {
+      autoAlpha: 0, duration: 2
+    }, ">5")
+  } 
   
   if (splashText && scrollDownText) {
       const splashTextSplitText = new SplitText(splashText, {type: 'words, lines'})
@@ -177,38 +238,9 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
           y: '100%', autoAlpha: 0, stagger: 0.05, rotateZ: 25, paused: true
       })
   }
-  
-  function destroyIntro(el) {
-      console.log('destroy', el);
-      pgia.scrollSceneManager.removeScene(el, true);
-  
-      header.removeAttribute('style')
-      header.removeAttribute('data-pg-ia-hide')
-      footer.removeAttribute('style')
-      footer.removeAttribute('data-pg-ia-hide')
-      document.getElementById('backdrop').removeAttribute('data-pg-ia-hide')
-      document.getElementById('backdrop').style.opacity = ''
-      document.getElementById('backdrop').style.visibility = ''
-  
-      removeEl(el);
-      removeEl(document.querySelector('.splash-page-one__scroll-down'))
-      document.querySelector('.backdrop-blur').style.opacity = '0'
-      document.querySelector('.backdrop-blur').style.visibility = 'hidden'
 
-      startHomePageAudio()
-  }
-
-  const svgLogoTimeline = gsap.timeline({paused: true});
+  svgLogoTimeline = gsap.timeline({});
   svgLogoTimeline.from(".draw-me", {duration: 2, drawSVG: '0'}, 0.1);
-
-  function drawSVG(e, progress) {
-      svgLogoTimeline.seek(progress * 2);
-  }
-  
-  function splitTextUpdate(e, progress) {
-      splashTextTimeline.seek(progress * 2)
-      scrollDownTimeline.seek(progress * 2)
-  }
 } else if (isHomePage) {
   // Homepage from another page (could have sessionStorage.getItem('has_navigated'))
   removeEl(document.querySelector('.splash-page-one__scroll-down'));
@@ -239,6 +271,14 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
           window.location = e.target.href
       }, 500)
   })
+
+  const leadText = document.querySelector('.lead-text')
+  if (leadText) {
+    const leadTextSplitText = new SplitText(leadText, {type: 'words, lines'})
+    gsap.from(leadTextSplitText.words, {
+      y: 100, autoAlpha: 0, stagger: 0.05
+    })
+  }
 }
 
 /**
@@ -273,15 +313,11 @@ const transitionText = [
 ]
 
 allLinks.forEach(el => {
-  console.log(el)
     el.addEventListener('click', (e) => {
-      console.log('cilkc', blur)
       if (blur) {
         e.preventDefault()
         const animationName = e.target.pathname === '/' || e.target.pathname === '/index.html' ? 'Blur Out' : 'Blur In'
         const transitionTextEl = document.getElementById('transition-text')
-
-        console.log(animationName, transitionTextEl)
 
         if (transitionTextEl) {
           const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
