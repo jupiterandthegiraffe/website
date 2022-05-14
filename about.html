@@ -25,29 +25,34 @@
   <body style="overflow-y: overlay; overflow-x: hidden;">
     <header style="filter: blur(10px); z-index: -1;">
       <button aria-label="Open Menu" class="header__menu-button" data-pg-ia='{"l":[{"name":"Open menu","trg":"click","t":"$.menu","a":{"l":[{"t":".main-menu__list","l":[{"t":"tween","p":0.4,"d":0.5,"l":{"x":0,"pgCall":{"complete":"setMenuAudio"}}}]},{"t":"","l":[{"t":"tween","p":0,"d":0.4,"l":{"autoAlpha":1}},{"t":"set","p":0.001,"d":0,"l":{"x":0}}]}]}}]}'>
-</button>
-      <a href="about.html" class="nav__link">Who we are</a>
+</button><a href="about.html" class="nav__link">Who we are</a>
     </header>
     <div class="menu">
       <button class="menu__close-button" data-pg-ia='{"l":[{"trg":"click","t":"$.menu","a":{"l":[{"t":"","l":[{"t":"tween","p":0.5,"d":0.5,"l":{"autoAlpha":0,"pgCall":{"complete":"removeMenuAudio"}}},{"t":"set","p":1,"d":0,"l":{"x":"-100%"}}]},{"t":".main-menu__list","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%"}}]}]},"name":"Close menu"}]}'></button>
       <ul class="main-menu__list">
-        <li><a href="about.html" class="main-menu__links">Who are we</a>
+        <li>
+          <a href="about.html" class="main-menu__links">Who are we</a>
         </li>
-        <li><a href="case-studies.html" class="main-menu__links">What do we do</a>
+        <li>
+          <a href="case-studies.html" class="main-menu__links">What do we do</a>
         </li>
-        <li><a href="process.html" class="main-menu__links">How do we do it</a>
+        <li>
+          <a href="process.html" class="main-menu__links">How do we do it</a>
         </li>
-        <li><a href="contact.html" class="main-menu__links">Make contact</a>
+        <li>
+          <a href="contact.html" class="main-menu__links">Make contact</a>
         </li>
       </ul>
     </div>
     <div class="silence-button" id="audio-button" data-pg-ia-hide data-pg-ia='{"l":[{"trg":"load","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.99,"l":{"autoAlpha":1}}]}]}}]}'>
       <button class="audio-off silence-button__button" type="button" aria-label="Mute Audio" id="audio">
         <img src="assets/svgs/audio-active.svg" alt="" class="audio__active"/>
-      </button><small id="audio-text" data-pg-ia-hide>Turn on audio for the full experience.</small>
+        <img src="assets/svgs/audio-active-black.svg" alt="" class="audio__active audio__active--black"/>
+      </button>
+      <small id="audio-text" data-pg-ia-hide>Turn on audio</small>
     </div>
     <main style="overflow: hidden; height: 100%; width: 100%;">
-      <section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="detail-content">
+      <section class="page-overlay" data-pg-ia-hide data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}},{"t":"tween","p":0.5,"d":0.5,"l":{}}]},{"t":".page-overlay__footer","l":[]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$main #gt# .page-overlay__footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]}]}},{"name":"Transition","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"100vh","autoAlpha":0}}]},{"t":"$main #gt# .page-overlay__footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"100vh","autoAlpha":0}}]}]}}]}' data-pgc-field="detail-content">
         <audio src="assets/audio/about.mp3" class="background-audio" loop></audio>
         <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
           <h1>WHO WE ARE</h1>
@@ -137,20 +142,31 @@
           </div>
         </div>
       </section>
-      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;" data-pg-ia='{"l":[{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".jg","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-20px","rotationY":"-20deg"}}]}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".jg","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"-20px","rotationX":"20deg"}}]}]}},{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"x":"-20px"}}]}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"y":"10px","opacity":0.8,"scale":0.95}}]}]}}]}'>
-        <div class="background jg">
-          <div class="backdrop-blur pg-empty-placeholder" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]}]}}]}' id="backdrop-blur"></div>
-          <div class="logo pg-empty-placeholder"></div>
-          <div class="pg-empty-placeholder shadow" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/images/blur.png'); background-repeat: no-repeat; background-position: center 70vh; background-size: 700px; z-index: -2;"></div>
-        </div>
+      <div class="page-overlay__footer" data-pg-ia-scene='{"dbg":"true","s":"custom","s_t":"start","s_s":"end","e_t":"end","l":[{"name":"Footer Scene","a":{"l":[{"t":"h2","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"a","l":[{"t":"set","p":0,"d":0,"l":{"y":100}},{"t":"tween","p":0.2,"d":0.5,"s":0.1,"l":{"autoAlpha":1,"y":0}}]}]},"p":"scroll"}],"e_s":"end"}'>
+        <section class="page-overlay__content-container page-overlay__footer" style="margin-bottom: 0; padding-bottom: 173px;">
+          <h2 data-pg-ia-hide><span>&gt;</span> Where next?</h2>
+          <div class="page-overlay__footer-links">
+            <a href="/about.html" data-pg-ia-hide>Who we are</a>
+            <a href="/process.html" data-pg-ia-hide>What we do</a>
+            <a href="/contact.html" data-pg-ia-hide>Make contact</a>
+          </div>
+        </section>
       </div>
       <!-- <canvas class="webgl"></canvas> -->
     </main>
-    <footer style="filter: blur(10px); z-index: -1;"><a href="" class="nav__link">Make contact</a>
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;" data-pg-ia='{"l":[{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".jg","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-20px","rotationY":"-20deg"}}]}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".jg","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"-20px","rotationX":"20deg"}}]}]}},{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"x":"-20px"}}]}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"y":"10px","opacity":0.8,"scale":0.95}}]}]}}]}'>
+      <div class="background jg">
+        <div class="backdrop-blur pg-empty-placeholder" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]}]}}]}' id="backdrop-blur"></div>
+        <div class="logo pg-empty-placeholder"></div>
+        <div class="pg-empty-placeholder shadow" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/images/blur.png'); background-repeat: no-repeat; background-position: center 70vh; background-size: 700px; z-index: -2;"></div>
+      </div>
+    </div>
+    <footer style="filter: blur(10px); z-index: -1;">
+      <a href="" class="nav__link">Make contact</a>
       <div class="footer__central-text">
         <p>Intelligent Experiences</p>
-        <p>v3.0.0</p>
-      </div><a href="" class="nav__link">What we do</a>
+      </div>
+      <a href="" class="nav__link">What we do</a>
     </footer>
     <div class="mode-selector mode-selector__buton" style="z-index: -1; filter: blur(10px);">
       <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
@@ -169,502 +185,4 @@
     <!-- <script src="/dist/bundle.js"></script> -->
   </body>
 </html>
-<!--[Pinegrow components saved data - this data is no longer used in the component. We're saving it just in case. Clear this with Components -> Clear saved unused edits]<meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading">
-        <a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading">
-        <a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-    <div class="persons">
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp"/>
-                <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Samuel Gregory</h2>
-                        <p class="person__overlay-text">Founder &amp; Creative Technologist</p>
-                    </div>
-                </div>
-                <p>Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p>
-                <p>
-                Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world. </p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Neil%20Profile@2x.webp 2x, assets/images/Neil%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Neil%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Neil%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Neil Noakes</h2>
-                        <p class="person__overlay-text">Product Strategy Consultant</p>
-                    </div>
-                </div>
-                <p>Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Chris%20Profile@2x.webp 2x, assets/images/Chris%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Chris%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Chris%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Chris Constantine</h2>
-                        <p class="person__overlay-text">Experience Producer</p>
-                    </div>
-                </div>
-                <p>Chris has been crafting experiences for major brands for over 20 years, working across sectors including automotive, health, finance, FMCG and luxury travel.</p>
-                <p>Bringing businesses a closer understanding of their customer needs, Chris is passionate about user-centred design, founded on insightful research and validated through rigorous testing.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Larry%20Profile@2x.webp 2x, assets/images/Larry%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Larry%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Larry%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Lawrence Lam</h2>
-                        <p class="person__overlay-text">Experience Designer</p>
-                    </div>
-                </div>
-                <p>Laurence (Larry) Lam brings exceptional craft and vision to lead the experience design team here at J&TG. Having worked with enterprise clients such as QED Technology, BBC, Ministry of Sound, B&Q, and most recently UBS who set the most challenging environments that test the fusion of creativity and functionality.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Paul%20Profile@2x.webp 2x, assets/images/Paul%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Paul Profile.jpg" alt="" class="person-image" srcset="assets/images/Paul%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Paul Gosnell</h2>
-                        <p class="person__overlay-text">Technical Producer</p>
-                    </div>
-                </div>
-                <p>Paul's deep technical knowledge and experience at a director level allows him to oversee and produce the development team and encourages robust, maintainable and scalable digital products. Being a serial entrepreneur himself, managing his own startup Fitlink as drawing from his work with IBM pays dividends in quality and efficiency.</p>
-            </div>
-        </div>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="detail-page-content">
-    <div class="page-overlay__heading">
-        <a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading">
-        <a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-    <div class="persons">
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp"/>
-                <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Samuel Gregory</h2>
-                        <p class="person__overlay-text">Founder &amp; Creative Technologist</p>
-                    </div>
-                </div>
-                <p>Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p>
-                <p>
-                Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world. </p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Neil%20Profile@2x.webp 2x, assets/images/Neil%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Neil%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Neil%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Neil Noakes</h2>
-                        <p class="person__overlay-text">Product Strategy Consultant</p>
-                    </div>
-                </div>
-                <p>Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Chris%20Profile@2x.webp 2x, assets/images/Chris%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Chris%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Chris%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Chris Constantine</h2>
-                        <p class="person__overlay-text">Experience Producer</p>
-                    </div>
-                </div>
-                <p>Chris has been crafting experiences for major brands for over 20 years, working across sectors including automotive, health, finance, FMCG and luxury travel.</p>
-                <p>Bringing businesses a closer understanding of their customer needs, Chris is passionate about user-centred design, founded on insightful research and validated through rigorous testing.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Larry%20Profile@2x.webp 2x, assets/images/Larry%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Larry%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Larry%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Lawrence Lam</h2>
-                        <p class="person__overlay-text">Experience Designer</p>
-                    </div>
-                </div>
-                <p>Laurence (Larry) Lam brings exceptional craft and vision to lead the experience design team here at J&TG. Having worked with enterprise clients such as QED Technology, BBC, Ministry of Sound, B&Q, and most recently UBS who set the most challenging environments that test the fusion of creativity and functionality.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Paul%20Profile@2x.webp 2x, assets/images/Paul%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Paul Profile.jpg" alt="" class="person-image" srcset="assets/images/Paul%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Paul Gosnell</h2>
-                        <p class="person__overlay-text">Technical Producer</p>
-                    </div>
-                </div>
-                <p>Paul's deep technical knowledge and experience at a director level allows him to oversee and produce the development team and encourages robust, maintainable and scalable digital products. Being a serial entrepreneur himself, managing his own startup Fitlink as drawing from his work with IBM pays dividends in quality and efficiency.</p>
-            </div>
-        </div>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-    <div class="persons">
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp"/>
-                <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Samuel Gregory</h2>
-                        <p class="person__overlay-text">Founder &amp; Creative Technologist</p>
-                    </div>
-                </div>
-                <p>Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p>
-                <p>
-                Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world. </p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Neil%20Profile@2x.webp 2x, assets/images/Neil%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Neil%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Neil%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Neil Noakes</h2>
-                        <p class="person__overlay-text">Product Strategy Consultant</p>
-                    </div>
-                </div>
-                <p>Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Chris%20Profile@2x.webp 2x, assets/images/Chris%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Chris%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Chris%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Chris Constantine</h2>
-                        <p class="person__overlay-text">Experience Producer</p>
-                    </div>
-                </div>
-                <p>Chris has been crafting experiences for major brands for over 20 years, working across sectors including automotive, health, finance, FMCG and luxury travel.</p>
-                <p>Bringing businesses a closer understanding of their customer needs, Chris is passionate about user-centred design, founded on insightful research and validated through rigorous testing.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Larry%20Profile@2x.webp 2x, assets/images/Larry%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Larry%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Larry%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Lawrence Lam</h2>
-                        <p class="person__overlay-text">Experience Designer</p>
-                    </div>
-                </div>
-                <p>Laurence (Larry) Lam brings exceptional craft and vision to lead the experience design team here at J&TG. Having worked with enterprise clients such as QED Technology, BBC, Ministry of Sound, B&Q, and most recently UBS who set the most challenging environments that test the fusion of creativity and functionality.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Paul%20Profile@2x.webp 2x, assets/images/Paul%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Paul Profile.jpg" alt="" class="person-image" srcset="assets/images/Paul%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Paul Gosnell</h2>
-                        <p class="person__overlay-text">Technical Producer</p>
-                    </div>
-                </div>
-                <p>Paul's deep technical knowledge and experience at a director level allows him to oversee and produce the development team and encourages robust, maintainable and scalable digital products. Being a serial entrepreneur himself, managing his own startup Fitlink as drawing from his work with IBM pays dividends in quality and efficiency.</p>
-            </div>
-        </div>
-    </div>
-</section><section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide data-pgc-field="template.main-section-detail">
-    <div class="page-overlay__heading">
-        <a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-        <h1>WHO WE ARE</h1>
-    </div>
-    <div class="page-overlay__content-container">
-        <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-    </div>
-    <div class="persons">
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp"/>
-                <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Samuel Gregory</h2>
-                        <p class="person__overlay-text">Founder &amp; Creative Technologist</p>
-                    </div>
-                </div>
-                <p>Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p>
-                <p>
-                Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world. </p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Neil%20Profile@2x.webp 2x, assets/images/Neil%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Neil%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Neil%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Neil Noakes</h2>
-                        <p class="person__overlay-text">Product Strategy Consultant</p>
-                    </div>
-                </div>
-                <p>Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Chris%20Profile@2x.webp 2x, assets/images/Chris%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Chris%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Chris%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Chris Constantine</h2>
-                        <p class="person__overlay-text">Experience Producer</p>
-                    </div>
-                </div>
-                <p>Chris has been crafting experiences for major brands for over 20 years, working across sectors including automotive, health, finance, FMCG and luxury travel.</p>
-                <p>Bringing businesses a closer understanding of their customer needs, Chris is passionate about user-centred design, founded on insightful research and validated through rigorous testing.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Larry%20Profile@2x.webp 2x, assets/images/Larry%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Larry%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Larry%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Lawrence Lam</h2>
-                        <p class="person__overlay-text">Experience Designer</p>
-                    </div>
-                </div>
-                <p>Laurence (Larry) Lam brings exceptional craft and vision to lead the experience design team here at J&TG. Having worked with enterprise clients such as QED Technology, BBC, Ministry of Sound, B&Q, and most recently UBS who set the most challenging environments that test the fusion of creativity and functionality.</p>
-            </div>
-        </div>
-        <div class="person">
-            <picture>
-                <source srcset="assets/images/Paul%20Profile@2x.webp 2x, assets/images/Paul%20Profile.webp" type="image/webp"/>
-                <img src="assets/images/Paul Profile.jpg" alt="" class="person-image" srcset="assets/images/Paul%20Profile@2x.jpg 2x"/>
-            </picture>
-            <div class="person__information">
-                <div class="person__overlay">
-                    <div>
-                        <h2 class="person__overlay-text">Paul Gosnell</h2>
-                        <p class="person__overlay-text">Technical Producer</p>
-                    </div>
-                </div>
-                <p>Paul's deep technical knowledge and experience at a director level allows him to oversee and produce the development team and encourages robust, maintainable and scalable digital products. Being a serial entrepreneur himself, managing his own startup Fitlink as drawing from his work with IBM pays dividends in quality and efficiency.</p>
-            </div>
-        </div>
-    </div>
-</section><main style="overflow: hidden; height: 100%; width: 100%;" data-pgc-field="template.main-section">
-    <section class="page-overlay" data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"y":0}}]},{"t":"$header","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0.001,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0)"}}]}]}}]}' data-pg-ia-hide>
-        <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button">Go back</a>
-            <h1>WHO WE ARE</h1>
-        </div>
-        <div class="page-overlay__content-container">
-            <p class="lead-text">
-          J&TG's team is made up of multidisciplinary experts who bring years of unrivalled technical and creative expertise to each and every project. From the very start of any engagement, the focus is always on creating exceptional design, solid code and the most immersive experiences that's firmly aligned to core strategic objectives.</p>
-        </div>
-        <div class="persons">
-            <div class="person">
-                <picture>
-                    <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp"/>
-                    <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x"/>
-                </picture>
-                <div class="person__information">
-                    <div class="person__overlay">
-                        <div>
-                            <h2 class="person__overlay-text">Samuel Gregory</h2>
-                            <p class="person__overlay-text">Founder &amp; Creative Technologist</p>
-                        </div>
-                    </div>
-                    <p>Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p>
-                    <p>
-                Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world. </p>
-                </div>
-            </div>
-            <div class="person">
-                <picture>
-                    <source srcset="assets/images/Neil%20Profile@2x.webp 2x, assets/images/Neil%20Profile.webp" type="image/webp"/>
-                    <img src="assets/images/Neil%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Neil%20Profile@2x.jpg 2x"/>
-                </picture>
-                <div class="person__information">
-                    <div class="person__overlay">
-                        <div>
-                            <h2 class="person__overlay-text">Neil Noakes</h2>
-                            <p class="person__overlay-text">Product Strategy Consultant</p>
-                        </div>
-                    </div>
-                    <p>Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p>
-                </div>
-            </div>
-            <div class="person">
-                <picture>
-                    <source srcset="assets/images/Chris%20Profile@2x.webp 2x, assets/images/Chris%20Profile.webp" type="image/webp"/>
-                    <img src="assets/images/Chris%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Chris%20Profile@2x.jpg 2x"/>
-                </picture>
-                <div class="person__information">
-                    <div class="person__overlay">
-                        <div>
-                            <h2 class="person__overlay-text">Chris Constantine</h2>
-                            <p class="person__overlay-text">Experience Producer</p>
-                        </div>
-                    </div>
-                    <p>Chris has been crafting experiences for major brands for over 20 years, working across sectors including automotive, health, finance, FMCG and luxury travel.</p>
-                    <p>Bringing businesses a closer understanding of their customer needs, Chris is passionate about user-centred design, founded on insightful research and validated through rigorous testing.</p>
-                </div>
-            </div>
-            <div class="person">
-                <picture>
-                    <source srcset="assets/images/Larry%20Profile@2x.webp 2x, assets/images/Larry%20Profile.webp" type="image/webp"/>
-                    <img src="assets/images/Larry%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Larry%20Profile@2x.jpg 2x"/>
-                </picture>
-                <div class="person__information">
-                    <div class="person__overlay">
-                        <div>
-                            <h2 class="person__overlay-text">Lawrence Lam</h2>
-                            <p class="person__overlay-text">Experience Designer</p>
-                        </div>
-                    </div>
-                    <p>Laurence (Larry) Lam brings exceptional craft and vision to lead the experience design team here at J&TG. Having worked with enterprise clients such as QED Technology, BBC, Ministry of Sound, B&Q, and most recently UBS who set the most challenging environments that test the fusion of creativity and functionality.</p>
-                </div>
-            </div>
-            <div class="person">
-                <picture>
-                    <source srcset="assets/images/Paul%20Profile@2x.webp 2x, assets/images/Paul%20Profile.webp" type="image/webp"/>
-                    <img src="assets/images/Paul Profile.jpg" alt="" class="person-image" srcset="assets/images/Paul%20Profile@2x.jpg 2x"/>
-                </picture>
-                <div class="person__information">
-                    <div class="person__overlay">
-                        <div>
-                            <h2 class="person__overlay-text">Paul Gosnell</h2>
-                            <p class="person__overlay-text">Technical Producer</p>
-                        </div>
-                    </div>
-                    <p>Paul's deep technical knowledge and experience at a director level allows him to oversee and produce the development team and encourages robust, maintainable and scalable digital products. Being a serial entrepreneur himself, managing his own startup Fitlink as drawing from his work with IBM pays dividends in quality and efficiency.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;" data-pg-ia='{"l":[{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".jg","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-20px","rotationY":"-20deg"}}]}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".jg","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"-20px","rotationX":"20deg"}}]}]}},{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"x":"-20px"}}]}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"y":"10px","opacity":0.8,"scale":0.95}}]}]}}]}'>
-        <div class="background jg">
-            <div class="backdrop-blur pg-empty-placeholder" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]}]}}]}' id="backdrop-blur"></div>
-            <div class="logo pg-empty-placeholder"></div>
-            <div class="pg-empty-placeholder shadow" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/images/blur.png'); background-repeat: no-repeat; background-position: center 70vh; background-size: 700px; z-index: -2;"></div>
-        </div>
-    </div>
-    [[[-- <canvas class="webgl"></canvas> --]]]
-</main><header data-pg-ia-hide data-pgc-field="header.hide-at-start">
-    <button aria-label="Open Menu" class="header__menu-button" data-pg-ia='{"l":[{"trg":"click","t":"$.menu","a":{"l":[{"t":".main-menu__list","l":[{"t":"tween","p":0.4,"d":0.5,"l":{"x":0}}]},{"t":"","l":[{"t":"tween","p":0,"d":0.4,"l":{"autoAlpha":1}},{"t":"set","p":0.001,"d":0,"l":{"x":0}}]}]}}]}'>
-</button><a href="">Who we are</a>
-</header>-->
+<!--[Pinegrow components saved data - this data is no longer used in the component. We're saving it just in case. Clear this with Components -> Clear saved unused edits]<meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/>-->

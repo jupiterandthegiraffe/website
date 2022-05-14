@@ -5,6 +5,11 @@
     --color-brand-red: #BD293B;
 }
 
+::selection {
+    background: var(--color-brand-yellow);
+    color: var(--color-brand-black);
+}
+
 body {
     background-color: var(--color-brand-black);
     font-family: 'Work Sans', sans-serif;
@@ -336,6 +341,7 @@ a {
 .page-overlay__heading {
     justify-content: space-between;
     text-align: center;
+    position: relative;
 }
 
 .page-overlay__back-button {
@@ -787,4 +793,39 @@ button[type="submit"] {
 
 .light-mode .process__image--dark {
     display: block;
+}
+
+.page-overlay__footer .page-overlay__content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-brand-black);
+}
+
+.page-overlay__footer-links {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+}
+
+.page-overlay__footer-links a {
+    display: inline-block;
+    margin-left: 1em;
+    margin-right: 1em;
+    text-transform: uppercase;
+}
+
+.page-overlay__footer h2 span {
+    animation: 1s blink infinite;
+    display: inline-block;
+}
+
+.page-overlay__footer {
+    background-color: var(--color-brand-black);
+}
+
+.light-mode .page-overlay__footer {
+    background-color: var(--color-brand-white);
 }
