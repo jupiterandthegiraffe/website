@@ -8,6 +8,7 @@ if (ua.indexOf('safari') != -1) {
     // Chrome
   } else {
     isSafari = true
+    document.documentElement.classList.add('safari')
   }
 }
 
@@ -54,10 +55,13 @@ const secondaryAudio = [
 
 audioButton.addEventListener('click', () => {
     if (sessionStorage.getItem('audio_on')) {
+      console.log('turn audio on')
         sessionStorage.removeItem('audio_on')
         audioButton.classList.add('audio-off')
         audioFiles.forEach(audio => audio.pause())
+        startHomePageAudio()
     } else {
+      console.log('turn audio off')
         sessionStorage.setItem('audio_on', 'true')
         audioButton.classList.remove('audio-off')
         bgAudioFiles.forEach(audio => audio.play())
@@ -69,10 +73,12 @@ audioButton.addEventListener('click', () => {
 })
 
 if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
+  console.log('pause bg audio on page load')
   bgAudioFiles.forEach(audio => {
     audio.pause()
   })
 } else if (bgAudioFiles) {
+  console.log('play bg audio on page load')
   bgAudioFiles.forEach(audio => {
     audio.play().catch(e => {
       sessionStorage.removeItem('audio_on')
@@ -84,6 +90,7 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
 
 function startHomePageAudio() {
   if (sessionStorage.getItem('audio_on') && !isSafari) {
+    console.log('startHomepageAudio')
     secondaryAudio.forEach(audio => {
       audio.play()
       audio.volume = 0
@@ -97,44 +104,51 @@ function startHomePageAudio() {
         bottomLefttAudio.volume = 0
         bottomRightAudio.volume = 0
       } else {
-        const xPos = (e.clientX / window.innerWidth) - .5
-        const yPos = (e.clientY / window.innerHeight) - .5
+        const xPos = e.clientX / window.innerWidth
+        const yPos = e.clientY / window.innerHeight
+
+        const leftToRight = Math.max((xPos - .5) * 2, 0)
+        const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
+
+        const centre = (e.clientX - (window.innerWidth / 2) * e.clientX - (window.innerWidth / 2), e.clientY - (window.innerWidth / 2) * e.clientY - (window.innerWidth / 2))
+
+        console.log(centre)
+
+        topRightAudio.volume = Math.min(leftToRight, topToBottom)
+        // mainAudio.volume = 
 
         if (xPos > 0 && yPos < 0) {
           // Top right
-          const newAudioVolume = Math.max((xPos + .5) - (yPos + .5), (yPos + .5) - (xPos + .5))
-          const oldAudioVolume = 1 - Math.max((xPos + .5) - (yPos + .5), (yPos + .5) - (xPos + .5))
 
-          mainAudio.volume = oldAudioVolume
-          topRightAudio.volume = newAudioVolume
 
-          bottomLefttAudio.volume = 0
-          bottomRightAudio.volume = 0
+
+          // bottomLefttAudio.volume = 0
+          // bottomRightAudio.volume = 0
         } else if (xPos < 0 && yPos < 0) {
           // Top left
-          mainAudio.volume = 1
+          // mainAudio.volume = 1
           
-          topRightAudio.volume = 0
-          bottomLefttAudio.volume = 0
-          bottomRightAudio.volume = 0
+          // topRightAudio.volume = 0
+          // bottomLefttAudio.volume = 0
+          // bottomRightAudio.volume = 0
         } else if (xPos > 0 && yPos > 0) {
           // bottom right
-          const newAudioVolume = xPos + yPos
-          const oldAudioVolume = 1 - (xPos + yPos)
-          mainAudio.volume = oldAudioVolume
-          bottomRightAudio.volume = newAudioVolume
+          // const newAudioVolume = xPos + yPos
+          // const oldAudioVolume = 1 - (xPos + yPos)
+          // mainAudio.volume = oldAudioVolume
+          // bottomRightAudio.volume = newAudioVolume
 
-          topRightAudio.volume = 0
-          bottomLefttAudio.volume = 0
+          // topRightAudio.volume = 0
+          // bottomLefttAudio.volume = 0
         } else if (xPos < 0 && yPos > 0) {
           // bottom left
-          const newAudioVolume = 1 - (xPos + .5) + (yPos - .5)
-          const oldAudioVolume = 1 + (xPos - yPos)
-          mainAudio.volume = oldAudioVolume
-          bottomLefttAudio.volume = newAudioVolume
+          // const newAudioVolume = 1 - (xPos + .5) + (yPos - .5)
+          // const oldAudioVolume = 1 + (xPos - yPos)
+          // mainAudio.volume = oldAudioVolume
+          // bottomLefttAudio.volume = newAudioVolume
 
-          topRightAudio.volume = 0
-          bottomRightAudio.volume = 0
+          // topRightAudio.volume = 0
+          // bottomRightAudio.volume = 0
         }
       }
     })
@@ -145,11 +159,15 @@ const colorModeSelector = document.querySelector('.mode-selector')
 if (colorModeSelector) {
   colorModeSelector.addEventListener('click', (e) => {
     if (e.target.classList.contains('mode-selector__button--dark-mode')) {
+      console.log('change color mode: dark mode')
       localStorage.removeItem('color_theme')
       document.documentElement.classList.remove('light-mode')
+      window.location = window.location
     } else {
+      console.log('change color mode: light mode')
       document.documentElement.classList.add('light-mode')
       localStorage.setItem('color_theme', 'light')
+      window.location = window.location
     }
   })
 }
@@ -157,12 +175,14 @@ if (colorModeSelector) {
 // Because of scope, we move these functions outside of homepage as these are controlled by Pinegrow Interacitons
 let svgLogoTimeline = null
 function drawSVG(e, progress) {
+  console.log('drawSVG', progress)
   if (svgLogoTimeline) {
     svgLogoTimeline.seek(progress * 2);
   }
 }
 
 function destroyIntro(el) {
+  console.log('destroy')
     pgia.scrollSceneManager.removeScene(el, true);
 
     header.removeAttribute('style')
@@ -185,15 +205,14 @@ function destroyIntro(el) {
 let splashTextTimeline = null
 let scrollDownTimeline = null
 function splitTextUpdate(e, progress) {
-  if (splashTextTimeline) {
-    splashTextTimeline.seek(progress * 2)
-  }
+  console.log('splitText', progress)
   if (scrollDownTimeline) {
-    scrollDownTimeline.seek(progress * 2)
+    scrollDownTimeline.seek(progress)
   }
 }
 
 const playTransitionText = (word, animationName, cb) => {
+  console.log('pageTransition', animationName)
   const transitionTextEl = document.getElementById('transition-text')
   const blur = document.getElementById('backdrop-blur')
 
@@ -204,7 +223,7 @@ const playTransitionText = (word, animationName, cb) => {
       const transitionSplitText = new SplitText(document.getElementById('transition-text'), {type: 'words'})
     
       const tl = gsap.timeline({
-        onComplete: cb
+        onComplete: cb && cb
       })
 
       tl.from(transitionSplitText.words, {
@@ -221,17 +240,36 @@ const playTransitionText = (word, animationName, cb) => {
 
 if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   if (isMobile) {
+    console.log('first run: mobile')
+    const el = document.querySelector('.splash-pages')
     const word = document.querySelector('.splash-page-two').innerText
 
     playTransitionText(word, 'Blur In', () => {
-      const el = document.getElementById('backdrop-blur')
-      pgia.play(el, 'Blur Out')
+      gsap.to('header', {
+        autoAlpha: 1, filter: 'blur(0)'
+      })
+      gsap.to('footer', {
+        autoAlpha: 1, filter: 'blur(0)'
+      })
+      
+      gsap.to('#backdrop-blur', {
+        autoAlpha: 0
+      })
+      
+      gsap.to('#backdrop', {
+        autoAlpha: 1
+      })
 
-      setTimeout(() => {
-        destroyIntro(document.querySelector('.splash-pages'))
-      }, 4000)
+      gsap.to('.mode-selector', {
+        filter: 'blur(0)'
+      })
+
+      setTimeout(() => [
+        destroyIntro(el)
+      ], 1000)
     })
   } else {
+    console.log('first run: Desktop')
     // First launch of direct to homepage
     document.querySelector('.splash-page-one__scroll-down').style.display = ''
     document.querySelector('.backdrop-blur').style.display = ''
@@ -244,10 +282,11 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       audio.pause()
     })
 
-    const splashText = document.querySelector(".splash-page-two .splash-page__main-text")
-    const scrollDownText = document.getElementById('keep-going')
+    const splashText = document.querySelector(".splash-page .splash-page__main-text")
+    const scrollDownText = document.getElementById('scroll-down')
 
     if (!isSafari) {
+      console.log('first run: desktop (not safari)')
       const audioText = document.getElementById('audio-text')
       const audioTextSplitText = new SplitText(audioText, {type: 'words'})
 
@@ -267,19 +306,23 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     } 
     
     if (splashText && scrollDownText) {
-        const splashTextSplitText = new SplitText(splashText, {type: 'words, lines'})
+        const splashTextSplitText = new SplitText(splashText, {type: 'words, lines, chars'})
         const scrollDownSplitText = new SplitText(scrollDownText, {type: 'chars, lines'})
     
         splashTextTimeline = gsap.from(splashTextSplitText.words, {
-            y: '100%', autoAlpha: 0, stagger: 0.05, rotateZ: 25, paused: true, scale: .8, rotateX: '-90deg'
+            y: '100%', autoAlpha: 0, stagger: 0.05, rotateZ: 25, scale: .8, rotateX: '-90deg'
         })
         
         gsap.set(splashTextSplitText.lines, {
             overflow: 'hidden'
         })
         
-        scrollDownTimeline = gsap.from(scrollDownSplitText.chars, {
-            y: '100%', autoAlpha: 0, stagger: 0.05, rotateZ: 25, paused: true
+        scrollDownTimeline = gsap.to(scrollDownSplitText.chars, {
+            y: '-100%', autoAlpha: 0, paused: true,
+            stagger: { // wrap advanced options in an object
+              each: 0.05,
+              from: scrollDownSplitText.chars.length,
+            }
         })
     }
 
@@ -287,6 +330,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     svgLogoTimeline.from(".draw-me", {duration: 2, drawSVG: '0'}, 0.1);
   }
 } else if (isHomePage) {
+  console.log('isHomepage')
   // Homepage from another page (could have sessionStorage.getItem('has_navigated'))
   removeEl(document.querySelector('.splash-page-one__scroll-down'));
   document.querySelector('#backdrop-blur').style.opacity = 0
@@ -301,6 +345,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     startHomePageAudio()
   }
 } else {
+  console.log('any other page')
   // to any other page
   sessionStorage.setItem('has_navigated', 'true');
 

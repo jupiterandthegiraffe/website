@@ -21,26 +21,24 @@
     <link href="css/style.css" rel="stylesheet"/> 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap"/>
     <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>   
   <body>
     <header data-pg-ia-hide>
       <button aria-label="Open Menu" class="header__menu-button" data-pg-ia='{"l":[{"name":"Open menu","trg":"click","t":"$.menu","a":{"l":[{"t":".main-menu__list","l":[{"t":"tween","p":0.4,"d":0.5,"l":{"x":0,"pgCall":{"complete":"setMenuAudio"}}}]},{"t":"","l":[{"t":"tween","p":0,"d":0.4,"l":{"autoAlpha":1}},{"t":"set","p":0.001,"d":0,"l":{"x":0}}]}]}}]}'>
-</button><a href="about.html" class="nav__link">Who we are</a>
+</button>
+      <a href="about.html" class="nav__link" rel="preftech">Who we are</a>
     </header>
     <div class="menu">
       <button class="menu__close-button" data-pg-ia='{"l":[{"trg":"click","t":"$.menu","a":{"l":[{"t":"","l":[{"t":"tween","p":0.5,"d":0.5,"l":{"autoAlpha":0,"pgCall":{"complete":"removeMenuAudio"}}},{"t":"set","p":1,"d":0,"l":{"x":"-100%"}}]},{"t":".main-menu__list","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%"}}]}]},"name":"Close menu"}]}'></button>
       <ul class="main-menu__list">
-        <li>
-          <a href="about.html" class="main-menu__links">Who we are</a>
+        <li><a href="about.html" class="main-menu__links" rel="prefetch">Who we are</a>
         </li>
-        <li>
-          <a href="process.html" class="main-menu__links">What we do</a>
+        <li><a href="process.html" class="main-menu__links" rel="prefetch">What we do</a>
         </li>
-        <li>
-          <a href="contact.html" class="main-menu__links">Make contact</a>
+        <li><a href="contact.html" class="main-menu__links" rel="prefetch">Make contact</a>
         </li>
-        <li>
-          <a href="end-credits.html" class="main-menu__links">End Credits</a>
+        <li><a href="end-credits.html" class="main-menu__links">End Credits</a>
         </li>
       </ul>
     </div>
@@ -48,26 +46,20 @@
       <button class="audio-off silence-button__button" type="button" aria-label="Mute Audio" id="audio">
         <img src="assets/svgs/audio-active.svg" alt="" class="audio__active"/>
         <img src="assets/svgs/audio-active-black.svg" alt="" class="audio__active audio__active--black"/>
-      </button><small id="audio-text" data-pg-ia-hide>Turn on audio</small>
+      </button>
+      <small id="audio-text" data-pg-ia-hide>Turn on audio</small>
     </div>
     <main style="overflow: hidden; height: 100%; width: 100%;" data-pgc-field="template.main-section">
       <div class="splash-page-one__scroll-down" style="display: none;">
-        <p style="margin: 0;"><small id="keep-going">(Keep going)</small><small>(Scroll down)</small></p>
+        <p style="margin: 0;"><small id="scroll-down">(Scroll down)</small></p>
         <img src="assets/svgs/scroll-down.svg" class="scroll-down__image"/>
         <img src="assets/svgs/scroll-down-dark.svg" class="scroll-down__image scroll-down__image--dark"/>
       </div>
-      <div class="splash-pages" data-pg-ia-scene='{"smooth":"2s","dbg":"true","s":"custom","s_t":"start","s_s":"start","e_t":"end","e_s":"end","pin":"true","pin_spc":"false","snap":"0,0.5,1","snap_dur":"0.2","snap_ease":"Quad.easeInOut","l":[{"name":"Splash Animation","a":{"l":[{"t":".splash-page-one #gt# div","l":[{"t":"tween","p":0,"d":0.5,"l":{"scale":0.7,"autoAlpha":0}}]},{"t":".splash-page-two #gt# div","l":[{"t":"tween","p":0.5,"d":0.99,"l":{"scale":1,"pgCall":{"update":"splitTextUpdate"},"autoAlpha":1}}]},{"t":"","l":[{"t":"tween","p":1.495,"d":0.5,"l":{"autoAlpha":0}},{"t":"tween","p":1.995,"d":0.5,"l":{"pgCall":{"complete":"destroyIntro"}}}]},{"t":"$.splash-page-one__scroll-down","l":[{"t":"tween","p":1.5,"d":0.5,"l":{"autoAlpha":0}}]},{"t":"$header","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0,"scale":1.2}},{"t":"tween","p":1.5,"d":0.5,"l":{"autoAlpha":1,"scale":1}}]},{"t":"$footer","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0,"scale":1.2}},{"t":"tween","p":1.5,"d":0.5,"l":{"autoAlpha":1,"scale":1}}]},{"t":"$.backdrop-blur","l":[{"t":"tween","p":1.5,"d":0.5,"l":{"autoAlpha":0}}]},{"t":"$.splash-page-one__scroll-down #gt# p #gt# small:nth-of-type(2)","l":[{"t":"tween","p":0.3,"d":0.3,"l":{"autoAlpha":0,"rotationX":"90deg","y":"-25px"}}]},{"t":"$svg","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0.4}},{"t":"tween","p":0,"d":1.49,"l":{"pgCall":{"update":"drawSVG"}}},{"t":"tween","p":1.49,"d":0.5,"l":{"autoAlpha":0,"scale":1.5}}]},{"t":"$main #gt# div:nth-of-type(3)","l":[{"t":"tween","p":1.49,"d":0.5,"l":{"autoAlpha":1}}]}]}}],"snap_del":"0"}' style="display: none;">
-        <div class="splash-page splash-page-one">
-          <div style="text-align: center;">
-            <div>
-              <p class="splash-page-one__main-text splash-page__main-text">Do you want the full experience?</p>
-            </div>
-          </div>
-        </div>
+      <div class="splash-pages" data-pg-ia-scene='{"smooth":"2s","on":"desktop","s":"custom","s_t":"start","s_s":"start","e_t":"end","e_s":"end","pin":"true","pin_spc":"false","snap":"0,0.5,1","snap_del":"0","snap_dur":"0.2","snap_ease":"Quad.easeInOut","l":[{"name":"Splash Animation","a":{"l":[{"t":".splash-page-two #gt# div","l":[{"t":"tween","p":0,"d":0.99,"l":{"scale":1,"pgCall":{"update":"splitTextUpdate"},"autoAlpha":0}}]},{"t":"","l":[{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":0,"pgCall":{"complete":"destroyIntro"}}}]},{"t":"$.splash-page-one__scroll-down","l":[{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":0}}]},{"t":"$header","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0,"scale":1.2}},{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":1,"scale":1}}]},{"t":"$footer","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0,"scale":1.2}},{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":1,"scale":1}}]},{"t":"$.backdrop-blur","l":[{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":0}}]},{"t":"$svg","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0.4}},{"t":"tween","p":0,"d":1,"l":{"pgCall":{"update":"drawSVG"}}},{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":0,"scale":1.5}}]},{"t":"$main #gt# div:nth-of-type(3)","l":[{"t":"tween","p":0.99,"d":0.5,"l":{"autoAlpha":1}}]}]}},{"name":"Mobile Splash Animation","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}},{"t":"tween","p":0.5,"d":0.5,"l":{"pgCall":{"complete":"destroyIntro"}}}]},{"t":"$header","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0,"scale":1.2}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"scale":1}}]},{"t":"$footer","l":[{"t":"set","p":0,"d":0,"l":{"autoAlpha":0,"scale":1.2}},{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"scale":1}}]},{"t":"$.backdrop-blur","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]},"p":"time","on":"mobile"}]}' style="display: none;">
         <div class="splash-page splash-page-two" style="height: 100vh;">
-          <div style="text-align: center; transform: scale3d(1.2, 1.2, 1.2);" data-pg-ia-hide>
+          <div style="text-align: center; transform: scale3d(1.2, 1.2, 1.2);">
             <p class="splash-page__main-text">
-              Jupiter and the Giraffe delivers exceptional, world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio.</p>
+              Jupiter and the Giraffe delivers exceptional, world-class online experiences for organisations who need to implement smarter solutions across their brand, product or campaign.</p>
           </div>
         </div>
       </div>
@@ -84,20 +76,18 @@
           <div class="backdrop-blur" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}}]}' id="backdrop-blur">
             <p id="transition-text" style="display: none;">Transition Text</p>
           </div>
+          <canvas class="webgl"></canvas>
           <div class="logo pg-empty-placeholder"></div>
-          <div class="pg-empty-placeholder shadow" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/images/blur.png'); background-repeat: no-repeat; background-position: center 70vh; background-size: 700px; z-index: -24;"></div>
+          <div class="pg-empty-placeholder shadow"></div>
         </div>
       </div>
-      <!-- <canvas class="webgl"></canvas> -->
     </main>
-    <footer data-pg-ia-hide>
-      <a href="/contact.html" class="nav__link">Make contact</a>
+    <footer data-pg-ia-hide><a href="/contact.html" class="nav__link" rel="prefetch">Make contact</a>
       <div class="footer__central-text">
         <p>Intelligent Experiences</p>
-      </div>
-      <a href="process.html" class="nav__link">What we do</a>
+      </div><a href="process.html" class="nav__link" rel="prefetch">What we do</a>
     </footer>
-    <div class="mode-selector mode-selector__buton">
+    <div class="mode-selector">
       <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
       <button type="button" aria-label="Theme: Dark mode" class="mode-selector__button mode-selector__button--dark-mode"></button>
     </div>
@@ -111,7 +101,6 @@
     <script src="assets/libs/DrawSVGPlugin.min.js"></script>
     <script src="pgia/lib/pgia.js"></script>
     <script src="js/main.js"></script>
-    <!-- <script src="/dist/bundle.js"></script> -->
+    <script src="/dist/bundle.js"></script>
   </body>   
 </html>
-<!--[Pinegrow components saved data - this data is no longer used in the component. We're saving it just in case. Clear this with Components -> Clear saved unused edits]<meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/><meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/>-->
