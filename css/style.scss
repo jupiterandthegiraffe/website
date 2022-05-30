@@ -91,11 +91,11 @@ footer {
 
 @keyframes blink {
     0%,
-    89% {
+    80% {
         opacity: 1;
     }
 
-    90%,
+    80%,
     100% {
         opacity: 0
     }
@@ -103,7 +103,7 @@ footer {
 
 .header__menu-button,
 .menu__close-button {
-    animation: blink 1s infinite;
+    animation: blink 1s infinite ease-in;
     background: transparent;
     appearance: none;
     border: none;

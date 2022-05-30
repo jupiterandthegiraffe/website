@@ -93,24 +93,24 @@ footer {
 
 @-webkit-keyframes blink {
   0%,
-  89% {
+  80% {
     opacity: 1; }
-  90%,
+  8%,
   100% {
     opacity: 0; } }
 
 @keyframes blink {
   0%,
-  89% {
+  80% {
     opacity: 1; }
-  90%,
+  8%,
   100% {
     opacity: 0; } }
 
 .header__menu-button,
 .menu__close-button {
-  -webkit-animation: blink 1s infinite;
-          animation: blink 1s infinite;
+  -webkit-animation: blink 1s infinite ease-in;
+          animation: blink 1s infinite ease-in;
   background: transparent;
   -webkit-appearance: none;
      -moz-appearance: none;
