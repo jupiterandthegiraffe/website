@@ -12,28 +12,10 @@ module.exports = {
         path: path.resolve(__dirname, '../dist')
     },
     devtool: 'source-map',
-    plugins:
-    [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../index.html'),
-            minify: true
-        }),
-        new MiniCSSExtractPlugin()
-    ],
     module:
     {
         rules:
         [
-            // HTML
-            // {
-            //     test: /\.(html)$/,
-            //     use:
-            //     [
-            //         'html-loader'
-            //     ]
-            // },
-
-            // JS
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -41,37 +23,7 @@ module.exports = {
                 [
                     'babel-loader'
                 ]
-            },
-
-            // CSS
-            // {
-            //     test: /\.css$/,
-            //     use:
-            //     [
-            //         MiniCSSExtractPlugin.loader,
-            //         'css-loader'
-            //     ]
-            // },
-
-            // Images
-            // {
-            //     test: /\.(jpg|png|gif|svg)$/,
-            //     type: 'asset/resource',
-            //     generator:
-            //     {
-            //         filename: 'assets/images/[hash][ext]'
-            //     }
-            // },
-
-            // Fonts
-            // {
-            //     test: /\.(ttf|eot|woff|woff2)$/,
-            //     type: 'asset/resource',
-            //     generator:
-            //     {
-            //         filename: 'assets/fonts/[hash][ext]'
-            //     }
-            // }
+            }
         ]
     }
 }
