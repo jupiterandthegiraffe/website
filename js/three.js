@@ -1,9 +1,7 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import * as dat from 'lil-gui'
-import gsap from 'gsap'
 
 
 // Debug
@@ -118,6 +116,7 @@ const tick = () =>
   const deltaTime = elapsedTime - previousTime
   previousTime = elapsedTime
 
+  // gsap is imported into the global scope
   gsap.to(camera.position, { x: Math.sin(mouse.x * 0.5), duration: 1})
   gsap.to(camera.position, { y: Math.cos(mouse.y * 0.5), duration: 1 })
 
