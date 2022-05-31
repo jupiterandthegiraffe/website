@@ -5,13 +5,14 @@ import * as dat from 'lil-gui'
 
 
 // Debug
-// const gui = new dat.GUI()
+const gui = new dat.GUI()
 
 /**
  * Base
  */
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
+console.log('canvas', canvas)
 
 // Scene
 const scene = new THREE.Scene()
@@ -41,14 +42,18 @@ window.addEventListener('resize', () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(0.412, 1.2, 1.8)
+camera.position.set(0.412, .5, 1.8)
 scene.add(camera)
+
+gui.add(camera.position, 'x', -5, 5).step(0.001).name('camera.x')
+gui.add(camera.position, 'y', -5, 5).step(0.001).name('camera.y')
+gui.add(camera.position, 'z', -5, 5).step(0.001).name('camera.z')
 
 /**
  * Lights
  */
-const directionalLight = new THREE.DirectionalLight(0xffffff, 3.116)
-directionalLight.position.set(.25, 1.189, 3.525)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+directionalLight.position.set(2.096, 2.269, 3.733)
 directionalLight.castShadow = true
 directionalLight.rotation.x = Math.PI / 2
 
@@ -69,13 +74,17 @@ dracoLoader.setDecoderPath('/js/draco/')
 const gltfLoader = new GLTFLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
 gltfLoader.load(
-    '/assets/models/J&G Logo_v01.glb',
+    '/assets/models/J&G Logo_v09.glb',
     (gltf) => {
       console.log(gltf);
       
       scene.add(gltf.scene)
 
-      logo = gltf.scene.children[2]
+      logo = gltf.scene.children[1]
+      logo.castShadow = true
+
+      gltf.scene.children[0].receiveShadow = true; //default
+      gltf.scene.children[2].receiveShadow = true; //default
 
       camera.lookAt(logo.position)
     },
@@ -103,7 +112,7 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
-renderer.physicallyCorrectLights = true
+// renderer.physicallyCorrectLights = true
 
 // Animate
 const clock = new THREE.Clock()

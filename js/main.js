@@ -41,7 +41,7 @@ const audioFiles = Array.from(document.querySelectorAll('audio'))
 const mainAudio = document.getElementById('main-audio')
 const topRightAudio = document.getElementById('top-right-audio')
 const bottomRightAudio = document.getElementById('bottom-right-audio')
-const bottomLefttAudio = document.getElementById('bottom-left-audio')
+const bottomLeftAudio = document.getElementById('bottom-left-audio')
 
 if (isSafari) {
   audioButton.style.display = 'none' 
@@ -50,25 +50,25 @@ if (isSafari) {
 const secondaryAudio = [
   topRightAudio,
   bottomRightAudio,
-  bottomLefttAudio
+  bottomLeftAudio
 ]
 
 audioButton.addEventListener('click', () => {
     if (sessionStorage.getItem('audio_on')) {
-      console.log('turn audio on')
-        sessionStorage.removeItem('audio_on')
-        audioButton.classList.add('audio-off')
-        audioFiles.forEach(audio => audio.pause())
-        startHomePageAudio()
-    } else {
       console.log('turn audio off')
-        sessionStorage.setItem('audio_on', 'true')
-        audioButton.classList.remove('audio-off')
-        bgAudioFiles.forEach(audio => audio.play())
-        // TODO: Fade in and out audio
-        if (isHomePage && sessionStorage.getItem('has_navigated')) {
-          startHomePageAudio()
-        }
+      sessionStorage.removeItem('audio_on')
+      audioButton.classList.add('audio-off')
+      audioFiles.forEach(audio => audio.pause())
+      startHomePageAudio()
+    } else {
+      console.log('turn audio on')
+      sessionStorage.setItem('audio_on', 'true')
+      audioButton.classList.remove('audio-off')
+      bgAudioFiles.forEach(audio => audio.play())
+      
+      if (isHomePage && sessionStorage.getItem('has_navigated')) {
+        startHomePageAudio()
+      }
     }
 })
 
@@ -79,12 +79,18 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
   })
 } else if (bgAudioFiles) {
   console.log('play bg audio on page load')
-  bgAudioFiles.forEach(audio => {
-    audio.play().catch(e => {
-      sessionStorage.removeItem('audio_on')
-      audioButton.classList.add('audio-off')
+
+  if (!sessionStorage.getItem('has_navigated')) {
+    mainAudio.play()
+  } else {
+    bgAudioFiles.forEach(audio => {
+      audio.play().catch(e => {
+        console.log('error playing audio', e)
+        sessionStorage.removeItem('audio_on')
+        audioButton.classList.add('audio-off')
+      })
     })
-  })
+  }
   audioButton.classList.remove('audio-off')
 }
 
@@ -101,55 +107,23 @@ function startHomePageAudio() {
         mainAudio.volume = 1
           
         topRightAudio.volume = 0
-        bottomLefttAudio.volume = 0
+        bottomLeftAudio.volume = 0
         bottomRightAudio.volume = 0
       } else {
         const xPos = e.clientX / window.innerWidth
         const yPos = e.clientY / window.innerHeight
 
         const leftToRight = Math.max((xPos - .5) * 2, 0)
+        const rightToLeft = 1 - xPos
         const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
-
-        const centre = (e.clientX - (window.innerWidth / 2) * e.clientX - (window.innerWidth / 2), e.clientY - (window.innerWidth / 2) * e.clientY - (window.innerWidth / 2))
-
-        console.log(centre)
+        const bottomToTop = yPos
+        const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
+        const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
 
         topRightAudio.volume = Math.min(leftToRight, topToBottom)
-        // mainAudio.volume = 
-
-        if (xPos > 0 && yPos < 0) {
-          // Top right
-
-
-
-          // bottomLefttAudio.volume = 0
-          // bottomRightAudio.volume = 0
-        } else if (xPos < 0 && yPos < 0) {
-          // Top left
-          // mainAudio.volume = 1
-          
-          // topRightAudio.volume = 0
-          // bottomLefttAudio.volume = 0
-          // bottomRightAudio.volume = 0
-        } else if (xPos > 0 && yPos > 0) {
-          // bottom right
-          // const newAudioVolume = xPos + yPos
-          // const oldAudioVolume = 1 - (xPos + yPos)
-          // mainAudio.volume = oldAudioVolume
-          // bottomRightAudio.volume = newAudioVolume
-
-          // topRightAudio.volume = 0
-          // bottomLefttAudio.volume = 0
-        } else if (xPos < 0 && yPos > 0) {
-          // bottom left
-          // const newAudioVolume = 1 - (xPos + .5) + (yPos - .5)
-          // const oldAudioVolume = 1 + (xPos - yPos)
-          // mainAudio.volume = oldAudioVolume
-          // bottomLefttAudio.volume = newAudioVolume
-
-          // topRightAudio.volume = 0
-          // bottomRightAudio.volume = 0
-        }
+        bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
+        bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
+        mainAudio.volume = Math.max(Math.min(rightToLeft, topToBottom), Math.min(centreX, centreY))
       }
     })
   }
@@ -175,7 +149,6 @@ if (colorModeSelector) {
 // Because of scope, we move these functions outside of homepage as these are controlled by Pinegrow Interacitons
 let svgLogoTimeline = null
 function drawSVG(e, progress) {
-  console.log('drawSVG', progress)
   if (svgLogoTimeline) {
     svgLogoTimeline.seek(progress * 2);
   }
@@ -183,29 +156,28 @@ function drawSVG(e, progress) {
 
 function destroyIntro(el) {
   console.log('destroy')
-    pgia.scrollSceneManager.removeScene(el, true);
+  pgia.scrollSceneManager.removeScene(el, true);
 
-    header.removeAttribute('style')
-    header.removeAttribute('data-pg-ia-hide')
-    footer.removeAttribute('style')
-    footer.removeAttribute('data-pg-ia-hide')
-    document.getElementById('backdrop').removeAttribute('data-pg-ia-hide')
-    document.getElementById('backdrop').style.opacity = ''
-    document.getElementById('backdrop').style.visibility = ''
+  header.removeAttribute('style')
+  header.removeAttribute('data-pg-ia-hide')
+  footer.removeAttribute('style')
+  footer.removeAttribute('data-pg-ia-hide')
+  document.getElementById('backdrop').removeAttribute('data-pg-ia-hide')
+  document.getElementById('backdrop').style.opacity = ''
+  document.getElementById('backdrop').style.visibility = ''
 
-    removeEl(el);
-    removeEl(document.querySelector('.splash-page-one__scroll-down'))
-    removeEl(document.querySelector('.draw-me').parentNode)
-    document.querySelector('.backdrop-blur').style.opacity = '0'
-    document.querySelector('.backdrop-blur').style.visibility = 'hidden'
+  removeEl(el);
+  removeEl(document.querySelector('.splash-page-one__scroll-down'))
+  removeEl(document.querySelector('.draw-me').parentNode)
+  document.querySelector('.backdrop-blur').style.opacity = '0'
+  document.querySelector('.backdrop-blur').style.visibility = 'hidden'
 
-    startHomePageAudio()
+  startHomePageAudio()
 }
 
 let splashTextTimeline = null
 let scrollDownTimeline = null
 function splitTextUpdate(e, progress) {
-  console.log('splitText', progress)
   if (scrollDownTimeline) {
     scrollDownTimeline.seek(progress)
   }
@@ -216,11 +188,12 @@ const playTransitionText = (word, animationName, cb) => {
   const transitionTextEl = document.getElementById('transition-text')
   const blur = document.getElementById('backdrop-blur')
 
+
     if (transitionTextEl) {
       transitionTextEl.innerHTML = word
       transitionTextEl.style.display = 'block'
 
-      const transitionSplitText = new SplitText(document.getElementById('transition-text'), {type: 'words'})
+      const transitionSplitText = new SplitText(transitionTextEl, {type: 'words'})
     
       const tl = gsap.timeline({
         onComplete: cb && cb
@@ -277,10 +250,11 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     document.querySelector('#backdrop').style.visibility = 'hidden'
     document.querySelector('.splash-pages').style.display = ''
 
-    secondaryAudio.forEach(audio => {
-      audio.volume = 0
-      audio.pause()
-    })
+    // secondaryAudio.forEach(audio => {
+    //   console.log('secondary audio pausing', audio)
+    //   audio.volume = 0
+    //   audio.pause()
+    // })
 
     const splashText = document.querySelector(".splash-page .splash-page__main-text")
     const scrollDownText = document.getElementById('scroll-down')
@@ -341,7 +315,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   footer.removeAttribute('style')
   footer.removeAttribute('data-pg-ia-hide')
 
-  if (sessionStorage.getItem('audio_on')) {
+  if (sessionStorage.getItem('audio_on') && sessionStorage.getItem('has_navigated')) {
+    console.log('isHomepage and audio is on and there is no intro')
     startHomePageAudio()
   }
 } else {
@@ -392,7 +367,12 @@ document.querySelectorAll('.menu a').forEach(el => {
 
         setTimeout(() => {
           const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
-          playTransitionText(word, 'Blur In', () => window.location = e.target.href)
+          playTransitionText(word, 'Blur In', () => {
+            pgia.play(document.getElementById('backdrop-blur', 'Page In'))
+            setTimeout(() => {
+              window.location = e.target.href
+            }, 500)
+          })
         }, 500)
     })
 })
@@ -412,8 +392,6 @@ allLinks.forEach(el => {
     el.addEventListener('click', (e) => {
         e.preventDefault()
 
-        console.log(e.target.href, window.location.href)
-
         if (e.target.href !== window.location.href) {
           const animationName = 
             e.target.pathname === '/' || e.target.pathname === '/index.html' ? 'Blur Out' : 'Blur In'
@@ -432,6 +410,7 @@ allLinks.forEach(el => {
             }, 500)
           } else {
             const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
+            console.log('play transition text')
             playTransitionText(word, animationName, () => window.location = e.target.href)
           }
         }

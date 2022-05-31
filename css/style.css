@@ -95,7 +95,7 @@ footer {
   0%,
   80% {
     opacity: 1; }
-  8%,
+  80%,
   100% {
     opacity: 0; } }
 
@@ -103,7 +103,7 @@ footer {
   0%,
   80% {
     opacity: 1; }
-  8%,
+  80%,
   100% {
     opacity: 0; } }
 
@@ -211,7 +211,8 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  outline: none; }
+  outline: none;
+  z-index: -2; }
 
 .splash-pages {
   z-index: 50;
@@ -264,7 +265,8 @@ a {
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
-          align-items: center; }
+          align-items: center;
+  z-index: -1; }
 
 .light-mode .backdrop-blur {
   background-color: rgba(226, 226, 226, 0.9); }
