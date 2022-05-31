@@ -64,10 +64,13 @@ audioButton.addEventListener('click', () => {
       console.log('turn audio on')
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
-      bgAudioFiles.forEach(audio => audio.play())
       
       if (isHomePage && sessionStorage.getItem('has_navigated')) {
         startHomePageAudio()
+      } else if (isHomePage) {
+        mainAudio.play()
+      } else {
+        bgAudioFiles.forEach(audio => audio.play())
       }
     }
 })
@@ -114,11 +117,20 @@ function startHomePageAudio() {
         const yPos = e.clientY / window.innerHeight
 
         const leftToRight = Math.max((xPos - .5) * 2, 0)
-        const rightToLeft = 1 - xPos
+        const rightToLeft = Math.max(1 - (xPos + .5), 0) * 2
         const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
-        const bottomToTop = yPos
+        const bottomToTop = Math.max(yPos - .5, 0) * 2
         const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
         const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
+
+        console.log({
+          leftToRight,
+          rightToLeft,
+          topToBottom,
+          bottomToTop,
+          centreX,
+          centreY,
+        })
 
         topRightAudio.volume = Math.min(leftToRight, topToBottom)
         bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
@@ -202,6 +214,10 @@ const playTransitionText = (word, animationName, cb) => {
       tl.from(transitionSplitText.words, {
           y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 25
       })
+
+      tl.to('canvas.webgl', {
+        autoAlpha: 0
+      }, '-=0.5')
 
       tl.to(document.querySelectorAll('#transition-text div'), {
         y: '-100%', autoAlpha: 0, stagger: '0.025'
