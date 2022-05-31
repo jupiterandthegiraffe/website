@@ -73,16 +73,17 @@
       <audio src="assets/audio/about.mp3" loop="true" preload="auto" class="background-audio" id="top-right-audio"></audio>
       <audio src="assets/audio/process.mp3" loop="true" preload="auto" class="background-audio" id="bottom-right-audio"></audio>
       <audio src="assets/audio/contact.mp3" loop="true" preload="auto" class="background-audio" id="bottom-left-audio"></audio>
-      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;" data-pg-ia='{"l":[{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".logo","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-20px","rotationY":"-20deg"}}],"m":true}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".logo","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"-20px","rotationX":"20deg"}}],"m":true}]}},{"trg":"mousemove_notouch","mm_a":"x","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"x":"-20px"}}],"m":true}]}},{"trg":"mousemove_notouch","mm_a":"y","a":{"l":[{"t":".shadow","l":[{"t":"tween","p":0.01,"d":0.5,"l":{"y":"10px","opacity":0.8,"scale":0.95}}],"m":true}]}}]}' id="backdrop">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;" id="backdrop">
         <div class="background jg">
-          <div class="backdrop-blur" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}}]}' id="backdrop-blur">
+          <div class="backdrop-blur" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$.webgl","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}},{"name":"Page In","trg":"no"}]}' id="backdrop-blur">
             <p id="transition-text" style="display: none;">Transition Text</p>
           </div>
           <canvas class="webgl"></canvas>
-          <div class="logo pg-empty-placeholder"></div>
-          <div class="pg-empty-placeholder shadow"></div>
         </div>
       </div>
+      <section class="page-overlay" data-pgc-edit="detail-content" data-pg-ia-hide>
+</section>
+      <div class="page-overlay__overlay pg-empty-placeholder"></div>
     </main>
     <footer data-pg-ia-hide>
       <a href="/contact.html" class="nav__link" rel="prefetch">Make contact</a>
@@ -105,6 +106,8 @@
     <script src="assets/libs/DrawSVGPlugin.min.js"></script>
     <script src="pgia/lib/pgia.js"></script>
     <script src="js/main.js"></script>
-    <script src="/dist/bundle.js"></script>
+    <script src="dist/bundle.js"></script>
+    <!-- <script src="/dist/bundle.js"></script> -->
   </body>   
 </html>
+<!--[Pinegrow components saved data - this data is no longer used in the component. We're saving it just in case. Clear this with Components -> Clear saved unused edits]<meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/>-->
