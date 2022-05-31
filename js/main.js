@@ -67,6 +67,7 @@ audioButton.addEventListener('click', () => {
       
       if (isHomePage && sessionStorage.getItem('has_navigated')) {
         startHomePageAudio()
+        mainAudio.play()
       } else if (isHomePage) {
         mainAudio.play()
       } else {
@@ -122,15 +123,6 @@ function startHomePageAudio() {
         const bottomToTop = Math.max(yPos - .5, 0) * 2
         const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
         const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
-
-        console.log({
-          leftToRight,
-          rightToLeft,
-          topToBottom,
-          bottomToTop,
-          centreX,
-          centreY,
-        })
 
         topRightAudio.volume = Math.min(leftToRight, topToBottom)
         bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
@@ -265,12 +257,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     document.querySelector('#backdrop').style.opacity = '0'
     document.querySelector('#backdrop').style.visibility = 'hidden'
     document.querySelector('.splash-pages').style.display = ''
-
-    // secondaryAudio.forEach(audio => {
-    //   console.log('secondary audio pausing', audio)
-    //   audio.volume = 0
-    //   audio.pause()
-    // })
 
     const splashText = document.querySelector(".splash-page .splash-page__main-text")
     const scrollDownText = document.getElementById('scroll-down')
