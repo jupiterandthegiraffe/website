@@ -5,7 +5,7 @@ import * as dat from 'lil-gui'
 
 
 // Debug
-const gui = new dat.GUI()
+// const gui = new dat.GUI()
 
 /**
  * Base
@@ -45,9 +45,9 @@ const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 
 camera.position.set(0.412, .5, 1.8)
 scene.add(camera)
 
-gui.add(camera.position, 'x', -5, 5).step(0.001).name('camera.x')
-gui.add(camera.position, 'y', -5, 5).step(0.001).name('camera.y')
-gui.add(camera.position, 'z', -5, 5).step(0.001).name('camera.z')
+// gui.add(camera.position, 'x', -5, 5).step(0.001).name('camera.x')
+// gui.add(camera.position, 'y', -5, 5).step(0.001).name('camera.y')
+// gui.add(camera.position, 'z', -5, 5).step(0.001).name('camera.z')
 
 /**
  * Lights
