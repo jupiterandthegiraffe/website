@@ -43,6 +43,28 @@ const topRightAudio = document.getElementById('top-right-audio')
 const bottomRightAudio = document.getElementById('bottom-right-audio')
 const bottomLeftAudio = document.getElementById('bottom-left-audio')
 
+// To do with pressing escape
+const menuCloseButton = document.querySelector('.menu__close-button')
+const pageOverlay = document.querySelector('.page-overlay')
+
+const navBack = () => {
+  pgia.play(document.querySelector('.page-overlay'), 'Slide out')
+
+  setTimeout(() => {
+      window.location = '/'
+  }, 500)
+}
+
+window.addEventListener('keyup', (e) => {
+  if(e.key === 'Escape') {
+    if (window.location.pathname === '/') {
+      pgia.play(menuCloseButton, 'Close menu')
+    } else {
+      navBack()
+    }
+  }
+})
+
 if (isSafari) {
   audioButton.style.display = 'none' 
 }
@@ -175,6 +197,8 @@ function destroyIntro(el) {
   removeEl(document.querySelector('.draw-me').parentNode)
   document.querySelector('.backdrop-blur').style.opacity = '0'
   document.querySelector('.backdrop-blur').style.visibility = 'hidden'
+
+  sessionStorage.setItem('has_navigated', true)
 
   startHomePageAudio()
 }
@@ -332,11 +356,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   document.querySelector('.page-overlay__back-button').addEventListener('click', (e) => {
       e.preventDefault()
   
-      pgia.play(document.querySelector('.page-overlay'), 'Slide out')
-
-      setTimeout(() => {
-          window.location = e.target.href
-      }, 500)
+      navBack()
   })
 
   const leadText = document.querySelector('.lead-text')

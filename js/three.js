@@ -5,7 +5,7 @@ import * as dat from 'lil-gui'
 
 
 // Debug
-// const gui = new dat.GUI()
+const gui = new dat.GUI()
 
 /**
  * Base
@@ -42,22 +42,22 @@ function initScene() {
    */
   // Base camera
   const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-  camera.position.set(0.412, .5, 1.8)
+  camera.position.set(1, 5, 1.8)
   scene.add(camera)
 
-  // gui.add(camera.position, 'x', -5, 5).step(0.001).name('camera.x')
-  // gui.add(camera.position, 'y', -5, 5).step(0.001).name('camera.y')
-  // gui.add(camera.position, 'z', -5, 5).step(0.001).name('camera.z')
+  gui.add(camera.position, 'x', -5, 5).step(0.001).name('camera.x')
+  gui.add(camera.position, 'y', -5, 5).step(0.001).name('camera.y')
+  gui.add(camera.position, 'z', -5, 5).step(0.001).name('camera.z')
 
   /**
    * Lights
    */
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-  directionalLight.position.set(2.096, 2.269, 3.733)
-  directionalLight.castShadow = true
-  directionalLight.rotation.x = Math.PI / 2
+  // const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+  // directionalLight.position.set(0.698, 2.91, 1.35)
+  // directionalLight.castShadow = true
+  // directionalLight.rotation.x = Math.PI / 2
 
-  scene.add(directionalLight)
+  // scene.add(directionalLight)
 
   // gui.add(directionalLight, 'intensity', 0, 10).step(0.001).name('lightIntensity')
   // gui.add(directionalLight.position, 'x', -5, 5).step(0.001).name('lightX')
@@ -67,6 +67,22 @@ function initScene() {
   // gui.add(directionalLight.rotation, 'y', -5, 5).step(0.001).name('lightRotationY')
   // gui.add(directionalLight.rotation, 'z', -5, 5).step(0.001).name('lightRotationZ')
 
+  const pointLight = new THREE.PointLight(0xffffff, 2.993, 2)
+  // pointLight.position.set(-0.163, 0.206, 1.189)
+  pointLight.position.set(-0.04, -0.286, 0.083)
+  scene.add(pointLight)
+
+  const spotLight = new THREE.SpotLight(0xFEFEFE, 1.887, 7, Math.PI / 2, 0.25, 1)
+  // spotLight.position.set(0.452, 1.681, -1.884)
+  spotLight.position.set(-0.286, 2.05, 2.2962)
+  spotLight.castShadow = true
+  scene.add(spotLight)
+
+  gui.add(spotLight, 'intensity', 0, 10).step(0.001).name('lightIntensity')
+  gui.add(spotLight.position, 'x', -5, 5).step(0.001).name('lightX')
+  gui.add(spotLight.position, 'y', -5, 5).step(0.001).name('lightY')
+  gui.add(spotLight.position, 'z', -5, 5).step(0.001).name('lightZ')
+
   let logo = null
   // Models
   const dracoLoader = new DRACOLoader()
@@ -74,17 +90,18 @@ function initScene() {
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
   gltfLoader.load(
-      '/assets/models/J&G Logo_v09.glb',
+      '/assets/models/J&G Logo_v11.glb',
       (gltf) => {
         console.log(gltf);
         
         scene.add(gltf.scene)
 
         logo = gltf.scene.children[1]
-        logo.castShadow = true
+        logo.castShadow = false
 
         gltf.scene.children[0].receiveShadow = true;
         gltf.scene.children[2].receiveShadow = true;
+
 
         camera.lookAt(logo.position)
 
@@ -123,6 +140,10 @@ function initScene() {
   const clock = new THREE.Clock()
   let previousTime = 0
 
+  const originalCameraPosition = new THREE.Vector2()
+  originalCameraPosition.x = camera.position.x
+  originalCameraPosition.y = camera.position.y
+
 
   const tick = () =>
   {
@@ -131,8 +152,8 @@ function initScene() {
     previousTime = elapsedTime
 
     // gsap is imported into the global scope
-    gsap.to(camera.position, { x: Math.sin(mouse.x * 0.5), duration: 1})
-    gsap.to(camera.position, { y: Math.cos(mouse.y * 0.5), duration: 1 })
+    gsap.to(camera.position, { x: Math.sin(originalCameraPosition.x - mouse.x * 0.5), duration: 1})
+    gsap.to(camera.position, { y: Math.cos(originalCameraPosition.y + mouse.y * 0.5), duration: 1 })
 
     if (logo) {
       camera.lookAt(logo.position)
