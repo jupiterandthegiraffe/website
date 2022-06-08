@@ -184,7 +184,7 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   list-style-type: none;
-  margin-top: 0;
+  margin: 0;
   padding: 0 1em 0 3em;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -955,3 +955,6 @@ h2.person__overlay-text {
 .light-mode .page-overlay__overlay {
   background: var(--color-brand-white);
   border-color: var(--color-brand-black); }
+
+.header__menu-button:focus {
+  outline: none; }
