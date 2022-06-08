@@ -67,21 +67,22 @@ function initScene() {
   // gui.add(directionalLight.rotation, 'y', -5, 5).step(0.001).name('lightRotationY')
   // gui.add(directionalLight.rotation, 'z', -5, 5).step(0.001).name('lightRotationZ')
 
-  const pointLight = new THREE.PointLight(0xffffff, 2.993, 2)
+  const pointLight = new THREE.PointLight(0xffffff, 1, 1)
   // pointLight.position.set(-0.163, 0.206, 1.189)
   pointLight.position.set(-0.04, -0.286, 0.083)
   scene.add(pointLight)
 
-  const spotLight = new THREE.SpotLight(0xFEFEFE, 1.887, 7, Math.PI / 2, 0.25, 1)
+  const spotLight = new THREE.SpotLight(0xFEFEFE, 1, 2, 0.734, 0.64, 0)
   // spotLight.position.set(0.452, 1.681, -1.884)
-  spotLight.position.set(-0.286, 2.05, 2.2962)
+  spotLight.position.set(0.733, 1.228, 2.240)
   spotLight.castShadow = true
   scene.add(spotLight)
 
-  gui.add(spotLight, 'intensity', 0, 10).step(0.001).name('lightIntensity')
-  gui.add(spotLight.position, 'x', -5, 5).step(0.001).name('lightX')
-  gui.add(spotLight.position, 'y', -5, 5).step(0.001).name('lightY')
-  gui.add(spotLight.position, 'z', -5, 5).step(0.001).name('lightZ')
+  // gui.add(spotLight, 'intensity', 0, 10).step(0.001).name('lightIntensity')
+  // gui.add(spotLight.position, 'x', -5, 5).step(0.001).name('lightX')
+  // gui.add(spotLight.position, 'y', -5, 5).step(0.001).name('lightY')
+  // gui.add(spotLight.position, 'z', -5, 5).step(0.001).name('lightZ')
+  // gui.add(spotLight, 'decay', -5, 5).step(0.001).name('decay')
 
   let logo = null
   // Models
@@ -97,7 +98,7 @@ function initScene() {
         scene.add(gltf.scene)
 
         logo = gltf.scene.children[1]
-        logo.castShadow = false
+        logo.castShadow = true
 
         gltf.scene.children[0].receiveShadow = true;
         gltf.scene.children[2].receiveShadow = true;
@@ -144,6 +145,22 @@ function initScene() {
   originalCameraPosition.x = camera.position.x
   originalCameraPosition.y = camera.position.y
 
+  const originalLightIntesity = spotLight.intensity
+
+  const spotLightAnimation = gsap.timeline({repeat: -1, delay: 5, repeatDelay: 20 })
+  spotLightAnimation.to(spotLight, { intensity: 0, duration: 0.05 })
+  spotLightAnimation.to(spotLight, { intensity: originalLightIntesity * 0.25, duration: 0.08 })
+  spotLightAnimation.to(spotLight, { intensity: 0, duration: 0.05 })
+  spotLightAnimation.to(spotLight, { intensity: originalLightIntesity * 0.5, duration: 0.08 })
+  spotLightAnimation.to(spotLight, { intensity: originalLightIntesity, duration: 1 })
+
+  const pointLightAnimation = gsap.timeline({repeat: -1, delay: 5, repeatDelay: 20 })
+  pointLightAnimation.to(pointLight, { intensity: 0, duration: 0.05 })
+  pointLightAnimation.to(pointLight, { intensity: originalLightIntesity * 0.25, duration: 0.08 })
+  pointLightAnimation.to(pointLight, { intensity: 0, duration: 0.05 })
+  pointLightAnimation.to(pointLight, { intensity: originalLightIntesity * 0.5, duration: 0.08 })
+  pointLightAnimation.to(pointLight, { intensity: originalLightIntesity, duration: 1 })
+
 
   const tick = () =>
   {
@@ -153,7 +170,7 @@ function initScene() {
 
     // gsap is imported into the global scope
     gsap.to(camera.position, { x: Math.sin(originalCameraPosition.x - mouse.x * 0.5), duration: 1})
-    gsap.to(camera.position, { y: Math.cos(originalCameraPosition.y + mouse.y * 0.5), duration: 1 })
+    gsap.to(camera.position, { y: Math.cos(originalCameraPosition.y + mouse.y * 0.5), duration: 1})
 
     if (logo) {
       camera.lookAt(logo.position)
