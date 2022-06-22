@@ -46,6 +46,8 @@ const bottomLeftAudio = document.getElementById('bottom-left-audio')
 // To do with pressing escape
 const menuCloseButton = document.querySelector('.menu__close-button')
 const pageOverlay = document.querySelector('.page-overlay')
+const menu = document.querySelector('.menu')
+const pageDetail = document.querySelector('.page-detail__main')
 
 const navBack = () => {
   pgia.play(document.querySelector('.page-overlay'), 'Slide out')
@@ -64,6 +66,22 @@ window.addEventListener('keyup', (e) => {
     }
   }
 })
+
+if (menu) {
+  menu.addEventListener('click', function(e) {
+    if (e.target.classList.contains('menu')) {
+      pgia.play(menuCloseButton, 1)
+    }
+  })
+}
+
+if (pageDetail) {
+  pageDetail.addEventListener('click', function(e) {
+    if (e.target.classList.contains('page-detail__main')) {
+      navBack()
+    }
+  })
+}
 
 if (isSafari) {
   audioButton.style.display = 'none' 
@@ -162,11 +180,14 @@ if (colorModeSelector) {
       console.log('change color mode: dark mode')
       localStorage.removeItem('color_theme')
       document.documentElement.classList.remove('light-mode')
-      window.location = window.location
+      setDarkTexture()
     } else {
       console.log('change color mode: light mode')
       document.documentElement.classList.add('light-mode')
       localStorage.setItem('color_theme', 'light')
+      setLightTexture()
+    }
+    if (isSafari) {
       window.location = window.location
     }
   })
@@ -203,11 +224,18 @@ function destroyIntro(el) {
   startHomePageAudio()
 }
 
+let scrollDownCurrentFrame = 0
 let splashTextTimeline = null
-let scrollDownTimeline = null
+let scrollDownTimeline = gsap.timeline({repeat: -1, repeatDelay: 2, onUpdate: function() { scrollDownCurrentFrame = this._time}})
 function splitTextUpdate(e, progress) {
   if (scrollDownTimeline) {
-    scrollDownTimeline.seek(progress)
+    scrollDownTimeline.seek((scrollDownCurrentFrame / 100) + progress)
+  } 
+  
+  if (progress === 0) {
+    scrollDownTimeline.play()
+  } else if (!scrollDownTimeline.paused()) {
+    scrollDownTimeline.pause()
   }
 }
 
@@ -306,28 +334,32 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     } 
     
     if (splashText && scrollDownText) {
-        const splashTextSplitText = new SplitText(splashText, {type: 'words, lines, chars'})
+        const splashTextSplitText = new SplitText(splashText, {type: 'words'})
         const scrollDownSplitText = new SplitText(scrollDownText, {type: 'chars, lines'})
     
         splashTextTimeline = gsap.from(splashTextSplitText.words, {
-            y: '100%', autoAlpha: 0, stagger: 0.05, rotateZ: 25, scale: .8, rotateX: '-90deg'
+            y: 50, autoAlpha: 0, stagger: 0.05, rotateZ: 10, filter: 'blur(10px)'
         })
-        
-        gsap.set(splashTextSplitText.lines, {
-            overflow: 'hidden'
+
+        scrollDownTimeline.to(scrollDownSplitText.chars, {
+          y: '-50%', autoAlpha: 0,
+          stagger: { // wrap advanced options in an object
+            each: 0.05,
+            from: scrollDownSplitText.chars.length,
+          }
         })
-        
-        scrollDownTimeline = gsap.to(scrollDownSplitText.chars, {
-            y: '-100%', autoAlpha: 0, paused: true,
-            stagger: { // wrap advanced options in an object
-              each: 0.05,
-              from: scrollDownSplitText.chars.length,
-            }
-        })
+        .addLabel('upComplete')
+        .to(scrollDownSplitText.chars, {
+          y: 0, autoAlpha: 1,
+          stagger: { // wrap advanced options in an object
+            each: 0.05,
+            from: scrollDownSplitText.chars.length,
+          }
+        }, 'upComplete')
     }
 
     svgLogoTimeline = gsap.timeline({});
-    svgLogoTimeline.from(".draw-me", {duration: 2, drawSVG: '0'}, 0.1);
+    svgLogoTimeline.from(".draw-me", {duration: 2, drawSVG: '0'}, 0.5);
   }
 } else if (isHomePage) {
   console.log('isHomepage')
@@ -361,9 +393,9 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
   const leadText = document.querySelector('.lead-text')
   if (leadText) {
-    const leadTextSplitText = new SplitText(leadText, {type: 'words, lines'})
+    const leadTextSplitText = new SplitText(leadText, {type: 'words'})
     gsap.from(leadTextSplitText.words, {
-      y: 100, autoAlpha: 0, stagger: 0.05
+      y: 50, autoAlpha: 0, stagger: 0.05, delay: 1
     })
   }
 }
