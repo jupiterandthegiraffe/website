@@ -221,7 +221,20 @@ function destroyIntro(el) {
 
   sessionStorage.setItem('has_navigated', true)
 
+  if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
+    pgia.play(feedback, 'Feedback In')
+  }
+
   startHomePageAudio()
+}
+
+const feedback = document.querySelector('.feedback')
+if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
+  pgia.play(feedback, 'Feedback In')
+}
+
+function setFeedbackDismissed() {
+  sessionStorage.setItem('feedback_dismissed', true)
 }
 
 let scrollDownCurrentFrame = 0
@@ -376,6 +389,11 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   header.removeAttribute('data-pg-ia-hide')
   footer.removeAttribute('style')
   footer.removeAttribute('data-pg-ia-hide')
+
+  if (window.location.pathname.match(/beta/)) {
+    const feedback = document.querySelector('.feedback')
+    pgia.play(feedback, 'Feedback In')
+  }
 
   if (sessionStorage.getItem('audio_on') && sessionStorage.getItem('has_navigated')) {
     console.log('isHomepage and audio is on and there is no intro')

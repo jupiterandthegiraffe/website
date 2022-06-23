@@ -122,6 +122,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
       <button type="button" aria-label="Theme: Dark mode" class="mode-selector__button mode-selector__button--dark-mode"></button>
     </div>
+    <div class="feedback" data-pg-ia='{"l":[{"name":"Feedback In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":0,"autoAlpha":1}}]}]}},{"name":"Feedback Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%","autoAlpha":0}}]}]}}]}'>
+      <button style="background: transparent; border: none; color: white; position: absolute; top: 1em; right: 1em; z-index: 1;" data-pg-ia='{"l":[{"trg":"click","t":"$.feedback","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"pgia":{"play":"Feedback Out"},"pgCall":{"complete":"setFeedbackDismissed"}}}]}]}}]}'>x</button>
+      <p>You lucky devil! You've been given access to the beta version of our site.</p>
+      <p>Please feel free to leave us some <a href="contact.html" style="text-decoration: underline">feedback</a> or your thoughts.</p>
+    </div>
     <script>
         if (window.location.pathname === '/') {
           document.querySelector('header').setAttribute('data-pg-ia-hide', '')
