@@ -1266,5 +1266,17 @@ h2.person__overlay-text {
     font-size: .75rem;
 }
 
+.feedback {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    max-width: 300px;
+    font-size: 0.75rem;
+    background-color: rgba(255, 255, 255, .2);
+    padding: 1em;
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
 
 
