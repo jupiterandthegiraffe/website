@@ -341,6 +341,10 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
             y: 50, autoAlpha: 0, stagger: 0.05, rotateZ: 10, filter: 'blur(10px)'
         })
 
+        gsap.from('.splash-page .splash-page__privacy-policy-text', {
+          autoAlpha: 0, filter: 'blur(10px)', delay: 1.5
+        })
+
         scrollDownTimeline.to(scrollDownSplitText.chars, {
           y: '-50%', autoAlpha: 0,
           stagger: { // wrap advanced options in an object
@@ -396,6 +400,34 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     const leadTextSplitText = new SplitText(leadText, {type: 'words'})
     gsap.from(leadTextSplitText.words, {
       y: 50, autoAlpha: 0, stagger: 0.05, delay: 1
+    })
+  }
+
+  const isProcessPage = window.location.pathname.match(/process/)
+
+  if (isProcessPage) {
+    console.log('process page')
+
+    const sections = gsap.utils.toArray('.page-overlay > .page-overlay__content-container')
+    sections.forEach(section => {
+      const sectionSplitText = new SplitText(section.querySelectorAll('.process__split-text'), {type: 'words'})
+      const button = section.querySelector('button')
+
+      gsap.set(sectionSplitText.words, {display: 'none'})
+      gsap.set(section.querySelector('.process__image'), { x: 100, autoAlpha: 0})
+
+      const sectionSplitTextTimeline = gsap.from(sectionSplitText.words, {
+        y: 20, autoAlpha: 0, stagger: 0.05, paused: true, duration: 0.5
+      })
+
+      if (button) {
+        button.addEventListener('click', (e) => {
+          gsap.set(sectionSplitText.words, {display: 'inline-block'})
+          gsap.to(section.querySelector('.process__image'), { x: 0, autoAlpha: 1})
+          sectionSplitTextTimeline.play()
+          gsap.to(button, {autoAlpha: 0})
+        })
+      }
     })
   }
 }

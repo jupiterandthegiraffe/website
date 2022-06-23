@@ -1,0 +1,187 @@
+<!DOCTYPE html> 
+<html data-pgc-master="masterpage-detail.html">
+  <head> 
+    <script>
+      if (localStorage.getItem('color_theme')) {
+        document.documentElement.classList.add('light-mode')
+      }
+
+      async function supportsImageFormat(format, dataUri) {
+        if (!self.createImageBitmap) return false;
+        
+        const imageData = `data:image/${format};base64,${dataUri}`;
+        const blob = await fetch(imageData).then(r => r.blob());
+        return createImageBitmap(blob).then(() => true, () => false);
+      }
+
+      (async () => {
+        if(await supportsImageFormat('webp','UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=')) {
+          document.documentElement.classList.add('webp-supported')
+        }
+      })();
+    </script>
+    <meta charset="utf-8"/> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/> 
+    <title data-pgc-field="jtg.page_title">Intelligent Experiences | Jupiter and The Giraffe</title>
+    <meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/> 
+    <meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/>
+    <meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/>
+    <meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta property="og:site_name" content="Jupiter and the Giraffe"/>
+    <meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/>
+    <meta name="twitter:site" content="@jupiter_giraffe"/> 
+    <link href="css/normalize.css" rel="stylesheet"/> 
+    <link href="css/style.css" rel="stylesheet"/> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap"/>
+    <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>   
+  <body style="overflow-y: overlay; overflow-x: hidden;">
+    <header style="filter: blur(10px); z-index: -1;">
+      <button aria-label="Open Menu" class="header__menu-button" data-pg-ia='{"l":[{"name":"Open menu","trg":"click","t":"$.menu","a":{"l":[{"t":".main-menu__list","l":[{"t":"tween","p":0.4,"d":0.5,"l":{"x":0,"pgCall":{"complete":"setMenuAudio"}}}]},{"t":"","l":[{"t":"tween","p":0,"d":0.4,"l":{"autoAlpha":1}},{"t":"set","p":0.001,"d":0,"l":{"x":0}}]}]}}]}'>
+</button>
+      <a href="about.html" class="nav__link">Who we are</a>
+    </header>
+    <div class="menu">
+      <button class="menu__close-button" data-pg-ia='{"l":[{"trg":"click","t":"$.menu","a":{"l":[{"t":"","l":[{"t":"tween","p":0.5,"d":0.5,"l":{"autoAlpha":0,"pgCall":{"complete":"removeMenuAudio"}}},{"t":"set","p":1,"d":0,"l":{"x":"-100%"}}]},{"t":".main-menu__list","l":[{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%"}}]}]},"name":"Close menu"}]}'></button>
+      <ul class="main-menu__list">
+        <li><a href="about.html" class="main-menu__links">Who are we</a>
+        </li>
+        <li><a href="case-studies.html" class="main-menu__links">What do we do</a>
+        </li>
+        <li><a href="process.html" class="main-menu__links">How do we do it</a>
+        </li>
+        <li><a href="contact.html" class="main-menu__links">Make contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class="silence-button" id="audio-button" data-pg-ia-hide data-pg-ia='{"l":[{"trg":"load","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.99,"l":{"autoAlpha":1}}]}]}}]}'>
+      <button class="audio-off silence-button__button" type="button" aria-label="Mute Audio" id="audio">
+        <img src="assets/svgs/audio-active.svg" alt="" class="audio__active"/>
+        <img src="assets/svgs/audio-active-black.svg" alt="" class="audio__active audio__active--black"/>
+      </button>
+      <small id="audio-text" data-pg-ia-hide>Turn on audio</small>
+    </div>
+    <main class="page-detail__main">
+      <section class="page-overlay" data-pg-ia-hide data-pg-ia='{"l":[{"name":"Slide In","trg":"load","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"y":"100vh"}},{"t":"set","p":0.9,"d":0,"l":{"y":0,"autoAlpha":1}}]},{"t":"$.page-overlay__overlay","l":[{"t":"tween","p":0,"d":0.9,"l":{"y":"-100%"},"e":"Bounce.easeOut"},{"t":"tween","p":0.8975240715268226,"d":0.5,"l":{"y":0},"e":"Quad.easeIn"},{"t":"tween","p":1.4008264462809918,"d":0.1,"l":{"pgDom":{"remove":1}}}]}]}},{"name":"Slide out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$main #gt# .page-overlay__footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0,"y":"100vh"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(0px)"}}]}]}},{"name":"Transition","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"100vh","autoAlpha":0}}]},{"t":"$main #gt# .page-overlay__footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"y":"100vh","autoAlpha":0}}]}]}}]}' data-pgc-field="detail-content">
+        <div style="position: relative;" class="page-overlay__content-header">
+          <div class="page-overlay__heading"><a href="/" class="page-overlay__back-button" id="back-button" rel="prefetch">Go back</a>
+            <h1>Terms and Conditions</h1>
+          </div>
+        </div>
+        <div class="page-overlay__content-container" style="max-width: 1512px;">
+          <div class="align-items-start col-md d-flex flex-column"> 
+            <div>
+              <h2>Intellectual Property Rights</h2> 
+              <p>Unless otherwise indicated, the Site is our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the Site (collectively, the “Content”) and the trademarks, service marks, and logos contained therein (th                  e “Marks”) are owned or controlled by us or licensed to us, and are protected by copyright and trademark laws and various other intellectual property rights and unfair competition laws of the United States, international copyright laws, and international conventions. The Content and the Marks are provided on the Site “AS IS” for your information and personal use only. Except as expressly provided in these Terms of Use, no part of the Site and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.Provided that you are eligible to use the Site, you are granted a limited license to access and use the Site and to download or print a copy of any portion of the Content to which you have properly gained access solely for your personal, non-commercial use. We reserve all rights not expressly granted to you in and to the Site, the Content and the Marks.</p>
+            </div>
+            <div> 
+              <h2>Usage</h2> 
+              <p>By using the Site, you represent and warrant that:  (1) you have the legal capacity and you agree to comply with these Terms of Use; (2) you are not a minor in the jurisdiction in which you reside; (3) you will not access the Site through automated or non-human means, whether through a bot, script, or otherwise; (4) you will not use the Site for any illegal or unauthorised purpose; and (5) your use of the Site will not violate any applicable law or regulation.</p>
+              <p>If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Site (or any portion thereof).</p> 
+            </div>
+            <div> 
+              <h2>User Generated Contributions</h2> 
+              <p>The Site does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Site, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, "Contributions"). Contributions may be viewable by other users of the Site and through third-party websites. As such, any Contributions you transmit may be treated in accordance with the Site Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:</p>
+              <ol>
+                <li>The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.</li>
+                <li>You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Site, and other users of the Site to use your Contributions in any manner contemplated by the Site and these Terms of Use.</li>
+                <li>You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Site and these Terms of Use.</li>
+                <li>Your Contributions are not false, inaccurate, or misleading.</li>
+                <li>Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.</li>
+                <li>Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).</li>
+                <li>Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.</li>
+                <li>Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.</li>
+                <li>Your Contributions do not violate any applicable law, regulation, or rule.</li>
+                <li>Your Contributions do not violate the privacy or publicity rights of any third party.</li>
+                <li>Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.</li>
+                <li>Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.</li>
+                <li>Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use, or any applicable law or regulation.</li>
+              </ol>
+              <p>Any use of the Site in violation of the foregoing violates these Terms of Use and may result in, among other things, termination or suspension of your rights to use the Site.</p>
+            </div>
+            <div> 
+              <h2>Contribution License</h2> 
+              <p>You and the Site agree that we may access, store, process, and use any information and personal data that you provide following the terms of the Privacy Policy and your choices (including settings).</p>
+              <p>By submitting suggestions or other feedback regarding the Site, you agree that we can use and share such feedback for any purpose without compensation to you.</p> 
+              <p>We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any intellectual property rights or other proprietary rights associated with your Contributions. We are not liable for any statements or representations in your Contributions provided by you in any area on the Site. You are solely responsible for your Contributions to the Site and you expressly agree to exonerate us from any and all responsibility and to refrain from any legal action against us regarding your Contributions.</p> 
+            </div>             
+            <div> 
+              <h2>Third-Party Website and Content</h2> 
+              <p>The Site may contain (or you may be sent via the Site) links to other websites ("Third-Party Websites") as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties ("Third-Party Content"). Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Site or any Third-Party Content posted on, available through, or installed from the Site, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content. Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or any Third-Party Content does not imply approval or endorsement thereof by us. If you decide to leave the Site and access the Third-Party Websites or to use or install any Third-Party Content, you do so at your own risk, and you should be aware these Terms of Use no longer govern. You should review the applicable terms and policies, including privacy and data gathering practices, of any website to which you navigate from the Site or relating to any applications you use or install from the Site. Any purchases you make through Third-Party Websites will be through other websites and from other companies, and we take no responsibility whatsoever in relation to such purchases which are exclusively between you and the applicable third party. You agree and acknowledge that we do not endorse the products or services offered on Third-Party Websites and you shall hold us harmless from any harm caused by your purchase of such products or services. Additionally, you shall hold us harmless from any losses sustained by you or harm caused to you relating to or resulting in any way from any Third-Party Content or any contact with Third-Party Websites.</p> 
+            </div>             
+            <div> 
+              <h2>Privacy Policy</h2> 
+              <p>We care about data privacy and security. Please review our Privacy Policy: https://jupiterandthegiraffe.com/privacy-policy. By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms of Use. Please be advised the Site is hosted in the United Kingdom. If you access the Site from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United Kingdom, then through your continued use of the Site, you are transferring your data to the United Kingdom, and you agree to have your data transferred to and processed in the United Kingdom.</p> 
+            </div>             
+            <div> 
+              <h2>Modifications and Interruptions</h2> 
+              <p>We reserve the right to change, modify, or remove the contents of the Site at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Site. We also reserve the right to modify or discontinue all or part of the Site without notice at any time. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Site.</p> 
+              <p>We cannot guarantee the Site will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the Site, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the Site at any time or for any reason without notice to you. You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Site during any downtime or discontinuance of the Site. Nothing in these Terms of Use will be construed to obligate us to maintain and support the Site or to supply any corrections, updates, or releases in connection therewith.</p> 
+            </div>             
+            <div> 
+              <h2>Dispute Resolution</h2> <strong class="d-block">Informal Negotiations</strong>
+              <p>To expedite resolution and control the cost of any dispute, controversy, or claim related to these Terms of Use (each "Dispute" and collectively, the “Disputes”) brought by either you or us (individually, a “Party” and collectively, the “Parties”), the Parties agree to first attempt to negotiate any Dispute (except those Disputes expressly provided below) informally for at least thirty (30) days before initiating arbitration. Such informal negotiations commence upon written notice from one Party to the other Party.</p> <strong class="d-block">Binding Arbitration</strong>
+              <p>Any dispute arising from the relationships between the Parties to this contract shall be determined by one arbitrator who will be chosen in accordance with the Arbitration and Internal Rules of the European Court of Arbitration being part of the European Centre of Arbitration having its seat in Strasbourg, and which are in force at the time the application for arbitration is filed, and of which adoption of this clause constitutes acceptance. The seat of arbitration shall be London, United Kingdom. The language of the proceedings shall be English (UK). Applicable rules of substantive law shall be the law of the United Kingdom.</p> <strong class="d-block">Restrictions</strong>
+              <p>The Parties agree that any arbitration shall be limited to the Dispute between the Parties individually. To the full extent permitted by law, (a) no arbitration shall be joined with any other proceeding; (b) there is no right or authority for any Dispute to be arbitrated on a class-action basis or to utilize class action procedures; and (c) there is no right or authority for any Dispute to be brought in a purported representative capacity on behalf of the general public or any other persons.</p> <strong class="d-block">Exceptions to Informal Negotiations and Arbitration</strong>
+              <p>The Parties agree that the following Disputes are not subject to the above provisions concerning informal negotiations and binding arbitration: (a) any Disputes seeking to enforce or protect, or concerning the validity of, any of the intellectual property rights of a Party; (b) any Dispute related to, or arising from, allegations of theft, piracy, invasion of privacy, or unauthorised use; and (c) any claim for injunctive relief. If this provision is found to be illegal or unenforceable, then neither Party will elect to arbitrate any Dispute falling within that portion of this provision found to be illegal or unenforceable and such Dispute shall be decided by a court of competent jurisdiction within the courts listed for jurisdiction above, and the Parties agree to submit to the personal jurisdiction of that court.</p> 
+            </div>
+            <div> 
+              <h2>Disclaimer</h2> 
+              <p class="small-text-normal text-uppercase">The site is provided on an as-is and as-available basis. You agree that your use of the site and our services will be at your sole risk. To the fullest extent permitted by law, we disclaim all warranties, express or implied, in connection with the site and your use thereof, including, without limitation, the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We make no warranties or representations about the accuracy or completeness of the site’s content or the content of any websites linked to the site and we will assume no liability or responsibility for any (1) errors, mistakes, or inaccuracies of content and materials, (2) personal injury or property damage, of any nature whatsoever, resulting from your access to and use of the site, (3) any unauthorised access to or use of our secure servers and/or any and all personal information and/or financial information stored therein, (4) any interruption or cessation of transmission to or from the site, (5) any bugs, viruses, trojan horses, or the like which may be transmitted to or through the site by any third party, and/or (6) any errors or omissions in any content and materials or for any loss or damage of any kind incurred as a result of the use of any content posted, transmitted, or otherwise made available via the site. We do not warrant, endorse, guarantee, or assume responsibility for any product or service advertised or offered by a third party through the site, any hyperlinked website, or any website or mobile application featured in any banner or other advertising, and we will not be a party to or in any way be responsible for monitoring any transaction between you and any third-party providers of products or services. As with the purchase of a product or service through any medium or in any environment, you should use your best judgment and exercise caution where appropriate.</p> 
+            </div>
+            <div> 
+              <h2>Indemnification</h2> 
+              <p>You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys’ fees and expenses, made by any third party due to or arising out of: (1) use of the Site; (2) breach of these Terms of Use; (3) any breach of your representations and warranties set forth in these Terms of Use; (4) your violation of the rights of a third party, including but not limited to intellectual property rights; or (5) any overt harmful act toward any other user of the Site with whom you connected via the Site. Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.</p> 
+            </div>
+            <div> 
+              <h2>Electronic Communications, Transactions and Signatures</h2> 
+              <p>Visiting the Site, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communication be in writing. <span class="text-uppercase">You hereby agree to the use of electronic signatures, contracts, orders, and other records, and to electronic delivery of notices, policies, and records of transactions initiated or completed by us or via the site.</span> You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means. </p> 
+            </div>             
+          </div>
+        </div>
+      </section>
+      <div class="page-overlay__footer" data-pg-ia-scene='{"dbg":"true","s":"custom","s_t":"start","s_s":"end","e_t":"end","l":[{"name":"Footer Scene","a":{"l":[{"t":"h2","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"a","l":[{"t":"set","p":0,"d":0,"l":{"y":100}},{"t":"tween","p":0.2,"d":0.5,"s":0.1,"l":{"autoAlpha":1,"y":0}}]}]},"p":"scroll"}],"e_s":"end"}'>
+        <section class="page-overlay__content-container page-overlay__footer">
+          <h2 data-pg-ia-hide><span class="blink">&gt;</span> Where next?</h2>
+          <div class="page-overlay__footer-links"><a href="/about.html" data-pg-ia-hide rel="prefetch">Who we are</a><a href="/process.html" data-pg-ia-hide rel="prefetch">What we do</a><a href="/contact.html" data-pg-ia-hide rel="prefetch">Make contact</a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div class="page-overlay__overlay pg-empty-placeholder"></div>
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-repeat: no-repeat; background-position: center 75%; z-index: -2;" id="backdrop">
+        <div class="background jg">
+          <div class="backdrop-blur" data-pg-ia='{"l":[{"name":"Blur Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}},{"name":"Blur In","trg":"no","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$footer","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]},{"t":"$.mode-selector","l":[{"t":"tween","p":0,"d":0.5,"l":{"filter":"blur(10px)"}}]}]}}]}' id="backdrop-blur">
+            <p id="transition-text" style="display: none;">Transition Text</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer style="filter: blur(10px); z-index: -1;">
+      <a href="" class="nav__link">Make contact</a>
+      <div class="footer__central-text">
+        <p>Intelligent Experiences</p>
+      </div>
+      <a href="" class="nav__link">What we do</a>
+    </footer>
+    <div class="mode-selector mode-selector__buton" style="z-index: -1; filter: blur(10px); display: none;">
+      <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
+      <button type="button" aria-label="Theme: Dark mode" class="mode-selector__button mode-selector__button--dark-mode"></button>
+    </div>
+    <script>
+        if (window.location.pathname === '/') {
+          document.querySelector('header').setAttribute('data-pg-ia-hide', '')
+          document.querySelector('footer').setAttribute('data-pg-ia-hide', '')
+        }
+    </script>
+    <script src="assets/libs/SplitText.min.js"></script>
+    <script src="assets/libs/DrawSVGPlugin.min.js"></script>
+    <script src="pgia/lib/pgia.js"></script>
+    <script src="js/main.js"></script>
+    <script src="/dist/bundle.js"></script>
+  </body>
+</html>
+<!--[Pinegrow components saved data - this data is no longer used in the component. We're saving it just in case. Clear this with Components -> Clear saved unused edits]<meta name="description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-description"/><meta property="og:title" content="Intelligent Experiences | Jupiter and The Giraffe" data-pgc-field="jtg.master-og-title"/><meta property="og:description" content="Delivering world-class solutions for organisations who need to implement smarter experiences across their web, app or digital product portfolio." data-pgc-field="jtg.master-og-description"/><meta property="og:image" content="https://jupiterandthegiraffe.com/thumbnail.jpg" data-pgc-field="jtg.master-image"/><meta name="twitter:image:alt" content="Intelligent Experiences" data-pgc-field="jtg.master-twitter-alt"/>-->
