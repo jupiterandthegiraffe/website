@@ -138,6 +138,8 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
   audioButton.classList.remove('audio-off')
 }
 
+let homepageAudio = false
+
 function startHomePageAudio() {
   if (sessionStorage.getItem('audio_on') && !isSafari) {
     console.log('startHomepageAudio')
@@ -145,33 +147,41 @@ function startHomePageAudio() {
       audio.play()
       audio.volume = 0
     })
-
-    document.addEventListener('mousemove', (e) => {
-      if (menuAudio) {
-        mainAudio.volume = 1
-          
-        topRightAudio.volume = 0
-        bottomLeftAudio.volume = 0
-        bottomRightAudio.volume = 0
-      } else {
-        const xPos = e.clientX / window.innerWidth
-        const yPos = e.clientY / window.innerHeight
-
-        const leftToRight = Math.max((xPos - .5) * 2, 0)
-        const rightToLeft = Math.max(1 - (xPos + .5), 0) * 2
-        const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
-        const bottomToTop = Math.max(yPos - .5, 0) * 2
-        const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
-        const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
-
-        topRightAudio.volume = Math.min(leftToRight, topToBottom)
-        bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
-        bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
-        mainAudio.volume = Math.max(Math.min(rightToLeft, topToBottom), Math.min(centreX, centreY))
-      }
-    })
+    homepageAudio = true
   }
 }
+
+window.addEventListener('mousemove', e => {
+  const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
+  const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
+  
+  effect2.uniforms[ 'amount' ].value = Math.min(1 - centreX, 1 - centreY) * 0.002
+  
+  if (homepageAudio) {
+    if (menuAudio) {
+      mainAudio.volume = 1
+        
+      topRightAudio.volume = 0
+      bottomLeftAudio.volume = 0
+      bottomRightAudio.volume = 0
+    } else {
+      const xPos = e.clientX / window.innerWidth
+      const yPos = e.clientY / window.innerHeight
+  
+      const leftToRight = Math.max((xPos - .5) * 2, 0)
+      const rightToLeft = Math.max(1 - (xPos + .5), 0) * 2
+      const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
+      const bottomToTop = Math.max(yPos - .5, 0) * 2
+      const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
+      const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
+  
+      topRightAudio.volume = Math.min(leftToRight, topToBottom)
+      bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
+      bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
+      mainAudio.volume = Math.max(Math.min(rightToLeft, topToBottom), Math.min(centreX, centreY))
+    }
+  }
+})
 
 const colorModeSelector = document.querySelector('.mode-selector')
 if (colorModeSelector) {
