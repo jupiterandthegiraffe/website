@@ -174,7 +174,7 @@ function initScene() {
 
     if (logo) {
       // gsap is imported into the global scope
-      gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.30), duration: 1})
+      gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1})
       gsap.to(logo.rotation, { z: originalCameraPosition.y + -(mouse.x * 0.30), duration: 1})
 
       camera.lookAt(logo.position)
