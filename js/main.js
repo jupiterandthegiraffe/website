@@ -147,17 +147,7 @@ function startHomePageAudio() {
       audio.play()
       audio.volume = 0
     })
-    homepageAudio = true
-  }
-}
-
-window.addEventListener('mousemove', e => {
-  const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
-  const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
-  
-  effect2.uniforms[ 'amount' ].value = Math.min(1 - centreX, 1 - centreY) * 0.002
-  
-  if (homepageAudio) {
+    
     if (menuAudio) {
       mainAudio.volume = 1
         
@@ -165,23 +155,26 @@ window.addEventListener('mousemove', e => {
       bottomLeftAudio.volume = 0
       bottomRightAudio.volume = 0
     } else {
-      const xPos = e.clientX / window.innerWidth
-      const yPos = e.clientY / window.innerHeight
-  
-      const leftToRight = Math.max((xPos - .5) * 2, 0)
-      const rightToLeft = Math.max(1 - (xPos + .5), 0) * 2
-      const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
-      const bottomToTop = Math.max(yPos - .5, 0) * 2
-      const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
-      const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
-  
-      topRightAudio.volume = Math.min(leftToRight, topToBottom)
-      bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
-      bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
-      mainAudio.volume = Math.max(Math.min(rightToLeft, topToBottom), Math.min(centreX, centreY))
+      window.addEventListener('mousemove', e => {
+
+        const xPos = e.clientX / window.innerWidth
+        const yPos = e.clientY / window.innerHeight
+    
+        const leftToRight = Math.max((xPos - .5) * 2, 0)
+        const rightToLeft = Math.max(1 - (xPos + .5), 0) * 2
+        const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
+        const bottomToTop = Math.max(yPos - .5, 0) * 2
+        const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
+        const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
+    
+        topRightAudio.volume = Math.min(leftToRight, topToBottom)
+        bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
+        bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
+        mainAudio.volume = Math.max(Math.min(rightToLeft, topToBottom), Math.min(centreX, centreY))
+      })
     }
   }
-})
+}
 
 const colorModeSelector = document.querySelector('.mode-selector')
 if (colorModeSelector) {
@@ -298,7 +291,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   if (isMobile) {
     console.log('first run: mobile')
     const el = document.querySelector('.splash-pages')
-    const word = document.querySelector('.splash-page-two').innerText
+    const word = document.querySelector('.splash-page__main-text').innerText
 
     playTransitionText(word, 'Blur In', () => {
       gsap.to('header', {
@@ -309,11 +302,11 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       })
       
       gsap.to('#backdrop-blur', {
-        autoAlpha: 0
+        autoAlpha: 0, filter: 'blur(0)'
       })
       
-      gsap.to('#backdrop', {
-        autoAlpha: 1
+      gsap.to('.webgl', {
+        autoAlpha: 1, filter: 'blur(0)'
       })
 
       gsap.to('.mode-selector', {
@@ -426,8 +419,9 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   const leadText = document.querySelector('.lead-text')
   if (leadText) {
     const leadTextSplitText = new SplitText(leadText, {type: 'words'})
-    gsap.from(leadTextSplitText.words, {
-      y: 50, autoAlpha: 0, stagger: 0.05, delay: 1
+    gsap.set(leadTextSplitText.words, { opacity: 0, y: 50})
+    gsap.to(leadTextSplitText.words, {
+      y: 1, autoAlpha: 1, stagger: 0.05, delay: 1
     })
   }
 
@@ -442,7 +436,12 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       const button = section.querySelector('button')
 
       gsap.set(sectionSplitText.words, {display: 'none'})
-      gsap.set(section.querySelector('.process__image'), { x: 100, autoAlpha: 0})
+
+      const image = section.querySelector('.process__image')
+
+      if (image) {
+        gsap.set(section.querySelector('.process__image'), { x: 100, autoAlpha: 0})
+      }
 
       const sectionSplitTextTimeline = gsap.from(sectionSplitText.words, {
         y: 20, autoAlpha: 0, stagger: 0.05, paused: true, duration: 0.5
@@ -482,7 +481,7 @@ document.querySelectorAll('.menu a').forEach(el => {
         setTimeout(() => {
           const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
           playTransitionText(word, 'Blur In', () => {
-            pgia.play(document.getElementById('backdrop-blur', 'Page In'))
+            pgia.play(document.getElementById('backdrop-blur'), 'Page In')
             setTimeout(() => {
               window.location = e.target.href
             }, 500)

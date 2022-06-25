@@ -14,34 +14,9 @@ import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js';
 // const gui = new dat.GUI()
 let logo = null
 let composer = null
+let effect2 = null
 
-const lightImage = new Image()
-const lightTexture = new THREE.Texture(lightImage)
-
-lightImage.onload = () => {
-  lightTexture.needsUpdate = true
-}
-
-lightImage.src = '../assets/models/J&G - Base 4K-white.png'
-
-window.setLightTexture = () => {
-  logo.material.map = lightTexture
-  logo.material.needsUpdate = true
-}
-
-const darkImage = new Image()
-const darkTexture = new THREE.Texture(darkImage)
-
-darkImage.onload = () => {
-  darkTexture.needsUpdate = true
-}
-
-darkImage.src = '../assets/models/J&G - Base 4K.png'
-
-window.setDarkTexture = () => {
-  logo.material.map = darkTexture
-  logo.material.needsUpdate = true
-}
+const isMobile = navigator.userAgent.toLowerCase().match(/mobile/i)
 
 /**
  * Base
@@ -110,24 +85,27 @@ function initScene() {
       (gltf) => {
         console.log(gltf);
         
+        console.log('add to scene');
         scene.add(gltf.scene)
-
+        
         logo = gltf.scene.children[0].children[1]
         const bg = gltf.scene.children[0].children[0]
         logo.castShadow = true
-
-        bg.receiveShadow = true;
-
+        
+        // bg.receiveShadow = true;
+        
+        console.log('set position');
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
-
+        
         camera.lookAt(logo.position)
-
+        
+        console.log('fade in');
         // Fade in on load
         gsap.to(canvas, {
           autoAlpha: 1,
           delay: .2
-        })
+        })        
       },
       () => {
           console.log('progress');
@@ -137,12 +115,20 @@ function initScene() {
       },
   )
 
+  console.log('mousemove');
   const mouse = new THREE.Vector2();
   window.addEventListener('mousemove', (event) => {
     mouse.x = (event.clientX / sizes.width) - 0.5
     mouse.y = (event.clientY / sizes.height)  - 0.5
+    
+    if (effect2) {
+      const centreX = 1 - Math.abs((event.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
+      const centreY = 1 - Math.abs((event.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
+      effect2.uniforms[ 'amount' ].value = Math.min(1 - centreX, 1 - centreY) * 0.002
+    }
   })
 
+  console.log('renderer');
   // Renderer
   const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -154,36 +140,44 @@ function initScene() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap
   renderer.physicallyCorrectLights = true
 
-  composer = new EffectComposer( renderer );
-  composer.addPass( new RenderPass( scene, camera ) );
-
-  window.effect2 = new ShaderPass( RGBShiftShader );
-  composer.addPass( effect2 );
+  if (!isMobile) {
+    console.log('compose effects')
+    composer = new EffectComposer( renderer );
+    composer.addPass( new RenderPass( scene, camera ) );
   
-  const effectFilm = new FilmPass( 0.35, 0.025, 648, false );
-  composer.addPass( effectFilm );
+    effect2 = new ShaderPass( RGBShiftShader );
+    effect2.uniforms[ 'amount' ].value = 0
+    composer.addPass( effect2 );
+    
+    const effectFilm = new FilmPass( 0.35, 0.025, 648, false );
+    composer.addPass( effectFilm );
+  }
+
+  console.log('complete');
 
   // Animate
-  const clock = new THREE.Clock()
-  let previousTime = 0
+  // const clock = new THREE.Clock()
+  // let previousTime = 0
 
   const tick = () => {
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - previousTime
-    previousTime = elapsedTime
+    // const elapsedTime = clock.getElapsedTime()
+    // const deltaTime = elapsedTime - previousTime
+    // previousTime = elapsedTime
 
-    if (logo) {
-      // gsap is imported into the global scope
-      gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1})
-      gsap.to(logo.rotation, { z: originalCameraPosition.y + -(mouse.x * 0.30), duration: 1})
-
-      camera.lookAt(logo.position)
-    }
-
+    
     // Render
-    if (composer) {
-      // renderer.render(scene, camera)
-      composer.render();
+    if (composer || renderer) {
+      if (isMobile) {
+        renderer.render(scene, camera)
+      } else {
+        if (logo) {
+          console.log('move')
+          // gsap is imported into the global scope
+          gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1})
+          gsap.to(logo.rotation, { z: originalCameraPosition.y + -(mouse.x * 0.30), duration: 1})
+        }
+        composer.render()
+      }
     }
 
     // Call tick again on the next frame
@@ -194,5 +188,6 @@ function initScene() {
 }
 
 if (canvas) {
+  console.log('canvas detected')
   initScene()
 }
