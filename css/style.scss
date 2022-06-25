@@ -267,7 +267,8 @@ a {
     font-size: 1rem;
     margin-bottom: 0.2em;
     max-width: 1036px;
-    padding: 0 50px
+    padding: 0 50px;
+    text-align: center
 }
 
 @media (min-width:576px) {
@@ -278,7 +279,6 @@ a {
 }
 
 .splash-page {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,6 +287,13 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
+    height: 100vh;
+}
+
+@media (min-width:576px) {
+    .splash-page {
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
 }
 
 .backdrop-blur {
@@ -847,10 +854,16 @@ button[type="submit"] {
 }
 
 #transition-text {
-    font-size: 40px;
+    font-size: 1rem;
     text-align: center;
     margin-left: 1em;
     margin-right: 1em;
+}
+
+@media (min-width:576px) {
+    #transition-text {
+        font-size: 40px;
+    }
 }
 
 .lead-text--left {
@@ -1085,12 +1098,6 @@ h2.person__overlay-text {
     width: 100%
 }
 
-@media (min-width:576px) {
-    .page-overlay__overlay {
-        margin-top: 180px;
-    }
-}
-
 .page-overlay__overlay {
     background: var(--color-brand-black);
     position: absolute;
@@ -1101,6 +1108,12 @@ h2.person__overlay-text {
     border-top: 2px solid #ffffff;
     margin-top: 0px;
     z-index: 10;
+}
+
+@media (min-width:576px) {
+    .page-overlay__overlay {
+        margin-top: 180px;
+    }
 }
 
 .light-mode .page-overlay__overlay {
@@ -1377,6 +1390,10 @@ h2.person__overlay-text {
         grid-column-gap: 60px;
         grid-template-rows: 1fr 1fr;
         margin-bottom: 2em;
+    }
+
+    .page-overlay .page-overlay__content-container:nth-child(even) {
+        padding-left: 20vw;
     }
 }
 
