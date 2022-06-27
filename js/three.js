@@ -126,7 +126,8 @@ function initScene() {
     if (effect2) {
       const centreX = 1 - Math.abs((event.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
       const centreY = 1 - Math.abs((event.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
-      effect2.uniforms[ 'amount' ].value = Math.min(1 - centreX, 1 - centreY) * 0.002
+
+      effect2.uniforms[ 'amount' ].value = Math.min(1 - centreX, 1 - centreY) * 0.003
     }
   })
 
