@@ -62,16 +62,16 @@ function initScene() {
    * Lights
    */
   const pointLight = new THREE.PointLight(0xffffff, 1, 1)
-  pointLight.position.set(-0.04, -0.286, 0.083)
+  pointLight.position.set(-0.04, -0.5, 0.083)
   scene.add(pointLight)
   
-  const pointLight2 = new THREE.PointLight(0xffffff, 1, 1)
-  pointLight2.position.set(0, 0.921, 0.958)
-  pointLight2.rotation.set(1.026,0, 0)
-  pointLight2.intensity = 6
-  pointLight2.decay = 1.5
-  pointLight2.distance = 0
-  scene.add(pointLight2)
+  // const pointLight2 = new THREE.PointLight(0xffffff, 1, 1)
+  // pointLight2.position.set(0, 0.921, 0.958)
+  // pointLight2.rotation.set(1.026,0, 0)
+  // pointLight2.intensity = 6
+  // pointLight2.decay = 1.5
+  // pointLight2.distance = 0
+  // scene.add(pointLight2)
 
   const originalCameraPosition = new THREE.Vector2()
 
@@ -81,15 +81,15 @@ function initScene() {
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
   gltfLoader.load(
-      '/assets/models/J&G Logo_v15-transformed.glb',
+      '/assets/models/wetransfer_j-g-roughness-4k-png_2022-06-27_0707/J&G Logo_v15-transform.glb',
       (gltf) => {
         console.log(gltf);
         
         console.log('add to scene');
         scene.add(gltf.scene)
         
-        logo = gltf.scene.children[0].children[1]
-        const bg = gltf.scene.children[0].children[0]
+        logo = gltf.scene.children[2]
+        const bg = gltf.scene.children[1]
         logo.castShadow = true
         
         // bg.receiveShadow = true;
@@ -97,6 +97,8 @@ function initScene() {
         console.log('set position');
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
+
+        gltf.scene.children[0].children[0].intensity = 4
         
         camera.lookAt(logo.position)
         
@@ -171,7 +173,6 @@ function initScene() {
         renderer.render(scene, camera)
       } else {
         if (logo) {
-          console.log('move')
           // gsap is imported into the global scope
           gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1})
           gsap.to(logo.rotation, { z: originalCameraPosition.y + -(mouse.x * 0.30), duration: 1})

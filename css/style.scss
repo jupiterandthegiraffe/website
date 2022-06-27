@@ -71,7 +71,7 @@ body {
     background-color: rgba(42, 42, 42, 0.5);
 }
 
-header {
+.header {
     position: fixed;
     top: 0;
     left: 0;
@@ -81,22 +81,22 @@ header {
     z-index: 1;
     padding: 1em;
 
-    a {
+    .nav__link {
         display: none;
     }
 }
 
 @media (min-width:576px) {
-    header {
+    .header {
         padding: 2em;
 
-        a {
+        .nav__link {
             display: block;
         }
     }
 }
 
-footer {
+.footer {
     position: fixed;
     left: 0;
     right: 0;
@@ -110,7 +110,7 @@ footer {
 }
 
 @media (min-width:576px) {
-    footer {
+    .footer {
         padding: 0 2em 2em;
         display: flex;
         justify-content: space-between;
@@ -384,7 +384,7 @@ a {
 
 .lead-text {
     text-align: right;
-    font-size: 36px;
+    font-size: 1.6em;
     color: var(--color-brand-white);
     max-width: 981px;
     margin-left: auto;
@@ -396,7 +396,7 @@ a {
 
 @media (max-width:575px) {
     .lead-text {
-        font-size: 22px;
+        font-size: 1.1rem;
     }
 }
 
@@ -418,7 +418,7 @@ a {
 
 @media (min-width:576px) {
     .page-overlay {
-        margin-top: 180px;
+        margin-top: 100px;
     }
 }
 
@@ -437,25 +437,24 @@ a {
     left: 10px;
     top: -30px;
     position: absolute;
-    font-size: .75em;
+    font-size: 1em;
 }
 
 @media (min-width:576px) {
     .page-overlay__back-button {
         top: 0px;
         left: 50px;
-        font-size: 1em;
     }
 }
 
 h1 {
     text-transform: uppercase;
-    font-size: 3em;
+    font-size: 2rem;
 }
 
-@media (max-width:769px) {
+@media (min-width:769px) {
     h1 {
-        font-size: 1em;
+        font-size: 3em;
     }
 }
 
@@ -589,6 +588,10 @@ h1 {
 
 .nav__link {
     text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 @media (max-width:575px) {
@@ -642,9 +645,15 @@ h1 {
 }
 
 h3 {
-    font-size: 48px;
+    font-size: 1.75rem;
     font-weight: 800;
     margin-bottom: 0.5em;
+}
+
+@media (min-width:576px) {
+    h3 {
+        font-size: 48px;
+    }
 }
 
 fieldset {
@@ -768,6 +777,7 @@ textarea {
     padding-top: 10px;
     padding-bottom: 5px;
     margin-bottom: 1em;
+    border-radius: 0;
 }
 
 .light-mode input,
@@ -1016,6 +1026,7 @@ button[type="submit"] {
         margin-left: 1em;
         margin-right: 1em;
         text-transform: uppercase;
+        font-size: 1rem;
     }
 }
 
@@ -1041,12 +1052,6 @@ button[type="submit"] {
     background-color: var(--color-brand-white);
 }
 
-@media (max-width:575px) {
-    body {
-        font-size: 24px;
-    }
-}
-
 h2.person__overlay-text {
     margin-bottom: 0;
     margin-top: 1em;
@@ -1054,6 +1059,7 @@ h2.person__overlay-text {
 
 .page-overlay__footer-links a {
     display: block;
+    font-size: 1.2rem;
 }
 
 .page-overlay__footer h2 {
@@ -1112,7 +1118,7 @@ h2.person__overlay-text {
 
 @media (min-width:576px) {
     .page-overlay__overlay {
-        margin-top: 180px;
+        margin-top: 100px;
     }
 }
 
@@ -1271,7 +1277,13 @@ h2.person__overlay-text {
 }
 
 .process h2 {
-    font-size: 3rem;
+    font-size: 2rem;
+}
+
+@media (min-width:576px) {
+    .process h2 {
+        font-size: 3rem;
+    }
 }
 
 .process__read-more {
@@ -1334,7 +1346,8 @@ h2.person__overlay-text {
         opacity: 0;
     }
 
-    .external-link:hover:after {
+    .external-link:hover:after,
+    .external-link:focus:after {
         transform: translate(0, -50%);
         opacity: 1;
     }
@@ -1396,6 +1409,35 @@ h2.person__overlay-text {
     .page-overlay .page-overlay__content-container:nth-child(even) {
         padding-left: 20vw;
     }
+}
+
+.nav__link:after {
+    content: '';
+    border-bottom: 1px solid white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(-100%);
+    transition: transform 1s ease-out;
+}
+
+.nav__link:hover:after {
+    transform: translateX(0);
+    border-color: var(--color-brand-yellow);
+}
+
+.menu:focus-within {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.main-menu__list:focus-within {
+    transform: translateX(0);
+}
+
+#budget {
+    display: none;
 }
 
 

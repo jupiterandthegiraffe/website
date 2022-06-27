@@ -14,11 +14,20 @@ if (ua.indexOf('safari') != -1) {
 
 const isMobile = ua.match(/mobile/i)
 
-const header = document.querySelector('header')
-const footer = document.querySelector('footer')
+const header = document.querySelector('.header')
+const footer = document.querySelector('.footer')
 let menuAudio = false
 
 const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html'
+
+const scrollDownButton = document.querySelector('.splash-page-one__scroll-down')
+if (scrollDownButton) {
+  scrollDownButton.addEventListener('click', e => {
+    e.preventDefault()
+
+    window.scrollTo({ top: window.innerHeight, behaviour: 'smooth'})
+  })
+}
 
 function setMenuAudio() {
   menuAudio = true
@@ -36,6 +45,7 @@ function removeEl(el) {
  * Audio Control
  */
 const audioButton = document.getElementById('audio')
+const audioButtonLabel = audioButton.getAttribute('aria-label')
 const bgAudioFiles = Array.from(document.querySelectorAll('audio.background-audio'))
 const audioFiles = Array.from(document.querySelectorAll('audio'))
 const mainAudio = document.getElementById('main-audio')
@@ -99,12 +109,14 @@ audioButton.addEventListener('click', () => {
       sessionStorage.removeItem('audio_on')
       audioButton.classList.add('audio-off')
       audioFiles.forEach(audio => audio.pause())
+      audioButton.setAttribute('aria-label', audioButtonLabel)
       startHomePageAudio()
     } else {
       console.log('turn audio on')
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
       
+      audioButton.setAttribute('aria-label', 'Audio off')
       if (isHomePage && sessionStorage.getItem('has_navigated')) {
         startHomePageAudio()
         mainAudio.play()
@@ -265,10 +277,15 @@ const playTransitionText = (word, animationName, cb) => {
       transitionTextEl.innerHTML = word
       transitionTextEl.style.display = 'block'
 
+      transitionTextEl.setAttribute('aria-live', 'polite')
+
       const transitionSplitText = new SplitText(transitionTextEl, {type: 'words'})
     
       const tl = gsap.timeline({
-        onComplete: cb && cb
+        onComplete: () => {
+          transitionTextEl.removeAttribute('aria-live')
+          cb()
+        }
       })
 
       tl.from(transitionSplitText.words, {
@@ -294,10 +311,10 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     const word = document.querySelector('.splash-page__main-text').innerText
 
     playTransitionText(word, 'Blur In', () => {
-      gsap.to('header', {
+      gsap.to('.header', {
         autoAlpha: 1, filter: 'blur(0)'
       })
-      gsap.to('footer', {
+      gsap.to('.footer', {
         autoAlpha: 1, filter: 'blur(0)'
       })
       
@@ -407,6 +424,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   // to any other page
   sessionStorage.setItem('has_navigated', 'true');
 
+  console.log(footer)
+
   footer.classList.add('blur')
   header.style.zIndex = -1
 
@@ -418,7 +437,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
   const leadText = document.querySelector('.lead-text')
   if (leadText) {
-    const leadTextSplitText = new SplitText(leadText, {type: 'words'})
+    const leadTextSplitText = new SplitText(leadText, {type: 'words,lines'})
+    gsap.set(leadTextSplitText.lines, {overflow: 'hidden'})
     gsap.set(leadTextSplitText.words, { opacity: 0, y: 50})
     gsap.to(leadTextSplitText.words, {
       y: 1, autoAlpha: 1, stagger: 0.05, delay: 1
@@ -449,7 +469,9 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
       if (button) {
         button.addEventListener('click', (e) => {
+          console.log(e)
           gsap.set(sectionSplitText.words, {display: 'inline-block'})
+          gsap.set(section.querySelectorAll('.process__split-text'), { attr: { role: 'alert', 'aria-live': 'assertive' } })
           gsap.to(section.querySelector('.process__image'), { x: 0, autoAlpha: 1})
           sectionSplitTextTimeline.play()
           gsap.to(button, {autoAlpha: 0})
@@ -496,12 +518,13 @@ document.querySelectorAll('.menu a').forEach(el => {
  */
 
 const allLinks = [
-  ...Array.from(document.querySelectorAll('header a')),
-  ...Array.from(document.querySelectorAll('footer a')),
+  ...Array.from(document.querySelectorAll('.header a')),
+  ...Array.from(document.querySelectorAll('.footer a')),
   ...Array.from(document.querySelectorAll('main a')),
 ]
 
 allLinks.forEach(el => {
+  if (!el.getAttribute('data-no-nav')) {
     el.addEventListener('click', (e) => {
         e.preventDefault()
 
@@ -529,6 +552,7 @@ allLinks.forEach(el => {
         }
 
     })
+  }
 })
 
 
@@ -543,12 +567,16 @@ if (formType) {
     const isProjectProposal = e.target.value === 'Project Proposal'
 
     if (isProjectProposal) {
-      budget.setAttribute('data-pg-ia-show', '')
-      budget.removeAttribute('data-pg-ia-hide')
+      budget.style.display = 'block'
+      setTimeout(() => {
+        budget.setAttribute('data-pg-ia-show', '')
+        budget.removeAttribute('data-pg-ia-hide')
+      }, 300)
     } else {
       budget.removeAttribute('data-pg-ia-show')
       budget.classList.add('fade-out')
       setTimeout(() => {
+        budget.style.display = 'none'
         budget.classList.remove('fade-out')
         budget.setAttribute('data-pg-ia-hide', '')
       }, 300)
