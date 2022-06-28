@@ -138,7 +138,13 @@ body {
     position: absolute;
     top: 1em;
     left: 1em;
-    z-index: 1
+    z-index: 1;
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+        animation: none;
+    }
 }
 
 .header__menu-button,
@@ -151,6 +157,7 @@ body {
     width: 55px;
     height: 50px;
     transition: border-color 1s ease-in-out;
+    cursor: pointer;
 }
 
 .light-mode .header__menu-button,
@@ -252,6 +259,8 @@ a {
 .splash-pages {
     z-index: 50;
     height: 200vh;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .header--closed {
@@ -266,7 +275,7 @@ a {
 .splash-page__main-text {
     font-size: 1rem;
     margin-bottom: 0.2em;
-    max-width: 1036px;
+    max-width: 1336px;
     padding: 0 50px;
     text-align: center
 }
@@ -274,7 +283,7 @@ a {
 @media (min-width:576px) {
     .splash-page__main-text {
         padding: 0;
-        font-size: 40px
+        font-size: 50px
     }
 }
 
@@ -291,9 +300,6 @@ a {
 }
 
 @media (min-width:576px) {
-    .splash-page {
-        transform: scale3d(1.2, 1.2, 1.2);
-    }
 }
 
 .backdrop-blur {
@@ -309,6 +315,7 @@ a {
     justify-content: center;
     align-items: center;
     z-index: -1;
+    pointer-events: none;
 }
 
 .light-mode .backdrop-blur {
@@ -371,7 +378,7 @@ a {
 }
 
 .audio-off .audio__active {
-    opacity: .2;
+    opacity: .4;
 }
 
 .light-mode .audio-off .audio__active {
@@ -379,7 +386,7 @@ a {
 }
 
 .audio-off {
-    cursor: default !important;
+    cursor: pointer !important;
 }
 
 .lead-text {
@@ -435,14 +442,14 @@ a {
 
 .page-overlay__back-button {
     left: 10px;
-    top: -30px;
+    top: -20px;
     position: absolute;
     font-size: 1em;
 }
 
 @media (min-width:576px) {
     .page-overlay__back-button {
-        top: 0px;
+        top: -50px;
         left: 50px;
     }
 }
@@ -892,7 +899,7 @@ button[type="submit"] {
 
 @media (min-width:576px) {
     .process__image {
-        right: 0;
+        right: 15vw;
         width: 25vw;
     }
 }
@@ -1053,8 +1060,7 @@ button[type="submit"] {
 }
 
 h2.person__overlay-text {
-    margin-bottom: 0;
-    margin-top: 1em;
+    margin: 0;
 }
 
 .page-overlay__footer-links a {
@@ -1438,6 +1444,42 @@ h2.person__overlay-text {
 
 #budget {
     display: none;
+}
+
+.page-overlay .page-overlay__content-container:nth-child(even) .process__image {
+    right: auto;
+    left: 0;
+}
+
+.process__image svg {
+    width: 100%;
+}
+
+.page-overlay__footer-links a.active {
+    color: #666666;
+}
+
+.footer__central-text {
+    text-align: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 1em;
+}
+
+@media (min-width:576px) {
+    .footer__central-text {
+        padding-bottom: 2em;
+    }
+}
+
+.header__menu-button:hover {
+    animation: none;
+}
+
+.silence-button__button:hover img {
+    opacity: .6;
 }
 
 

@@ -7,6 +7,9 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js';
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
+
+const staticAudio = document.getElementById('static-audio')
 
 // import * as dat from 'lil-gui'
 
@@ -15,6 +18,8 @@ import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js';
 let logo = null
 let composer = null
 let effect2 = null
+let glitchPass = null
+let glitch = 0
 
 const isMobile = navigator.userAgent.toLowerCase().match(/mobile/i)
 
@@ -152,9 +157,21 @@ function initScene() {
     effect2.uniforms[ 'amount' ].value = 0
     composer.addPass( effect2 );
     
+    glitchPass = new GlitchPass();
+    glitchPass.enabled = false
+    composer.addPass(glitchPass)
+    
     const effectFilm = new FilmPass( 0.35, 0.025, 648, false );
     composer.addPass( effectFilm );
   }
+  
+  canvas.addEventListener('click', () => {
+    glitch = 1
+
+    if (sessionStorage.getItem('audio_on')) {
+      staticAudio.play()
+    }
+  })
 
   console.log('complete');
 
@@ -167,12 +184,20 @@ function initScene() {
     // const deltaTime = elapsedTime - previousTime
     // previousTime = elapsedTime
 
-    
     // Render
     if (composer || renderer) {
       if (isMobile) {
         renderer.render(scene, camera)
       } else {
+        if (glitch) {
+          glitchPass.enabled = true
+          glitchPass.curF = glitch++
+          
+          if (glitchPass.curF >= 30) {
+            glitch = 0
+            glitchPass.enabled = false
+          }
+        }
         if (logo) {
           // gsap is imported into the global scope
           gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1})
