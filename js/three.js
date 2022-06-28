@@ -109,8 +109,8 @@ function initScene() {
         
         console.log('fade in');
         // Fade in on load
-        gsap.to(canvas, {
-          autoAlpha: 1,
+        gsap.from(canvas, {
+          autoAlpha: 0,
           delay: .2
         })        
       },

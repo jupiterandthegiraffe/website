@@ -513,7 +513,7 @@ h1 {
   border-left-color: var(--color-brand-black); }
 
 .person__information > p {
-  font-size: .75rem; }
+  font-size: 1rem; }
 
 @media (min-width: 1024px) {
   .person__information > p {
