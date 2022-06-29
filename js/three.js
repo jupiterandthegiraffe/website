@@ -107,9 +107,9 @@ function initScene() {
         
         camera.lookAt(logo.position)
         
-        console.log('fade in');
+        console.log('fade in', canvas);
         // Fade in on load
-        gsap.to(canvas, {
+        gsap.to(canvas || document.querySelector('canvas.webgl'), {
           autoAlpha: 1,
           delay: .2
         })        
