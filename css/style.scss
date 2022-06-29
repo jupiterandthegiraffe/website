@@ -390,11 +390,9 @@ a {
 }
 
 .lead-text {
-    text-align: right;
     font-size: 1.6em;
     color: var(--color-brand-white);
     max-width: 981px;
-    margin-left: auto;
 
     > div {
         overflow: hidden;
@@ -425,7 +423,7 @@ a {
 
 @media (min-width:576px) {
     .page-overlay {
-        margin-top: 100px;
+        margin-top: 110px;
     }
 }
 
@@ -899,7 +897,7 @@ button[type="submit"] {
 
 @media (min-width:576px) {
     .process__image {
-        right: 15vw;
+        right: 0;
         width: 25vw;
     }
 }
@@ -1124,7 +1122,7 @@ h2.person__overlay-text {
 
 @media (min-width:576px) {
     .page-overlay__overlay {
-        margin-top: 100px;
+        margin-top: 110px;
     }
 }
 
@@ -1298,6 +1296,7 @@ h2.person__overlay-text {
     border: none;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    cursor: pointer;
 }
 
 .main-menu__list-info {
@@ -1480,6 +1479,30 @@ h2.person__overlay-text {
 
 .silence-button__button:hover img {
     opacity: .6;
+}
+
+.end-credits__words-list {
+    list-style-type: none;
+    padding-left: 0;
+    flex-wrap: wrap;
+}
+
+@media (min-width:576px) {
+    .end-credits__words-list {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+
+.end-credits__words {
+    padding: 1em;
+    font-size: 2rem;
+    font-weight: bolder;
+    flex-grow: 0;
+    flex-basis: 25%;
+    text-align: center;
+    max-width: 25%;
+    flex-shrink: 1;
 }
 
 

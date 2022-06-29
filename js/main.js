@@ -366,19 +366,11 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       const audioText = document.getElementById('audio-text')
       const audioTextSplitText = new SplitText(audioText, {type: 'words'})
 
-      const audioTextTimeline = gsap.timeline({})
+      gsap.to(audioText, {autoAlpha: 1})
 
-      audioTextTimeline.to(audioText, {
-        autoAlpha: 1
-      }, ">")
-
-      audioTextTimeline.from(audioTextSplitText.words, {
+      gsap.from(audioTextSplitText.words, {
           y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 25
-      }, ">")
-
-      audioTextTimeline.to(audioText, {
-        autoAlpha: 0, duration: 2
-      }, ">5")
+      })
     } 
     
     if (splashText && scrollDownText) {
@@ -436,6 +428,13 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     console.log('isHomepage and audio is on and there is no intro')
     startHomePageAudio()
   }
+
+  if (!isSafari) {
+    console.log('first run: desktop (not safari)')
+    const audioText = document.getElementById('audio-text')
+
+    gsap.set(audioText, {autoAlpha: 1})
+  } 
 
   startMousewheelDetection()
 } else {
