@@ -109,7 +109,7 @@ function initScene() {
         
         console.log('fade in', canvas);
         // Fade in on load
-        gsap.to(canvas || document.querySelector('canvas.webgl'), {
+        gsap.to(document.querySelector('canvas.webgl'), {
           autoAlpha: 1,
           delay: .2
         })        
