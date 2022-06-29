@@ -29,7 +29,7 @@ const isMobile = navigator.userAgent.toLowerCase().match(/mobile/i)
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
-function initScene() {
+function initScene(canvas) {
   // Scene
   const scene = new THREE.Scene()
 
@@ -109,7 +109,7 @@ function initScene() {
         
         console.log('fade in', canvas);
         // Fade in on load
-        gsap.to(document.querySelector('canvas.webgl'), {
+        gsap.to(canvas, {
           autoAlpha: 1,
           delay: .2
         })        
@@ -216,5 +216,5 @@ function initScene() {
 
 if (canvas) {
   console.log('canvas detected')
-  initScene()
+  initScene(canvas)
 }
