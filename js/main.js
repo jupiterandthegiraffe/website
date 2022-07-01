@@ -45,7 +45,7 @@ function removeEl(el) {
 /**
  * Audio Control
  */
-const audioButton = document.getElementById('audio')
+const audioButton = document.getElementById('audio-button')
 const audioButtonLabel = audioButton.getAttribute('aria-label')
 const bgAudioFiles = Array.from(document.querySelectorAll('audio.background-audio'))
 const audioFiles = Array.from(document.querySelectorAll('audio'))
@@ -447,11 +447,14 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   footer.classList.add('blur')
   header.style.zIndex = -1
 
-  document.querySelector('.page-overlay__back-button').addEventListener('click', (e) => {
-      e.preventDefault()
-  
-      navBack()
-  })
+  const backButton = document.querySelector('.page-overlay__back-button')
+  if (backButton) {
+    backButton.addEventListener('click', (e) => {
+        e.preventDefault()
+    
+        navBack()
+    })
+  }
 
   const leadText = document.querySelector('.lead-text')
   if (leadText) {
@@ -504,24 +507,24 @@ const transitionText = [
 /**
  * Transitioning Back to home
  */
-const closeButton = document.querySelector('.menu__close-button')
-document.querySelectorAll('.menu a').forEach(el => {
-    el.addEventListener('click', (e) => {
-        e.preventDefault()
+// const closeButton = document.querySelector('.menu__close-button')
+// document.querySelectorAll('.menu a').forEach(el => {
+//     el.addEventListener('click', (e) => {
+//         e.preventDefault()
 
-        pgia.play(closeButton, 1)
+//         pgia.play(closeButton, 1)
 
-        setTimeout(() => {
-          const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
-          playTransitionText(word, 'Blur In', () => {
-            pgia.play(document.getElementById('backdrop-blur'), 'Page In')
-            setTimeout(() => {
-              window.location = e.target.href
-            }, 500)
-          })
-        }, 500)
-    })
-})
+//         setTimeout(() => {
+//           const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
+//           playTransitionText(word, 'Blur In', () => {
+//             pgia.play(document.getElementById('backdrop-blur'), 'Page In')
+//             setTimeout(() => {
+//               window.location = e.target.href
+//             }, 500)
+//           })
+//         }, 500)
+//     })
+// })
 
 
 /**
@@ -561,10 +564,26 @@ allLinks.forEach(el => {
             playTransitionText(word, animationName, () => window.location = e.target.href)
           }
         }
-
     })
   }
 })
+
+/* 404 page */
+const blurOutLinks = Array.from(document.querySelectorAll('.blur-out-link'))
+if (blurOutLinks) {
+  const blurOutAnim = gsap.timeline({paused: true})
+  blurOutAnim.to('.blur-out', { filter: 'blur(0px)'})
+  blurOutAnim.to('.four-oh-four__content', { autoAlpha: 0, filter: 'blur(10px)'}, '<')
+  blurOutLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault()
+      blurOutAnim.play()
+      setTimeout(() => {
+        window.location = e.target.href
+      }, 1000)
+    })
+  })
+}
 
 
 /**
