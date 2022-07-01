@@ -1496,14 +1496,20 @@ h2.person__overlay-text {
 }
 
 .end-credits__words {
-    padding: 1em;
+    padding: .5em 0;
     font-size: 2rem;
     font-weight: bolder;
     flex-grow: 0;
     flex-basis: 25%;
-    text-align: center;
     max-width: 25%;
     flex-shrink: 1;
+}
+
+@media (min-width:576px) {
+    .end-credits__words {
+        text-align: center;
+        padding: 1em;
+    }
 }
 
 .blur-out {
@@ -1513,6 +1519,14 @@ h2.person__overlay-text {
 
 .four-oh-four {
     margin-top: 100px
+}
+
+.end-credits__design-image {
+    width: 100%;
+}
+
+.person__read-more-text {
+    display: none;
 }
 
 @media (min-width:576px) {
@@ -1525,7 +1539,25 @@ h2.person__overlay-text {
         padding-right: 50px;
         margin-top: 0;
     }
+
+    end-credits__design-image {
+        float: right;
+        width: 400px;
+        margin-left: 1em;
+    }
+
+    .end-credits__design-image {
+        float: right;
+        width: 400px;
+        margin-left: 1em;
+    }
 }
 
-
+@media (min-width: 1024px) {
+    .person__read-more-text {
+        opacity: .3;
+        margin: 0;
+        display: block;
+    }
+}
 
