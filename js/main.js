@@ -505,26 +505,26 @@ const transitionText = [
 ]
 
 /**
- * Transitioning Back to home
+ * Transitioning from side menu
  */
-// const closeButton = document.querySelector('.menu__close-button')
-// document.querySelectorAll('.menu a').forEach(el => {
-//     el.addEventListener('click', (e) => {
-//         e.preventDefault()
+const closeButton = document.querySelector('.menu__close-button')
+document.querySelectorAll('.menu a').forEach(el => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault()
 
-//         pgia.play(closeButton, 1)
+        pgia.play(closeButton, 1)
 
-//         setTimeout(() => {
-//           const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
-//           playTransitionText(word, 'Blur In', () => {
-//             pgia.play(document.getElementById('backdrop-blur'), 'Page In')
-//             setTimeout(() => {
-//               window.location = e.target.href
-//             }, 500)
-//           })
-//         }, 500)
-//     })
-// })
+        setTimeout(() => {
+          const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
+          playTransitionText(word, 'Blur In', () => {
+            pgia.play(document.getElementById('backdrop-blur'), 'Page In')
+            setTimeout(() => {
+              window.location = e.target.href
+            }, 500)
+          })
+        }, 500)
+    })
+})
 
 
 /**

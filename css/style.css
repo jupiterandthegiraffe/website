@@ -1357,7 +1357,7 @@ h2.person__overlay-text {
             justify-content: space-evenly; } }
 
 .end-credits__words {
-  padding: 1em;
+  padding: .5em 0;
   font-size: 2rem;
   font-weight: bolder;
   -webkit-box-flex: 0;
@@ -1365,10 +1365,14 @@ h2.person__overlay-text {
           flex-grow: 0;
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
-  text-align: center;
   max-width: 25%;
   -ms-flex-negative: 1;
       flex-shrink: 1; }
+
+@media (min-width: 576px) {
+  .end-credits__words {
+    text-align: center;
+    padding: 1em; } }
 
 .blur-out {
   -webkit-filter: blur(10px);
@@ -1377,6 +1381,12 @@ h2.person__overlay-text {
 
 .four-oh-four {
   margin-top: 100px; }
+
+.end-credits__design-image {
+  width: 100%; }
+
+.person__read-more-text {
+  display: none; }
 
 @media (min-width: 576px) {
   .four-oh-four {
@@ -1393,4 +1403,18 @@ h2.person__overlay-text {
             justify-content: center;
     padding-left: 50px;
     padding-right: 50px;
-    margin-top: 0; } }
+    margin-top: 0; }
+  end-credits__design-image {
+    float: right;
+    width: 400px;
+    margin-left: 1em; }
+  .end-credits__design-image {
+    float: right;
+    width: 400px;
+    margin-left: 1em; } }
+
+@media (min-width: 1024px) {
+  .person__read-more-text {
+    opacity: .3;
+    margin: 0;
+    display: block; } }
