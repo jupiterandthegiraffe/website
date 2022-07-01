@@ -1253,7 +1253,8 @@ h2.person__overlay-text {
 
 @media (min-width: 576px) {
   .feedback {
-    background-color: rgba(255, 255, 255, 0.2); }
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-brand-black); }
   .budget__radio-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -1368,3 +1369,28 @@ h2.person__overlay-text {
   max-width: 25%;
   -ms-flex-negative: 1;
       flex-shrink: 1; }
+
+.blur-out {
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  z-index: -2; }
+
+.four-oh-four {
+  margin-top: 100px; }
+
+@media (min-width: 576px) {
+  .four-oh-four {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 0; } }
