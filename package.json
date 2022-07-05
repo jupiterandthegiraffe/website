@@ -2,7 +2,8 @@
   "repository": "#",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "webpack --config ./bundler/webpack.prod.js",
+    "generateSW": "npx workbox-cli generateSW workbox-config.js",
+    "build": "npm run generateSW && webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack --config ./bundler/webpack.dev.js",
     "start": "npm run dev"
   },
@@ -22,9 +23,13 @@
     "raw-loader": "^4.0.2",
     "style-loader": "^3.3.1",
     "three": "^0.134.0",
-    "webpack": "^5.60.0",
+    "webpack": "^5.73.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "workbox-cli": "^6.5.3"
+  },
+  "devDependencies": {
+    "workbox-webpack-plugin": "^6.5.3"
   }
 }
