@@ -6,7 +6,10 @@ module.exports = {
 	swDest: 'sw.js',
 	ignoreURLParametersMatching: [
 		/^utm_/,
-		/^fbclid$/
+		/^fbclid$/,
+		/^_pgbackup/,
+		/^pginfo/,
+		/^node_modules/
 	],
 	maximumFileSizeToCacheInBytes: 500 * 1024 * 1024
 };
