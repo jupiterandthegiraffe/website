@@ -1,7 +1,7 @@
 {
     "name": "Jupiter and the Giraffe Website",
     "short_name": "J&TG",
-    "start_url": "/index.html",
+    "start_url": "/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
