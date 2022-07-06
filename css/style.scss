@@ -1396,6 +1396,11 @@ h2.person__overlay-text {
     opacity: 0;
     transform: translateX(-100%);
     z-index: 20;
+
+    a,
+    button {
+        color: inherit !important;
+    }
 }
 
 @media (min-width:576px) {
