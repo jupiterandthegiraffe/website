@@ -1264,6 +1264,10 @@ h2.person__overlay-text {
     background-image: url(/assets/images/contact@2x.webp);
 }
 
+.avif-supported .page-overlay__content-header--contact {
+    background-image: url(/assets/images/contact@2x.avif);
+}
+
 .page-overlay__content-header--who-we-are {
     background-image: url('../assets/images/who-we-are-hero.jpg');
 }
@@ -1272,12 +1276,20 @@ h2.person__overlay-text {
     background-image: url('../assets/images/who-we-are-hero.webp');
 }
 
+.avif-supported .page-overlay__content-header--who-we-are {
+    background-image: url('../assets/images/who-we-are-hero.avif');
+}
+
 .page-overlay__content-header--process {
     background-image: url(../assets/images/process@2x.jpg);
 }
 
 .webp-supported .page-overlay__content-header--process {
     background-image: url(../assets/images/process@2x.jpg);
+}
+
+.avif-supported .page-overlay__content-header--process {
+    background-image: url(../assets/images/process@2x.avif);
 }
 
 .process h2 {
