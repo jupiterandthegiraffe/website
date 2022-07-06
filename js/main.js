@@ -570,7 +570,7 @@ allLinks.forEach(el => {
 
 /* 404 page */
 const blurOutLinks = Array.from(document.querySelectorAll('.blur-out-link'))
-if (blurOutLinks) {
+if (blurOutLinks.length) {
   const blurOutAnim = gsap.timeline({paused: true})
   blurOutAnim.to('.blur-out', { filter: 'blur(0px)'})
   blurOutAnim.to('.four-oh-four__content', { autoAlpha: 0, filter: 'blur(10px)'}, '<')
