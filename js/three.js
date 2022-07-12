@@ -98,8 +98,8 @@ function initScene(canvas) {
         
         scene.add(gltf.scene)
         
-        logo = gltf.scene.children[1]
-        const bg = gltf.scene.children[2]
+        logo = gltf.scene.children.filter(child => child.name === 'J&G_Logo')[0]
+        const bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
         
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y

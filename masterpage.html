@@ -51,10 +51,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC4ZCSK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <div class="feedback" data-pg-ia='{"l":[{"name":"Feedback In","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-live":"polite","role":"alert","aria-hidden":"false","tabindex":""}}},{"t":"tween","p":0,"d":0.5,"l":{"x":0,"autoAlpha":1}}]}]}},{"name":"Feedback Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-hidden":"true","tabindex":-1}}},{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%","autoAlpha":0}}]}]}}]}' aria-hidden="true" aria-label="Feedback prompt notification" tabindex="-1">
+    <div class="feedback" data-pg-ia='{"l":[{"name":"Feedback In","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-live":"polite","role":"alert","aria-hidden":"false","tabindex":""}}},{"t":"tween","p":0,"d":0.5,"l":{"x":0,"autoAlpha":1}}]}]},"tc":"attr","tca":"beta","tcv":"true"},{"name":"Feedback Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-hidden":"true","tabindex":-1}}},{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%","autoAlpha":0}}]}]}}]}' aria-hidden="true" aria-label="Feedback prompt notification" tabindex="-1">
       <button style="background: transparent; border: none; color: white; position: absolute; top: 1em; right: 1em; z-index: 1;" data-pg-ia='{"l":[{"trg":"click","t":"$.feedback","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"pgia":{"play":"Feedback Out"},"pgCall":{"complete":"setFeedbackDismissed"}}}]}]}}]}' aria-label="Close feedback prompt">x</button>
       <p>You lucky devil! You've been given access to the beta version of our site.</p>
       <p>Please feel free to <a href="contact.html" style="text-decoration: underline">leave us some feedback</a> or your thoughts.</p>
+      <script>
+        const isBeta = window.location.href.match('beta')
+        if (isBeta) {
+          document.querySelector('.feedback').setAttribute('beta-active', 'true')
+        }
+      </script>
     </div>
     <div class="menu" id="mainmenu">
       <nav>
