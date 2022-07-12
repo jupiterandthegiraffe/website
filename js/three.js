@@ -5,11 +5,17 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
-import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
+// import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 const staticAudio = document.getElementById('static-audio')
+const loader = document.getElementsByClassName('loader')[0]
+let loaderNumber, loaderBar;
+if (loader) {
+  loaderNumber = document.getElementsByClassName('loader-number')[0]
+  loaderBar = document.getElementsByClassName('loader-bar')[0]
+}
 
 // import * as dat from 'lil-gui'
 
@@ -86,43 +92,45 @@ function initScene(canvas) {
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
   gltfLoader.load(
-      '/assets/models/wetransfer_j-g-roughness-4k-png_2022-06-27_0707/J&G Logo_v15-transform.glb',
+      '/assets/models/scene-2.glb',///J&G Logo_v15-transform.glb',
       (gltf) => {
         console.log(gltf);
         
-        console.log('add to scene');
         scene.add(gltf.scene)
         
-        logo = gltf.scene.children[2]
-        const bg = gltf.scene.children[1]
-        logo.castShadow = true
+        logo = gltf.scene.children[1]
+        const bg = gltf.scene.children[2]
         
-        // bg.receiveShadow = true;
-        
-        console.log('set position');
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
-
-        gltf.scene.children[0].children[0].intensity = 4
         
         camera.lookAt(logo.position)
-        
-        console.log('fade in', canvas);
+
+        const tl = gsap.timeline()
+
+        tl.to(loader, {
+          opacity: 0,
+          duration: 1,
+          onComplete: () => loader.parentNode.removeChild(loader)
+        })
+
         // Fade in on load
-        gsap.to(canvas, {
+        tl.to(canvas, {
           autoAlpha: 1,
           delay: .2
-        })        
+        }, ">")        
       },
-      () => {
-          console.log('progress');
+      (progress) => {
+          const loadingPercent = Math.floor(progress.loaded / progress.total * 100)
+          loaderNumber.innerText = loadingPercent
+          loaderBar.style.width = `${loadingPercent}%`
+
       },
       (e) => {
           console.log('error:', e);
       },
   )
 
-  console.log('mousemove');
   const mouse = new THREE.Vector2();
   window.addEventListener('mousemove', (event) => {
     mouse.x = (event.clientX / sizes.width) - 0.5
@@ -136,7 +144,6 @@ function initScene(canvas) {
     }
   })
 
-  console.log('renderer');
   // Renderer
   const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -146,10 +153,9 @@ function initScene(canvas) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.shadowMap.enabled = true
   renderer.shadowMap.type = THREE.PCFSoftShadowMap
-  renderer.physicallyCorrectLights = true
+  renderer.physicallyCorrectLights = false
 
   if (!isMobile) {
-    console.log('compose effects')
     composer = new EffectComposer( renderer );
     composer.addPass( new RenderPass( scene, camera ) );
   
@@ -161,8 +167,8 @@ function initScene(canvas) {
     glitchPass.enabled = false
     composer.addPass(glitchPass)
     
-    const effectFilm = new FilmPass( 0.35, 0.025, 648, false );
-    composer.addPass( effectFilm );
+    // const effectFilm = new FilmPass( 0.35, 0.025, 648, false );
+    // composer.addPass( effectFilm );
   }
   
   canvas.addEventListener('click', () => {
@@ -173,7 +179,6 @@ function initScene(canvas) {
     }
   })
 
-  console.log('complete');
 
   // Animate
   // const clock = new THREE.Clock()
@@ -215,6 +220,5 @@ function initScene(canvas) {
 }
 
 if (canvas) {
-  console.log('canvas detected')
   initScene(canvas)
 }

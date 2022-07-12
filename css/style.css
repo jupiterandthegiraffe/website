@@ -40,10 +40,9 @@ body {
   font-weight: 800;
   color: var(--color-brand-black); }
 
-html,
-body {
-  overscroll-behavior-y: none;
-  overflow-y: overlay; }
+html[data-pgc-master="masterpage-detail.html"] body {
+  overflow-y: overlay;
+  overflow-x: hidden; }
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -439,7 +438,13 @@ h1 {
     padding-right: 15px; } }
 
 .person {
-  margin-bottom: 50px; }
+  margin-bottom: 50px;
+  background: transparent;
+  border: none;
+  color: var(--color-brand-white);
+  text-align: left;
+  cursor: pointer;
+  padding: 0; }
 
 @media (min-width: 1024px) {
   .person {
@@ -462,7 +467,8 @@ h1 {
 
 .person__information {
   position: relative;
-  padding-left: 15px; }
+  padding-left: 15px;
+  margin-top: 15px; }
 
 @media (min-width: 1024px) {
   .person__overlay {
@@ -484,12 +490,19 @@ h1 {
     -o-transition: transform .5s ease-in-out;
     transition: transform .5s ease-in-out;
     transition: transform .5s ease-in-out, -webkit-transform .5s ease-in-out; }
-  .person:hover .person__overlay {
+  .person.active .person__overlay {
     -webkit-transform: translateX(75%);
         -ms-transform: translateX(75%);
             transform: translateX(75%); }
-  .person:hover .person__overlay-text {
-    opacity: .5; } }
+  .person.active .person__overlay-text {
+    opacity: .5; }
+  .mouse-user .person:hover,
+  .keyboard-user .person:focus {
+    outline: none; }
+    .mouse-user .person:hover .person__read-more-text,
+    .keyboard-user .person:focus .person__read-more-text {
+      color: var(--color-brand-yellow);
+      opacity: .7; } }
 
 .light-mode .person__overlay {
   background-color: var(--color-brand-white); }
@@ -997,8 +1010,6 @@ h2.person__overlay-text {
     left: 40px; } }
 
 .page-detail__main {
-  overflow: hidden;
-  height: 100%;
   width: 100%; }
 
 .page-overlay__overlay {
@@ -1259,8 +1270,9 @@ h2.person__overlay-text {
       -ms-transform: translateX(-100%);
           transform: translateX(-100%);
   z-index: 20; }
-  .feedback a, .feedback button {
-    color: inherit !important; }
+  .feedback a,
+  .feedback button {
+    color: inherit; }
 
 @media (min-width: 576px) {
   .feedback {
@@ -1429,3 +1441,28 @@ h2.person__overlay-text {
     opacity: .3;
     margin: 0;
     display: block; } }
+
+html,
+body {
+  overscroll-behavior-y: none; }
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  z-index: 100; }
+
+.loader-bar {
+  border-bottom: 1px solid #ffffff;
+  width: 0; }
+
+@media (min-width: 1024px) {
+  .person__information {
+    margin-top: 0;
+    height: 100%; } }

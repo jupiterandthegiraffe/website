@@ -8,6 +8,7 @@ module.exports = {
 		/^utm_/,
 		/^fbclid$/,
 		/^pginfo/,
+		/^pgbackup/,
 		/^node_modules/
 	],
 	maximumFileSizeToCacheInBytes: 500 * 1024 * 1024
