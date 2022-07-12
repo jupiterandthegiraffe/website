@@ -1,2 +1,55 @@
 [build]
   command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+
+  [plugins.inputs]
+    exclude = [
+      './masterpage-detail.html',
+      './masterpage.html'
+    ]
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+
+[[plugins]]
+  package = "netlify-plugin-image-optim"
+
+[[plugins]]
+  package = "netlify-purge-cloudflare-on-deploy"
+
+[[redirects]] 
+  from = "/sitemap.xml"    
+  to = "/sitemap.xml"
+  status = 200
+  
+[[redirects]] 
+  from = "/robots.txt"    
+  to = "/robots.txt"
+  status = 200
+  
+[[redirects]]
+  from = "https://jatg.co/*"
+  to = "https://jupiterandthegiraffe.com/:splat"
+  force = true
+
+[[redirects]]
+  from = "https://jatg.co"
+  to = "https://jupiterandthegiraffe.com"
+  force = true
+  
+[[redirects]]
+  from = "https://www.jatg.co/*"
+  to = "https://jupiterandthegiraffe.com/:splat"
+  force = true
+
+[[redirects]]
+  from = "https://www.jatg.co"
+  to = "https://jupiterandthegiraffe.com"
+  force = true
+
+# A basic redirect rule
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
