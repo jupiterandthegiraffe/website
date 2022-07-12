@@ -92,7 +92,7 @@ function initScene(canvas) {
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
   gltfLoader.load(
-      '/assets/models/scene-2.glb',///J&G Logo_v15-transform.glb',
+      '/assets/models/scene-draco.glb',///J&G Logo_v15-transform.glb',
       (gltf) => {
         console.log(gltf);
         
