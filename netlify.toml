@@ -14,9 +14,6 @@
   package = "netlify-plugin-submit-sitemap"
 
 [[plugins]]
-  package = "netlify-plugin-image-optim"
-
-[[plugins]]
   package = "netlify-purge-cloudflare-on-deploy"
 
 [[redirects]] 
