@@ -121,7 +121,7 @@ function initScene(canvas) {
         }, ">")        
       },
       (progress) => {
-          const loadingPercent = Math.floor(progress.loaded / progress.total * 100)
+          const loadingPercent = Math.floor(progress.loaded / (progress.total || 6921916) * 100)
           loaderNumber.innerText = loadingPercent
           loaderBar.style.width = `${loadingPercent}%`
 
