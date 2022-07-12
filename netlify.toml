@@ -7,7 +7,9 @@
   [plugins.inputs]
     exclude = [
       './masterpage-detail.html',
-      './masterpage.html'
+      './masterpage.html',
+      '/node_modules/**',
+      './styleguide.html'
     ]
 
 [[plugins]]
