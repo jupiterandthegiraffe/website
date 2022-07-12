@@ -8,7 +8,7 @@
     exclude = [
       './masterpage-detail.html',
       './masterpage.html',
-      '/node_modules/',
+      './node_modules/',
       './styleguide.html'
     ]
 
