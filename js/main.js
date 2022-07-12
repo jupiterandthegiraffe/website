@@ -69,6 +69,8 @@ const navBack = () => {
 }
 
 window.addEventListener('keyup', (e) => {
+  document.documentElement.classList.add('keyboard-user')
+  document.documentElement.classList.remove('mouse-user')
   if(e.key === 'Escape') {
     if (window.location.pathname === '/') {
       pgia.play(menuCloseButton, 'Close menu')
@@ -76,6 +78,11 @@ window.addEventListener('keyup', (e) => {
       navBack()
     }
   }
+})
+
+window.addEventListener('mousemove', () => {
+  document.documentElement.classList.remove('keyboard-user')
+  document.documentElement.classList.add('mouse-user')
 })
 
 const resetScale = () => gsap.to('.header, .footer', {scale: 1, y: 0})
@@ -123,7 +130,6 @@ const secondaryAudio = [
 
 audioButton.addEventListener('click', () => {
     if (sessionStorage.getItem('audio_on')) {
-      console.log('turn audio off')
       sessionStorage.removeItem('audio_on')
       audioButton.classList.add('audio-off')
       audioFiles.forEach(audio => audio.pause())
@@ -131,7 +137,6 @@ audioButton.addEventListener('click', () => {
       startHomePageAudio()
       dataLayer.push({'event': 'audioOff'});
     } else {
-      console.log('turn audio on')
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
       dataLayer.push({'event': 'audioOn'});
@@ -149,19 +154,16 @@ audioButton.addEventListener('click', () => {
 })
 
 if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
-  console.log('pause bg audio on page load')
   bgAudioFiles.forEach(audio => {
     audio.pause()
   })
 } else if (bgAudioFiles) {
-  console.log('play bg audio on page load')
 
   if (!sessionStorage.getItem('has_navigated')) {
     mainAudio.play()
   } else {
     bgAudioFiles.forEach(audio => {
       audio.play().catch(e => {
-        console.log('error playing audio', e)
         sessionStorage.removeItem('audio_on')
         audioButton.classList.add('audio-off')
       })
@@ -172,7 +174,6 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
 
 function startHomePageAudio() {
   if (sessionStorage.getItem('audio_on') && !isSafari) {
-    console.log('startHomepageAudio')
     secondaryAudio.forEach(audio => {
       audio.play()
       audio.volume = 0
@@ -209,12 +210,10 @@ const colorModeSelector = document.querySelector('.mode-selector')
 if (colorModeSelector) {
   colorModeSelector.addEventListener('click', (e) => {
     if (e.target.classList.contains('mode-selector__button--dark-mode')) {
-      console.log('change color mode: dark mode')
       localStorage.removeItem('color_theme')
       document.documentElement.classList.remove('light-mode')
       setDarkTexture()
     } else {
-      console.log('change color mode: light mode')
       document.documentElement.classList.add('light-mode')
       localStorage.setItem('color_theme', 'light')
       setLightTexture()
@@ -234,7 +233,6 @@ function drawSVG(e, progress) {
 }
 
 function destroyIntro(el) {
-  console.log('destroy')
   pgia.scrollSceneManager.removeScene(el, true);
 
 
@@ -291,7 +289,6 @@ function splitTextUpdate(e, progress) {
 }
 
 const playTransitionText = (word, animationName, cb) => {
-  console.log('pageTransition', animationName)
   const transitionTextEl = document.getElementById('transition-text')
   const blur = document.getElementById('backdrop-blur')
 
@@ -302,6 +299,8 @@ const playTransitionText = (word, animationName, cb) => {
       transitionTextEl.setAttribute('aria-live', 'polite')
 
       const transitionSplitText = new SplitText(transitionTextEl, {type: 'words'})
+
+      gsap.set(transitionSplitText.words, {overflow: 'hidden'})
     
       const tl = gsap.timeline({
         onComplete: () => {
@@ -311,7 +310,7 @@ const playTransitionText = (word, animationName, cb) => {
       })
 
       tl.from(transitionSplitText.words, {
-          y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 25
+          y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 20
       })
 
       tl.to('canvas.webgl', {
@@ -328,7 +327,6 @@ const playTransitionText = (word, animationName, cb) => {
 
 if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   if (isMobile) {
-    console.log('first run: mobile')
     const el = document.querySelector('.splash-pages')
     const word = document.querySelector('.splash-page__main-text').innerText
 
@@ -350,7 +348,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       ], 1000)
     })
   } else {
-    console.log('first run: Desktop')
     // First launch of direct to homepage
     document.querySelector('.splash-page-one__scroll-down').style.display = ''
     document.querySelector('.backdrop-blur').style.display = ''
@@ -362,7 +359,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     const scrollDownText = document.getElementById('scroll-down')
 
     if (!isSafari) {
-      console.log('first run: desktop (not safari)')
       const audioText = document.getElementById('audio-text')
       const audioTextSplitText = new SplitText(audioText, {type: 'words'})
 
@@ -406,7 +402,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     svgLogoTimeline.from(".draw-me", {duration: 2, drawSVG: '0'}, 0.5);
   }
 } else if (isHomePage) {
-  console.log('isHomepage')
   // Homepage from another page (could have sessionStorage.getItem('has_navigated'))
   removeEl(document.querySelector('.splash-page-one__scroll-down'));
   document.querySelector('#backdrop-blur').style.opacity = 0
@@ -425,12 +420,10 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   }
 
   if (sessionStorage.getItem('audio_on') && sessionStorage.getItem('has_navigated')) {
-    console.log('isHomepage and audio is on and there is no intro')
     startHomePageAudio()
   }
 
   if (!isSafari) {
-    console.log('first run: desktop (not safari)')
     const audioText = document.getElementById('audio-text')
 
     gsap.set(audioText, {autoAlpha: 1})
@@ -438,11 +431,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
   startMousewheelDetection()
 } else {
-  console.log('any other page')
   // to any other page
   sessionStorage.setItem('has_navigated', 'true');
-
-  console.log(footer)
 
   footer.classList.add('blur')
   header.style.zIndex = -1
@@ -467,10 +457,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   }
 
   const isProcessPage = window.location.pathname.match(/process/)
-
   if (isProcessPage) {
-    console.log('process page')
-
     const sections = gsap.utils.toArray('.page-overlay > .page-overlay__content-container')
     sections.forEach(section => {
       const sectionSplitText = new SplitText(section.querySelectorAll('.process__split-text'), {type: 'words'})
@@ -484,13 +471,26 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
       if (button) {
         button.addEventListener('click', (e) => {
-          console.log(e)
           gsap.set(sectionSplitText.words, {display: 'inline-block'})
           gsap.set(section.querySelectorAll('.process__split-text'), { attr: { role: 'alert', 'aria-live': 'assertive' } })
           sectionSplitTextTimeline.play()
           gsap.to(button, {autoAlpha: 0})
         })
       }
+    })
+  }
+
+  const person = document.getElementsByClassName('person')
+  if (person) {
+    Array.from(person).forEach(button => {
+      button.addEventListener('click', (e) => {
+        const target = e.currentTarget
+        Array.from(person).forEach(p => p.classList.remove('active'))
+        target.classList.toggle('active')
+        setTimeout(() => {
+          target.classList.remove('active')
+        }, 20 * 1000) // 20 seconds
+      })
     })
   }
 }
@@ -560,7 +560,6 @@ allLinks.forEach(el => {
             }, 500)
           } else {
             const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
-            console.log('play transition text')
             playTransitionText(word, animationName, () => window.location = e.target.href)
           }
         }
