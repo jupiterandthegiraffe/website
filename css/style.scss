@@ -532,7 +532,8 @@ h1 {
         transform: translateX(75%);
     }
 
-    .person.active .person__overlay-text {
+    .person.active .person__overlay-text,
+    .person.active .person__overlay-title {
         opacity: .5;
     }
 
@@ -551,7 +552,8 @@ h1 {
     background-color: var(--color-brand-white);
 }
 
-.person__overlay-text {
+.person__overlay-text,
+.person__overlay-title {
     transition: opacity .5s ease-in-out;
 }
 
@@ -580,6 +582,11 @@ h1 {
 }
 
 .person__overlay-text {
+    font-size: 2rem;
+}
+
+.person__overlay-text,
+.person__overlay-title {
     opacity: 1;
     margin-bottom: 0;
     margin-top: 0;
@@ -1073,7 +1080,7 @@ button[type="submit"] {
     background-color: var(--color-brand-white);
 }
 
-h2.person__overlay-text {
+.person__overlay-text {
     margin: 0;
 }
 
