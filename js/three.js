@@ -22,6 +22,7 @@ if (loader) {
 // Debug
 // const gui = new dat.GUI()
 let logo = null
+let bg = null
 let composer = null
 let effect2 = null
 let glitchPass = null
@@ -62,6 +63,20 @@ function initScene(canvas) {
 
   })
 
+  const darkTexture = new THREE.TextureLoader().load('/assets/models/J&G - Base 4K.png')  
+  const lightTexture = new THREE.TextureLoader().load('/assets/models/J&G - Base 4K-white.png')
+
+  window.setDarkTexture = () => {
+    console.log(logo.material)
+    logo.material.map = darkTexture
+    bg.material.map = darkTexture
+  }
+
+  window.setLightTexture = () => {
+    logo.material.map = lightTexture
+    bg.material.map = lightTexture
+  }
+
   /**
    * Camera
    */
@@ -99,7 +114,7 @@ function initScene(canvas) {
         scene.add(gltf.scene)
         
         logo = gltf.scene.children.filter(child => child.name === 'J&G_Logo')[0]
-        const bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
+        bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
         
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
