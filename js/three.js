@@ -59,7 +59,6 @@ function initScene(canvas) {
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
   })
 
   /**
@@ -118,13 +117,12 @@ function initScene(canvas) {
         tl.to(canvas, {
           autoAlpha: 1,
           delay: .2
-        }, ">")        
+        }, ">")  
       },
       (progress) => {
           const loadingPercent = Math.floor(progress.loaded / (progress.total || 6921916) * 100)
           loaderNumber.innerText = loadingPercent
           loaderBar.style.width = `${loadingPercent}%`
-
       },
       (e) => {
           console.log('error:', e);
