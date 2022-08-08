@@ -76,9 +76,10 @@ function initScene(canvas) {
   
   const pointLight2 = new THREE.PointLight(0xffffff)
   pointLight2.position.set(0.780, 1.114, 1.284)
-  pointLight2.decay = 1
+  pointLight2.decay = 2
   pointLight2.intensity = 8
-  pointLight2.distance = 10
+  pointLight2.distance = 5
+  pointLight2.castShadow = true
   scene.add(pointLight, pointLight2)
 
   const textureLoader = new THREE.TextureLoader()
@@ -91,7 +92,7 @@ function initScene(canvas) {
   backgroundMaterial.normalScale = new THREE.Vector2(0.5, 0.5)
   backgroundMaterial.roughnessMap = backgroundRough
   backgroundMaterial.metalnessMap = backgroundRough
-  backgroundMaterial.roughness = 1
+  backgroundMaterial.roughness = 5
   backgroundMaterial.metalness = 0
   
   // const pointLight2 = new THREE.PointLight(0xffffff, 1, 1)
@@ -118,11 +119,9 @@ function initScene(canvas) {
         const bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
         const light = gltf.scene.children.filter(child => child.name === 'SpotLight')[0]
         
-        scene.add(logo, bg, light)
+        scene.add(logo, bg)
 
         bg.material = backgroundMaterial
-        bg.receiveShadow = true
-        logo.castShadow = true
         
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
