@@ -1472,3 +1472,9 @@ body {
   .person__information {
     margin-top: 0;
     height: 100%; } }
+
+.page-overlay__footer-links a.active .blink {
+  visibility: hidden; }
+
+.page-overlay__footer-links .blink {
+  margin-right: 10px; }

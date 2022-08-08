@@ -1627,3 +1627,11 @@ body {
     }
 }
 
+.page-overlay__footer-links a.active .blink {
+    visibility: hidden;
+}
+
+.page-overlay__footer-links .blink {
+    margin-right: 10px;
+}
+
