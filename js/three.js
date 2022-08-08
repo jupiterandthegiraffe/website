@@ -134,6 +134,7 @@ function initScene(canvas) {
         tl.to(loader, {
           opacity: 0,
           duration: 1,
+          delay: .5,
           onComplete: () => loader.parentNode.removeChild(loader)
         })
 
