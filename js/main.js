@@ -612,13 +612,3 @@ if (formType) {
     }
   })
 }
-
-// Apply active class to footer link
-const footerLinks = document.querySelectorAll('.page-overlay__footer-links a')
-if (footerLinks.length) {
-  footerLinks.forEach(link => {
-    if (window.location.href.match(link.href) && link.href !== '/') {
-      link.classList.add('active')
-    }
-  })
-}
