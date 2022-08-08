@@ -123,8 +123,6 @@ function initScene(canvas) {
         bg.material = backgroundMaterial
         bg.receiveShadow = true
         logo.castShadow = true
-        // logo.material = logoMaterial
-        console.log(bg)
         
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
