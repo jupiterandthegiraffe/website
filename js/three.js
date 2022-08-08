@@ -71,9 +71,28 @@ function initScene(canvas) {
   /**
    * Lights
    */
-  const pointLight = new THREE.PointLight(0xffffff, 1, 1)
+  const pointLight = new THREE.PointLight(0xffffff, .2)
   pointLight.position.set(-0.04, -0.5, 0.083)
-  scene.add(pointLight)
+  
+  const pointLight2 = new THREE.PointLight(0xffffff)
+  pointLight2.position.set(0.780, 1.114, 1.284)
+  pointLight2.decay = 1
+  pointLight2.intensity = 8
+  pointLight2.distance = 10
+  scene.add(pointLight, pointLight2)
+
+  const textureLoader = new THREE.TextureLoader()
+  const backgroundTexture = textureLoader.load('/assets/models/J&G - Base 4K.webp')
+  const backgroundNormal = textureLoader.load('/assets/models/J&G - Normal 4K.webp')
+  const backgroundRough = textureLoader.load('/assets/models/rough.webp')
+
+  const backgroundMaterial = new THREE.MeshStandardMaterial({ map: backgroundTexture })
+  backgroundMaterial.normalMap = backgroundNormal
+  backgroundMaterial.normalScale = new THREE.Vector2(0.5, 0.5)
+  backgroundMaterial.roughnessMap = backgroundRough
+  backgroundMaterial.metalnessMap = backgroundRough
+  backgroundMaterial.roughness = 1
+  backgroundMaterial.metalness = 0
   
   // const pointLight2 = new THREE.PointLight(0xffffff, 1, 1)
   // pointLight2.position.set(0, 0.921, 0.958)
@@ -91,14 +110,21 @@ function initScene(canvas) {
   const gltfLoader = new GLTFLoader()
   gltfLoader.setDRACOLoader(dracoLoader)
   gltfLoader.load(
-      '/assets/models/scene-draco.glb',///J&G Logo_v15-transform.glb',
+      '/assets/models/scene 1.glb',///J&G Logo_v15-transform.glb',
       (gltf) => {
         console.log(gltf);
         
-        scene.add(gltf.scene)
-        
         logo = gltf.scene.children.filter(child => child.name === 'J&G_Logo')[0]
         const bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
+        const light = gltf.scene.children.filter(child => child.name === 'SpotLight')[0]
+        
+        scene.add(logo, bg, light)
+
+        bg.material = backgroundMaterial
+        bg.receiveShadow = true
+        logo.castShadow = true
+        // logo.material = logoMaterial
+        console.log(bg)
         
         originalCameraPosition.x = logo.rotation._x
         originalCameraPosition.y = logo.rotation._y
@@ -149,9 +175,7 @@ function initScene(canvas) {
   })
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  renderer.shadowMap.enabled = true
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap
-  renderer.physicallyCorrectLights = false
+  renderer.physicallyCorrectLights = true
 
   if (!isMobile) {
     composer = new EffectComposer( renderer );
