@@ -540,7 +540,7 @@ h1 {
 .person__overlay-text,
 .person__overlay-title {
   opacity: 1;
-  margin-bottom: 0;
+  margin-bottom: .5em;
   margin-top: 0; }
 
 .persons {
@@ -982,7 +982,7 @@ button[type="submit"] {
   background-color: var(--color-brand-white); }
 
 .person__overlay-text {
-  margin: 0; }
+  margin: 0 0 .5em; }
 
 .page-overlay__footer-links a {
   display: block;
