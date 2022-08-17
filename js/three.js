@@ -22,6 +22,7 @@ if (loader) {
 // Debug
 // const gui = new dat.GUI()
 let logo = null
+let bg = null
 let composer = null
 let effect2 = null
 let glitchPass = null
@@ -84,6 +85,7 @@ function initScene(canvas) {
 
   const textureLoader = new THREE.TextureLoader()
   const backgroundTexture = textureLoader.load('/assets/models/J&G - Base 4K.webp')
+  const backgroundTextureLight = textureLoader.load('/assets/models/J&G - Base 4K-light.jpg')
   const backgroundNormal = textureLoader.load('/assets/models/J&G - Normal 4K.webp')
   const backgroundRough = textureLoader.load('/assets/models/rough.webp')
 
@@ -94,6 +96,23 @@ function initScene(canvas) {
   backgroundMaterial.metalnessMap = backgroundRough
   backgroundMaterial.roughness = 5
   backgroundMaterial.metalness = 0
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+  ambientLight.enabled = false
+  scene.add(ambientLight)
+
+
+  window.setDarkTexture = () => {
+    bg.material.map = backgroundTexture
+    logo.material = new THREE.MeshStandardMaterial({color: 0xffffff})
+    ambientLight = false
+  }
+  window.setLightTexture = () => {
+    bg.material.map = backgroundTextureLight
+    logo.material = new THREE.MeshStandardMaterial({color: 0x000000})
+    ambientLight = true
+  }
+
   
   // const pointLight2 = new THREE.PointLight(0xffffff, 1, 1)
   // pointLight2.position.set(0, 0.921, 0.958)
@@ -116,7 +135,7 @@ function initScene(canvas) {
         console.log(gltf);
         
         logo = gltf.scene.children.filter(child => child.name === 'J&G_Logo')[0]
-        const bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
+        bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
         const light = gltf.scene.children.filter(child => child.name === 'SpotLight')[0]
         
         scene.add(logo, bg)
@@ -170,6 +189,7 @@ function initScene(canvas) {
   const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
+      alpha: true,
   })
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))

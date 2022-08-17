@@ -218,9 +218,6 @@ if (colorModeSelector) {
       localStorage.setItem('color_theme', 'light')
       setLightTexture()
     }
-    if (isSafari) {
-      window.location = window.location
-    }
   })
 }
 
