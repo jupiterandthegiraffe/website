@@ -1427,8 +1427,8 @@ button[type="submit"] {
 
 @media (min-width:576px) {
     .feedback {
-        background-color: rgba(255, 255, 255, .9);
-        color: var(--color-brand-black);
+        background-color: rgba(255, 255, 255, .1);
+        color: var(--color-brand-white);
     }
 
     .budget__radio-wrap {
@@ -1634,5 +1634,9 @@ body {
 
 .page-overlay__footer-links .blink {
     margin-right: 10px;
+}
+
+.logo-fill {
+    fill: var(--color-brand-white);
 }
 
