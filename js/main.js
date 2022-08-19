@@ -218,9 +218,6 @@ if (colorModeSelector) {
       localStorage.setItem('color_theme', 'light')
       setLightTexture()
     }
-    if (isSafari) {
-      window.location = window.location
-    }
   })
 }
 
@@ -414,10 +411,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   document.querySelector('.footer__central-text').removeAttribute('style')
   document.querySelector('.footer__central-text').removeAttribute('data-pg-ia-hide')
 
-  if (window.location.pathname.match(/beta/)) {
-    const feedback = document.querySelector('.feedback')
-    pgia.play(feedback, 'Feedback In')
-  }
+  const feedback = document.querySelector('.feedback')
+  pgia.play(feedback, 0)
 
   if (sessionStorage.getItem('audio_on') && sessionStorage.getItem('has_navigated')) {
     startHomePageAudio()
