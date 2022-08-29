@@ -252,23 +252,23 @@ function destroyIntro(el) {
 
   sessionStorage.setItem('has_navigated', true)
 
-  if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
-    pgia.play(feedback, 'Feedback In')
-  }
+  // if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
+  //   pgia.play(feedback, 'Feedback In')
+  // }
 
   startHomePageAudio()
 
   startMousewheelDetection()
 }
 
-const feedback = document.querySelector('.feedback')
-if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
-  pgia.play(feedback, 'Feedback In')
-}
+// const feedback = document.querySelector('.feedback')
+// if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
+//   pgia.play(feedback, 'Feedback In')
+// }
 
-function setFeedbackDismissed() {
-  sessionStorage.setItem('feedback_dismissed', true)
-}
+// function setFeedbackDismissed() {
+//   sessionStorage.setItem('feedback_dismissed', true)
+// }
 
 let scrollDownCurrentFrame = 0
 let splashTextTimeline = null
@@ -411,8 +411,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   document.querySelector('.footer__central-text').removeAttribute('style')
   document.querySelector('.footer__central-text').removeAttribute('data-pg-ia-hide')
 
-  const feedback = document.querySelector('.feedback')
-  pgia.play(feedback, 0)
+  // const feedback = document.querySelector('.feedback')
+  // pgia.play(feedback, 0)
 
   if (sessionStorage.getItem('audio_on') && sessionStorage.getItem('has_navigated')) {
     startHomePageAudio()
