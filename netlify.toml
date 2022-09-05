@@ -47,6 +47,11 @@
   from = "https://www.jatg.co"
   to = "https://jupiterandthegiraffe.com"
   force = true
+  
+[[redirects]]
+  from = "https://beta.jupiterandthegiraffe.com"
+  to = "/"
+  force = true
 
 # A basic redirect rule
 [[redirects]]
