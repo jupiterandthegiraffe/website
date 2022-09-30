@@ -9,7 +9,8 @@
       './masterpage-detail.html',
       './masterpage.html',
       './node_modules/',
-      './styleguide.html'
+      './styleguide.html',
+      './lib.html'
     ]
 
 [[plugins]]
