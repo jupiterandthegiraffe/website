@@ -134,11 +134,11 @@ audioButton.addEventListener('click', () => {
       audioFiles.forEach(audio => audio.pause())
       audioButton.setAttribute('aria-label', audioButtonLabel)
       startHomePageAudio()
-      audioButton.classList.remove('audio-off')
+      audioButton.classList.add('audio-off')
       dataLayer.push({'event': 'audioOff'});
     } else {
       sessionStorage.setItem('audio_on', 'true')
-      audioButton.classList.add('audio-off')
+      audioButton.classList.remove('audio-off')
       dataLayer.push({'event': 'audioOn'});
       
       audioButton.setAttribute('aria-label', 'Audio off')
