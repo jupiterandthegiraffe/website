@@ -269,22 +269,6 @@ function destroyIntro(el) {
 // function setFeedbackDismissed() {
 //   sessionStorage.setItem('feedback_dismissed', true)
 // }
-
-let scrollDownCurrentFrame = 0
-let splashTextTimeline = null
-let scrollDownTimeline = gsap.timeline({repeat: -1, repeatDelay: 2, onUpdate: function() { scrollDownCurrentFrame = this._time}})
-function splitTextUpdate(e, progress) {
-  if (scrollDownTimeline) {
-    scrollDownTimeline.seek((scrollDownCurrentFrame / 100) + progress)
-  } 
-  
-  if (progress === 0) {
-    scrollDownTimeline.play()
-  } else if (!scrollDownTimeline.paused()) {
-    scrollDownTimeline.pause()
-  }
-}
-
 const playTransitionText = (word, animationName, cb) => {
   const transitionTextEl = document.getElementById('transition-text')
   const blur = document.getElementById('backdrop-blur')
@@ -353,7 +337,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     document.querySelector('.splash-pages').style.display = ''
 
     const splashText = document.querySelector(".splash-page .splash-page__main-text")
-    const scrollDownText = document.getElementById('scroll-down')
 
     if (!isSafari) {
       const audioText = document.getElementById('audio-text')
@@ -366,9 +349,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       })
     } 
     
-    if (splashText && scrollDownText) {
+    if (splashText) {
         const splashTextSplitText = new SplitText(splashText, {type: 'words'})
-        const scrollDownSplitText = new SplitText(scrollDownText, {type: 'chars, lines'})
     
         splashTextTimeline = gsap.from(splashTextSplitText.words, {
             y: 50, autoAlpha: 0, stagger: 0.05, rotateZ: 10, filter: 'blur(10px)'
@@ -377,22 +359,6 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
         gsap.from('.splash-page .splash-page__privacy-policy-text', {
           autoAlpha: 0, filter: 'blur(10px)', delay: 1.5
         })
-
-        scrollDownTimeline.to(scrollDownSplitText.chars, {
-          y: '-50%', autoAlpha: 0,
-          stagger: { // wrap advanced options in an object
-            each: 0.05,
-            from: scrollDownSplitText.chars.length,
-          }
-        })
-        .addLabel('upComplete')
-        .to(scrollDownSplitText.chars, {
-          y: 0, autoAlpha: 1,
-          stagger: { // wrap advanced options in an object
-            each: 0.05,
-            from: scrollDownSplitText.chars.length,
-          }
-        }, 'upComplete')
     }
 
     svgLogoTimeline = gsap.timeline({});
@@ -606,4 +572,41 @@ if (formType) {
       }, 300)
     }
   })
+}
+
+const people = Array.from(document.querySelectorAll(".person"));
+if (people.length) {
+  people.forEach(person => {
+    const image = person.querySelector(".person-image");
+    const name = person.querySelector(".person__overlay-text");
+    const title = person.querySelector(".person__overlay-title");
+    const readMore = person.querySelector(".person__read-more-text");
+
+    gsap.set(image, {opacity: 0, scale: .9});
+    gsap.set(name, {opacity: 0, x: "-100%"});
+    gsap.set(title, {y: "-100%", opacity: 0})
+    gsap.set(readMore, {y: "-100%", opacity: 0})
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: person,
+        start: 'top bottom',
+        end: '+=500',
+        scrub: .3
+      }
+    })
+
+
+    tl
+      .to(image, {autoAlpha: 1, scale: 1})
+      .to(name, {x: 0, autoAlpha: 1})
+      .to(title, {y: 0, autoAlpha: 1})
+      .to(readMore, {y: 0, autoAlpha: 1})
+  })
+}
+
+function addAudioClass(el) {
+  setTimeout(() => {
+    el.classList.add('interaction')
+  }, 1 * 1000)
 }
