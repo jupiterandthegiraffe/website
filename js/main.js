@@ -131,14 +131,14 @@ const secondaryAudio = [
 audioButton.addEventListener('click', () => {
     if (sessionStorage.getItem('audio_on')) {
       sessionStorage.removeItem('audio_on')
-      audioButton.classList.add('audio-off')
       audioFiles.forEach(audio => audio.pause())
       audioButton.setAttribute('aria-label', audioButtonLabel)
       startHomePageAudio()
+      audioButton.classList.remove('audio-off')
       dataLayer.push({'event': 'audioOff'});
     } else {
       sessionStorage.setItem('audio_on', 'true')
-      audioButton.classList.remove('audio-off')
+      audioButton.classList.add('audio-off')
       dataLayer.push({'event': 'audioOn'});
       
       audioButton.setAttribute('aria-label', 'Audio off')
@@ -269,6 +269,7 @@ function destroyIntro(el) {
 // function setFeedbackDismissed() {
 //   sessionStorage.setItem('feedback_dismissed', true)
 // }
+
 const playTransitionText = (word, animationName, cb) => {
   const transitionTextEl = document.getElementById('transition-text')
   const blur = document.getElementById('backdrop-blur')
@@ -596,7 +597,6 @@ if (people.length) {
       }
     })
 
-
     tl
       .to(image, {autoAlpha: 1, scale: 1})
       .to(name, {x: 0, autoAlpha: 1})
@@ -609,4 +609,4 @@ function addAudioClass(el) {
   setTimeout(() => {
     el.classList.add('interaction')
   }, 1 * 1000)
-}
+ }
