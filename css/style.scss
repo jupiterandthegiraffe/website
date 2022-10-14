@@ -1704,10 +1704,6 @@ body {
     }
 }
 
-#audio-button .silence-button__button {
-    cursor: not-allowed;
-}
-
 #audio-button.audio-off .silence-button__button {
     cursor: pointer;
 }

@@ -366,9 +366,6 @@ a {
 .light-mode .audio-off .audio__active {
   opacity: .4; }
 
-.audio-off {
-  cursor: pointer !important; }
-
 .lead-text {
   font-size: 1.6em;
   color: var(--color-brand-white);
@@ -1547,3 +1544,6 @@ body {
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     opacity: 0; } }
+
+#audio-button.audio-off .silence-button__button {
+  cursor: pointer; }

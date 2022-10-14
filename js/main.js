@@ -3,8 +3,8 @@ gsap.registerPlugin(SplitText, DrawSVGPlugin)
 let isSafari = false
 let hasScrolled = false
 
-var ua = navigator.userAgent.toLowerCase(); 
-if (ua.indexOf('safari') != -1) { 
+var ua = navigator.userAgent.toLowerCase();
+if (ua.indexOf('safari') != -1) {
   if (ua.indexOf('chrome') > -1) {
     // Chrome
   } else {
@@ -119,7 +119,7 @@ if (pageDetail) {
 }
 
 if (isSafari) {
-  audioButton.style.display = 'none' 
+  audioButton.style.display = 'none'
 }
 
 const secondaryAudio = [
@@ -140,7 +140,7 @@ audioButton.addEventListener('click', () => {
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
       dataLayer.push({'event': 'audioOn'});
-      
+
       audioButton.setAttribute('aria-label', 'Audio off')
       if (isHomePage && sessionStorage.getItem('has_navigated')) {
         startHomePageAudio()
@@ -158,7 +158,7 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
     audio.pause()
   })
 } else if (bgAudioFiles) {
-
+  audioButton.classList.remove('audio-off')
   if (!sessionStorage.getItem('has_navigated')) {
     mainAudio.play()
   } else {
@@ -169,34 +169,34 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
       })
     })
   }
-  audioButton.classList.remove('audio-off')
 }
 
 function startHomePageAudio() {
   if (sessionStorage.getItem('audio_on') && !isSafari) {
+    document.getElementById("audio-animation").click()
     secondaryAudio.forEach(audio => {
       audio.play()
       audio.volume = 0
     })
-    
+
     window.addEventListener('mousemove', e => {
       if (menuAudio) {
         mainAudio.volume = 1
-          
+
         topRightAudio.volume = 0
         bottomLeftAudio.volume = 0
         bottomRightAudio.volume = 0
       } else {
         const xPos = e.clientX / window.innerWidth
         const yPos = e.clientY / window.innerHeight
-    
+
         const leftToRight = Math.max((xPos - .5) * 2, 0)
         const rightToLeft = Math.max(1 - (xPos + .5), 0) * 2
         const topToBottom = Math.max((1 - (yPos + .5)) * 2, 0)
         const bottomToTop = Math.max(yPos - .5, 0) * 2
         const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
         const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
-    
+
         topRightAudio.volume = Math.min(leftToRight, topToBottom)
         bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
         bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
@@ -283,7 +283,7 @@ const playTransitionText = (word, animationName, cb) => {
       const transitionSplitText = new SplitText(transitionTextEl, {type: 'words'})
 
       gsap.set(transitionSplitText.words, {overflow: 'hidden'})
-    
+
       const tl = gsap.timeline({
         onComplete: () => {
           transitionTextEl.removeAttribute('aria-live')
@@ -316,7 +316,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       gsap.to('.header, .footer, .footer__central-text, .webgl' , {
         autoAlpha: 1, filter: 'blur(0)'
       })
-      
+
       gsap.to('#backdrop-blur', {
         autoAlpha: 0, filter: 'blur(0)'
       })
@@ -348,11 +348,11 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       gsap.from(audioTextSplitText.words, {
           y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 25
       })
-    } 
-    
+    }
+
     if (splashText) {
         const splashTextSplitText = new SplitText(splashText, {type: 'words'})
-    
+
         splashTextTimeline = gsap.from(splashTextSplitText.words, {
             y: 50, autoAlpha: 0, stagger: 0.05, rotateZ: 10, filter: 'blur(10px)'
         })
@@ -389,7 +389,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     const audioText = document.getElementById('audio-text')
 
     gsap.set(audioText, {autoAlpha: 1})
-  } 
+  }
 
   startMousewheelDetection()
 } else {
@@ -403,7 +403,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   if (backButton) {
     backButton.addEventListener('click', (e) => {
         e.preventDefault()
-    
+
         navBack()
     })
   }
@@ -505,7 +505,7 @@ allLinks.forEach(el => {
         e.preventDefault()
 
         if (e.target.href !== window.location.href) {
-          const animationName = 
+          const animationName =
             e.target.pathname === '/' || e.target.pathname === '/index.html' ? 'Blur Out' : 'Blur In'
 
           if (!isHomePage && (e.target.href !== '/' || e.target.href !== '/index.html')) {
@@ -610,3 +610,10 @@ function addAudioClass(el) {
     el.classList.add('interaction')
   }, 1 * 1000)
  }
+
+new rive.Rive({
+  src: "/assets/animations/audio.riv",
+  canvas: document.getElementById("audio-animation"),
+  autoplay: true,
+  stateMachines: ['State Machine 1'],
+});
