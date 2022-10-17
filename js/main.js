@@ -13,6 +13,24 @@ if (ua.indexOf('safari') != -1) {
   }
 }
 
+const container = document.getElementById("firstLottie");
+let interaction = null;
+if (container) {
+  interaction = lottie.loadAnimation({ 
+      container, 
+      renderer: 'svg', 
+      loop: false, 
+      autoplay: false, 
+      path: 'assets/animations/audio-active.json',
+  });
+
+  if (sessionStorage.getItem('audio_on')) {
+    interaction.goToAndStop(2, true)
+  } else {
+    interaction.goToAndStop(0, true)
+  }
+}
+
 const isMobile = ua.match(/mobile/i)
 
 const header = document.querySelector('.header')
@@ -136,10 +154,18 @@ audioButton.addEventListener('click', () => {
       startHomePageAudio()
       audioButton.classList.add('audio-off')
       dataLayer.push({'event': 'audioOff'});
+
+      if (interaction) {
+        interaction.playSegments([3,4],true)
+      }
     } else {
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
       dataLayer.push({'event': 'audioOn'});
+
+      if (interaction) {
+        interaction.playSegments([0,3],true);
+      }
 
       audioButton.setAttribute('aria-label', 'Audio off')
       if (isHomePage && sessionStorage.getItem('has_navigated')) {
@@ -159,6 +185,7 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
   })
 } else if (bgAudioFiles) {
   audioButton.classList.remove('audio-off')
+
   if (!sessionStorage.getItem('has_navigated')) {
     mainAudio.play()
   } else {
@@ -173,7 +200,6 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
 
 function startHomePageAudio() {
   if (sessionStorage.getItem('audio_on') && !isSafari) {
-    document.getElementById("audio-animation").click()
     secondaryAudio.forEach(audio => {
       audio.play()
       audio.volume = 0
@@ -232,10 +258,7 @@ function drawSVG(e, progress) {
 function destroyIntro(el) {
   pgia.scrollSceneManager.removeScene(el, true);
 
-
   // because we remove the scene, we need to remove all animation properties
-  document.querySelector('.footer__central-text').removeAttribute('style')
-  document.querySelector('.footer__central-text').removeAttribute('data-pg-ia-hide')
   header.removeAttribute('style')
   header.removeAttribute('data-pg-ia-hide')
   footer.removeAttribute('style')
@@ -313,7 +336,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     const word = document.querySelector('.splash-page__main-text').innerText
 
     playTransitionText(word, 'Blur In', () => {
-      gsap.to('.header, .footer, .footer__central-text, .webgl' , {
+      gsap.to('.header, .footer, .webgl' , {
         autoAlpha: 1, filter: 'blur(0)'
       })
 
@@ -375,11 +398,13 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   header.removeAttribute('data-pg-ia-hide')
   footer.removeAttribute('style')
   footer.removeAttribute('data-pg-ia-hide')
-  document.querySelector('.footer__central-text').removeAttribute('style')
-  document.querySelector('.footer__central-text').removeAttribute('data-pg-ia-hide')
 
   // const feedback = document.querySelector('.feedback')
   // pgia.play(feedback, 0)
+
+  if (sessionStorage.getItem('has_navigated')) {
+    audioButton.classList.add('interaction')
+  }
 
   if (sessionStorage.getItem('audio_on') && sessionStorage.getItem('has_navigated')) {
     startHomePageAudio()
@@ -408,14 +433,16 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     })
   }
 
-  const leadText = document.querySelector('.lead-text')
-  if (leadText) {
-    const leadTextSplitText = new SplitText(leadText, {type: 'words,lines'})
-    gsap.set(leadTextSplitText.lines, {overflow: 'hidden'})
-    gsap.set(leadTextSplitText.words, { opacity: 0, y: 50})
-    gsap.to(leadTextSplitText.words, {
-      y: 1, autoAlpha: 1, stagger: 0.05, delay: 1
-    })
+  const leadText = document.querySelectorAll('.lead-text')
+  if (leadText.length) {
+    for(let i = 0; i < leadText.length; i++) {
+      const text = leadText[i];
+      const leadTextSplitText = new SplitText(text, {type: 'words'})
+      gsap.set(leadTextSplitText.words, { opacity: 0, y: 10})
+      gsap.to(leadTextSplitText.words, {
+        y: 1, autoAlpha: 1, stagger: 0.05, delay: 1, ease: Power4.easeOut
+      })
+    }
   }
 
   const isProcessPage = window.location.pathname.match(/process/)
@@ -488,27 +515,27 @@ document.querySelectorAll('.menu a').forEach(el => {
     })
 })
 
-
 /**
  * Page transitions to detail screen
  */
-
 const allLinks = [
   ...Array.from(document.querySelectorAll('.header a')),
   ...Array.from(document.querySelectorAll('.footer a')),
-  ...Array.from(document.querySelectorAll('main a')),
+  ...Array.from(document.querySelectorAll('main a'))
 ]
 
 allLinks.forEach(el => {
   if (!el.getAttribute('data-no-nav')) {
-    el.addEventListener('click', (e) => {
+    el.addEventListener('click', function(e) {
         e.preventDefault()
 
-        if (e.target.href !== window.location.href) {
+        const href = this.getAttribute('href')
+
+        if (href !== window.location.href) {
           const animationName =
             e.target.pathname === '/' || e.target.pathname === '/index.html' ? 'Blur Out' : 'Blur In'
 
-          if (!isHomePage && (e.target.href !== '/' || e.target.href !== '/index.html')) {
+          if (!isHomePage && (href !== '/' || href !== '/index.html')) {
             const blur = document.getElementById('backdrop-blur')
             pgia.play(document.querySelector('.page-overlay'), 'Transition')
             pgia.play(blur, 'Blur Out')
@@ -517,12 +544,12 @@ allLinks.forEach(el => {
               pgia.play(blur, 'Blur In')
 
               setTimeout(() => {
-                window.location = e.target.href
+                window.location = href
               }, 500)
             }, 500)
           } else {
             const word = transitionText[Math.floor((Math.random() * transitionText.length) + 0)]
-            playTransitionText(word, animationName, () => window.location = e.target.href)
+            playTransitionText(word, animationName, () => window.location = href)
           }
         }
     })
@@ -583,11 +610,6 @@ if (people.length) {
     const title = person.querySelector(".person__overlay-title");
     const readMore = person.querySelector(".person__read-more-text");
 
-    gsap.set(image, {opacity: 0, scale: .9});
-    gsap.set(name, {opacity: 0, x: "-100%"});
-    gsap.set(title, {y: "-100%", opacity: 0})
-    gsap.set(readMore, {y: "-100%", opacity: 0})
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: person,
@@ -598,10 +620,10 @@ if (people.length) {
     })
 
     tl
-      .to(image, {autoAlpha: 1, scale: 1})
-      .to(name, {x: 0, autoAlpha: 1})
-      .to(title, {y: 0, autoAlpha: 1})
-      .to(readMore, {y: 0, autoAlpha: 1})
+      .from(image, {autoAlpha: 0, scale: .9})
+      .from(name, {autoAlph: 0, x: "-100%"})
+      .from(title, {y: "-100%", autoAlpha: 0})
+      .from(readMore, {y: "-100%", autoAlpha: 0})
   })
 }
 
@@ -611,9 +633,63 @@ function addAudioClass(el) {
   }, 1 * 1000)
  }
 
-new rive.Rive({
-  src: "/assets/animations/audio.riv",
-  canvas: document.getElementById("audio-animation"),
-  autoplay: true,
-  stateMachines: ['State Machine 1'],
-});
+/* 
+ * Background "splash" on homepage links
+ */
+let navLinks = Array.from(document.querySelectorAll('.nav__link')) || []
+const menuLinks = Array.from(document.querySelectorAll('.main-menu__links')) || []
+
+navLinks = navLinks.concat(menuLinks);
+
+if (navLinks.length) {
+  for(let i = 0; i < navLinks.length; i++) {
+    const link = navLinks[i];
+    const rotation = Math.floor(Math.random() * (5 - -5 + 1) + -5);
+    link.style.setProperty('--rotation', `${rotation}deg`)
+  }
+}
+
+
+/* 
+ * Pinning on services page
+ */
+const services = document.querySelector('.services');
+if (services) {
+  ScrollTrigger.matchMedia({
+    "(min-width: 576px)": () => {
+      const servicesTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: services,
+          start: "top bottom",
+          end: "+=3000px",
+          scrub: 1,
+          onUpdate: drawNumbers,
+        }
+      });
+
+      servicesTimeline.from(".services__column", {
+        autoAlpha: 0,
+        stagger: 0.025,
+      });
+
+      // Need to create a seperate pin ScrollTrigger
+      ScrollTrigger.create({
+        trigger: ".services",
+        start: "center center",
+        end: "+=2000px",
+        pin: true,
+      })
+
+      const svgNumberTimeline = gsap.timeline();
+      svgNumberTimeline.from(".draw-me", {
+        duration: 1, 
+        drawSVG: 0,
+      });
+      svgNumberTimeline.pause()
+
+      function drawNumbers(el) {
+        svgNumberTimeline.seek(el.progress)
+      }
+    }
+  });
+}
