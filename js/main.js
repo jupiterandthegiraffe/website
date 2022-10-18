@@ -488,7 +488,7 @@ const transitionText = [
   '<div>Driven by distinction</div> <div>Devoted to development.</div>',
   '<div>Designing for richer,</div> <div>more meaningful experiences.</div>',
   '<div>Restless reinvention.</div> <div>World-class expertise.</div>',
-  '<div>Adding the difference.</div>',
+  '<div>Immersive storytelling</div> <div>for the web.</div>',
   '<div>Exploring further<div>for greater discoveries.</div>',
   '<div>Always observing.</div>',
 ]
