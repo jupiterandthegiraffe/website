@@ -491,6 +491,7 @@ const transitionText = [
   '<div>Immersive storytelling</div> <div>for the web.</div>',
   '<div>Exploring further<div>for greater discoveries.</div>',
   '<div>Always observing.</div>',
+  '<div>Invoking emotions.</div>',
 ]
 
 /**
