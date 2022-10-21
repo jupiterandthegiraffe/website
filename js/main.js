@@ -15,24 +15,21 @@ if (ua.indexOf('safari') != -1) {
 
 const container = document.getElementById("audio-animation");
 let interaction = null;
-let isActiveInput = null;
 if (container) {
   interaction = new rive.Rive({
    src: "/assets/animations/audio.riv",
    canvas: container,
-   autoplay: true,
+   autoplay: false,
+   animations: 'idle_out',
    stateMachines: 'State Machine 1',
    onLoad: (_) => {
-    const inputs = interaction.stateMachineInputs('State Machine 1')
-    isActiveInput = inputs.find(i => i.name === 'Active')
-
     if (sessionStorage.getItem('audio_on')) {
-      isActiveInput.value = true
-    } else {
-      isActiveInput.value = false
+      interaction.play("idle_in")
     }
    }
  });
+
+
 }
 
 const isMobile = ua.match(/mobile/i)
@@ -160,7 +157,7 @@ audioButton.addEventListener('click', () => {
       dataLayer.push({'event': 'audioOff'});
 
       if (interaction) {
-        isActiveInput.value = false
+        interaction.play("Audio Out")
       }
     } else {
       sessionStorage.setItem('audio_on', 'true')
@@ -168,7 +165,7 @@ audioButton.addEventListener('click', () => {
       dataLayer.push({'event': 'audioOn'});
 
       if (interaction) {
-        isActiveInput.value = true
+        interaction.play("Audio In")
       }
 
       audioButton.setAttribute('aria-label', 'Audio off')
@@ -626,7 +623,7 @@ if (people.length) {
 
     tl
       .from(image, {autoAlpha: 0, scale: .9})
-      .from(name, {autoAlph: 0, x: "-100%"})
+      .from(name, {autoAlpha: 0, x: "-100%"})
       .from(title, {y: "-100%", autoAlpha: 0})
       .from(readMore, {y: "-100%", autoAlpha: 0})
   })
