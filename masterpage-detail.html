@@ -72,7 +72,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <span class="nav__link" tabindex="-1">Who we are</span>
     </div>
     <div class="audio-off interaction silence-button" id="audio-button">
-      <button class="silence-button__button" type="button" aria-label="Audio on" id="audio"><span id="firstLottie" style="width: 100px; height: 50px; display: block;"></span>
+      <button class="silence-button__button" type="button" aria-label="Audio on" id="audio">
+        <canvas id="audio-animation" width="92" height="57"></canvas>
       </button><small id="audio-text" style="display: inline-block; overflow: hidden;">Audio experience</small>
     </div>
     <main class="page-detail__main">
@@ -123,7 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="assets/libs/SplitText.min.js"></script>
     <script src="assets/libs/DrawSVGPlugin.min.js"></script>
     <script src="pgia/lib/pgia.js"></script>
-    <script src="js/lottie.min.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas@1.0.79"></script>
     <script src="js/main.js"></script>
     <script src="/dist/bundle.js"></script>
   </body>

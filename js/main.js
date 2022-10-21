@@ -13,22 +13,26 @@ if (ua.indexOf('safari') != -1) {
   }
 }
 
-const container = document.getElementById("firstLottie");
+const container = document.getElementById("audio-animation");
 let interaction = null;
+let isActiveInput = null;
 if (container) {
-  interaction = lottie.loadAnimation({ 
-      container, 
-      renderer: 'svg', 
-      loop: false, 
-      autoplay: false, 
-      path: 'assets/animations/audio-active.json',
-  });
+  interaction = new rive.Rive({
+   src: "/assets/animations/audio.riv",
+   canvas: container,
+   autoplay: true,
+   stateMachines: 'State Machine 1',
+   onLoad: (_) => {
+    const inputs = interaction.stateMachineInputs('State Machine 1')
+    isActiveInput = inputs.find(i => i.name === 'Active')
 
-  if (sessionStorage.getItem('audio_on')) {
-    interaction.goToAndStop(2, true)
-  } else {
-    interaction.goToAndStop(0, true)
-  }
+    if (sessionStorage.getItem('audio_on')) {
+      isActiveInput.value = true
+    } else {
+      isActiveInput.value = false
+    }
+   }
+ });
 }
 
 const isMobile = ua.match(/mobile/i)
@@ -156,7 +160,7 @@ audioButton.addEventListener('click', () => {
       dataLayer.push({'event': 'audioOff'});
 
       if (interaction) {
-        interaction.playSegments([3,4],true)
+        isActiveInput.value = false
       }
     } else {
       sessionStorage.setItem('audio_on', 'true')
@@ -164,7 +168,7 @@ audioButton.addEventListener('click', () => {
       dataLayer.push({'event': 'audioOn'});
 
       if (interaction) {
-        interaction.playSegments([0,3],true);
+        isActiveInput.value = true
       }
 
       audioButton.setAttribute('aria-label', 'Audio off')
@@ -433,7 +437,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     })
   }
 
-  const leadText = document.querySelectorAll('.lead-text')
+  const leadText = gsap.utils.toArray('.lead-text')
   if (leadText.length) {
     for(let i = 0; i < leadText.length; i++) {
       const text = leadText[i];
@@ -469,12 +473,12 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     })
   }
 
-  const person = document.getElementsByClassName('person')
+  const person = gsap.utils.toArray('.person')
   if (person) {
-    Array.from(person).forEach(button => {
+    person.forEach(button => {
       button.addEventListener('click', (e) => {
         const target = e.currentTarget
-        Array.from(person).forEach(p => p.classList.remove('active'))
+        person.forEach(p => p.classList.remove('active'))
         target.classList.toggle('active')
         setTimeout(() => {
           target.classList.remove('active')
@@ -485,7 +489,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 }
 
 const transitionText = [
-  '<div>Driven by distinction</div> <div>Devoted to development.</div>',
+  '<div>Sitting at the intersection</div> <div>of creativity and technology.</div>',
   '<div>Designing for richer,</div> <div>more meaningful experiences.</div>',
   '<div>Restless reinvention.</div> <div>World-class expertise.</div>',
   '<div>Immersive storytelling</div> <div>for the web.</div>',

@@ -107,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
     <div class="audio-off silence-button" id="audio-button" data-pg-ia-hide data-pg-ia='{"l":[{"trg":"load","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.99,"l":{"autoAlpha":1,"pgCall":{"complete":"addAudioClass"}}}]}]},"tcv":"interaction"}]}'>
       <button class="silence-button__button" type="button" aria-label="Audio on" id="audio">
-        <div id="firstLottie" style="width:100px; height:50px;"></div>
+        <canvas id="audio-animation" width="92" height="57"></canvas>
       </button>
       <small id="audio-text" data-pg-ia-hide style="overflow: hidden; display: inline-block;">Audio experience</small>
     </div>
@@ -130,7 +130,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="assets/libs/SplitText.min.js"></script>
     <script src="assets/libs/DrawSVGPlugin.min.js"></script>
     <script src="pgia/lib/pgia.js"></script>
-    <script src="js/lottie.min.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas@1.0.79"></script>
     <script src="js/main.js"></script>
     <script src="dist/bundle.js"></script>
   </body>   
