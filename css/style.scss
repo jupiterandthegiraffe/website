@@ -1314,11 +1314,11 @@ button[type="submit"] {
 }
 
 .page-overlay__content-header--process {
-    background-image: url(../assets/images/process@2x.jpg);
+    background: url(../assets/images/process@2x.jpg);
 }
 
 .webp-supported .page-overlay__content-header--process {
-    background-image: url(../assets/images/process@2x.jpg);
+    background: url(../assets/images/process@2x.webp);
 }
 
 .avif-supported .page-overlay__content-header--process {
@@ -1741,4 +1741,14 @@ body {
 
 .main-menu__list li:first-child {
     margin-top: auto;
+}
+
+.page-overlay__content-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: var(--color-brand-black);
+    display: block;
 }
