@@ -6,6 +6,20 @@
         document.documentElement.classList.add('light-mode')
       }
 
+      async function supportsImageFormat(format, dataUri) {
+        if (!self.createImageBitmap) return false;
+        
+        const imageData = `data:image/${format};base64,${dataUri}`;
+        const blob = await fetch(imageData).then(r => r.blob());
+        return createImageBitmap(blob).then(() => true, () => false);
+      }
+
+      (async () => {
+        if(await supportsImageFormat('webp','UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=')) {
+          document.documentElement.classList.add('webp-supported')
+        }
+      })();
+
       var avif = new Image();
       avif.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
       avif.onload = function () {
@@ -112,8 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <picture>
           <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp" data-pgc-edit="jtg.person.source[srcset, no_content]"/>
           <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x" width="432" height="308" data-pgc-edit="jtg.person.img[src, srcset, no_content]"/>
-        </picture>
-        <span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-edit="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-edit="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-edit="jtg.person.info" data-pgc-repeat="jtg.person.info-repeat">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p> </span>
+        </picture><span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-edit="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-edit="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-edit="jtg.person.info" data-pgc-repeat="jtg.person.info-repeat">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p> </span>
       </button>
     </main>
     <div data-pg-ia-hide class="footer"><a href="/contact.html" class="nav__link" rel="prefetch" tabindex="-1">Make contact</a><a href="/services.html" class="nav__link" rel="prefetch" tabindex="-1">What we do</a>
