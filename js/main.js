@@ -21,7 +21,6 @@ if (container) {
    canvas: container,
    autoplay: false,
    animations: 'idle_out',
-   stateMachines: 'State Machine 1',
    onLoad: (_) => {
     if (sessionStorage.getItem('audio_on')) {
       interaction.play("idle_in")
