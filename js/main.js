@@ -2,7 +2,18 @@ gsap.registerPlugin(SplitText, DrawSVGPlugin)
 
 let isSafari = false
 let hasScrolled = false
+const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html'
+let menuAudio = false
 
+gsap.defaults({
+  ease: "power4.inOut",
+  duration: 1
+});
+
+/*
+ * Detect safari
+ * Safari doesn't support audio well enough
+ */
 var ua = navigator.userAgent.toLowerCase();
 if (ua.indexOf('safari') != -1) {
   if (ua.indexOf('chrome') > -1) {
@@ -13,6 +24,11 @@ if (ua.indexOf('safari') != -1) {
   }
 }
 
+const isMobile = ua.match(/mobile/i)
+
+/*
+ * Setup Audio Animation
+ */
 const container = document.getElementById("audio-animation");
 let interaction = null;
 if (container) {
@@ -27,18 +43,15 @@ if (container) {
     }
    }
  });
-
-
 }
 
-const isMobile = ua.match(/mobile/i)
 
 const header = document.querySelector('.header')
 const footer = document.querySelector('.footer')
-let menuAudio = false
 
-const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html'
-
+/*
+ * Scroll down button trigger
+ */ 
 const scrollDownButton = document.querySelector('.splash-page-one__scroll-down')
 if (scrollDownButton) {
   scrollDownButton.addEventListener('click', e => {
@@ -56,8 +69,11 @@ function removeMenuAudio() {
   menuAudio = false
 }
 
+/*
+ * Helper
+ */
 function removeEl(el) {
-    el.parentNode.removeChild(el);
+  el.parentNode.removeChild(el);
 }
 
 /**
@@ -72,12 +88,12 @@ const topRightAudio = document.getElementById('top-right-audio')
 const bottomRightAudio = document.getElementById('bottom-right-audio')
 const bottomLeftAudio = document.getElementById('bottom-left-audio')
 
-// To do with pressing escape
 const menuCloseButton = document.querySelector('.menu__close-button')
 const pageOverlay = document.querySelector('.page-overlay')
 const menu = document.querySelector('.menu')
 const pageDetail = document.querySelector('.page-detail__main')
 
+// To do with pressing escape on detail pages
 const navBack = () => {
   pgia.play(document.querySelector('.page-overlay'), 'Slide out')
 
@@ -98,11 +114,15 @@ window.addEventListener('keyup', (e) => {
   }
 })
 
+/* helper */
 window.addEventListener('mousemove', () => {
   document.documentElement.classList.remove('keyboard-user')
   document.documentElement.classList.add('mouse-user')
 })
 
+/*
+ * If user tries to scroll on homepage
+ */
 const resetScale = () => gsap.to('.header, .footer', {scale: 1, y: 0})
 let timeout = null
 const startMousewheelDetection = () => {
@@ -180,10 +200,12 @@ audioButton.addEventListener('click', () => {
 })
 
 if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
+  // Pause all audio
   bgAudioFiles.forEach(audio => {
     audio.pause()
   })
 } else if (bgAudioFiles) {
+  // Play bg audio
   audioButton.classList.remove('audio-off')
 
   if (!sessionStorage.getItem('has_navigated')) {
@@ -273,7 +295,8 @@ function destroyIntro(el) {
   document.querySelector('.backdrop-blur').style.opacity = '0'
   document.querySelector('.backdrop-blur').style.visibility = 'hidden'
 
-  sessionStorage.setItem('has_navigated', true)
+  sessionStorage.setItem('has_navigated', true);
+  localStorage.setItem('repeat_visitor', true);
 
   // if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
   //   pgia.play(feedback, 'Feedback In')
@@ -303,9 +326,9 @@ const playTransitionText = (word, animationName, cb) => {
 
       transitionTextEl.setAttribute('aria-live', 'polite')
 
-      const transitionSplitText = new SplitText(transitionTextEl, {type: 'words'})
+      const transitionSplitText = new SplitText(transitionTextEl, {type: 'words,lines'})
 
-      gsap.set(transitionSplitText.words, {overflow: 'hidden'})
+      gsap.set(transitionSplitText.lines, {overflow: 'hidden'})
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -315,7 +338,7 @@ const playTransitionText = (word, animationName, cb) => {
       })
 
       tl.from(transitionSplitText.words, {
-          y: '200%', autoAlpha: 0, stagger: 0.05, rotateZ: 20
+          y: '200%', autoAlpha: 0, stagger: 0.05
       })
 
       tl.to('canvas.webgl', {
@@ -324,16 +347,21 @@ const playTransitionText = (word, animationName, cb) => {
 
       tl.to(document.querySelectorAll('#transition-text div'), {
         y: '-100%', autoAlpha: 0, stagger: '0.025'
-      }, '+=1')
+      }, '1.5')
     }
 
     pgia.play(blur, animationName)
 }
 
+
+/*
+ * Handle homepage intro
+ */
 if (!sessionStorage.getItem('has_navigated') && isHomePage) {
   if (isMobile) {
     const el = document.querySelector('.splash-pages')
     const word = document.querySelector('.splash-page__main-text').innerText
+    document.querySelector('.loader').style.display = 'none';
 
     playTransitionText(word, 'Blur In', () => {
       gsap.to('.header, .footer, .webgl' , {
@@ -348,9 +376,30 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
         filter: 'blur(0)'
       })
 
-      setTimeout(() => [
+      setTimeout(() => {
         destroyIntro(el)
-      ], 1000)
+      }, 1000)
+    })
+  } else if (localStorage.getItem('repeat_visitor')) {
+    document.querySelector('.loader').style.display = 'none';
+
+    playTransitionText("Hello again traveller. Welcome back.", 'Blur In', () => {
+
+      gsap.to('.header, .footer, .webgl' , {
+        autoAlpha: 1, filter: 'blur(0)'
+      })
+
+      gsap.to('#backdrop-blur', {
+        autoAlpha: 0, filter: 'blur(0)'
+      })
+
+      gsap.to('.mode-selector', {
+        filter: 'blur(0)'
+      })
+
+      setTimeout(() => {
+        destroyIntro(el)
+      }, 1000)
     })
   } else {
     // First launch of direct to homepage
@@ -360,8 +409,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
     document.querySelector('#backdrop').style.visibility = 'hidden'
     document.querySelector('.splash-pages').style.display = ''
 
-    const splashText = document.querySelector(".splash-page .splash-page__main-text")
-
+    // Play audio text animation
     if (!isSafari) {
       const audioText = document.getElementById('audio-text')
       const audioTextSplitText = new SplitText(audioText, {type: 'words'})
@@ -373,16 +421,17 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       })
     }
 
+    const splashText = document.querySelector(".splash-page .splash-page__main-text")
     if (splashText) {
-        const splashTextSplitText = new SplitText(splashText, {type: 'words'})
+      const splashTextSplitText = new SplitText(splashText, {type: 'words'})
 
-        splashTextTimeline = gsap.from(splashTextSplitText.words, {
-            y: 50, autoAlpha: 0, stagger: 0.05, rotateZ: 10, filter: 'blur(10px)'
-        })
+      splashTextTimeline = gsap.from(splashTextSplitText.words, {
+          autoAlpha: 0, stagger: 0.05, filter: 'blur(10px)'
+      })
 
-        gsap.from('.splash-page .splash-page__privacy-policy-text', {
-          autoAlpha: 0, filter: 'blur(10px)', delay: 1.5
-        })
+      gsap.from('.splash-page .splash-page__privacy-policy-text', {
+        autoAlpha: 0, filter: 'blur(10px)', delay: 1.5
+      })
     }
 
     svgLogoTimeline = gsap.timeline({});
@@ -661,10 +710,11 @@ if (services) {
       const servicesTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: services,
-          start: "top bottom",
+          start: "top bottom+=200px",
           end: "+=3000px",
           scrub: 1,
           onUpdate: drawNumbers,
+          duration: 0
         }
       });
 

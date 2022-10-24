@@ -621,15 +621,11 @@ h1 {
 
 .nav__link,
 .main-menu__links {
-    mix-blend-mode: difference;
     color: var(--color-brand-white);
 }
 
 .nav__link {
     text-transform: uppercase;
-    position: relative;
-    margin-top: auto;
-    margin-bottom: auto;
     display: inline-block;
 }
 
@@ -1687,22 +1683,28 @@ body {
     cursor: pointer;
 }
 
-.nav__link:hover:before,
-.main-menu__links:hover:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--color-brand-white);
-    z-index: -1;
-    rotate: var(--rotation);
+// .nav__link:hover:before,
+// .main-menu__links:hover:before {
+// content: '';
+// position: absolute;
+// top: 0;
+// left: 0;
+// right: 0;
+// bottom: 0;
+// background-color: var(--color-brand-white);
+// z-index: -1;
+// rotate: var(--rotation);
+// }
+.nav__link,
+.main-menu__links {
+    text-shadow: 0 0 5px rgba(255,255,255,0);
+    transition: text-shadow .3s ease-in-out;
 }
 
 .nav__link:hover,
 .main-menu__links:hover {
-    color: var(--color-brand-black);
+    color: var(--color-brand-white);
+    text-shadow: 0 0 15px rgba(255,255,255,1);
 }
 
 .lead-text a:hover {
