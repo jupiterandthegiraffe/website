@@ -133,14 +133,12 @@ function initScene(canvas) {
         tl.to(loader, {
           opacity: 0,
           duration: 1,
-          delay: .5,
           onComplete: () => loader.parentNode.removeChild(loader)
         })
 
         // Fade in on load
         tl.to(canvas, {
           autoAlpha: 1,
-          delay: .2
         }, ">")  
       },
       (progress) => {
@@ -225,8 +223,8 @@ function initScene(canvas) {
         }
         if (logo) {
           // gsap is imported into the global scope
-          gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1})
-          gsap.to(logo.rotation, { z: originalCameraPosition.y + -(mouse.x * 0.30), duration: 1})
+          gsap.to(logo.rotation, { x: originalCameraPosition.x + (mouse.y * 0.10), duration: 1, ease: 'none'})
+          gsap.to(logo.rotation, { z: originalCameraPosition.y + -(mouse.x * 0.30), duration: 1, ease: 'none'})
         }
         composer.render()
       }
