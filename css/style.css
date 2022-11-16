@@ -227,8 +227,16 @@ a {
 
 @media (min-width: 576px) {
   .main-menu__list {
-    right: 25%;
-    padding: 0 3em 0 3em; } }
+    border: 1px solid #2e2e2e;
+    border-radius: 10px 20px 20px 10px;
+    right: 10%;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px; } }
+
+@media (min-width: 1024px) {
+  .main-menu__list {
+    right: 50%; } }
 
 .light-mode .main-menu__list {
   border-right-color: var(--color-brand-black);
