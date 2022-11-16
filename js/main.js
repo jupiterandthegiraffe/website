@@ -381,6 +381,7 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       }, 1000)
     })
   } else if (localStorage.getItem('repeat_visitor')) {
+    const el = document.querySelector('.splash-pages')
     document.querySelector('.loader').style.display = 'none';
 
     playTransitionText("Hello again traveller. Welcome back.", 'Blur In', () => {
