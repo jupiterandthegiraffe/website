@@ -23,6 +23,14 @@ module.exports = {
                 [
                     'babel-loader'
                 ]
+            },
+            {
+                test: /\.(glsl|vs|fs|vert|frag)$/,
+                type: 'asset/source',
+                generator:
+                {
+                    filename: 'assets/images/[hash][ext]'
+                }
             }
         ]
     }
