@@ -9,6 +9,12 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
+// import GUI from 'lil-gui'
+// const gui = new GUI()
+
+import dustVertexShader from '../assets/shaders/dust/vertex.glsl'
+import dustFragmentShader from '../assets/shaders/dust/fragment.glsl'
+
 const staticAudio = document.getElementById('static-audio')
 const loader = document.getElementsByClassName('loader')[0]
 let loaderNumber, loaderBar;
@@ -17,10 +23,7 @@ if (loader) {
   loaderBar = document.getElementsByClassName('loader-bar')[0]
 }
 
-// import * as dat from 'lil-gui'
-
 // Debug
-// const gui = new dat.GUI()
 let logo = null
 let composer = null
 let effect2 = null
@@ -59,6 +62,8 @@ function initScene(canvas) {
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+    particleMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2)
   })
 
   /**
@@ -94,14 +99,6 @@ function initScene(canvas) {
   backgroundMaterial.metalnessMap = backgroundRough
   backgroundMaterial.roughness = 5
   backgroundMaterial.metalness = 0
-  
-  // const pointLight2 = new THREE.PointLight(0xffffff, 1, 1)
-  // pointLight2.position.set(0, 0.921, 0.958)
-  // pointLight2.rotation.set(1.026,0, 0)
-  // pointLight2.intensity = 6
-  // pointLight2.decay = 1.5
-  // pointLight2.distance = 0
-  // scene.add(pointLight2)
 
   const originalCameraPosition = new THREE.Vector2()
 
@@ -113,7 +110,7 @@ function initScene(canvas) {
   gltfLoader.load(
       '/assets/models/scene 1.glb',///J&G Logo_v15-transform.glb',
       (gltf) => {
-        console.log(gltf);
+        // console.log(gltf);
         
         logo = gltf.scene.children.filter(child => child.name === 'J&G_Logo')[0]
         const bg = gltf.scene.children.filter(child => child.name === 'Background')[0]
@@ -164,6 +161,40 @@ function initScene(canvas) {
     }
   })
 
+  /* 
+   *Particles
+   */
+  const particlesGeometry = new THREE.BufferGeometry(1, 32, 32)
+  const dustCount = 17
+  const positions = new Float32Array(dustCount * 3)
+  const scaleArray = new Float32Array(dustCount)
+  
+  for (let i = 0; i < dustCount; i++) {
+    positions[i * 3 + 0] = (Math.random() - 0.5) * 2
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 2
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 2
+
+    scaleArray[i] = Math.random()
+  }
+  
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  particlesGeometry.setAttribute('aScale', new THREE.BufferAttribute(scaleArray, 1))
+
+  const particleMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+      uSize: { value: 80.0 },
+    },
+    vertexShader: dustVertexShader,
+    fragmentShader: dustFragmentShader,
+    transparent: true,
+    // blending: THREE.AdditiveBlending,
+    depthWrite: false
+  })
+  const particles = new THREE.Points(particlesGeometry, particleMaterial)
+  scene.add(particles)
+
   // Renderer
   const renderer = new THREE.WebGLRenderer({
       canvas,
@@ -199,13 +230,13 @@ function initScene(canvas) {
 
 
   // Animate
-  // const clock = new THREE.Clock()
+  const clock = new THREE.Clock()
   // let previousTime = 0
 
   const tick = () => {
-    // const elapsedTime = clock.getElapsedTime()
-    // const deltaTime = elapsedTime - previousTime
-    // previousTime = elapsedTime
+    const elapsedTime = clock.getElapsedTime()
+
+    particleMaterial.uniforms.uTime.value = elapsedTime * 0.5
 
     // Render
     if (composer || renderer) {
