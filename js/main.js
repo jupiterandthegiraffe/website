@@ -221,16 +221,15 @@ audioButton.addEventListener('click', () => {
       audioButton.setAttribute('aria-label', audioButtonLabel)
       startHomePageAudio()
       audioButton.classList.add('audio-off')
-      dataLayer.push({'event': 'audioOff'});
 
       if (interaction) {
         interaction.play("Audio Out")
       }
 
+      dataLayer.push({'event': 'Audio On'})
     } else {
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
-      dataLayer.push({'event': 'audioOn'});
 
       if (interaction) {
         interaction.play("Audio In")
@@ -247,6 +246,8 @@ audioButton.addEventListener('click', () => {
       } else {
         bgAudioFiles.forEach(audio => audio.play())
       }
+
+      dataLayer.push({'event': 'Audio On'})
     }
 })
 
