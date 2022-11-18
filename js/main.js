@@ -226,6 +226,8 @@ audioButton.addEventListener('click', () => {
       if (interaction) {
         interaction.play("Audio Out")
       }
+
+      dataLayer.push({'event': 'Audio Off'})
     } else {
       sessionStorage.setItem('audio_on', 'true')
       audioButton.classList.remove('audio-off')
@@ -246,6 +248,8 @@ audioButton.addEventListener('click', () => {
       } else {
         bgAudioFiles.forEach(audio => audio.play())
       }
+
+      dataLayer.push({'event': 'Audio On'})
     }
 })
 
