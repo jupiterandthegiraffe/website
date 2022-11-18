@@ -1584,3 +1584,33 @@ body {
   left: 0;
   background: var(--color-brand-black);
   display: block; }
+
+.points-popup {
+  position: fixed;
+  right: 10px;
+  padding: 10px;
+  background-color: var(--color-brand-black);
+  border: 1px solid #323232;
+  max-width: 400px;
+  width: 100%;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+  bottom: 0;
+  z-index: 10; }
+
+.points-popup__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.points-popup__title {
+  font-size: 1rem;
+  margin-bottom: 0.5em; }
+
+.points-popup__text {
+  margin-top: 0;
+  margin-bottom: .5em; }
+
+small {
+  font-size: 0.75rem; }
