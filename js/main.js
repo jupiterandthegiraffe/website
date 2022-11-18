@@ -10,6 +10,54 @@ gsap.defaults({
   duration: 1
 });
 
+if (!window.localStorage.getItem('user-points')) {
+  window.localStorage.setItem('user-points', 0) 
+}
+if (!window.localStorage.getItem('awards')) {
+  window.localStorage.setItem('awards', JSON.stringify({awards: []})) 
+}
+
+const pointsPopup = document.querySelector('.points-popup');
+const triggerPointPopup = (message, points = 1, code) => {
+  const currentAwards = JSON.parse(window.localStorage.getItem('awards'))
+  if (currentAwards.awards.indexOf(code) <= -1) {
+    window.localStorage.setItem('user-points', Number(window.localStorage.getItem('user-points')) + points)
+
+    pointsPopup.querySelector('.points-popup__points').innerText = window.localStorage.getItem('user-points')
+    pointsPopup.querySelector('.points-popup__text').innerText = message
+
+    pgia.play(pointsPopup, 'Points Popup')
+
+    const awards = JSON.parse(window.localStorage.getItem('awards')).awards || []
+    awards.push(code)
+    window.localStorage.setItem('awards', JSON.stringify({awards}))
+
+    setTimeout(() => {
+      pgia.play(pointsPopup, 'Points Popdown')
+    }, 5000)
+  }
+}
+
+if (!window.localStorage.getItem('pages-visited')) {
+  window.localStorage.setItem('pages-visited', JSON.stringify([]))
+}
+let pagesVisited = JSON.parse(window.localStorage.getItem('pages-visited')).length
+
+const totalPagesTarget = 7
+const increasePageVisitor = (page) => {
+  const pages = JSON.parse(window.localStorage.getItem('pages-visited'))
+  if (pages.indexOf(page) <= -1) {
+    pages.push(page)
+    window.localStorage.setItem('pages-visited', JSON.stringify(pages))
+    pagesVisited++
+  }
+
+  console.log(pagesVisited, totalPagesTarget)
+  if (pagesVisited >= totalPagesTarget) {
+    triggerPointPopup("You've seen just about everything there is to be seen", 5, 'all_pages')
+  }
+}
+
 /*
  * Detect safari
  * Safari doesn't support audio well enough
@@ -187,6 +235,8 @@ audioButton.addEventListener('click', () => {
         interaction.play("Audio In")
       }
 
+      triggerPointPopup('Welcome to the full experience.', 2, 'audio_on')
+
       audioButton.setAttribute('aria-label', 'Audio off')
       if (isHomePage && sessionStorage.getItem('has_navigated')) {
         startHomePageAudio()
@@ -220,12 +270,24 @@ if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
   }
 }
 
+if (window.location.pathname.match(/\/(.+)\.|\??/)[0] && window.location.pathname.match(/\/(.+)\.|\??/)[1] !== 'index') {
+  increasePageVisitor(window.location.pathname.match(/\/(.+)\.|\??/)[1])
+}
+if (window.location.pathname.match(/end-credits/)) {
+  triggerPointPopup('Wow! You found a secret!', 3, 'end_cred')
+}
+
 function startHomePageAudio() {
   if (sessionStorage.getItem('audio_on') && !isSafari) {
     secondaryAudio.forEach(audio => {
       audio.play()
       audio.volume = 0
     })
+
+    let audioDiscoveryTracker = false
+    let discoverTopRight = false
+    let discoverBottomRight = false
+    let discoverBottomLeft = false
 
     window.addEventListener('mousemove', e => {
       if (menuAudio) {
@@ -245,9 +307,30 @@ function startHomePageAudio() {
         const centreX = 1 - Math.abs((e.clientX - (window.innerWidth / 2)) / (window.innerWidth / 2))
         const centreY = 1 - Math.abs((e.clientY - (window.innerHeight / 2)) / (window.innerHeight / 2))
 
-        topRightAudio.volume = Math.min(leftToRight, topToBottom)
-        bottomRightAudio.volume = Math.min(leftToRight, bottomToTop)
-        bottomLeftAudio.volume = Math.min(rightToLeft, bottomToTop)
+        const topRight = Math.min(leftToRight, topToBottom)
+        const bottomRight = Math.min(leftToRight, bottomToTop)
+        const bottomLeft = Math.min(rightToLeft, bottomToTop)
+
+        if (topRight > 0.5 && !discoverTopRight) {
+          discoverTopRight = true
+        }
+        
+        if (bottomRight > 0.5 && !discoverBottomRight) {
+          discoverBottomRight = true
+        }
+        
+        if (bottomLeft > 0.5 && !discoverBottomLeft) {
+          discoverBottomLeft = true
+        }
+
+        if (!audioDiscoveryTracker && discoverTopRight && discoverBottomRight && discoverBottomLeft) {
+          audioDiscoveryTracker = true
+          triggerPointPopup("Wow, you're a good listener.", 2, "audio_listen") 
+        }
+
+        topRightAudio.volume = topRight
+        bottomRightAudio.volume = bottomRight
+        bottomLeftAudio.volume = bottomLeft
         mainAudio.volume = Math.max(Math.min(rightToLeft, topToBottom), Math.min(centreX, centreY))
       }
     })
@@ -353,6 +436,14 @@ const playTransitionText = (word, animationName, cb) => {
     pgia.play(blur, animationName)
 }
 
+function setFirstVisit() {
+  triggerPointPopup('Welcome to the club', 1, 'visit_one')
+}
+
+function finishIntro(el) {
+  destroyIntro(el)
+  setFirstVisit()
+}
 
 /*
  * Handle homepage intro
@@ -378,6 +469,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
       setTimeout(() => {
         destroyIntro(el)
+
+        setFirstVisit()
       }, 1000)
     })
   } else if (localStorage.getItem('repeat_visitor')) {
@@ -400,6 +493,8 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
 
       setTimeout(() => {
         destroyIntro(el)
+
+        triggerPointPopup('Do you come here often?', 1, 'repeat_visit')
       }, 1000)
     })
   } else {
@@ -532,6 +627,10 @@ if (!sessionStorage.getItem('has_navigated') && isHomePage) {
       })
     })
   }
+
+  setTimeout(() => {
+    triggerPointPopup('The inquisitive type, eh?', 1, 'nested_page')
+  }, 3000)
 }
 
 const transitionText = [

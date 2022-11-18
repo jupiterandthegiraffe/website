@@ -226,6 +226,8 @@ function initScene(canvas) {
     if (sessionStorage.getItem('audio_on')) {
       staticAudio.play()
     }
+
+    triggerPointPopup('You found a glitch!', 1, 'glitch')
   })
 
 
