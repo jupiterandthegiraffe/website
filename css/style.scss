@@ -1776,6 +1776,7 @@ body {
     transform: translateY(100%);
     bottom: 0;
     z-index: 10;
+    left: 10px;
 }
 
 .points-popup__content {
@@ -1797,4 +1798,10 @@ body {
 
 small {
     font-size: 0.75rem;
+}
+
+@media (min-width:576px) {
+    .points-popup {
+        left: auto;
+    }
 }
