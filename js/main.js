@@ -1,5 +1,3 @@
-import.meta.glob("./experience.js");
-
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
@@ -944,3 +942,7 @@ if (services) {
     },
   });
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  import("./experience.js")
+})
