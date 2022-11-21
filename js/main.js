@@ -1,3 +1,7 @@
+import { Rive } from "@rive-app/canvas";
+import { SplitText } from 'gsap/SplitText';
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
+
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
@@ -96,7 +100,7 @@ const isMobile = ua.match(/mobile/i);
 const container = document.getElementById("audio-animation");
 let interaction = null;
 if (container) {
-  interaction = new rive.Rive({
+  interaction = new Rive({
     src: "/assets/animations/audio.riv",
     canvas: container,
     autoplay: false,
@@ -585,7 +589,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         type: "words",
       });
 
-      splashTextTimeline = gsap.from(splashTextSplitText.words, {
+      gsap.from(splashTextSplitText.words, {
         autoAlpha: 0,
         stagger: 0.05,
         filter: "blur(10px)",
