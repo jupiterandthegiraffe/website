@@ -13,6 +13,7 @@ gsap.defaults({
 if (!window.localStorage.getItem('user-points')) {
   window.localStorage.setItem('user-points', 0) 
 }
+
 if (!window.localStorage.getItem('awards')) {
   window.localStorage.setItem('awards', JSON.stringify({awards: []})) 
 }
@@ -20,6 +21,7 @@ if (!window.localStorage.getItem('awards')) {
 const pointsPopup = document.querySelector('.points-popup');
 const triggerPointPopup = (message, points = 1, code) => {
   const currentAwards = JSON.parse(window.localStorage.getItem('awards'))
+
   if (currentAwards.awards.indexOf(code) <= -1) {
     window.localStorage.setItem('user-points', Number(window.localStorage.getItem('user-points')) + points)
 
@@ -27,6 +29,8 @@ const triggerPointPopup = (message, points = 1, code) => {
     pointsPopup.querySelector('.points-popup__text').innerText = message
 
     pgia.play(pointsPopup, 'Points Popup')
+
+    dataLayer.push({'event': `Award ${code} achieved`})
 
     const awards = JSON.parse(window.localStorage.getItem('awards')).awards || []
     awards.push(code)
@@ -215,40 +219,40 @@ const secondaryAudio = [
 ]
 
 audioButton.addEventListener('click', () => {
-    if (sessionStorage.getItem('audio_on')) {
-      sessionStorage.removeItem('audio_on')
-      audioFiles.forEach(audio => audio.pause())
-      audioButton.setAttribute('aria-label', audioButtonLabel)
-      startHomePageAudio()
-      audioButton.classList.add('audio-off')
+  if (sessionStorage.getItem('audio_on')) {
+    sessionStorage.removeItem('audio_on')
+    audioFiles.forEach(audio => audio.pause())
+    audioButton.setAttribute('aria-label', audioButtonLabel)
+    startHomePageAudio()
+    audioButton.classList.add('audio-off')
 
-      if (interaction) {
-        interaction.play("Audio Out")
-      }
-
-      dataLayer.push({'event': 'Audio On'})
-    } else {
-      sessionStorage.setItem('audio_on', 'true')
-      audioButton.classList.remove('audio-off')
-
-      if (interaction) {
-        interaction.play("Audio In")
-      }
-
-      triggerPointPopup('Welcome to the full experience.', 2, 'audio_on')
-
-      audioButton.setAttribute('aria-label', 'Audio off')
-      if (isHomePage && sessionStorage.getItem('has_navigated')) {
-        startHomePageAudio()
-        mainAudio.play()
-      } else if (isHomePage) {
-        mainAudio.play()
-      } else {
-        bgAudioFiles.forEach(audio => audio.play())
-      }
-
-      dataLayer.push({'event': 'Audio On'})
+    if (interaction) {
+      interaction.play("Audio Out")
     }
+
+    dataLayer.push({'event': 'Audio On'})
+  } else {
+    sessionStorage.setItem('audio_on', 'true')
+    audioButton.classList.remove('audio-off')
+
+    if (interaction) {
+      interaction.play("Audio In")
+    }
+
+    triggerPointPopup('Welcome to the full experience.', 2, 'audio_on')
+
+    audioButton.setAttribute('aria-label', 'Audio off')
+    if (isHomePage && sessionStorage.getItem('has_navigated')) {
+      startHomePageAudio()
+      mainAudio.play()
+    } else if (isHomePage) {
+      mainAudio.play()
+    } else {
+      bgAudioFiles.forEach(audio => audio.play())
+    }
+
+    dataLayer.push({'event': 'Audio On'})
+  }
 })
 
 if (bgAudioFiles && !sessionStorage.getItem('audio_on')) {
