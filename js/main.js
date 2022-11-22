@@ -99,7 +99,7 @@ const isMobile = ua.match(/mobile/i);
 const container = document.getElementById("audio-animation");
 let interaction = null;
 if (container) {
-  interaction = new Rive({
+  interaction = new rive.Rive({
     src: "/assets/animations/audio.riv",
     canvas: container,
     autoplay: false,
