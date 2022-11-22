@@ -136,6 +136,8 @@ function initScene(canvas) {
         (child) => child.name === "SpotLight"
       )[0];
 
+      logo.scale.set(0.8, 0.8, 0.8)
+
       scene.add(logo, bg);
 
       bg.material = backgroundMaterial;
@@ -144,6 +146,18 @@ function initScene(canvas) {
       originalCameraPosition.y = logo.rotation._y;
 
       camera.lookAt(logo.position);
+
+      gsap.to(logo.scale, {
+        x: 1,
+        y: 1,
+        z: 1,
+        duration: 3
+      })
+
+      gsap.from(logo.rotation, {
+        z: Math.PI * 0.5,
+        duration: 3 
+      })
 
       const tl = gsap.timeline();
 
