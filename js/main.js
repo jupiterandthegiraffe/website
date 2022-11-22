@@ -1,4 +1,4 @@
-import * as rive from "@rive-app/canvas";
+import {Rive} from "@rive-app/canvas";
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 
@@ -100,7 +100,7 @@ const isMobile = ua.match(/mobile/i);
 const container = document.getElementById("audio-animation");
 let interaction = null;
 if (container) {
-  interaction = new rive.Rive({
+  interaction = new Rive({
     src: "/assets/animations/audio.riv",
     canvas: container,
     autoplay: false,
