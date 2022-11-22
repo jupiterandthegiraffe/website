@@ -1,4 +1,3 @@
-import {Rive} from "@rive-app/canvas";
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 
