@@ -438,8 +438,9 @@ h1 {
   max-width: 1512px;
   margin-inline: auto;
   position: relative; }
-  + .page-overlay__content-container {
-    margin-top: 2em; }
+
+.page-overlay__content-container + .page-overlay__content-container {
+  margin-top: 2em; }
 
 @media (max-width: 769px) {
   .page-overlay__content-container {
