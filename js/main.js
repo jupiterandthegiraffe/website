@@ -1,5 +1,7 @@
-import { SplitText } from 'gsap/SplitText';
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
+
+import rive from '../node_modules/@rive-app/canvas'
+import { SplitText } from '../node_modules/gsap/SplitText'
+import { DrawSVGPlugin } from '../node_modules/gsap/DrawSVGPlugin'
 
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
