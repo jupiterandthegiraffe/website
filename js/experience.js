@@ -1,14 +1,13 @@
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+import * as THREE from "../node_modules/three";
+import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "../node_modules/three/examples/jsm/loaders/DRACOLoader.js";
+import { EffectComposer } from "../node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "../node_modules/three/examples/jsm/postprocessing/RenderPass.js";
+import { ShaderPass } from "../node_modules/three/examples/jsm/postprocessing/ShaderPass.js";
 
-// import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
-import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
-import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
-import { AsciiEffect } from "three/examples/jsm/effects/AsciiEffect.js";
+// import { FilmPass } from '../node_modules/three/examples/jsm/postprocessing/FilmPass.js';
+import { RGBShiftShader } from "../node_modules/three/examples/jsm/shaders/RGBShiftShader.js";
+import { GlitchPass } from "../node_modules/three/examples/jsm/postprocessing/GlitchPass.js";
 
 // import GUI from 'lil-gui'
 // const gui = new GUI()
