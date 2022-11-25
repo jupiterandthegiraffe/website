@@ -1,13 +1,13 @@
-import * as THREE from "../node_modules/three";
-import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "../node_modules/three/examples/jsm/loaders/DRACOLoader.js";
-import { EffectComposer } from "../node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "../node_modules/three/examples/jsm/postprocessing/RenderPass.js";
-import { ShaderPass } from "../node_modules/three/examples/jsm/postprocessing/ShaderPass.js";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 
-// import { FilmPass } from '../node_modules/three/examples/jsm/postprocessing/FilmPass.js';
-import { RGBShiftShader } from "../node_modules/three/examples/jsm/shaders/RGBShiftShader.js";
-import { GlitchPass } from "../node_modules/three/examples/jsm/postprocessing/GlitchPass.js";
+// import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
+import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
+import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
 
 // import GUI from 'lil-gui'
 // const gui = new GUI()
@@ -136,7 +136,7 @@ function initScene(canvas) {
         (child) => child.name === "SpotLight"
       )[0];
 
-      logo.scale.set(0.8, 0.8, 0.8)
+      logo.scale.set(0.8, 0.8, 0.8);
 
       scene.add(logo, bg);
 
@@ -151,13 +151,13 @@ function initScene(canvas) {
         x: 1,
         y: 1,
         z: 1,
-        duration: 3
-      })
+        duration: 3,
+      });
 
       gsap.from(logo.rotation, {
         z: Math.PI * 0.5,
-        duration: 3 
-      })
+        duration: 3,
+      });
 
       const tl = gsap.timeline();
 

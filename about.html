@@ -47,9 +47,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PC4ZCSK');</script>
     <script>
+  /*
       if (navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.register('sw.js');
-      }
+        navigator.serviceWorker.register(
+          new URL('sw.js', import.meta.url),
+          {type: 'module'}
+        );
+      }*/
     </script>
   </head>   
   <body>
@@ -77,8 +81,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
     </div>
     <div style="filter: blur(10px); z-index: -1;" class="header">
-      <div class="header__menu-button" tabindex="-1"></div>
-      <span class="nav__link" tabindex="-1">Who we are</span>
+      <div class="header__menu-button" tabindex="-1"></div><span class="nav__link" tabindex="-1">Who we are</span>
     </div>
     <div class="audio-off silence-button" id="audio-button" data-pg-ia-hide data-pg-ia='{"l":[{"trg":"load","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.99,"l":{"autoAlpha":1,"pgCall":{"complete":"addAudioClass"}}}]}]},"tcv":"interaction"}]}' data-pgc="jtg.audio-button">
       <button class="silence-button__button" type="button" aria-label="Audio on" id="audio">
@@ -105,15 +108,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <picture>
               <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp" data-pgc-field="jtg.person.source"/>
               <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x" width="432" height="308" data-pgc-field="jtg.person.img"/>
-            </picture>
-            <span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-field="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-field="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-field="jtg.person.info">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p><p data-pgc-field="jtg.person.info">Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world.</p> </span>
+            </picture><span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-field="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-field="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-field="jtg.person.info">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p><p data-pgc-field="jtg.person.info">Samuel founded J&TG in 2019 as a remote-first consultancy and built the company into offering world-class experiential websites for clients around the world.</p> </span>
           </button>
           <button class="person" type="button" data-pgc="jtg.person">
             <picture>
               <source srcset="assets/images/Neil%20Profile@2x.webp 2x, assets/images/Neil%20Profile.webp" type="image/webp" data-pgc-field="jtg.person.source"/>
               <img src="assets/images/Neil%20Profile.jpg" alt="" class="person-image" srcset="assets/images/Neil%20Profile@2x.jpg 2x" width="432" height="308" data-pgc-field="jtg.person.img"/>
-            </picture>
-            <span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-field="jtg.person.name">Neil Noakes</p> <p class="person__overlay-title" data-pgc-field="jtg.person.title">Product Strategy Consultant</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-field="jtg.person.info">Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p> </span>
+            </picture><span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-field="jtg.person.name">Neil Noakes</p> <p class="person__overlay-title" data-pgc-field="jtg.person.title">Product Strategy Consultant</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-field="jtg.person.info">Neil has an unparalleled eye for detail, precision and strategic thinking working with behemoth clients such as NHS, Ministry of Justice, amongst others to Jupiter and the Giraffe as part of our strategic Lean App Strategy onboarding phase.</p> </span>
           </button>
           <button class="person" type="button">
             <picture>
@@ -153,16 +154,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <picture>
               <source srcset="assets/images/steve-coe@2x.webp 2x, assets/images/steve-coe.webp" type="image/webp" data-pgc-field="jtg.person.source"/>
               <img src="assets/images/steve-coe.jpg" alt="" class="person-image" srcset="assets/images/steve-coe@2x.jpg 2x" width="432" height="308" data-pgc-field="jtg.person.img"/>
-            </picture>
-            <span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-field="jtg.person.name">Steve Coe</p> <p class="person__overlay-title" data-pgc-field="jtg.person.title">Immersive Storyteller</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-field="jtg.person.info">Steve's career boasts extensive experience within digital marketing and entertainment. His IMBD credits include Fluffy (Cannes, Palm Springs Festivals), and I, DOG (Amazon Prime). He is also a brand storyteller - Conversation Designer (AI) Award Winning TOBi, and Conceptual Copywriter with over 23 years' experience creating content for high-profile agencies and brands. This has included Ogilvy, AMV BBDO, Barclaycard, Barclays, Coutts, Vodafone, and Sony.</p> </span>
+            </picture><span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-field="jtg.person.name">Steve Coe</p> <p class="person__overlay-title" data-pgc-field="jtg.person.title">Immersive Storyteller</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-field="jtg.person.info">Steve's career boasts extensive experience within digital marketing and entertainment. His IMBD credits include Fluffy (Cannes, Palm Springs Festivals), and I, DOG (Amazon Prime). He is also a brand storyteller - Conversation Designer (AI) Award Winning TOBi, and Conceptual Copywriter with over 23 years' experience creating content for high-profile agencies and brands. This has included Ogilvy, AMV BBDO, Barclaycard, Barclays, Coutts, Vodafone, and Sony.</p> </span>
           </button>
         </div>
       </section>
       <div class="page-overlay__footer" data-pg-ia-scene='{"s":"custom","s_t":"start","s_s":"end","e_t":"end","e_s":"end","l":[{"name":"Footer Scene","a":{"l":[{"t":"h2","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1}}]},{"t":"a","l":[{"t":"set","p":0,"d":0,"l":{"y":100}},{"t":"tween","p":0.2,"d":0.5,"s":0.1,"l":{"autoAlpha":1,"y":0}}]}]},"p":"scroll"}]}'>
         <section class="page-overlay__content-container page-overlay__footer">
           <h2 data-pg-ia-hide>Where next?</h2>
-          <div class="page-overlay__footer-links"><a href="/index.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">Home</span></a>
-            <a href="/services.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">What we do</span></a><a href="/about.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link" class="active"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">Who we are</span></a><a href="/process.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">How we do it</span></a><a href="/contact.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">Make contact</span></a>
+          <div class="page-overlay__footer-links">
+            <a href="/index.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">Home</span></a><a href="/services.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">What we do</span></a>
+            <a href="/about.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link" class="active"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">Who we are</span></a>
+            <a href="/process.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">How we do it</span></a>
+            <a href="/contact.html" data-pg-ia-hide rel="prefetch" data-pgc-field="footer_link"><span class="blink" aria-hidden="true">&gt;</span><span data-pgc-field="footer_link-text">Make contact</span></a>
           </div>
         </section>
       </div>
@@ -177,9 +180,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
     </div>
-    <div style="filter: blur(10px); z-index: -1;" class="footer">
-      <span class="nav__link" tabindex="-1">Make contact</span><span class="nav__link" tabindex="-1">What we do</span>
-      <span class="nav__link" tabindex="-1">How we do it</span>
+    <div style="filter: blur(10px); z-index: -1;" class="footer"><span class="nav__link" tabindex="-1">Make contact</span>
+      <span class="nav__link" tabindex="-1">What we do</span><span class="nav__link" tabindex="-1">How we do it</span>
     </div>
     <div class="mode-selector mode-selector__buton" style="z-index: -1; filter: blur(10px); display: none;">
       <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
@@ -201,9 +203,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
     </script>
     <script src="pgia/lib/pgia.js"></script>
-    <script src="assets/libs/SplitText.min.js"></script>
-    <script src="assets/libs/DrawSVGPlugin.min.js"></script>
-    <script src="https://unpkg.com/@rive-app/canvas@1.0.79"></script>
-    <script src="/js/main.js" type="module"></script>
+    <script src="/dist/bundle.js"></script>
   </body>
 </html>

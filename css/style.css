@@ -591,25 +591,6 @@ h1 {
 .splash-page-one {
   z-index: 1; }
 
-.logo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-repeat: no-repeat;
-  background-position: center 40vh;
-  background-size: 300px;
-  background-image: url("../assets/images/LOGO.png");
-  z-index: -24; }
-
-@media (min-width: 576px) {
-  .logo {
-    background-size: 900px; } }
-
-.light-mode .logo {
-  background-image: url("../assets/images/LOGO-black.png"); }
-
 .background {
   position: fixed;
   top: 0;
@@ -1001,22 +982,6 @@ button[type="submit"] {
 .page-overlay__footer h2 {
   margin-top: 0;
   margin-bottom: 0; }
-
-.shadow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/assets/images/blur.png");
-  background-repeat: no-repeat;
-  background-position: center 70vh;
-  background-size: 700px;
-  z-index: -2; }
-
-@media (min-width: 576px) {
-  .shadow {
-    background-size: 700px; } }
 
 @media (min-width: 576px) {
   .header__menu-button,

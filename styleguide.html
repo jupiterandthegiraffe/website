@@ -56,9 +56,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PC4ZCSK');</script>
     <!-- End Google Tag Manager -->
     <script>
+  /*
       if (navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.register('sw.js');
-      }
+        navigator.serviceWorker.register(
+          new URL('sw.js', import.meta.url),
+          {type: 'module'}
+        );
+      }*/
     </script>
   </head>   
   <body>
@@ -69,17 +73,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <nav>
         <ul class="main-menu__list">
           <li>
-            <a href="services.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">What we do</a>
+            <a href="services.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">What we do</a>
           </li>
-          <li><a href="about.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">Who we are</a>
+          <li><a href="about.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Who we are</a>
           </li>
-          <li><a href="process.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">How we do it</a>
+          <li><a href="process.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">How we do it</a>
           </li>
-          <li><a href="contact.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">Make contact</a>
+          <li><a href="contact.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Make contact</a>
           </li>
           <li><a href="https://www.behance.net/jatg" class="external-link main-menu__links" rel="nofollow noreferrer" target="_blank" aria-label="Case studies - external link" data-audio="tap" data-audio-event="mouseover">Case Studies</a>
           </li>
-          <li><a href="end-credits.html" class="main-menu__links" data-audio="tap" data-audio-event="mouseover">End Credits</a>
+          <li><a href="end-credits.html" class="main-menu__links" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">End Credits</a>
           </li>
           <li class="main-menu__list-info">
             <p>Company number: 11769481</p>
@@ -127,10 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           document.querySelector('.footer').setAttribute('data-pg-ia-hide', '')
         }
     </script>
-    <script src="assets/libs/SplitText.min.js"></script>
-    <script src="assets/libs/DrawSVGPlugin.min.js"></script>
-    <script src="https://unpkg.com/@rive-app/canvas@1.0.79"></script>
     <script src="pgia/lib/pgia.js"></script>
-    <script src="/js/main.js" type="module"></script>
+    <script src="dist/bundle.js"></script>
   </body>   
 </html>

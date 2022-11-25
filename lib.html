@@ -56,9 +56,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PC4ZCSK');</script>
     <!-- End Google Tag Manager -->
     <script>
+  /*
       if (navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.register('sw.js');
-      }
+        navigator.serviceWorker.register(
+          new URL('sw.js', import.meta.url),
+          {type: 'module'}
+        );
+      }*/
     </script>
   </head>   
   <body>
@@ -69,17 +73,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <nav>
         <ul class="main-menu__list">
           <li>
-            <a href="services.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">What we do</a>
+            <a href="services.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">What we do</a>
           </li>
-          <li><a href="about.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">Who we are</a>
+          <li><a href="about.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Who we are</a>
           </li>
-          <li><a href="process.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">How we do it</a>
+          <li><a href="process.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">How we do it</a>
           </li>
-          <li><a href="contact.html" class="main-menu__links" rel="prefetch" data-audio="tap" data-audio-event="mouseover">Make contact</a>
+          <li><a href="contact.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Make contact</a>
           </li>
           <li><a href="https://www.behance.net/jatg" class="external-link main-menu__links" rel="nofollow noreferrer" target="_blank" aria-label="Case studies - external link" data-audio="tap" data-audio-event="mouseover">Case Studies</a>
           </li>
-          <li><a href="end-credits.html" class="main-menu__links" data-audio="tap" data-audio-event="mouseover">End Credits</a>
+          <li><a href="end-credits.html" class="main-menu__links" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">End Credits</a>
           </li>
           <li class="main-menu__list-info">
             <p>Company number: 11769481</p>
@@ -107,7 +111,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <picture>
           <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp" data-pgc-edit="jtg.person.source[srcset, no_content]"/>
           <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x" width="432" height="308" data-pgc-edit="jtg.person.img[src, srcset, no_content]"/>
-        </picture><span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-edit="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-edit="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-edit="jtg.person.info" data-pgc-repeat="jtg.person.info-repeat">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p> </span>
+        </picture>
+        <span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-edit="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-edit="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-edit="jtg.person.info" data-pgc-repeat="jtg.person.info-repeat">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p> </span>
       </button>
       <div class="feedback" data-pg-ia='{"l":[{"name":"Feedback In","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-live":"polite","role":"alert","aria-hidden":"false","tabindex":""}}},{"t":"tween","p":0,"d":0.5,"l":{"x":0,"autoAlpha":1}}]}]},"tc":"attr","tcv":"true","tca":"beta-active"},{"name":"Feedback Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-hidden":"true","tabindex":-1}}},{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%","autoAlpha":0}}]}]}}]}' aria-hidden="true" aria-label="Feedback prompt notification" tabindex="-1" data-pgc-define="jt.feedback" data-pgc-define-name="Feeback" data-pgc-section="Global">
         <button style="background: transparent; border: none; color: white; position: absolute; top: 1em; right: 1em; z-index: 1;" data-pg-ia='{"l":[{"trg":"click","t":"$.feedback","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"pgia":{"play":"Feedback Out"},"pgCall":{"complete":"setFeedbackDismissed"}}}]}]}}]}' aria-label="Close feedback prompt">x</button>
@@ -152,10 +157,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           document.querySelector('.footer').setAttribute('data-pg-ia-hide', '')
         }
     </script>
-    <script src="assets/libs/SplitText.min.js"></script>
-    <script src="assets/libs/DrawSVGPlugin.min.js"></script>
-    <script src="https://unpkg.com/@rive-app/canvas@1.0.79"></script>
     <script src="pgia/lib/pgia.js"></script>
-    <script src="/js/main.js" type="module"></script>
+    <script src="dist/bundle.js"></script>
   </body>   
 </html>

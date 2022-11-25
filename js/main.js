@@ -1,3 +1,7 @@
+import { SplitText } from 'gsap/SplitText'
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
+import { Rive } from '@rive-app/canvas'
+
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
@@ -28,6 +32,7 @@ if (audioEls) {
       audioIds.forEach((id, index) => {
         const elementId = id.trim()
         const event = el.getAttribute('data-audio-event').split(',')[index]
+        const delay = el.getAttribute('data-audio-delay')?.split(',').filter(item => item.split(':') ? item.split(':')[0].match(event) : false) || []
 
         if (event) {
           const audio = document.getElementById(elementId)
@@ -35,7 +40,13 @@ if (audioEls) {
           if (audio) {
             el.addEventListener(event.trim(), () => {
               if (sessionStorage.getItem("audio_on")) {
-                audio.play()
+                if (delay.length) {
+                  setTimeout(() => {
+                    audio.play()
+                  }, delay[0].split(':')[0] === event.trim() ? delay[0].split(':')[1] * 1000 : 0)
+                } else {
+                  audio.play()
+                }
               }
             })
           } else {
@@ -125,7 +136,7 @@ const isMobile = ua.match(/mobile/i);
 const container = document.getElementById("audio-animation");
 let interaction = null;
 if (container) {
-  interaction = new rive.Rive({
+  interaction = new Rive({
     src: "/assets/animations/audio.riv",
     canvas: container,
     autoplay: false,
@@ -908,23 +919,6 @@ window.addAudioClass = function(el) {
   setTimeout(() => {
     el.classList.add("interaction");
   }, 1 * 1000);
-}
-
-/*
- * Background "splash" on homepage links
- */
-let navLinks = Array.from(document.querySelectorAll(".nav__link")) || [];
-const menuLinks =
-  Array.from(document.querySelectorAll(".main-menu__links")) || [];
-
-navLinks = navLinks.concat(menuLinks);
-
-if (navLinks.length) {
-  for (let i = 0; i < navLinks.length; i++) {
-    const link = navLinks[i];
-    const rotation = Math.floor(Math.random() * (5 - -5 + 1) + -5);
-    link.style.setProperty("--rotation", `${rotation}deg`);
-  }
 }
 
 /*
