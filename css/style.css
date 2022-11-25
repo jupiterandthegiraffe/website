@@ -317,8 +317,8 @@ a {
   background-color: rgba(226, 226, 226, 0.9); }
 
 .splash-page-one__scroll-down {
-  position: fixed;
-  bottom: 1em;
+  position: absolute;
+  top: 100%;
   left: 0;
   z-index: 9999;
   text-align: center;
@@ -1498,11 +1498,6 @@ body {
   -webkit-transition: text-shadow .3s ease-in-out;
   -o-transition: text-shadow .3s ease-in-out;
   transition: text-shadow .3s ease-in-out; }
-
-.nav__link:hover,
-.main-menu__links:hover {
-  color: var(--color-brand-white);
-  text-shadow: 0 0 15px white; }
 
 .lead-text a:hover {
   text-decoration: none; }

@@ -335,8 +335,8 @@ a {
 }
 
 .splash-page-one__scroll-down {
-    position: fixed;
-    bottom: 1em;
+    position: absolute;
+    top: 100%;
     left: 0;
     z-index: 9999;
     text-align: center;
@@ -1667,12 +1667,6 @@ body {
 .main-menu__links {
     text-shadow: 0 0 5px rgba(255,255,255,0);
     transition: text-shadow .3s ease-in-out;
-}
-
-.nav__link:hover,
-.main-menu__links:hover {
-    color: var(--color-brand-white);
-    text-shadow: 0 0 15px rgba(255,255,255,1);
 }
 
 .lead-text a:hover {

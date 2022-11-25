@@ -162,6 +162,30 @@ if (scrollDownButton) {
   scrollDownButton.addEventListener("click", (e) => {
     e.preventDefault();
 
+    sessionStorage.setItem("audio_on", "true");
+    audioButton.classList.remove("audio-off");
+
+    if (interaction) {
+      interaction.play("Audio In");
+    }
+
+    setTimeout(() => {
+      triggerPointPopup("Welcome to the full experience.", 2, "audio_on");
+    }, 8000)
+
+    audioButton.setAttribute("aria-label", "Audio off");
+
+    if (isHomePage && sessionStorage.getItem("has_navigated")) {
+      startHomePageAudio();
+      mainAudio.play();
+    } else if (isHomePage) {
+      mainAudio.play();
+    } else {
+      bgAudioFiles.forEach((audio) => audio.play());
+    }
+
+    dataLayer.push({ event: "Audio On" });
+
     window.scrollTo({ top: window.innerHeight, behaviour: "smooth" });
   });
 }
@@ -269,12 +293,12 @@ if (isSafari) {
 
 const secondaryAudio = [topRightAudio, bottomRightAudio, bottomLeftAudio];
 
-audioButton.addEventListener("click", () => {
-  if (sessionStorage.getItem("audio_on")) {
-    sessionStorage.removeItem("audio_on");
-    audioFiles.forEach((audio) => audio.pause());
-    audioButton.setAttribute("aria-label", audioButtonLabel);
-    startHomePageAudio();
+  audioButton.addEventListener("click", () => {
+    if (sessionStorage.getItem("audio_on")) {
+      sessionStorage.removeItem("audio_on");
+      audioFiles.forEach((audio) => audio.pause());
+      audioButton.setAttribute("aria-label", audioButtonLabel);
+      startHomePageAudio();
     audioButton.classList.add("audio-off");
 
     if (interaction) {
@@ -449,7 +473,10 @@ window.destroyIntro = function(el) {
   document.getElementById("backdrop").style.visibility = "";
 
   removeEl(el);
-  removeEl(document.querySelector(".splash-page-one__scroll-down"));
+
+  if (document.querySelector(".splash-page-one__scroll-down")) {
+    removeEl(document.querySelector(".splash-page-one__scroll-down"));
+  }
   removeEl(document.querySelector(".draw-me").parentNode);
   document.querySelector(".backdrop-blur").style.opacity = "0";
   document.querySelector(".backdrop-blur").style.visibility = "hidden";
@@ -596,7 +623,8 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     );
   } else {
     // First launch of direct to homepage
-    document.querySelector(".splash-page-one__scroll-down").style.display = "";
+    const scrollDown = document.querySelector(".splash-page-one__scroll-down")
+    scrollDown.style.display = "";
     document.querySelector(".backdrop-blur").style.display = "";
     document.querySelector("#backdrop").style.opacity = "0";
     document.querySelector("#backdrop").style.visibility = "hidden";
@@ -618,24 +646,25 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     }
 
     const splashText = document.querySelector(
-      ".splash-page .splash-page__main-text"
+      ".splash-page__main-text"
     );
     if (splashText) {
-      const splashTextSplitText = new SplitText(splashText, {
-        type: "words",
-      });
-
-      gsap.from(splashTextSplitText.words, {
-        autoAlpha: 0,
-        stagger: 0.05,
-        filter: "blur(10px)",
-      });
-
-      gsap.from(".splash-page .splash-page__privacy-policy-text", {
+      const splashTexttl = gsap.timeline({})
+      splashTexttl.from(splashText, {
         autoAlpha: 0,
         filter: "blur(10px)",
-        delay: 1.5,
+        duration: 2
       });
+
+      splashTexttl.from(".splash-page__privacy-policy-text", {
+        autoAlpha: 0,
+        filter: "blur(10px)",
+        duration: 2
+      }, "-=1");
+
+      splashTexttl.from(scrollDown, {
+        autoAlpha: 0,
+      }, "-=1")
     }
 
     svgLogoTimeline = gsap.timeline({});
