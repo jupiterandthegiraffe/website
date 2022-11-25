@@ -317,8 +317,8 @@ a {
   background-color: rgba(226, 226, 226, 0.9); }
 
 .splash-page-one__scroll-down {
-  position: fixed;
-  bottom: 1em;
+  position: absolute;
+  top: 100%;
   left: 0;
   z-index: 9999;
   text-align: center;
@@ -438,8 +438,9 @@ h1 {
   max-width: 1512px;
   margin-inline: auto;
   position: relative; }
-  + .page-overlay__content-container {
-    margin-top: 2em; }
+
+.page-overlay__content-container + .page-overlay__content-container {
+  margin-top: 2em; }
 
 @media (max-width: 769px) {
   .page-overlay__content-container {
@@ -589,25 +590,6 @@ h1 {
 
 .splash-page-one {
   z-index: 1; }
-
-.logo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-repeat: no-repeat;
-  background-position: center 40vh;
-  background-size: 300px;
-  background-image: url("../assets/images/LOGO.png");
-  z-index: -24; }
-
-@media (min-width: 576px) {
-  .logo {
-    background-size: 900px; } }
-
-.light-mode .logo {
-  background-image: url("../assets/images/LOGO-black.png"); }
 
 .background {
   position: fixed;
@@ -1000,22 +982,6 @@ button[type="submit"] {
 .page-overlay__footer h2 {
   margin-top: 0;
   margin-bottom: 0; }
-
-.shadow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/assets/images/blur.png");
-  background-repeat: no-repeat;
-  background-position: center 70vh;
-  background-size: 700px;
-  z-index: -2; }
-
-@media (min-width: 576px) {
-  .shadow {
-    background-size: 700px; } }
 
 @media (min-width: 576px) {
   .header__menu-button,
@@ -1532,11 +1498,6 @@ body {
   -webkit-transition: text-shadow .3s ease-in-out;
   -o-transition: text-shadow .3s ease-in-out;
   transition: text-shadow .3s ease-in-out; }
-
-.nav__link:hover,
-.main-menu__links:hover {
-  color: var(--color-brand-white);
-  text-shadow: 0 0 15px white; }
 
 .lead-text a:hover {
   text-decoration: none; }
