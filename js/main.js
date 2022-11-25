@@ -1,8 +1,3 @@
-
-import rive from '../node_modules/@rive-app/canvas/rive'
-import { SplitText } from '../node_modules/gsap/dist/SplitText'
-import { DrawSVGPlugin } from '../node_modules/gsap/dist/DrawSVGPlugin'
-
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
@@ -25,8 +20,37 @@ if (!window.localStorage.getItem("awards")) {
   window.localStorage.setItem("awards", JSON.stringify({ awards: [] }));
 }
 
+const audioEls = Array.from(document.querySelectorAll('[data-audio]'))
+if (audioEls) {
+  audioEls.forEach(el => {
+    const audioIds = el.getAttribute('data-audio').split(',')
+    if (audioIds) {
+      audioIds.forEach((id, index) => {
+        const elementId = id.trim()
+        const event = el.getAttribute('data-audio-event').split(',')[index]
+
+        if (event) {
+          const audio = document.getElementById(elementId)
+          
+          if (audio) {
+            el.addEventListener(event.trim(), () => {
+              if (sessionStorage.getItem("audio_on")) {
+                audio.play()
+              }
+            })
+          } else {
+            console.log('Cannot find audio element with id #' + elementId)
+          }
+        } else {
+          console.log('No matching event for id #', elementId)
+        }
+      })
+    }
+  })
+}
+
 const pointsPopup = document.querySelector(".points-popup");
-const triggerPointPopup = (message, points = 1, code) => {
+window.triggerPointPopup = (message, points = 1, code) => {
   const currentAwards = JSON.parse(window.localStorage.getItem("awards"));
 
   if (currentAwards.awards.indexOf(code) <= -1) {

@@ -8,6 +8,7 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 // import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
 import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
 import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
+import { AsciiEffect } from "three/examples/jsm/effects/AsciiEffect.js";
 
 // import GUI from 'lil-gui'
 // const gui = new GUI()
@@ -270,9 +271,6 @@ function initScene(canvas) {
     glitchPass = new GlitchPass();
     glitchPass.enabled = false;
     composer.addPass(glitchPass);
-
-    // const effectFilm = new FilmPass( 0.35, 0.025, 648, false );
-    // composer.addPass( effectFilm );
   }
 
   canvas.addEventListener("click", () => {
@@ -321,6 +319,7 @@ function initScene(canvas) {
             ease: "none",
           });
         }
+        renderer.clear();
         composer.render();
       }
     }
