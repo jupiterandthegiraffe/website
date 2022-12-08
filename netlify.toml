@@ -30,6 +30,11 @@
   status = 200
   
 [[redirects]]
+  from = "/capabilities"
+  to = "https://drive.google.com/file/d/1skQtzZF-pWTxHfzJc--ueo3Gk4TiRu6R/view?usp=share_link"
+  status = 200
+  
+[[redirects]]
   from = "https://jatg.co/*"
   to = "https://jupiterandthegiraffe.com/:splat"
   force = true
