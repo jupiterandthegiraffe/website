@@ -2,6 +2,8 @@ import { SplitText } from 'gsap/SplitText'
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 import { Rive } from '@rive-app/canvas'
 
+require('./audio-elements')
+
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
@@ -21,50 +23,31 @@ if (!window.localStorage.getItem("user-points")) {
 }
 
 if (!window.localStorage.getItem("awards")) {
-  window.localStorage.setItem("awards", JSON.stringify({ awards: [] }));
+  window.localStorage.setItem("awards", JSON.stringify([]));
 }
 
-const audioEls = Array.from(document.querySelectorAll('[data-audio]'))
-if (audioEls) {
-  audioEls.forEach(el => {
-    const audioIds = el.getAttribute('data-audio').split(',')
-    if (audioIds) {
-      audioIds.forEach((id, index) => {
-        const elementId = id.trim()
-        const event = el.getAttribute('data-audio-event').split(',')[index]
-        const delay = el.getAttribute('data-audio-delay')?.split(',').filter(item => item.split(':') ? item.split(':')[0].match(event) : false) || []
-
-        if (event) {
-          const audio = document.getElementById(elementId)
-          
-          if (audio) {
-            el.addEventListener(event.trim(), () => {
-              if (sessionStorage.getItem("audio_on")) {
-                if (delay.length) {
-                  setTimeout(() => {
-                    audio.play()
-                  }, delay[0].split(':')[0] === event.trim() ? delay[0].split(':')[1] * 1000 : 0)
-                } else {
-                  audio.play()
-                }
-              }
-            })
-          } else {
-            console.log('Cannot find audio element with id #' + elementId)
-          }
-        } else {
-          console.log('No matching event for id #', elementId)
-        }
-      })
+const awards = JSON.parse(localStorage.awards)
+if (awards.awards) {
+  console.log('old awards system detected. Converting...')
+  const newAwardsSystem = awards.awards.map(award => {
+    return {
+      title: '',
+      id: award,
+      score: ''
     }
   })
+  localStorage.setItem('awards', JSON.stringify(newAwardsSystem))
 }
 
 const pointsPopup = document.querySelector(".points-popup");
 window.triggerPointPopup = (message, points = 1, code) => {
-  const currentAwards = JSON.parse(window.localStorage.getItem("awards"));
+  const currentAwards = JSON.parse(localStorage.awards);
+  const currentAwardCodes = currentAwards.map((award) => award.id)
 
-  if (currentAwards.awards.indexOf(code) <= -1) {
+  console.log(currentAwardCodes.indexOf(code), code)
+
+  if (currentAwardCodes.indexOf(code) <= -1) {
+    console.log('code not found')
     window.localStorage.setItem(
       "user-points",
       Number(window.localStorage.getItem("user-points")) + points
@@ -78,20 +61,34 @@ window.triggerPointPopup = (message, points = 1, code) => {
 
     dataLayer.push({ event: `Award ${code} achieved` });
 
-    const awards =
-      JSON.parse(window.localStorage.getItem("awards")).awards || [];
-    awards.push(code);
-    window.localStorage.setItem("awards", JSON.stringify({ awards }));
+    const awards = JSON.parse(window.localStorage.getItem("awards")) || [];
+    awards.push({
+      title: message,
+      id: code,
+      score: points
+    });
+    window.localStorage.setItem("awards", JSON.stringify(awards));
 
     setTimeout(() => {
       pgia.play(pointsPopup, "Points Popdown");
     }, 5000);
+  } else if (currentAwardCodes.indexOf(code) > -1) {
+    console.log('code found, checking if it has message and score')
+    currentAwards.forEach((award, index) => {
+      if (award.id === code && !award.title && !award.score) {
+        console.log('current award achieved but doesn\'t have score or message. Updating...')
+        currentAwards.splice(index, 1, {title: message, id: code, score: points})
+      }
+    })
+
+    window.localStorage.setItem("awards", JSON.stringify(currentAwards));
   }
 };
 
 if (!window.localStorage.getItem("pages-visited")) {
   window.localStorage.setItem("pages-visited", JSON.stringify([]));
 }
+
 let pagesVisited = JSON.parse(
   window.localStorage.getItem("pages-visited")
 ).length;
@@ -892,109 +889,14 @@ if (blurOutLinks.length) {
   });
 }
 
-/**
- * Contact form
- */
-const formType = document.getElementById("form-type");
-const budget = document.getElementById("budget");
-
-if (formType) {
-  formType.addEventListener("change", (e) => {
-    const isProjectProposal = e.target.value === "Project Proposal";
-
-    if (isProjectProposal) {
-      budget.style.display = "block";
-      setTimeout(() => {
-        budget.setAttribute("data-pg-ia-show", "");
-        budget.removeAttribute("data-pg-ia-hide");
-      }, 300);
-    } else {
-      budget.removeAttribute("data-pg-ia-show");
-      budget.classList.add("fade-out");
-      setTimeout(() => {
-        budget.style.display = "none";
-        budget.classList.remove("fade-out");
-        budget.setAttribute("data-pg-ia-hide", "");
-      }, 300);
-    }
-  });
-}
-
-const people = Array.from(document.querySelectorAll(".person"));
-if (people.length) {
-  people.forEach((person) => {
-    const image = person.querySelector(".person-image");
-    const name = person.querySelector(".person__overlay-text");
-    const title = person.querySelector(".person__overlay-title");
-    const readMore = person.querySelector(".person__read-more-text");
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: person,
-        start: "top bottom",
-        end: "+=500",
-        scrub: 0.3,
-      },
-    });
-
-    tl.from(image, { autoAlpha: 0, scale: 0.9 })
-      .from(name, { autoAlpha: 0, x: "-100%" })
-      .from(title, { y: "-100%", autoAlpha: 0 })
-      .from(readMore, { y: "-100%", autoAlpha: 0 });
-  });
-}
-
 window.addAudioClass = function(el) {
   setTimeout(() => {
     el.classList.add("interaction");
   }, 1 * 1000);
 }
 
-/*
- * Pinning on services page
- */
-const services = document.querySelector(".services");
-if (services) {
-  ScrollTrigger.matchMedia({
-    "(min-width: 576px)": () => {
-      const servicesTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: services,
-          start: "top bottom+=200px",
-          end: "+=3000px",
-          scrub: 1,
-          onUpdate: drawNumbers,
-          duration: 0,
-        },
-      });
-
-      servicesTimeline.from(".services__column", {
-        autoAlpha: 0,
-        stagger: 0.025,
-      });
-
-      // Need to create a seperate pin ScrollTrigger
-      ScrollTrigger.create({
-        trigger: ".services",
-        start: "center center",
-        end: "+=2000px",
-        pin: true,
-      });
-
-      const svgNumberTimeline = gsap.timeline();
-      svgNumberTimeline.from(".draw-me", {
-        duration: 1,
-        drawSVG: 0,
-      });
-      svgNumberTimeline.pause();
-
-      function drawNumbers(el) {
-        svgNumberTimeline.seek(el.progress);
-      }
-    },
-  });
-}
-
 window.addEventListener('DOMContentLoaded', () => {
   import("./experience.js")
 })
+
+require('./page-loader')

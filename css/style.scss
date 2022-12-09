@@ -1757,3 +1757,44 @@ small {
         left: auto;
     }
 }
+
+.awards-table {
+    display: block;
+}
+
+.awards-table-row {
+    display: flex;
+    border-bottom: 1px solid #2f2f2f;
+    padding: 0.2em 0.5em
+}
+
+.awards-table-title {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.awards-table-score {
+    flex-basis: 20px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.awards-table-body {
+    display: block;
+}
+
+.awards-table tfoot {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    display: block;
+    background-color: #272727;
+}
+
+.points-popup__points {
+    text-decoration: underline;
+}
+
+.points-popup__points:hover {
+    text-decoration: none;
+}
