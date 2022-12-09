@@ -16,7 +16,7 @@ const pageLoader = document.querySelectorAll('[data-page]')
 if (pageLoader.length) {
   pageLoader.forEach(page => {
     const pageName = page.getAttribute('data-page')
-    if (pageName) {
+    if (pageName && pages[pageName]) {
       pages[pageName]()
     }
   })
