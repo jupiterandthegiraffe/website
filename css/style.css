@@ -1859,6 +1859,7 @@ small {
   .points-popup {
     left: auto;
   }
+<<<<<<< HEAD
 }
 .awards-table {
   display: block;
@@ -1909,4 +1910,6 @@ small {
 
 .points-popup__points:hover {
   text-decoration: none;
+=======
+>>>>>>> 7338368 (separate pages js)
 }
