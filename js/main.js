@@ -44,10 +44,7 @@ window.triggerPointPopup = (message, points = 1, code) => {
   const currentAwards = JSON.parse(localStorage.awards);
   const currentAwardCodes = currentAwards.map((award) => award.id)
 
-  console.log(currentAwardCodes.indexOf(code), code)
-
   if (currentAwardCodes.indexOf(code) <= -1) {
-    console.log('code not found')
     window.localStorage.setItem(
       "user-points",
       Number(window.localStorage.getItem("user-points")) + points
@@ -199,6 +196,7 @@ window.removeMenuAudio = function() {
  * Helper
  */
 window.removeEl = (el) => {
+  console.log('remove child', el.parentNode);
   el.parentNode.removeChild(el);
 }
 
@@ -458,6 +456,7 @@ window.drawSVG = function(e, progress) {
 }
 
 window.destroyIntro = function(el) {
+  const introPinnedWrapper = document.querySelector('main > .pin-spacer')
   pgia.scrollSceneManager.removeScene(el, true);
 
   // because we remove the scene, we need to remove all animation properties
@@ -465,11 +464,12 @@ window.destroyIntro = function(el) {
   header.removeAttribute("data-pg-ia-hide");
   footer.removeAttribute("style");
   footer.removeAttribute("data-pg-ia-hide");
+
   document.getElementById("backdrop").removeAttribute("data-pg-ia-hide");
   document.getElementById("backdrop").style.opacity = "";
   document.getElementById("backdrop").style.visibility = "";
 
-  removeEl(el);
+  removeEl(introPinnedWrapper);
 
   if (document.querySelector(".splash-page-one__scroll-down")) {
     removeEl(document.querySelector(".splash-page-one__scroll-down"));
@@ -555,6 +555,7 @@ function setFirstVisit() {
 }
 
 window.finishIntro = function(el) {
+  console.log(el);
   destroyIntro(el);
   setFirstVisit();
 }
