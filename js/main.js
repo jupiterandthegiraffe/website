@@ -44,14 +44,7 @@ window.triggerPointPopup = (message, points = 1, code) => {
   const currentAwards = JSON.parse(localStorage.awards);
   const currentAwardCodes = currentAwards.map((award) => award.id)
 
-<<<<<<< HEAD
   if (currentAwardCodes.indexOf(code) <= -1) {
-=======
-  console.log(currentAwardCodes.indexOf(code), code)
-
-  if (currentAwardCodes.indexOf(code) <= -1) {
-    console.log('code not found')
->>>>>>> 2551a17 (update pages)
     window.localStorage.setItem(
       "user-points",
       Number(window.localStorage.getItem("user-points")) + points
