@@ -18,6 +18,7 @@ import dustFragmentShader from "../assets/shaders/dust/fragment.glsl?raw";
 const staticAudio = document.getElementById("static-audio");
 const loader = document.getElementsByClassName("loader")[0];
 let loaderNumber, loaderBar;
+
 if (loader) {
   loaderNumber = document.getElementsByClassName("loader-number")[0];
   loaderBar = document.getElementsByClassName("loader-bar")[0];
@@ -57,11 +58,15 @@ function initScene(canvas) {
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
 
-    composer.setSize(sizes.width, sizes.height);
-
     // Update renderer
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+    // Update effect composer
+    if (!isMobile) {
+      composer.setSize(sizes.width, sizes.height);
+      composer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    }
 
     particleMaterial.uniforms.uPixelRatio.value = Math.min(
       window.devicePixelRatio,
@@ -289,7 +294,7 @@ function initScene(canvas) {
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
 
-    particleMaterial.uniforms.uTime.value = elapsedTime * 0.5;
+    particleMaterial.uniforms.uTime.value = elapsedTime ? elapsedTime * 0.5 : 0;
 
     // Render
     if (composer || renderer) {
@@ -318,6 +323,7 @@ function initScene(canvas) {
             ease: "none",
           });
         }
+
         renderer.clear();
         composer.render();
       }
