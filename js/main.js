@@ -1,10 +1,11 @@
 import { SplitText } from 'gsap/SplitText'
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
+import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { Rive } from '@rive-app/canvas'
 
 require('./audio-elements')
 
-gsap.registerPlugin(SplitText, DrawSVGPlugin);
+gsap.registerPlugin(SplitText, DrawSVGPlugin, ScrollSmoother);
 
 let isSafari = false;
 let hasScrolled = false;
@@ -196,7 +197,6 @@ window.removeMenuAudio = function() {
  * Helper
  */
 window.removeEl = (el) => {
-  console.log('remove child', el.parentNode);
   el.parentNode.removeChild(el);
 }
 
@@ -245,26 +245,6 @@ window.addEventListener("mousemove", () => {
   document.documentElement.classList.remove("keyboard-user");
   document.documentElement.classList.add("mouse-user");
 });
-
-/*
- * If user tries to scroll on homepage
- */
-const resetScale = () => gsap.to(".header, .footer", { scale: 1, y: 0 });
-let timeout = null;
-const startMousewheelDetection = () => {
-  gsap.set(".header, .footer", { scale: 1 });
-  window.addEventListener("mousewheel", (e) => {
-    if (e.deltaY >= 20) {
-      const tl = gsap.timeline({
-        onStart: clearTimeout(timeout),
-        onComplete: () => (timeout = setTimeout(resetScale, 500)),
-      });
-
-      tl.to(".header", { scale: 0.95, y: "+=5" });
-      tl.to(".footer", { scale: 0.95, y: "-=5" }, "<");
-    }
-  });
-};
 
 if (menu) {
   menu.addEventListener("click", function (e) {
@@ -486,8 +466,6 @@ window.destroyIntro = function(el) {
   // }
 
   startHomePageAudio();
-
-  startMousewheelDetection();
 }
 
 // const feedback = document.querySelector('.feedback')
@@ -502,6 +480,8 @@ window.destroyIntro = function(el) {
 const playTransitionText = (word, animationName, cb) => {
   const transitionTextEl = document.getElementById("transition-text");
   const blur = document.getElementById("backdrop-blur");
+
+  pgia.play(blur, animationName);
 
   if (transitionTextEl) {
     transitionTextEl.innerHTML = word;
@@ -546,8 +526,6 @@ const playTransitionText = (word, animationName, cb) => {
       "1.5"
     );
   }
-
-  pgia.play(blur, animationName);
 };
 
 function setFirstVisit() {
@@ -555,7 +533,6 @@ function setFirstVisit() {
 }
 
 window.finishIntro = function(el) {
-  console.log(el);
   destroyIntro(el);
   setFirstVisit();
 }
@@ -698,8 +675,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
 
     gsap.set(audioText, { autoAlpha: 1 });
   }
-
-  startMousewheelDetection();
 } else {
   // to any other page
   sessionStorage.setItem("has_navigated", "true");
@@ -810,7 +785,7 @@ document.querySelectorAll(".menu a").forEach((el) => {
       const word =
         transitionText[Math.floor(Math.random() * transitionText.length + 0)];
       playTransitionText(word, "Blur In", () => {
-        pgia.play(document.getElementById("backdrop-blur"), "Page In");
+        pgia.play(document.getElementById("backdrop-blur"), "Blur In");
         setTimeout(() => {
           window.location = e.target.href;
         }, 500);
@@ -895,6 +870,22 @@ window.addAudioClass = function(el) {
     el.classList.add("interaction");
   }, 1 * 1000);
 }
+
+const theFooter = document.getElementsByClassName('the-footer')[0]
+theFooter.style.setProperty('--footer-height', theFooter.clientHeight + 'px')
+
+ScrollTrigger.create({
+  trigger: theFooter,
+  start: 'top bottom',
+  end: 'bottom bottom',
+  scrub: 1,
+  onUpdate: (self) => {
+    const target = self.trigger
+    const progress = self.progress
+    
+    target.style.setProperty('--scroll-progress', progress)
+  }
+})
 
 window.addEventListener('DOMContentLoaded', () => {
   import("./experience.js")

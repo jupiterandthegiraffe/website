@@ -1,5 +1,5 @@
 exports.default = function() {
-  const people = Array.from(document.querySelectorAll(".person"));
+  const people = gsap.utils.toArray(".person");
   if (people.length) {
     people.forEach((person) => {
       const image = person.querySelector(".person-image");
@@ -11,7 +11,7 @@ exports.default = function() {
         scrollTrigger: {
           trigger: person,
           start: "top bottom",
-          end: "+=500",
+          end: "top center",
           scrub: 0.3,
         },
       });
