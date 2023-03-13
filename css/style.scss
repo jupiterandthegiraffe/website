@@ -157,6 +157,7 @@ html[data-pgc-master="masterpage-detail.html"] body {
     height: 50px;
     transition: border-color 1s ease-in-out;
     cursor: pointer;
+    color: var(--color-brand-white);
 }
 
 .light-mode .header__menu-button,
