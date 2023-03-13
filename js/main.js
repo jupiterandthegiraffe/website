@@ -575,16 +575,16 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     playTransitionText(word, "Blur In", () => {
       gsap.to(".header, .footer, .webgl", {
         autoAlpha: 1,
-        filter: "blur(0)",
+        filter: "blur(0px)",
       });
 
       gsap.to("#backdrop-blur", {
         autoAlpha: 0,
-        filter: "blur(0)",
+        filter: "blur(0px)",
       });
 
       gsap.to(".mode-selector", {
-        filter: "blur(0)",
+        filter: "blur(0px)",
       });
 
       setTimeout(() => {
