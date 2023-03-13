@@ -18,7 +18,6 @@ import dustFragmentShader from "../assets/shaders/dust/fragment.glsl?raw";
 const staticAudio = document.getElementById("static-audio");
 const loader = document.getElementsByClassName("loader")[0];
 let loaderNumber, loaderBar;
-
 if (loader) {
   loaderNumber = document.getElementsByClassName("loader-number")[0];
   loaderBar = document.getElementsByClassName("loader-bar")[0];
@@ -58,15 +57,11 @@ function initScene(canvas) {
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
 
+    composer.setSize(sizes.width, sizes.height);
+
     // Update renderer
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    
-    // Update effect composer
-    if (!isMobile) {
-      composer.setSize(sizes.width, sizes.height);
-      composer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    }
 
     particleMaterial.uniforms.uPixelRatio.value = Math.min(
       window.devicePixelRatio,
@@ -86,14 +81,38 @@ function initScene(canvas) {
   camera.position.set(1, 0.329, 2.296);
   scene.add(camera);
 
-  const textureLoader = new THREE.TextureLoader();
+  /**
+   * Lights
+   */
+  const pointLight = new THREE.PointLight(0xffffff, 0.2);
+  pointLight.position.set(-0.04, -0.5, 0.083);
 
-  const spotLight = new THREE.SpotLight(0xffffff, 1.5);
-  spotLight.position.set(2.5, 3.8, 4.280);
-  spotLight.angle = 0.214
-  spotLight.penumbra = 1
-  spotLight.castShadow = true
-  scene.add(spotLight)
+  const pointLight2 = new THREE.PointLight(0xffffff);
+  pointLight2.position.set(0.78, 1.114, 1.284);
+  pointLight2.decay = 2;
+  pointLight2.intensity = 8;
+  pointLight2.distance = 5;
+  pointLight2.castShadow = true;
+  scene.add(pointLight, pointLight2);
+
+  const textureLoader = new THREE.TextureLoader();
+  const backgroundTexture = textureLoader.load(
+    "/assets/models/J&G - Base 4K.webp"
+  );
+  const backgroundNormal = textureLoader.load(
+    "/assets/models/J&G - Normal 4K.webp"
+  );
+  const backgroundRough = textureLoader.load("/assets/models/rough.webp");
+
+  const backgroundMaterial = new THREE.MeshStandardMaterial({
+    map: backgroundTexture,
+  });
+  backgroundMaterial.normalMap = backgroundNormal;
+  backgroundMaterial.normalScale = new THREE.Vector2(0.5, 0.5);
+  backgroundMaterial.roughnessMap = backgroundRough;
+  backgroundMaterial.metalnessMap = backgroundRough;
+  backgroundMaterial.roughness = 5;
+  backgroundMaterial.metalness = 0;
 
   const originalCameraPosition = new THREE.Vector2();
 
@@ -103,31 +122,25 @@ function initScene(canvas) {
   const gltfLoader = new GLTFLoader();
   gltfLoader.setDRACOLoader(dracoLoader);
   gltfLoader.load(
-    "/assets/models/scene-6.glb", ///J&G Logo_v15-transform.glb',
+    "/assets/models/scene 1.glb", ///J&G Logo_v15-transform.glb',
     (gltf) => {
-      console.log(gltf.scene);
+      // console.log(gltf);
 
       logo = gltf.scene.children.filter(
         (child) => child.name === "J&G_Logo"
       )[0];
       const bg = gltf.scene.children.filter(
-        (child) => child.name === "Plane"
+        (child) => child.name === "Background"
       )[0];
-      const spotLight = gltf.scene.children.filter(
+      const light = gltf.scene.children.filter(
         (child) => child.name === "SpotLight"
       )[0];
-
-      const pointLight = gltf.scene.children.filter(
-        (child) => child.name === "PointLight"
-      )[0];
-
-      logo.castShadow = true
-      // logo.material.color = new THREE.Color(0x333333)
-      bg.receiveShadow = true
 
       logo.scale.set(0.8, 0.8, 0.8);
 
       scene.add(logo, bg);
+
+      bg.material = backgroundMaterial;
 
       originalCameraPosition.x = logo.rotation._x;
       originalCameraPosition.y = logo.rotation._y;
@@ -244,8 +257,7 @@ function initScene(canvas) {
   });
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.clearColor(0x171D1A);
-  renderer.physicallyCorrectLights = false;
+  renderer.physicallyCorrectLights = true;
 
   if (!isMobile) {
     composer = new EffectComposer(renderer);
@@ -260,8 +272,7 @@ function initScene(canvas) {
     composer.addPass(glitchPass);
   }
 
-  window.addEventListener("click", () => {
-    console.log('click');
+  canvas.addEventListener("click", () => {
     glitch = 1;
 
     if (sessionStorage.getItem("audio_on")) {
@@ -278,7 +289,7 @@ function initScene(canvas) {
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
 
-    particleMaterial.uniforms.uTime.value = elapsedTime ? elapsedTime * 0.5 : 0;
+    particleMaterial.uniforms.uTime.value = elapsedTime * 0.5;
 
     // Render
     if (composer || renderer) {
@@ -307,7 +318,6 @@ function initScene(canvas) {
             ease: "none",
           });
         }
-
         renderer.clear();
         composer.render();
       }

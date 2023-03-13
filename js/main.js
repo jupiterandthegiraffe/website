@@ -877,22 +877,6 @@ window.addAudioClass = function(el) {
   }, 1 * 1000);
 }
 
-const theFooter = document.getElementsByClassName('the-footer')[0]
-theFooter.style.setProperty('--footer-height', theFooter.clientHeight + 'px')
-
-ScrollTrigger.create({
-  trigger: theFooter,
-  start: 'top bottom',
-  end: 'bottom bottom',
-  scrub: 1,
-  onUpdate: (self) => {
-    const target = self.trigger
-    const progress = self.progress
-    
-    target.style.setProperty('--scroll-progress', progress)
-  }
-})
-
 window.addEventListener('DOMContentLoaded', () => {
   import("./experience.js")
 })
