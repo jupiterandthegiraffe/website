@@ -1547,6 +1547,10 @@ button[type="submit"] {
     }
 }
 
+html[data-pgc-master="masterpage.html"] body {
+    overflow: hidden;
+}
+
 html,
 body {
     overscroll-behavior-y: none;

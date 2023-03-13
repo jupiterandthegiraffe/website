@@ -587,8 +587,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       });
 
       setTimeout(() => {
-        destroyIntro(document.querySelector(".splash-pages"));
-
         pgia.play(document.getElementById('chat'), "Chat Animate in")
 
         setFirstVisit();
@@ -596,7 +594,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
 
     });
   } else if (localStorage.getItem("repeat_visitor")) {
-    const splashPages = document.querySelector(".splash-pages");
     document.querySelector(".loader").style.display = "none";
 
     playTransitionText(
@@ -618,7 +615,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         });
         
         setTimeout(() => {
-          destroyIntro(splashPages);
+          destroyIntro(document.querySelector(".splash-pages"));
 
           pgia.play(document.getElementById('chat'), "Chat Animate in")
 
