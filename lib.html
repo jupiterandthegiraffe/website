@@ -75,47 +75,7 @@ _chatbot.height = '300px';
 _chatbot.hello = 'Welcome. What would you like to know?';
 
 </script>
-        <style>
-    .anycb-popup-container .anycb-popup-header {
-        display: none;
-    }
-    .anycb-popup-container {
-        background: transparent;
-    }
-    .anycb-popup-container .anycb-popup-form .anycb-popup-form-button {
-        margin-top: 0;
-        margin-bottom: 0;
-        background-color: transparent;
-    }
-    .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:hover {
-        background-color: var(--color-brand-white);
-    } 
-    .anycb-popup-container .anycb-popup-form .anycb-popup-form-button .anycb-popup-form-button-icon {
-        fill: var(--color-brand-black) !important;
-    }
-    .anycb-popup-form {
-        height: 50px;
-        display: flex;
-        align-items: center;
-    }
-    .anycb-popup-container .anycb-popup-form .anycb-popup-form-input {
-        margin: 0;
-        color: var(--color-brand-white);
-        background-color: rgba(255, 255, 255, 0.2);
-        transition: background-color 1s ease-in-out;
-    }
-    .anycb-popup-container .anycb-popup-form .anycb-popup-form-input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
-    .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:hover, .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:focus {
-        background-color: rgba(255, 255, 255, 0.4);
-    }
-    .anycb-message-container .anycb-message-c.anycb-message-c-assistant {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: var(--color-brand-white);
-        backdrop-filter: blur(5px);
-    }
-    </style>
+        <style>.anycb-popup-container .anycb-popup-header { display: none; } .anycb-popup-container { background: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button { margin-top: 0; margin-bottom: 0; background-color: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:hover { background-color: var(--color-brand-white); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button .anycb-popup-form-button-icon { fill: var(--color-brand-black) !important; } .anycb-popup-form { height: 50px; display: flex; align-items: center; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input { margin: 0; color: var(--color-brand-white); background-color: rgba(255, 255, 255, 0.2); transition: background-color 1s ease-in-out; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input::placeholder { color: rgba(255, 255, 255, 0.5); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:hover, .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:focus { background-color: rgba(255, 255, 255, 0.4); } .anycb-message-container .anycb-message-c.anycb-message-c-assistant { background-color: rgba(255, 255, 255, 0.2); color: var(--color-brand-white); backdrop-filter: blur(5px); }</style>
     </head>     
     <body>
         <noscript>
@@ -124,18 +84,22 @@ _chatbot.hello = 'Welcome. What would you like to know?';
         <div class="menu" id="mainmenu">
             <nav>
                 <ul class="main-menu__list">
+                    <li><a href="services.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">What we do</a>
+                    </li>
                     <li>
-                        <a href="services.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">What we do</a>
+                        <a href="about.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Who we are</a>
                     </li>
-                    <li><a href="about.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Who we are</a>
+                    <li>
+                        <a href="process.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">How we do it</a>
                     </li>
-                    <li><a href="process.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">How we do it</a>
+                    <li>
+                        <a href="contact.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Make contact</a>
                     </li>
-                    <li><a href="contact.html" class="main-menu__links" rel="prefetch" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">Make contact</a>
+                    <li>
+                        <a href="https://www.behance.net/jatg" class="external-link main-menu__links" rel="nofollow noreferrer" target="_blank" aria-label="Case studies - external link" data-audio="tap" data-audio-event="mouseover">Case Studies</a>
                     </li>
-                    <li><a href="https://www.behance.net/jatg" class="external-link main-menu__links" rel="nofollow noreferrer" target="_blank" aria-label="Case studies - external link" data-audio="tap" data-audio-event="mouseover">Case Studies</a>
-                    </li>
-                    <li><a href="end-credits.html" class="main-menu__links" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">End Credits</a>
+                    <li>
+                        <a href="end-credits.html" class="main-menu__links" data-audio="tap,page-transition" data-audio-event="mouseover,click" data-audio-delay="click:0.75">End Credits</a>
                     </li>
                     <li class="main-menu__list-info">
                         <p>Company number: 11769481</p>
@@ -150,15 +114,15 @@ _chatbot.hello = 'Welcome. What would you like to know?';
         <div data-pg-ia-hide class="header">
             <button class="header__menu-button" data-pg-ia='{"l":[{"name":"Open menu","trg":"click","t":"$.menu","a":{"l":[{"t":".main-menu__list","l":[{"t":"tween","p":0.7,"d":0.6,"l":{"x":0,"pgCall":{"complete":"setMenuAudio"}},"e":"Power3.easeOut"}]},{"t":"","l":[{"t":"tween","p":0,"d":0.7,"l":{"autoAlpha":1}},{"t":"set","p":0.001,"d":0,"l":{"x":0}}]}]}}]}' tabindex="-1" type="button" aria-label="Open menu" data-audio="menu-audio" data-audio-event="click">
                 Menu
-</button>
-            <a href="about.html" class="nav__link" rel="preftech" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover,click">Who we are</a>
+</button><a href="about.html" class="nav__link" rel="preftech" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover,click">Who we are</a>
         </div>
         <main data-pgc-field="template.main-section">
             <button class="person" type="button" data-pgc-define="jtg.person" data-pgc-define-name="Person" data-pgc-section="About Page">
                 <picture>
                     <source srcset="assets/images/sam-profile@2x.webp 2x, assets/images/sam-profile.webp" type="image/webp" data-pgc-edit="jtg.person.source[srcset, no_content]"/>
                     <img src="assets/images/sam-profile.jpg" alt="" class="person-image" srcset="assets/images/sam-profile@2x.jpg 2x" width="432" height="308" data-pgc-edit="jtg.person.img[src, srcset, no_content]"/>
-                </picture><span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-edit="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-edit="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-edit="jtg.person.info" data-pgc-repeat="jtg.person.info-repeat">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p> </span>
+                </picture>
+                <span class="person__information"> <span class="person__overlay"> <span> <p class="person__overlay-text" data-pgc-edit="jtg.person.name">Samuel Gregory</p> <p class="person__overlay-title" data-pgc-edit="jtg.person.title">Founder</p> <p aria-hidden="true" class="person__read-more-text">Read more</p> </span> </span> <p data-pgc-edit="jtg.person.info" data-pgc-repeat="jtg.person.info-repeat">Using his years of experience in the creative industry and building websites for the likes of Netflix, Corning, and Conde-Nast, Samuel leads teams with his out-of-the-box thinking and technical know-how.</p> </span>
             </button>
             <div class="feedback" data-pg-ia='{"l":[{"name":"Feedback In","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-live":"polite","role":"alert","aria-hidden":"false","tabindex":""}}},{"t":"tween","p":0,"d":0.5,"l":{"x":0,"autoAlpha":1}}]}]},"tc":"attr","tcv":"true","tca":"beta-active"},{"name":"Feedback Out","trg":"no","a":{"l":[{"t":"","l":[{"t":"set","p":0,"d":0,"l":{"attr":{"aria-hidden":"true","tabindex":-1}}},{"t":"tween","p":0,"d":0.5,"l":{"x":"-100%","autoAlpha":0}}]}]}}]}' aria-hidden="true" aria-label="Feedback prompt notification" tabindex="-1" data-pgc-define="jt.feedback" data-pgc-define-name="Feeback" data-pgc-section="Global">
                 <button style="background: transparent; border: none; color: white; position: absolute; top: 1em; right: 1em; z-index: 1;" data-pg-ia='{"l":[{"trg":"click","t":"$.feedback","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"pgia":{"play":"Feedback Out"},"pgCall":{"complete":"setFeedbackDismissed"}}}]}]}}]}' aria-label="Close feedback prompt">x</button>
@@ -181,66 +145,15 @@ _chatbot.hello = 'Welcome. What would you like to know?';
   </script>
             </div>
         </main>
-        <div data-pg-ia-hide class="footer"><a href="/contact.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click">Make contact</a><a href="/services.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click">What we do</a>
-            <a href="process.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click">How we do it</a>
+        <div data-pg-ia-hide class="footer">
+            <a href="/contact.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click">Make contact</a>
+            <a href="/services.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click">What we do</a><a href="process.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click">How we do it</a>
         </div>
         <div class="audio-off silence-button" id="audio-button" data-pg-ia-hide data-pg-ia='{"l":[{"trg":"load","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.99,"l":{"autoAlpha":1,"pgCall":{"complete":"addAudioClass"}}}]}]},"tcv":"interaction"}]}' data-pgc="jtg.audio-button">
             <button class="silence-button__button" type="button" aria-label="Audio on" id="audio">
                 <canvas id="audio-animation" width="92" height="57"></canvas>
-            </button>
-            <small id="audio-text" data-pg-ia-hide style="overflow: hidden; display: inline-block;">Audio experience</small>
+            </button><small id="audio-text" data-pg-ia-hide style="overflow: hidden; display: inline-block;">Audio experience</small>
         </div>
-        <footer class="the-footer">
-            <div>
-                <div class="footer__links-row">
-                    <div class="footer__links-col"><a href="">Who we are</a><a href="">What we do</a>
-                    </div>
-                    <div class="footer__links-col"><a href="">How we do it</a><a href="">Contact</a>
-                    </div>
-                </div>
-                <div class="footer__info-row">
-                    <div class="footer__logo">
-                        <svg width="100%" viewBox="0 0 297 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_1021_42)">
-                                <path d="M154.153 29.4622H132.372V42.1862H96.125V28.8432L105.012 19.7092H153.967V2.10718H98.169L78.521 22.2992V59.7892H136.55L154.153 42.1862V29.4622Z" fill="#171D1A"/>
-                                <path d="M71.779 22.166H34.35V39.932H54.176V52.699L42.294 64.541L40.522 66.314H0V83.916H47.853L71.779 59.99V22.166Z" fill="#171D1A"/>
-                                <path d="M183.736 -0.0578613V13.1481C183.736 15.5248 183.075 17.3848 181.752 18.7281C180.45 20.0508 178.632 20.7121 176.296 20.7121C174.622 20.7121 173.258 20.4021 172.204 19.7821C171.15 19.1621 170.417 18.2941 170.003 17.1781C169.59 16.0415 169.518 14.7291 169.786 13.2411L172.979 12.6521C172.731 14.4295 172.866 15.7418 173.382 16.5891C173.899 17.4158 174.87 17.8291 176.296 17.8291C177.846 17.8291 178.911 17.3848 179.489 16.4961C180.089 15.5868 180.388 14.2641 180.388 12.5281V-0.0578613H183.736Z" fill="#171D1A"/>
-                                <path d="M206.459 -0.0578613V12.5591C206.459 15.2665 205.746 17.3021 204.32 18.6661C202.894 20.0301 200.817 20.7121 198.089 20.7121C195.403 20.7121 193.336 20.0301 191.889 18.6661C190.463 17.3021 189.75 15.2665 189.75 12.5591V-0.0578613H193.067V12.1561C193.067 14.0781 193.481 15.5041 194.307 16.4341C195.134 17.3641 196.395 17.8291 198.089 17.8291C199.805 17.8291 201.076 17.3641 201.902 16.4341C202.729 15.5041 203.142 14.0781 203.142 12.1561V-0.0578613H206.459Z" fill="#171D1A"/>
-                                <path d="M220.006 -0.0578613C221.473 -0.0578613 222.734 0.200472 223.788 0.717138C224.862 1.23381 225.699 1.96747 226.299 2.91814C226.898 3.86881 227.198 5.01581 227.198 6.35914C227.198 7.68181 226.898 8.8288 226.299 9.80014C225.699 10.7508 224.862 11.4845 223.788 12.0011C222.734 12.5178 221.473 12.7761 220.006 12.7761H215.449V20.4021H212.132V-0.0578613H220.006ZM219.479 9.92414C220.946 9.92414 222.021 9.62447 222.703 9.02514C223.405 8.40514 223.757 7.51647 223.757 6.35914C223.757 5.18114 223.405 4.29247 222.703 3.69314C222.021 3.07314 220.946 2.76314 219.479 2.76314H215.449V9.92414H219.479Z" fill="#171D1A"/>
-                                <path d="M234.884 -0.0578613V20.4021H231.567V-0.0578613H234.884Z" fill="#171D1A"/>
-                                <path d="M256.173 -0.0578613V2.79414H249.167V20.4021H245.85V2.79414H238.844V-0.0578613H256.173Z" fill="#171D1A"/>
-                                <path d="M260.145 20.4021V-0.0578613H274.963V2.79414H263.462V8.68414H272.452V11.4741H263.462V17.5501H275.397V20.4021H260.145Z" fill="#171D1A"/>
-                                <path d="M288.192 -0.0578613C290.383 -0.0578613 292.119 0.489806 293.4 1.58514C294.702 2.68047 295.353 4.15814 295.353 6.01814C295.353 7.94014 294.702 9.42814 293.4 10.4821C292.119 11.5155 290.383 12.0321 288.192 12.0321L287.882 12.2181H283.139V20.4021H279.853V-0.0578613H288.192ZM287.944 9.45914C289.288 9.45914 290.28 9.19047 290.92 8.65314C291.582 8.09514 291.912 7.24781 291.912 6.11114C291.912 4.99514 291.582 4.15814 290.92 3.60014C290.28 3.04214 289.288 2.76314 287.944 2.76314H283.139V9.45914H287.944ZM289.897 10.1411L296.562 20.4021H292.749L287.045 11.4431L289.897 10.1411Z" fill="#171D1A"/>
-                                <path d="M188.479 51.0611H184.976L183.023 45.6981H174.436L172.483 51.0611H169.073L176.792 30.6011H180.76L188.479 51.0611ZM175.366 43.0011H182.093L178.745 33.4531L175.366 43.0011Z" fill="#171D1A"/>
-                                <path d="M208.878 30.6011V51.0611H204.941L197.036 38.1651L195.052 34.5381H195.021L195.145 37.8551V51.0611H192.107V30.6011H196.013L203.887 43.4661L205.902 47.1551H205.933L205.809 43.8071V30.6011H208.878Z" fill="#171D1A"/>
-                                <path d="M222.157 30.6011C225.36 30.6011 227.85 31.4897 229.628 33.2671C231.426 35.0237 232.325 37.5451 232.325 40.8311C232.325 44.1171 231.426 46.6487 229.628 48.4261C227.85 50.1827 225.36 51.0611 222.157 51.0611H214.934V30.6011H222.157ZM222.157 48.2401C224.327 48.2401 225.98 47.5994 227.117 46.3181C228.274 45.0161 228.853 43.1871 228.853 40.8311C228.853 38.4751 228.274 36.6564 227.117 35.3751C225.98 34.0731 224.327 33.4221 222.157 33.4221H218.251V48.2401H222.157Z" fill="#171D1A"/>
-                                <path d="M257.981 30.6011V33.4531H250.975V51.0611H247.658V33.4531H240.652V30.6011H257.981Z" fill="#171D1A"/>
-                                <path d="M278.724 30.6011V51.0611H275.376V30.6011H278.724ZM265.27 30.6011V51.0611H261.953V30.6011H265.27ZM277.05 39.2811V42.1331H263.627V39.2811H277.05Z" fill="#171D1A"/>
-                                <path d="M284.78 51.0611V30.6011H299.598V33.4531H288.097V39.3431H297.087V42.1331H288.097V48.2091H300.032V51.0611H284.78Z" fill="#171D1A"/>
-                                <path d="M179.799 82.0302C177.877 82.0302 176.214 81.6065 174.808 80.7592C173.403 79.9119 172.308 78.7132 171.522 77.1632C170.737 75.5925 170.344 73.7015 170.344 71.4902C170.344 69.3202 170.747 67.4499 171.553 65.8792C172.38 64.3085 173.537 63.0995 175.025 62.2522C176.534 61.3842 178.26 60.9502 180.202 60.9502C182.331 60.9502 184.046 61.3429 185.348 62.1282C186.671 62.9135 187.725 64.1329 188.51 65.7862L185.441 67.2432C185.049 66.1065 184.398 65.2592 183.488 64.7012C182.6 64.1225 181.515 63.8332 180.233 63.8332C178.952 63.8332 177.826 64.1329 176.854 64.7322C175.904 65.3315 175.16 66.2099 174.622 67.3672C174.085 68.5039 173.816 69.8782 173.816 71.4902C173.816 73.1229 174.054 74.5179 174.529 75.6752C175.005 76.8119 175.718 77.6799 176.668 78.2792C177.64 78.8785 178.828 79.1782 180.233 79.1782C180.998 79.1782 181.711 79.0852 182.372 78.8992C183.034 78.6925 183.612 78.4032 184.108 78.0312C184.604 77.6385 184.987 77.1529 185.255 76.5742C185.545 75.9749 185.689 75.2722 185.689 74.4662V73.8772H179.737V71.1802H188.634V81.7202H186.154L185.968 77.5972L186.588 77.9072C186.092 79.2092 185.266 80.2219 184.108 80.9452C182.972 81.6685 181.535 82.0302 179.799 82.0302Z" fill="#171D1A"/>
-                                <path d="M197.241 61.2602V81.7202H193.924V61.2602H197.241Z" fill="#171D1A"/>
-                                <path d="M211.648 61.2602C213.838 61.2602 215.574 61.8079 216.856 62.9032C218.158 63.9985 218.809 65.4762 218.809 67.3362C218.809 69.2582 218.158 70.7462 216.856 71.8002C215.574 72.8335 213.838 73.3502 211.648 73.3502L211.338 73.5362H206.595V81.7202H203.309V61.2602H211.648ZM211.4 70.7772C212.743 70.7772 213.735 70.5085 214.376 69.9712C215.037 69.4132 215.368 68.5659 215.368 67.4292C215.368 66.3132 215.037 65.4762 214.376 64.9182C213.735 64.3602 212.743 64.0812 211.4 64.0812H206.595V70.7772H211.4ZM213.353 71.4592L220.018 81.7202H216.205L210.501 72.7612L213.353 71.4592Z" fill="#171D1A"/>
-                                <path d="M241.125 81.7202H237.622L235.669 76.3572H227.082L225.129 81.7202H221.719L229.438 61.2602H233.406L241.125 81.7202ZM228.012 73.6602H234.739L231.391 64.1122L228.012 73.6602Z" fill="#171D1A"/>
-                                <path d="M259.54 64.1122H248.07V70.0642H257.06V72.9162H248.07V81.7202H244.753V61.2602H259.54V64.1122Z" fill="#171D1A"/>
-                                <path d="M278.491 64.1122H267.021V70.0642H276.011V72.9162H267.021V81.7202H263.704V61.2602H278.491V64.1122Z" fill="#171D1A"/>
-                                <path d="M282.655 81.7202V61.2602H297.473V64.1122H285.972V70.0022H294.962V72.7922H285.972V78.8682H297.907V81.7202H282.655Z" fill="#171D1A"/>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_1021_42">
-                                    <rect width="297" height="85" fill="white"/>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </div>
-                    <div class="footer__info">
-                        <p>Company number: 11769481</p>
-                        <p>48a Forest Hill Road, London, SE22 0RR</p>
-                        <p><a href="/terms-and-conditions.html" data-audio="tap" data-audio-event="mouseover">Terms and Conditions</a></p>
-                        <p><a href="privacy-policy.html" data-audio="tap" data-audio-event="mouseover">Privacy Policy</a></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
         <div class="mode-selector" style="display: none;">
             <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
             <button type="button" aria-label="Theme: Dark mode" class="mode-selector__button mode-selector__button--dark-mode"></button>
@@ -250,7 +163,8 @@ _chatbot.hello = 'Welcome. What would you like to know?';
                 <img src="assets/svgs/trophy.svg" width="100px"/>
                 <div>
                     <h2 class="points-popup__title">You&apos;ve earned a reward!</h2>
-                    <p class="points-popup__text">Name of award</p><small>You&apos;ve got <a href="/progress.html" class="points-popup__points">0</a> point(s)!</small>
+                    <p class="points-popup__text">Name of award</p>
+                    <small>You&apos;ve got <a href="/progress.html" class="points-popup__points">0</a> point(s)!</small>
                 </div>
             </div>
         </div>
