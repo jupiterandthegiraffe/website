@@ -590,8 +590,11 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       setTimeout(() => {
         destroyIntro(el);
 
+        pgia.play(document.getElementById('chat'), "Chat Animate in")
+
         setFirstVisit();
       }, 1000);
+
     });
   } else if (localStorage.getItem("repeat_visitor")) {
     const el = document.querySelector(".splash-pages");
@@ -617,6 +620,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         
         setTimeout(() => {
           destroyIntro(el);
+
           pgia.play(document.getElementById('chat'), "Chat Animate in")
 
           triggerPointPopup("Do you come here often?", 1, "repeat_visit");
@@ -664,6 +668,8 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         autoAlpha: 0,
       }, "-=50%")
     }
+
+    pgia.play(document.getElementById('chat'), "Chat Animate in")
 
     svgLogoTimeline = gsap.timeline({});
     svgLogoTimeline.from(".draw-me", { duration: 2, drawSVG: "0" }, 0.5);
