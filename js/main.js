@@ -503,6 +503,8 @@ const playTransitionText = (word, animationName, cb) => {
   const transitionTextEl = document.getElementById("transition-text");
   const blur = document.getElementById("backdrop-blur");
 
+  pgia.play(blur, animationName);
+
   if (transitionTextEl) {
     transitionTextEl.innerHTML = word;
     transitionTextEl.style.display = "block";
@@ -558,6 +560,7 @@ window.finishIntro = function(el) {
   console.log(el);
   destroyIntro(el);
   setFirstVisit();
+  pgia.play(document.getElementById('chat'), "Chat Animate in")
 }
 
 /*
@@ -600,20 +603,21 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       () => {
         gsap.to(".header, .footer, .webgl", {
           autoAlpha: 1,
-          filter: "blur(0)",
+          filter: "blur(0px)",
         });
 
         gsap.to("#backdrop-blur", {
           autoAlpha: 0,
-          filter: "blur(0)",
+          filter: "blur(0px)",
         });
 
         gsap.to(".mode-selector", {
-          filter: "blur(0)",
+          filter: "blur(0px)",
         });
-
+        
         setTimeout(() => {
           destroyIntro(el);
+          pgia.play(document.getElementById('chat'), "Chat Animate in")
 
           triggerPointPopup("Do you come here often?", 1, "repeat_visit");
         }, 1000);
@@ -650,19 +654,15 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       const splashTexttl = gsap.timeline({})
       splashTexttl.from(splashText, {
         autoAlpha: 0,
-        filter: "blur(10px)",
-        duration: 2
       });
 
       splashTexttl.from(".splash-page__privacy-policy-text", {
         autoAlpha: 0,
-        filter: "blur(10px)",
-        duration: 2
-      }, "-=1");
+      }, "-=50%");
 
       splashTexttl.from(scrollDown, {
         autoAlpha: 0,
-      }, "-=1")
+      }, "-=50%")
     }
 
     svgLogoTimeline = gsap.timeline({});
@@ -699,7 +699,9 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     gsap.set(audioText, { autoAlpha: 1 });
   }
 
-  startMousewheelDetection();
+  setTimeout(() => {
+    pgia.play(document.getElementById('chat'), "Chat Animate in")
+  }, 2000)
 } else {
   // to any other page
   sessionStorage.setItem("has_navigated", "true");
@@ -810,7 +812,7 @@ document.querySelectorAll(".menu a").forEach((el) => {
       const word =
         transitionText[Math.floor(Math.random() * transitionText.length + 0)];
       playTransitionText(word, "Blur In", () => {
-        pgia.play(document.getElementById("backdrop-blur"), "Page In");
+        pgia.play(document.getElementById("backdrop-blur"), "Blur In");
         setTimeout(() => {
           window.location = e.target.href;
         }, 500);
