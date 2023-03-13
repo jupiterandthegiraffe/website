@@ -158,6 +158,7 @@ html[data-pgc-master="masterpage-detail.html"] body {
     transition: border-color 1s ease-in-out;
     cursor: pointer;
     color: var(--color-brand-white);
+    font-size: .7rem;
 }
 
 .light-mode .header__menu-button,
@@ -1094,6 +1095,7 @@ button[type="submit"] {
     .menu__close-button {
         width: 75px;
         border-width: 8px;
+        font-size: 1rem;
     }
 
     .menu__close-button {
