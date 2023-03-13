@@ -195,9 +195,9 @@ window.removeMenuAudio = function() {
 /*
  * Helper
  */
-window.removeEl = (el) => {
-  console.log('remove child', el.parentNode);
-  el.parentNode.removeChild(el);
+window.removeEl = (elementToDelete) => {
+  console.log('remove child', elementToDelete.parentNode);
+  elementToDelete.parentNode.removeChild(elementToDelete);
 }
 
 /**
@@ -568,7 +568,7 @@ window.finishIntro = function(el) {
  */
 if (!sessionStorage.getItem("has_navigated") && isHomePage) {
   if (isMobile) {
-    const el = document.querySelector(".splash-pages");
+    const splashPages = document.querySelector(".splash-pages");
     const word = document.querySelector(".splash-page__main-text").innerText;
     document.querySelector(".loader").style.display = "none";
 
@@ -588,7 +588,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       });
 
       setTimeout(() => {
-        destroyIntro(el);
+        destroyIntro(splashPages);
 
         pgia.play(document.getElementById('chat'), "Chat Animate in")
 
