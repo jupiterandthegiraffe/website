@@ -1549,10 +1549,6 @@ button[type="submit"] {
     }
 }
 
-html[data-pgc-master="masterpage.html"] body {
-    overflow: hidden;
-}
-
 html,
 body {
     overscroll-behavior-y: none;
@@ -1888,4 +1884,8 @@ small {
     color: var(--color-brand-white);
     padding: 0.5em;
     cursor: pointer;
+}
+
+html[data-pgc-master="masterpage.html"] body {
+    overflow: hidden;
 }

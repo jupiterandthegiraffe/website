@@ -156,31 +156,37 @@ if (scrollDownButton) {
   scrollDownButton.addEventListener("click", (e) => {
     e.preventDefault();
 
-    sessionStorage.setItem("audio_on", "true");
-    audioButton.classList.remove("audio-off");
-
-    if (interaction) {
-      interaction.play("Audio In");
+    if (!isSafari) {
+      sessionStorage.setItem("audio_on", "true");
+      audioButton.classList.remove("audio-off");
+  
+      if (interaction) {
+        interaction.play("Audio In");
+      }
+  
+      setTimeout(() => {
+        triggerPointPopup("Welcome to the full experience.", 2, "audio_on");
+      }, 8000)
+  
+      audioButton.setAttribute("aria-label", "Audio off");
+  
+      if (isHomePage && sessionStorage.getItem("has_navigated")) {
+        startHomePageAudio();
+        mainAudio.play();
+      } else if (isHomePage) {
+        mainAudio.play();
+      } else {
+        bgAudioFiles.forEach((audio) => audio.play());
+      }
+  
+      dataLayer.push({ event: "Audio On" });
     }
-
-    setTimeout(() => {
-      triggerPointPopup("Welcome to the full experience.", 2, "audio_on");
-    }, 8000)
-
-    audioButton.setAttribute("aria-label", "Audio off");
-
-    if (isHomePage && sessionStorage.getItem("has_navigated")) {
-      startHomePageAudio();
-      mainAudio.play();
-    } else if (isHomePage) {
-      mainAudio.play();
-    } else {
-      bgAudioFiles.forEach((audio) => audio.play());
-    }
-
-    dataLayer.push({ event: "Audio On" });
 
     window.scrollTo({ top: window.innerHeight, behaviour: "smooth" });
+
+    setTimeout(() => {
+      pgia.play(document.getElementById('chat'), "Chat Animate in")
+    }, 2000);
   });
 }
 
@@ -557,9 +563,9 @@ function setFirstVisit() {
 }
 
 window.finishIntro = function(el) {
-  console.log(el);
   destroyIntro(el);
   setFirstVisit();
+  document.querySelector('body').style.overflow = ''
   pgia.play(document.getElementById('chat'), "Chat Animate in")
 }
 
@@ -631,6 +637,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     document.querySelector("#backdrop").style.opacity = "0";
     document.querySelector("#backdrop").style.visibility = "hidden";
     document.querySelector(".splash-pages").style.display = "";
+    document.querySelector('body').style.overflow = 'auto'
 
     // Play audio text animation
     if (!isSafari) {
