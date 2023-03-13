@@ -144,6 +144,9 @@ _chatbot.hello = 'Welcome. What would you like to know?';
         }
     </script>
         <script src="pgia/lib/pgia.js"></script>
-        <script src="dist/bundle.js"></script>
+        <script id="bust" src="dist/bundle.js"></script>
+        <script>
+            document.getElementById('bust').src = 'dist/bundle.js?' + Date.now()
+        </script>
     </body>     
 </html>
