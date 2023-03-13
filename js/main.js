@@ -669,8 +669,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       }, "-=50%")
     }
 
-    pgia.play(document.getElementById('chat'), "Chat Animate in")
-
     svgLogoTimeline = gsap.timeline({});
     svgLogoTimeline.from(".draw-me", { duration: 2, drawSVG: "0" }, 0.5);
   }
