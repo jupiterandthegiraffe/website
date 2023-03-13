@@ -535,6 +535,9 @@ function setFirstVisit() {
 window.finishIntro = function(el) {
   destroyIntro(el);
   setFirstVisit();
+  setTimeout(() => {
+    pgia.play(document.getElementById('chat'), "Chat Animate in")
+  }, 2000)
 }
 
 /*
@@ -624,22 +627,21 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       ".splash-page__main-text"
     );
     if (splashText) {
-      const splashTexttl = gsap.timeline({})
+      // Choppy animation
+      const splashTexttl = gsap.timeline()
       splashTexttl.from(splashText, {
         autoAlpha: 0,
-        filter: "blur(10px)",
-        duration: 2
+        // filter: "blur(10px)",
       });
 
       splashTexttl.from(".splash-page__privacy-policy-text", {
         autoAlpha: 0,
-        filter: "blur(10px)",
-        duration: 2
-      }, "-=1");
+        // filter: "blur(10px)",
+      }, "-=50%");
 
       splashTexttl.from(scrollDown, {
         autoAlpha: 0,
-      }, "-=1")
+      }, "-=50%")
     }
 
     svgLogoTimeline = gsap.timeline({});
@@ -675,6 +677,10 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
 
     gsap.set(audioText, { autoAlpha: 1 });
   }
+
+  setTimeout(() => {
+    pgia.play(document.getElementById('chat'), "Chat Animate in")
+  }, 2000)
 } else {
   // to any other page
   sessionStorage.setItem("has_navigated", "true");

@@ -86,38 +86,14 @@ function initScene(canvas) {
   camera.position.set(1, 0.329, 2.296);
   scene.add(camera);
 
-  /**
-   * Lights
-   */
-  const pointLight = new THREE.PointLight(0xffffff, 0.2);
-  pointLight.position.set(-0.04, -0.5, 0.083);
-
-  const pointLight2 = new THREE.PointLight(0xffffff);
-  pointLight2.position.set(0.78, 1.114, 1.284);
-  pointLight2.decay = 2;
-  pointLight2.intensity = 8;
-  pointLight2.distance = 5;
-  pointLight2.castShadow = true;
-  scene.add(pointLight, pointLight2);
-
   const textureLoader = new THREE.TextureLoader();
-  const backgroundTexture = textureLoader.load(
-    "/assets/models/J&G - Base 4K.webp"
-  );
-  const backgroundNormal = textureLoader.load(
-    "/assets/models/J&G - Normal 4K.webp"
-  );
-  const backgroundRough = textureLoader.load("/assets/models/rough.webp");
 
-  const backgroundMaterial = new THREE.MeshStandardMaterial({
-    map: backgroundTexture,
-  });
-  backgroundMaterial.normalMap = backgroundNormal;
-  backgroundMaterial.normalScale = new THREE.Vector2(0.5, 0.5);
-  backgroundMaterial.roughnessMap = backgroundRough;
-  backgroundMaterial.metalnessMap = backgroundRough;
-  backgroundMaterial.roughness = 5;
-  backgroundMaterial.metalness = 0;
+  const spotLight = new THREE.SpotLight(0xffffff, 1.5);
+  spotLight.position.set(2.5, 3.8, 4.280);
+  spotLight.angle = 0.214
+  spotLight.penumbra = 1
+  spotLight.castShadow = true
+  scene.add(spotLight)
 
   const originalCameraPosition = new THREE.Vector2();
 
@@ -127,25 +103,31 @@ function initScene(canvas) {
   const gltfLoader = new GLTFLoader();
   gltfLoader.setDRACOLoader(dracoLoader);
   gltfLoader.load(
-    "/assets/models/scene 1.glb", ///J&G Logo_v15-transform.glb',
+    "/assets/models/scene-6.glb", ///J&G Logo_v15-transform.glb',
     (gltf) => {
-      // console.log(gltf);
+      console.log(gltf.scene);
 
       logo = gltf.scene.children.filter(
         (child) => child.name === "J&G_Logo"
       )[0];
       const bg = gltf.scene.children.filter(
-        (child) => child.name === "Background"
+        (child) => child.name === "Plane"
       )[0];
-      const light = gltf.scene.children.filter(
+      const spotLight = gltf.scene.children.filter(
         (child) => child.name === "SpotLight"
       )[0];
+
+      const pointLight = gltf.scene.children.filter(
+        (child) => child.name === "PointLight"
+      )[0];
+
+      logo.castShadow = true
+      // logo.material.color = new THREE.Color(0x333333)
+      bg.receiveShadow = true
 
       logo.scale.set(0.8, 0.8, 0.8);
 
       scene.add(logo, bg);
-
-      bg.material = backgroundMaterial;
 
       originalCameraPosition.x = logo.rotation._x;
       originalCameraPosition.y = logo.rotation._y;
@@ -262,7 +244,8 @@ function initScene(canvas) {
   });
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.physicallyCorrectLights = true;
+  renderer.clearColor(0x171D1A);
+  renderer.physicallyCorrectLights = false;
 
   if (!isMobile) {
     composer = new EffectComposer(renderer);
@@ -277,7 +260,8 @@ function initScene(canvas) {
     composer.addPass(glitchPass);
   }
 
-  canvas.addEventListener("click", () => {
+  window.addEventListener("click", () => {
+    console.log('click');
     glitch = 1;
 
     if (sessionStorage.getItem("audio_on")) {
