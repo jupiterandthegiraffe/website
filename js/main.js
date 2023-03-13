@@ -568,10 +568,9 @@ window.finishIntro = function(el) {
  */
 if (!sessionStorage.getItem("has_navigated") && isHomePage) {
   if (isMobile) {
-    const splashPages = document.querySelector(".splash-pages");
     const word = document.querySelector(".splash-page__main-text").innerText;
     document.querySelector(".loader").style.display = "none";
-
+    
     playTransitionText(word, "Blur In", () => {
       gsap.to(".header, .footer, .webgl", {
         autoAlpha: 1,
@@ -588,7 +587,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       });
 
       setTimeout(() => {
-        destroyIntro(splashPages);
+        destroyIntro(document.querySelector(".splash-pages"));
 
         pgia.play(document.getElementById('chat'), "Chat Animate in")
 
