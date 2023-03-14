@@ -2044,3 +2044,15 @@ html[data-pgc-master="masterpage.html"] body {
   font-weight: bold;
   outline: 4px solid var(--color-brand-yellow);
 }
+
+box {
+  width: 100px;
+  height: 100px;
+  background-color: #ff0000;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #ff0000;
+}
