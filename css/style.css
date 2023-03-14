@@ -1928,7 +1928,7 @@ small {
 @media (min-width: 576px) {
   .chat {
     left: 50%;
-    bottom: 10;
+    bottom: 10%;
     text-align: center;
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
