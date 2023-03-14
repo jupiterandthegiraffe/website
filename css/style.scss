@@ -1816,7 +1816,7 @@ small {
 @media (min-width:576px) {
     .chat {
         left: 50%;
-        bottom: 15%;
+        bottom: 5%;
         text-align: center;
         transform: translateX(-50%);
         max-width: 400px;
@@ -1843,7 +1843,10 @@ small {
 
 .chat__text {
     margin-bottom: 0.2em;
-    font-size: 0.75rem;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .chat-popup {
