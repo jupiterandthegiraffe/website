@@ -1872,7 +1872,7 @@ small {
     color: var(--color-brand-black);
 }
 
-.chat__button:focus {
+.keyboard-user .chat__button:focus {
     outline: 4px solid var(--color-brand-yellow);
 }
 
@@ -1884,8 +1884,10 @@ small {
     border: none;
     background-color: transparent;
     color: var(--color-brand-white);
-    padding: 0.5em;
     cursor: pointer;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
 }
 
 @media (min-width:576px) {
@@ -1897,4 +1899,9 @@ small {
 
 html[data-pgc-master="masterpage.html"] body {
     overflow: hidden;
+}
+
+.keyboard-user .chat-popup__close:focus {
+    font-weight: bold;
+    outline: 4px solid var(--color-brand-yellow);
 }

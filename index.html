@@ -75,7 +75,7 @@ _chatbot.height = '300px';
 _chatbot.hello = 'Welcome. What would you like to know?';
 
 </script>
-        <style>.anycb-popup-container .anycb-popup-header { display: none; } .anycb-popup-container { background: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button { margin-top: 0; margin-bottom: 0; background-color: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:hover { background-color: var(--color-brand-white); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button .anycb-popup-form-button-icon { fill: var(--color-brand-black) !important; } .anycb-popup-form { height: 50px; display: flex; align-items: center; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input { margin: 0; color: var(--color-brand-white); background-color: rgba(255, 255, 255, 0.2); transition: background-color 1s ease-in-out; font-size: 1rem; } @media (min-width: 567px) { .anycb-popup-container .anycb-popup-form .anycb-popup-form-input {  font-size: 0.875rem; } } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input::placeholder { color: rgba(255, 255, 255, 0.5); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:hover, .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:focus { background-color: rgba(255, 255, 255, 0.4); } .anycb-message-container .anycb-message-c.anycb-message-c-assistant { background-color: rgba(255, 255, 255, 0.2); color: var(--color-brand-white); backdrop-filter: blur(5px); } .anycb-message-container .anycb-message-c.anycb-message-c-user { background-color: var(--color-brand-yellow); color: var(--color-brand-black); } .anycb-popup-messages-replying { animation: blinking infinite 1s ease-in-out alternate; } @keyframes blinking { from {  opacity: 0; }  to {  opacity: 1; } } .anycb-container { padding: 0; }</style>
+        <style>.anycb-popup-container .anycb-popup-header { display: none; } .anycb-popup-container { background: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button { margin-top: 0; margin-bottom: 0; background-color: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:hover, .keyboard-user .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:focus { background-color: var(--color-brand-white); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button .anycb-popup-form-button-icon { fill: var(--color-brand-black) !important; } .anycb-popup-form { height: 50px; display: flex; align-items: center; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input { margin: 0; color: var(--color-brand-white); background-color: rgba(255, 255, 255, 0.2); transition: background-color 1s ease-in-out; font-size: 1rem; } @media (min-width: 567px) { .anycb-popup-container .anycb-popup-form .anycb-popup-form-input {  font-size: 0.875rem; } } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input::placeholder { color: rgba(255, 255, 255, 0.5); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:hover, .keyboard-user .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:focus { background-color: rgba(255, 255, 255, 0.4); } .anycb-message-container .anycb-message-c.anycb-message-c-assistant { background-color: rgba(255, 255, 255, 0.2); color: var(--color-brand-white); backdrop-filter: blur(5px); } .anycb-message-container .anycb-message-c.anycb-message-c-user { background-color: var(--color-brand-yellow); color: var(--color-brand-black); } .anycb-popup-messages-replying { animation: blinking infinite 1s ease-in-out alternate; } @keyframes blinking { from {  opacity: 0; }  to {  opacity: 1; } } .anycb-container { padding: 0; }</style>
     </head>     
     <body>
         <noscript>
@@ -151,13 +151,6 @@ _chatbot.hello = 'Welcome. What would you like to know?';
                     </svg>
                 </button>
             </div>
-            <div class="chat-popup" data-pg-ia-hide>
-                <div class="chat-popup__center">
-                    <button data-pg-ia='{"l":[{"trg":"click","t":"$.chat-popup","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}}]}' class="chat-popup__close" id="chat-close">x</button>
-                    <div data-empty-placeholder id="chatbot"></div>
-                    <p style="font-size: .75em; text-align: center; opacity: .8">Currently in Beta</p>
-                </div>
-            </div>
             <svg width="533" height="282" viewBox="0 0 533 282" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);" data-pg-ia-hide>
                 <path class="draw-me" d="M457.336 138.191H457.836V137.691V94.4624H532.088V137.483L471.575 197.652H271.786V69.5759L339.374 0.5H531.445V59.9608H362.798H362.588L362.441 60.1112L331.735 91.5072L331.592 91.653V91.8568V137.691V138.191H332.092H457.336Z" stroke="#F1F1F1" stroke-width="2px"/>
                 <path class="draw-me" d="M187.685 129.946V129.446H187.185H119.164V69.4208H187.185H247.492V151.114V155.965V198.658L165.121 280.56H82.0966H79.1849H0.5V221.062H139.992H140.198L140.344 220.916L146.47 214.826L146.47 214.825L187.537 174.142L187.685 173.996V173.787V155.965V151.114V129.946Z" stroke="#F1F1F1" stroke-width="2px"/>
@@ -183,6 +176,13 @@ _chatbot.hello = 'Welcome. What would you like to know?';
                 <canvas class="webgl" style="opacity: 0;"></canvas>
             </div>
         </main>
+        <div class="chat-popup" data-pg-ia-hide role="alertdialog" aria-modal="true">
+            <div class="chat-popup__center">
+                <div data-empty-placeholder id="chatbot"></div>
+                <p style="font-size: .75em; text-align: center; opacity: .8">Currently in Beta</p>
+                <button data-pg-ia='{"l":[{"trg":"click","t":"$.chat-popup","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":0}}]}]}}]}' class="chat-popup__close" id="chat-close">x</button>
+            </div>
+        </div>
         <div data-pg-ia-hide class="footer">
             <a href="/contact.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click" style="display: none;">Make contact</a>
             <a href="/services.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click" style="display: none;">What we do</a><a href="process.html" class="nav__link" rel="prefetch" tabindex="-1" data-audio="tap, page-transition" data-audio-event="mouseover, click" style="display: none;">How we do it</a>

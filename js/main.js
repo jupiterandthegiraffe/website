@@ -228,16 +228,28 @@ const menu = document.querySelector(".menu");
 const pageDetail = document.querySelector(".page-detail__main");
 
 
-if (aiModalAudio) {
-  document.getElementById('chat-open').addEventListener('click', () => {
+document.getElementById('chat-open').addEventListener('click', () => {
+  window.aiModelOpen = true;
+
+  document.querySelector('main').setAttribute('aria-hidden', 'true')
+
+  setTimeout(() => {
+    document.querySelector('.anycb-popup-form-input').focus()
+  }, 1000);
+  
+  if (aiModalAudio) {
     adjustVolume(aiModalAudio, .5, {})
-    window.aiModelOpen = true
-  })
-  document.getElementById('chat-close').addEventListener('click', () => {
+  }
+})
+
+document.getElementById('chat-close').addEventListener('click', () => {
+  window.aiModelOpen = false
+  document.querySelector('main').setAttribute('aria-hidden', 'false')
+
+  if (aiModalAudio) {
     adjustVolume(aiModalAudio, 0, {})
-    window.aiModelOpen = false
-  })
-}
+  }
+})
 
 // To do with pressing escape on detail pages
 const navBack = () => {
