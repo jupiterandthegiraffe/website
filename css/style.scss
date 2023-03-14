@@ -1327,12 +1327,14 @@ button[type="submit"] {
     }
 }
 
-.main-menu__list-info p {
+.main-menu__list-info p,
+.main-menu__list-info address {
     margin: 0;
+    font-style: normal;
 }
 
 @media (min-width:576px) {
-    .main-menu__list-info p:nth-child(even) {
+    .main-menu__list-info > *:nth-child(even) {
         text-align: right;
     }
 }
