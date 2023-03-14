@@ -1,7 +1,9 @@
 const audioEls = Array.from(document.querySelectorAll('[data-audio]'))
 if (audioEls) {
   audioEls.forEach(el => {
+    // get id's of the audio the element should trigger
     const audioIds = el.getAttribute('data-audio').split(',')
+
     if (audioIds) {
       audioIds.forEach((id, index) => {
         const elementId = id.trim()
@@ -12,6 +14,7 @@ if (audioEls) {
           const audio = document.getElementById(elementId)
           
           if (audio) {
+            // Create listerners for each event
             el.addEventListener(event.trim(), () => {
               if (sessionStorage.getItem("audio_on")) {
                 if (delay.length) {

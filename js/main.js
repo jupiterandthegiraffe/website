@@ -214,6 +214,8 @@ const audioButtonLabel = audioButton.getAttribute("aria-label");
 const bgAudioFiles = Array.from(
   document.querySelectorAll("audio.background-audio")
 );
+const aiModalAudio = document.getElementById("ai-modal-audio");
+
 const audioFiles = Array.from(document.querySelectorAll("audio"));
 const mainAudio = document.getElementById("main-audio");
 const topRightAudio = document.getElementById("top-right-audio");
@@ -224,6 +226,18 @@ const menuCloseButton = document.querySelector(".menu__close-button");
 const pageOverlay = document.querySelector(".page-overlay");
 const menu = document.querySelector(".menu");
 const pageDetail = document.querySelector(".page-detail__main");
+
+
+if (aiModalAudio) {
+  document.getElementById('chat-open').addEventListener('click', () => {
+    adjustVolume(aiModalAudio, .5, {})
+    window.aiModelOpen = true
+  })
+  document.getElementById('chat-close').addEventListener('click', () => {
+    adjustVolume(aiModalAudio, 0, {})
+    window.aiModelOpen = false
+  })
+}
 
 // To do with pressing escape on detail pages
 const navBack = () => {
@@ -292,7 +306,7 @@ if (isSafari) {
   audioButton.style.display = "none";
 }
 
-const secondaryAudio = [topRightAudio, bottomRightAudio, bottomLeftAudio];
+const secondaryAudio = [topRightAudio, bottomRightAudio, bottomLeftAudio, aiModalAudio];
 
   audioButton.addEventListener("click", () => {
     if (sessionStorage.getItem("audio_on")) {
@@ -362,6 +376,40 @@ if (window.location.pathname.match(/end-credits/)) {
   triggerPointPopup("Wow! You found a secret!", 3, "end_cred");
 }
 
+function swing(p) {
+  return 0.5 - Math.cos(p * Math.PI) / 2;
+}
+
+function adjustVolume(element, newVolume, {
+  duration = 1000,
+  easing = swing,
+  interval = 13,
+}) {
+  const originalVolume = element.volume;
+  const delta = newVolume - originalVolume;
+
+  if (!delta || !duration || !easing || !interval) {
+      element.volume = newVolume;
+      return Promise.resolve();
+  }
+
+  const ticks = Math.floor(duration / interval);
+  let tick = 1;
+
+  return new Promise(resolve => {
+      const timer = setInterval(() => {
+          element.volume = originalVolume + (
+              easing(tick / ticks) * delta
+          );
+
+          if (++tick === ticks + 1) {
+              clearInterval(timer);
+              resolve();
+          }
+      }, interval);
+  });
+}
+
 window.startHomePageAudio = () => {
   if (sessionStorage.getItem("audio_on") && !isSafari) {
     secondaryAudio.forEach((audio) => {
@@ -426,10 +474,10 @@ window.startHomePageAudio = () => {
           triggerPointPopup("Wow, you're a good listener.", 2, "audio_listen");
         }
 
-        topRightAudio.volume = topRight;
-        bottomRightAudio.volume = bottomRight;
-        bottomLeftAudio.volume = bottomLeft;
-        mainAudio.volume = Math.max(
+        topRightAudio.volume = window.aiModelOpen ? 0 : topRight;
+        bottomRightAudio.volume =  window.aiModelOpen ? 0 : bottomRight;
+        bottomLeftAudio.volume =  window.aiModelOpen ? 0 : bottomLeft;
+        mainAudio.volume =  window.aiModelOpen ? 0 : Math.max(
           Math.min(rightToLeft, topToBottom),
           Math.min(centreX, centreY)
         );
@@ -554,8 +602,6 @@ const playTransitionText = (word, animationName, cb) => {
       "1.5"
     );
   }
-
-  pgia.play(blur, animationName);
 };
 
 function setFirstVisit() {
@@ -819,7 +865,6 @@ document.querySelectorAll(".menu a").forEach((el) => {
       const word =
         transitionText[Math.floor(Math.random() * transitionText.length + 0)];
       playTransitionText(word, "Blur In", () => {
-        pgia.play(document.getElementById("backdrop-blur"), "Blur In");
         setTimeout(() => {
           window.location = e.target.href;
         }, 500);

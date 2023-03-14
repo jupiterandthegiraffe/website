@@ -171,6 +171,7 @@ html[data-pgc-master="masterpage-detail.html"] body {
   cursor: pointer;
   color: var(--color-brand-white);
   font-size: 0.7rem;
+  text-align: center;
 }
 
 .light-mode .header__menu-button,
@@ -1990,7 +1991,7 @@ small {
   max-width: 600px;
   width: 100%;
   position: relative;
-  padding-top: 50px;
+  padding-top: 35px;
 }
 
 .chat__button:hover,
@@ -2005,9 +2006,10 @@ small {
 }
 
 .chat-popup__close {
+  font-size: 1.5rem;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 10px;
   border: none;
   background-color: transparent;
   color: var(--color-brand-white);
@@ -2015,6 +2017,12 @@ small {
   cursor: pointer;
 }
 
+@media (min-width: 576px) {
+  .chat-popup__close {
+    font-size: 1rem;
+    right: 0;
+  }
+}
 html[data-pgc-master="masterpage.html"] body {
   overflow: hidden;
 }
