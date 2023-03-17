@@ -7,7 +7,6 @@ require('./audio-elements')
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
-let hasScrolled = false;
 const isHomePage =
   window.location.pathname === "/" ||
   window.location.pathname === "/index.html";
@@ -16,6 +15,10 @@ let menuAudio = false;
 gsap.defaults({
   ease: "power4.inOut",
   duration: 1,
+});
+
+window.params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop)
 });
 
 if (!window.localStorage.getItem("user-points")) {
@@ -223,33 +226,48 @@ const bottomRightAudio = document.getElementById("bottom-right-audio");
 const bottomLeftAudio = document.getElementById("bottom-left-audio");
 
 const menuCloseButton = document.querySelector(".menu__close-button");
-const pageOverlay = document.querySelector(".page-overlay");
 const menu = document.querySelector(".menu");
 const pageDetail = document.querySelector(".page-detail__main");
 
 
-document.getElementById('chat-open').addEventListener('click', () => {
-  window.aiModelOpen = true;
+const chat = document.getElementById('chat')
+const chatButton = document.getElementById('chat-open')
+const chatClose = document.getElementById('chat-close')
+const chatPopup = document.querySelector('.chat-popup')
+if (chat) {
+  const closeChatWindow = () => {
+    window.aiModelOpen = false
+    
+    document.querySelector('main').setAttribute('aria-hidden', 'false')
+    
+    if (aiModalAudio) {
+      adjustVolume(aiModalAudio, 0, {})
+    }
+  }
 
-  document.querySelector('main').setAttribute('aria-hidden', 'true')
-
-  setTimeout(() => {
-    document.querySelector('.anycb-popup-form-input').focus()
-  }, 1000);
+  const openChatWindow = () => {
+    window.aiModelOpen = true;
   
-  if (aiModalAudio) {
-    adjustVolume(aiModalAudio, .5, {})
+    document.querySelector('main').setAttribute('aria-hidden', 'true')
+  
+    setTimeout(() => {
+      document.querySelector('.anycb-popup-form-input').focus()
+    }, 1000);
+    
+    if (aiModalAudio) {
+      adjustVolume(aiModalAudio, .5, {})
+    }
   }
-})
-
-document.getElementById('chat-close').addEventListener('click', () => {
-  window.aiModelOpen = false
-  document.querySelector('main').setAttribute('aria-hidden', 'false')
-
-  if (aiModalAudio) {
-    adjustVolume(aiModalAudio, 0, {})
-  }
-})
+  
+  chatPopup.addEventListener('click', () => {
+    if (e.target.classList.contains('chat-popup')) {
+      pgia.play(chatClose, 1)
+      closeChatWindow()
+    }
+  })
+  chatButton.addEventListener('click', openChatWindow)
+  chatClose.addEventListener('click', closeChatWindow)
+}
 
 // To do with pressing escape on detail pages
 const navBack = () => {
@@ -782,6 +800,14 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       navBack();
     });
   }
+
+  window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('background')) {
+      e.preventDefault()
+
+      navBack()
+    }
+  })
 
   const leadText = gsap.utils.toArray(".lead-text");
   if (leadText.length) {

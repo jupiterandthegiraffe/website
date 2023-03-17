@@ -9,11 +9,21 @@ exports.default = function() {
           drawSVG: 0,
         });
 
+        svgNumberTimeline.to(".services__column", {
+          autoAlpha: .5,
+          stagger: 0.025,
+        })
+        
+        svgNumberTimeline.to(".services__column", {
+          autoAlpha: 1,
+          stagger: 0.025,
+        })
+
         const servicesTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: services,
-            start: "top bottom+=200px",
-            end: "+=3000px",
+            start: "top bottom+=100",
+            end: "+=1000px",
             scrub: 1,
             onUpdate: (el) => {
               svgNumberTimeline.seek(el.progress);
@@ -22,6 +32,7 @@ exports.default = function() {
           },
         });
 
+        
         servicesTimeline.from(".services__column", {
           autoAlpha: 0,
           stagger: 0.025,
@@ -31,7 +42,7 @@ exports.default = function() {
         ScrollTrigger.create({
           trigger: ".services",
           start: "center center",
-          end: "+=2000px",
+          end: "+=1000px",
           pin: true,
         });
       },

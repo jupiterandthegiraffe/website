@@ -7,11 +7,16 @@
   font-style: normal;
   font-display: block;
 }
+@font-face {
+  font-family: "Mont Heavy";
+  src: url("/assets/fonts/font.woff2") format("woff2"), url("/assets/fonts/font.woff") format("woff");
+}
 :root {
   --color-brand-black: #171D1A;
   --color-brand-white: #f1f1f1;
   --color-brand-yellow: #FFD11F;
   --color-brand-red: #BD293B;
+  --font-family-headers: "Mont Heavy";
 }
 
 ::-moz-selection {
@@ -40,6 +45,14 @@ body {
     font-size: 20px;
   }
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Mont Heavy";
+}
+
 .light-mode body {
   background-color: var(--color-brand-white);
   font-weight: 800;
@@ -172,6 +185,7 @@ html[data-pgc-master="masterpage-detail.html"] body {
   color: var(--color-brand-white);
   font-size: 0.7rem;
   text-align: center;
+  display: block;
 }
 
 .light-mode .header__menu-button,
@@ -224,9 +238,14 @@ a:hover, a:focus {
     font-size: 2.2rem;
   }
 }
-@media (min-width: 1194px) {
+@media (min-width: 1194px) and (min-height: 937px) {
   .main-menu__links {
     font-size: 2.5rem;
+  }
+}
+@media (max-height: 802px) {
+  .main-menu__links {
+    margin: 0.1em 0;
   }
 }
 .light-mode .main-menu__links {
@@ -837,7 +856,7 @@ textarea {
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   border: none;
   border-bottom: 5px solid hsl(0deg, 0%, 77%);
   color: var(--color-brand-white);
@@ -1501,8 +1520,6 @@ button[type=submit]:hover, button[type=submit]:focus {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 60px;
-    grid-template-rows: 1fr 1fr;
-    margin-bottom: 2em;
   }
   .page__process-indent,
 .page-overlay__content-header .page-overlay__content-container {
@@ -1679,12 +1696,6 @@ body {
   fill: var(--color-brand-white);
 }
 
-@media (min-width: 1194px) {
-  .page__process-indent,
-.page-overlay__content-header .page-overlay__content-container {
-    padding-left: 20vw;
-  }
-}
 .person__information p:last-child {
   margin-bottom: 0;
 }
@@ -1768,6 +1779,7 @@ body {
   -webkit-transition: text-shadow 0.3s ease-in-out;
   -o-transition: text-shadow 0.3s ease-in-out;
   transition: text-shadow 0.3s ease-in-out;
+  font-family: var(--font-family-headers);
 }
 
 .lead-text a:hover {
@@ -2032,7 +2044,7 @@ small {
 
 @media (min-width: 576px) {
   .chat-popup__close {
-    font-size: 1rem;
+    font-size: 1.5rem;
     right: 0;
   }
 }
