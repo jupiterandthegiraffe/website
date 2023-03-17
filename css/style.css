@@ -2086,7 +2086,7 @@ box {
   visibility: hidden;
 }
 .switch:checked + label {
-  background: #bada55;
+  background: #FFD11F;
 }
 .switch:checked + label:after {
   left: calc(100% - 5px);
@@ -2096,12 +2096,7 @@ box {
 }
 
 .legacy-switch {
-  /* position: absolute */
-  /* left: 50% */
-  /* top: 20px */
-  /* z-index: 10 */
   font-size: 12px;
-  /* transform: translateX(-50%) */
 }
 
 .switch-label {
