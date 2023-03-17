@@ -17,6 +17,37 @@ gsap.defaults({
   duration: 1,
 });
 
+
+const legacyLinks = Array.from(document.querySelectorAll('.legacy-link'))
+const legacyMode = document.getElementById("switch");
+if (legacyMode) {
+  legacyMode.addEventListener("change", (e) => {
+    if (e.target.checked) {
+      sessionStorage.setItem("legacy_mode", "true");
+      legacyLinks.forEach(link => {
+        link.style.transition = ''
+        link.style.opacity = 1
+      })
+    } else {
+      sessionStorage.removeItem("legacy_mode");
+      legacyLinks.forEach(link => {
+        link.style.transition = ''
+        link.style.opacity = 0
+      })
+    }
+  });
+
+}
+if (sessionStorage.getItem("legacy_mode")) {
+  if (legacyMode) {
+    legacyMode.checked = true;
+  }
+  legacyLinks.forEach(link => {
+    link.style.transition = 'none'
+    link.style.opacity = 1
+  })
+}
+
 window.params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop)
 });
@@ -205,7 +236,6 @@ window.removeMenuAudio = function() {
  * Helper
  */
 window.removeEl = (elementToDelete) => {
-  console.log('remove child', elementToDelete.parentNode);
   elementToDelete.parentNode.removeChild(elementToDelete);
 }
 
@@ -249,6 +279,8 @@ if (chat) {
     window.aiModelOpen = true;
   
     document.querySelector('main').setAttribute('aria-hidden', 'true')
+
+    triggerPointPopup("Welcome to the future!", 4, "ai_on");
   
     setTimeout(() => {
       document.querySelector('.anycb-popup-form-input').focus()
@@ -259,7 +291,7 @@ if (chat) {
     }
   }
   
-  chatPopup.addEventListener('click', () => {
+  chatPopup.addEventListener('click', (e) => {
     if (e.target.classList.contains('chat-popup')) {
       pgia.play(chatClose, 1)
       closeChatWindow()

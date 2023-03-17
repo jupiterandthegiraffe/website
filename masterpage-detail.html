@@ -85,7 +85,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </script>
         </div>
         <div style="filter: blur(10px); z-index: -1; pointer-events: none;" class="header">
-            <div class="header__menu-button" tabindex="-1">Browse</div><span class="nav__link" tabindex="-1" style="display: none;">Who we are</span>
+            <button class="header__menu-button" tabindex="-1" type="button" aria-label="Open menu" data-audio="menu-audio" data-audio-event="click">
+                Browse
+</button><span class="legacy-link nav__link" tabindex="-1">Who we are</span>
         </div>
         <div class="audio-off silence-button" id="audio-button" data-pg-ia-hide data-pg-ia='{"l":[{"trg":"load","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.99,"l":{"autoAlpha":1,"pgCall":{"complete":"addAudioClass"}}}]}]},"tcv":"interaction"}]}' data-pgc="jtg.audio-button">
             <button class="silence-button__button" type="button" aria-label="Audio on" id="audio">
@@ -128,8 +130,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
             </div>
         </div>
-        <div style="filter: blur(10px); z-index: -1;" class="footer"><span class="nav__link" tabindex="-1" style="display: none;">Make contact</span>
-            <span class="nav__link" tabindex="-1" style="display: none;">What we do</span><span class="nav__link" tabindex="-1" style="display: none;">How we do it</span>
+        <div style="filter: blur(10px); z-index: -1;" class="footer"><span class="legacy-link nav__link" tabindex="-1">Make contact</span>
+            <span class="legacy-link nav__link" tabindex="-1">What we do</span><span class="legacy-link nav__link" tabindex="-1">How we do it</span>
         </div>
         <div class="mode-selector mode-selector__buton" style="z-index: -1; filter: blur(10px); display: none;">
             <button type="button" aria-label="Theme: Light mode" class="mode-selector__button"></button>
