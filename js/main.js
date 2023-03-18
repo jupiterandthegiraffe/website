@@ -1,8 +1,8 @@
-import { SplitText } from 'gsap/SplitText'
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
-import { Rive } from '@rive-app/canvas'
+import { SplitText } from "gsap/SplitText";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { Rive } from "@rive-app/canvas";
 
-require('./audio-elements')
+require("./audio-elements");
 
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
@@ -17,39 +17,37 @@ gsap.defaults({
   duration: 1,
 });
 
-
-const legacyLinks = Array.from(document.querySelectorAll('.legacy-link'))
+const legacyLinks = Array.from(document.querySelectorAll(".legacy-link"));
 const legacyMode = document.getElementById("switch");
 if (legacyMode) {
   legacyMode.addEventListener("change", (e) => {
     if (e.target.checked) {
       sessionStorage.setItem("legacy_mode", "true");
-      legacyLinks.forEach(link => {
-        link.style.transition = ''
-        link.style.opacity = 1
-      })
+      legacyLinks.forEach((link) => {
+        link.style.transition = "";
+        link.style.opacity = 1;
+      });
     } else {
       sessionStorage.removeItem("legacy_mode");
-      legacyLinks.forEach(link => {
-        link.style.transition = ''
-        link.style.opacity = 0
-      })
+      legacyLinks.forEach((link) => {
+        link.style.transition = "";
+        link.style.opacity = 0;
+      });
     }
   });
-
 }
 if (sessionStorage.getItem("legacy_mode")) {
   if (legacyMode) {
     legacyMode.checked = true;
   }
-  legacyLinks.forEach(link => {
-    link.style.transition = 'none'
-    link.style.opacity = 1
-  })
+  legacyLinks.forEach((link) => {
+    link.style.transition = "none";
+    link.style.opacity = 1;
+  });
 }
 
 window.params = new Proxy(new URLSearchParams(window.location.search), {
-  get: (searchParams, prop) => searchParams.get(prop)
+  get: (searchParams, prop) => searchParams.get(prop),
 });
 
 if (!window.localStorage.getItem("user-points")) {
@@ -60,23 +58,23 @@ if (!window.localStorage.getItem("awards")) {
   window.localStorage.setItem("awards", JSON.stringify([]));
 }
 
-const awards = JSON.parse(localStorage.awards)
+const awards = JSON.parse(localStorage.awards);
 if (awards.awards) {
-  console.log('old awards system detected. Converting...')
-  const newAwardsSystem = awards.awards.map(award => {
+  console.log("old awards system detected. Converting...");
+  const newAwardsSystem = awards.awards.map((award) => {
     return {
-      title: '',
+      title: "",
       id: award,
-      score: ''
-    }
-  })
-  localStorage.setItem('awards', JSON.stringify(newAwardsSystem))
+      score: "",
+    };
+  });
+  localStorage.setItem("awards", JSON.stringify(newAwardsSystem));
 }
 
 const pointsPopup = document.querySelector(".points-popup");
 window.triggerPointPopup = (message, points = 1, code) => {
   const currentAwards = JSON.parse(localStorage.awards);
-  const currentAwardCodes = currentAwards.map((award) => award.id)
+  const currentAwardCodes = currentAwards.map((award) => award.id);
 
   if (currentAwardCodes.indexOf(code) <= -1) {
     window.localStorage.setItem(
@@ -96,7 +94,7 @@ window.triggerPointPopup = (message, points = 1, code) => {
     awards.push({
       title: message,
       id: code,
-      score: points
+      score: points,
     });
     window.localStorage.setItem("awards", JSON.stringify(awards));
 
@@ -104,13 +102,19 @@ window.triggerPointPopup = (message, points = 1, code) => {
       pgia.play(pointsPopup, "Points Popdown");
     }, 5000);
   } else if (currentAwardCodes.indexOf(code) > -1) {
-    console.log('code found, checking if it has message and score')
+    console.log("code found, checking if it has message and score");
     currentAwards.forEach((award, index) => {
       if (award.id === code && !award.title && !award.score) {
-        console.log('current award achieved but doesn\'t have score or message. Updating...')
-        currentAwards.splice(index, 1, {title: message, id: code, score: points})
+        console.log(
+          "current award achieved but doesn't have score or message. Updating..."
+        );
+        currentAwards.splice(index, 1, {
+          title: message,
+          id: code,
+          score: points,
+        });
       }
-    })
+    });
 
     window.localStorage.setItem("awards", JSON.stringify(currentAwards));
   }
@@ -193,17 +197,17 @@ if (scrollDownButton) {
     if (!isSafari) {
       sessionStorage.setItem("audio_on", "true");
       audioButton.classList.remove("audio-off");
-  
+
       if (interaction) {
         interaction.play("Audio In");
       }
-  
+
       setTimeout(() => {
         triggerPointPopup("Welcome to the full experience.", 2, "audio_on");
-      }, 8000)
-  
+      }, 8000);
+
       audioButton.setAttribute("aria-label", "Audio off");
-  
+
       if (isHomePage && sessionStorage.getItem("has_navigated")) {
         startHomePageAudio();
         mainAudio.play();
@@ -212,32 +216,32 @@ if (scrollDownButton) {
       } else {
         bgAudioFiles.forEach((audio) => audio.play());
       }
-  
+
       dataLayer.push({ event: "Audio On" });
     }
 
     window.scrollTo({ top: window.innerHeight, behaviour: "smooth" });
 
     setTimeout(() => {
-      pgia.play(document.getElementById('chat'), "Chat Animate in")
+      pgia.play(document.getElementById("chat"), "Chat Animate in");
     }, 2000);
   });
 }
 
-window.setMenuAudio = function() {
+window.setMenuAudio = function () {
   menuAudio = true;
-}
+};
 
-window.removeMenuAudio = function() {
+window.removeMenuAudio = function () {
   menuAudio = false;
-}
+};
 
 /*
  * Helper
  */
 window.removeEl = (elementToDelete) => {
   elementToDelete.parentNode.removeChild(elementToDelete);
-}
+};
 
 /**
  * Audio Control
@@ -259,46 +263,63 @@ const menuCloseButton = document.querySelector(".menu__close-button");
 const menu = document.querySelector(".menu");
 const pageDetail = document.querySelector(".page-detail__main");
 
-
-const chat = document.getElementById('chat')
-const chatButton = document.getElementById('chat-open')
-const chatClose = document.getElementById('chat-close')
-const chatPopup = document.querySelector('.chat-popup')
+const chat = document.getElementById("chat");
+const chatButton = document.getElementById("chat-open");
+const chatClose = document.getElementById("chat-close");
+const chatPopup = document.querySelector(".chat-popup");
 if (chat) {
   const closeChatWindow = () => {
-    window.aiModelOpen = false
-    
-    document.querySelector('main').setAttribute('aria-hidden', 'false')
-    
+    window.aiModelOpen = false;
+
+    document.querySelector("main").setAttribute("aria-hidden", "false");
+
     if (aiModalAudio) {
-      adjustVolume(aiModalAudio, 0, {})
+      adjustVolume(aiModalAudio, 0, {});
     }
-  }
+  };
 
   const openChatWindow = () => {
     window.aiModelOpen = true;
-  
-    document.querySelector('main').setAttribute('aria-hidden', 'true')
+
+    document.querySelector("main").setAttribute("aria-hidden", "true");
 
     triggerPointPopup("Welcome to the future!", 4, "ai_on");
-  
+
+    pgia.seek(chatPopup.querySelector(".chat-popup__popular-suggestions"), 0);
+    pgia.play(chatPopup.querySelector(".chat-popup__popular-suggestions"), 1);
+
     setTimeout(() => {
-      document.querySelector('.anycb-popup-form-input').focus()
+      document.querySelector(".anycb-popup-form-input").focus();
     }, 1000);
-    
+
     if (aiModalAudio) {
-      adjustVolume(aiModalAudio, .5, {})
+      adjustVolume(aiModalAudio, 0.5, {});
     }
-  }
-  
-  chatPopup.addEventListener('click', (e) => {
-    if (e.target.classList.contains('chat-popup')) {
-      pgia.play(chatClose, 1)
-      closeChatWindow()
+  };
+
+  chatPopup.addEventListener("click", (e) => {
+    if (e.target.classList.contains("chat-popup")) {
+      pgia.play(chatClose, 1);
+      closeChatWindow();
     }
-  })
-  chatButton.addEventListener('click', openChatWindow)
-  chatClose.addEventListener('click', closeChatWindow)
+  });
+  chatButton.addEventListener("click", openChatWindow);
+  chatClose.addEventListener("click", closeChatWindow);
+
+  Array.from(chatPopup.querySelectorAll("[data-prompt]"))?.forEach((prompt) => {
+    prompt.addEventListener("click", () => {
+      chatPopup.querySelector(".anycb-popup-form-input").value =
+        prompt.getAttribute("data-prompt");
+
+      chatPopup
+        .querySelector(".anycb-popup-form-input")
+        .dispatchEvent(new Event("input"));
+
+      setTimeout(() => {
+        chatPopup.querySelector(".anycb-popup-form-button").click();
+      }, 0);
+    });
+  });
 }
 
 // To do with pressing escape on detail pages
@@ -368,14 +389,19 @@ if (isSafari) {
   audioButton.style.display = "none";
 }
 
-const secondaryAudio = [topRightAudio, bottomRightAudio, bottomLeftAudio, aiModalAudio];
+const secondaryAudio = [
+  topRightAudio,
+  bottomRightAudio,
+  bottomLeftAudio,
+  aiModalAudio,
+];
 
-  audioButton.addEventListener("click", () => {
-    if (sessionStorage.getItem("audio_on")) {
-      sessionStorage.removeItem("audio_on");
-      audioFiles.forEach((audio) => audio.pause());
-      audioButton.setAttribute("aria-label", audioButtonLabel);
-      startHomePageAudio();
+audioButton.addEventListener("click", () => {
+  if (sessionStorage.getItem("audio_on")) {
+    sessionStorage.removeItem("audio_on");
+    audioFiles.forEach((audio) => audio.pause());
+    audioButton.setAttribute("aria-label", audioButtonLabel);
+    startHomePageAudio();
     audioButton.classList.add("audio-off");
 
     if (interaction) {
@@ -442,33 +468,31 @@ function swing(p) {
   return 0.5 - Math.cos(p * Math.PI) / 2;
 }
 
-function adjustVolume(element, newVolume, {
-  duration = 1000,
-  easing = swing,
-  interval = 13,
-}) {
+function adjustVolume(
+  element,
+  newVolume,
+  { duration = 1000, easing = swing, interval = 13 }
+) {
   const originalVolume = element.volume;
   const delta = newVolume - originalVolume;
 
   if (!delta || !duration || !easing || !interval) {
-      element.volume = newVolume;
-      return Promise.resolve();
+    element.volume = newVolume;
+    return Promise.resolve();
   }
 
   const ticks = Math.floor(duration / interval);
   let tick = 1;
 
-  return new Promise(resolve => {
-      const timer = setInterval(() => {
-          element.volume = originalVolume + (
-              easing(tick / ticks) * delta
-          );
+  return new Promise((resolve) => {
+    const timer = setInterval(() => {
+      element.volume = originalVolume + easing(tick / ticks) * delta;
 
-          if (++tick === ticks + 1) {
-              clearInterval(timer);
-              resolve();
-          }
-      }, interval);
+      if (++tick === ticks + 1) {
+        clearInterval(timer);
+        resolve();
+      }
+    }, interval);
   });
 }
 
@@ -537,16 +561,18 @@ window.startHomePageAudio = () => {
         }
 
         topRightAudio.volume = window.aiModelOpen ? 0 : topRight;
-        bottomRightAudio.volume =  window.aiModelOpen ? 0 : bottomRight;
-        bottomLeftAudio.volume =  window.aiModelOpen ? 0 : bottomLeft;
-        mainAudio.volume =  window.aiModelOpen ? 0 : Math.max(
-          Math.min(rightToLeft, topToBottom),
-          Math.min(centreX, centreY)
-        );
+        bottomRightAudio.volume = window.aiModelOpen ? 0 : bottomRight;
+        bottomLeftAudio.volume = window.aiModelOpen ? 0 : bottomLeft;
+        mainAudio.volume = window.aiModelOpen
+          ? 0
+          : Math.max(
+              Math.min(rightToLeft, topToBottom),
+              Math.min(centreX, centreY)
+            );
       }
     });
   }
-}
+};
 
 const colorModeSelector = document.querySelector(".mode-selector");
 if (colorModeSelector) {
@@ -565,14 +591,14 @@ if (colorModeSelector) {
 
 // Because of scope, we move these functions outside of homepage as these are controlled by Pinegrow Interacitons
 let svgLogoTimeline = null;
-window.drawSVG = function(e, progress) {
+window.drawSVG = function (e, progress) {
   if (svgLogoTimeline) {
     svgLogoTimeline.seek(progress * 2);
   }
-}
+};
 
-window.destroyIntro = function(el) {
-  const introPinnedWrapper = document.querySelector('main > .pin-spacer')
+window.destroyIntro = function (el) {
+  const introPinnedWrapper = document.querySelector("main > .pin-spacer");
   pgia.scrollSceneManager.removeScene(el, true);
 
   // because we remove the scene, we need to remove all animation properties
@@ -604,7 +630,7 @@ window.destroyIntro = function(el) {
   startHomePageAudio();
 
   startMousewheelDetection();
-}
+};
 
 // const feedback = document.querySelector('.feedback')
 // if (!sessionStorage.getItem('feedback_dismissed') && feedback && sessionStorage.getItem('has_navigated')) {
@@ -670,12 +696,12 @@ function setFirstVisit() {
   triggerPointPopup("Welcome to the club", 1, "visit_one");
 }
 
-window.finishIntro = function(el) {
+window.finishIntro = function (el) {
   destroyIntro(el);
   setFirstVisit();
-  document.querySelector('body').style.overflow = ''
-  pgia.play(document.getElementById('chat'), "Chat Animate in")
-}
+  document.querySelector("body").style.overflow = "";
+  pgia.play(document.getElementById("chat"), "Chat Animate in");
+};
 
 /*
  * Handle homepage intro
@@ -684,7 +710,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
   if (isMobile) {
     const word = document.querySelector(".splash-page__main-text").innerText;
     document.querySelector(".loader").style.display = "none";
-    
+
     playTransitionText(word, "Blur In", () => {
       gsap.to(".header, .footer, .webgl", {
         autoAlpha: 1,
@@ -701,11 +727,10 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       });
 
       setTimeout(() => {
-        pgia.play(document.getElementById('chat'), "Chat Animate in")
+        pgia.play(document.getElementById("chat"), "Chat Animate in");
 
         setFirstVisit();
       }, 1000);
-
     });
   } else if (localStorage.getItem("repeat_visitor")) {
     document.querySelector(".loader").style.display = "none";
@@ -727,11 +752,11 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         gsap.to(".mode-selector", {
           filter: "blur(0px)",
         });
-        
+
         setTimeout(() => {
           destroyIntro(document.querySelector(".splash-pages"));
 
-          pgia.play(document.getElementById('chat'), "Chat Animate in")
+          pgia.play(document.getElementById("chat"), "Chat Animate in");
 
           triggerPointPopup("Do you come here often?", 1, "repeat_visit");
         }, 1000);
@@ -739,13 +764,13 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     );
   } else {
     // First launch of direct to homepage
-    const scrollDown = document.querySelector(".splash-page-one__scroll-down")
+    const scrollDown = document.querySelector(".splash-page-one__scroll-down");
     scrollDown.style.display = "";
     document.querySelector(".backdrop-blur").style.display = "";
     document.querySelector("#backdrop").style.opacity = "0";
     document.querySelector("#backdrop").style.visibility = "hidden";
     document.querySelector(".splash-pages").style.display = "";
-    document.querySelector('body').style.overflow = 'auto'
+    document.querySelector("body").style.overflow = "auto";
 
     // Play audio text animation
     if (!isSafari) {
@@ -762,22 +787,28 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       });
     }
 
-    const splashText = document.querySelector(
-      ".splash-page__main-text"
-    );
+    const splashText = document.querySelector(".splash-page__main-text");
     if (splashText) {
-      const splashTexttl = gsap.timeline({})
+      const splashTexttl = gsap.timeline({});
       splashTexttl.from(splashText, {
         autoAlpha: 0,
       });
 
-      splashTexttl.from(".splash-page__privacy-policy-text", {
-        autoAlpha: 0,
-      }, "-=50%");
+      splashTexttl.from(
+        ".splash-page__privacy-policy-text",
+        {
+          autoAlpha: 0,
+        },
+        "-=50%"
+      );
 
-      splashTexttl.from(scrollDown, {
-        autoAlpha: 0,
-      }, "-=50%")
+      splashTexttl.from(
+        scrollDown,
+        {
+          autoAlpha: 0,
+        },
+        "-=50%"
+      );
     }
 
     svgLogoTimeline = gsap.timeline({});
@@ -815,8 +846,8 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
   }
 
   setTimeout(() => {
-    pgia.play(document.getElementById('chat'), "Chat Animate in")
-  }, 2000)
+    pgia.play(document.getElementById("chat"), "Chat Animate in");
+  }, 2000);
 } else {
   // to any other page
   sessionStorage.setItem("has_navigated", "true");
@@ -833,13 +864,13 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
     });
   }
 
-  window.addEventListener('click', (e) => {
-    if (e.target.classList.contains('background')) {
-      e.preventDefault()
+  window.addEventListener("click", (e) => {
+    if (e.target.classList.contains("background")) {
+      e.preventDefault();
 
-      navBack()
+      navBack();
     }
-  })
+  });
 
   const leadText = gsap.utils.toArray(".lead-text");
   if (leadText.length) {
@@ -1014,14 +1045,14 @@ if (blurOutLinks.length) {
   });
 }
 
-window.addAudioClass = function(el) {
+window.addAudioClass = function (el) {
   setTimeout(() => {
     el.classList.add("interaction");
   }, 1 * 1000);
-}
+};
 
-window.addEventListener('DOMContentLoaded', () => {
-  import("./experience.js")
-})
+window.addEventListener("DOMContentLoaded", () => {
+  import("./experience.js");
+});
 
-require('./page-loader')
+require("./page-loader");

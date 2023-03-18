@@ -2133,3 +2133,32 @@ box {
   -o-transition: opacity 1s ease-in-out;
   transition: opacity 1s ease-in-out;
 }
+
+.chat-popup__popular-suggestions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.5rem;
+  overflow-x: scroll;
+}
+
+.chat-popup__suggestion {
+  background-color: #1e1e1e;
+  color: var(--color-brand-white);
+  border-radius: 20px;
+  margin-right: 5px;
+  font-size: 0.78em;
+  border: 1px solid #454545;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
+.chat-popup__suggestion:hover {
+  background-color: #3b3b3b;
+}
