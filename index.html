@@ -49,35 +49,68 @@
         <meta name="theme-color" content="#171d1a"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <!-- Google Tag Manager -->
-        <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-M8Z5BBT');</script>
         <!-- End Google Tag Manager -->
-        <!-- End Google Tag Manager -->
-        <script>
-  /*
-      if (navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.register(
-          new URL('sw.js', import.meta.url),
-          {type: 'module'}
-        );
-      }*/
-    </script>
+        <script type="module">
+            // This code sample uses features introduced in Workbox v6.
+            import {Workbox} from 'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-window.prod.mjs';
+          
+            if ('serviceWorker' in navigator) {
+              const wb = new Workbox('/sw.js');
+              let registration;
+          
+              const showSkipWaitingPrompt = async (event) => {
+                // Assuming the user accepted the update, set up a listener
+                // that will reload the page as soon as the previously waiting
+                // service worker has taken control.
+                wb.addEventListener('controlling', () => {
+                  // At this point, reloading will ensure that the current
+                  // tab is loaded under the control of the new service worker.
+                  // Depending on your web app, you may want to auto-save or
+                  // persist transient state before triggering the reload.
+                  window.location.reload();
+                });
+          
+                // When `event.wasWaitingBeforeRegister` is true, a previously
+                // updated service worker is still waiting.
+                // You may want to customize the UI prompt accordingly.
+          
+                // This code assumes your app has a promptForUpdate() method,
+                // which returns true if the user wants to update.
+                // Implementing this is app-specific; some examples are:
+                // https://open-ui.org/components/alert.research or
+                // https://open-ui.org/components/toast.research
+                const updateAccepted = await promptForUpdate();
+          
+                if (updateAccepted) {
+                  wb.messageSkipWaiting();
+                }
+              };
+          
+              // Add an event listener to detect when the registered
+              // service worker has installed but is waiting to activate.
+              wb.addEventListener('waiting', (event) => {
+                showSkipWaitingPrompt(event);
+              });
+          
+              wb.register();
+            }
+          </script>
         <script src="https://anywebsite.ai/chatbot/chatbot.js"></script>
         <script>
-var _chatbot = window._chatbot = window._chatbot || [];
-_chatbot.website = '01gv7xp3majsqehqgrmbj6f5wb';
-_chatbot.domainName = 'jupiterandthegiraffe.com';
-_chatbot.frameMode = true;
-_chatbot.width = 'auto';
-_chatbot.height = '500px';
-_chatbot.hello = 'I\'m here to help. Try asking what we do, who our team is or you can browse by closing this window and clicking the \'browse\' button over at the top left.';
-_chatbot.replying = 'Thinking...'
-
-</script>
+            var _chatbot = window._chatbot = window._chatbot || [];
+            _chatbot.website = '01gv7xp3majsqehqgrmbj6f5wb';
+            _chatbot.domainName = 'jupiterandthegiraffe.com';
+            _chatbot.frameMode = true;
+            _chatbot.width = 'auto';
+            _chatbot.height = '500px';
+            _chatbot.hello = 'I\'m here to help. Try asking what we do, who our team is or you can browse by closing this window and clicking the \'browse\' button over at the top left.';
+            _chatbot.replying = 'Thinking...'
+        </script>
         <style>.anycb-popup-container .anycb-popup-header { display: none; } .anycb-popup-container { background: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button { margin-top: 0; margin-bottom: 0; background-color: transparent; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:hover, .keyboard-user .anycb-popup-container .anycb-popup-form .anycb-popup-form-button:focus { background-color: var(--color-brand-white); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-button .anycb-popup-form-button-icon { fill: var(--color-brand-black) !important; } .anycb-popup-form { height: 50px; display: flex; align-items: center; } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input { margin: 0; color: var(--color-brand-white); background-color: rgba(255, 255, 255, 0.2); transition: background-color 1s ease-in-out; font-size: 1rem; } @media (min-width: 567px) { .anycb-popup-container .anycb-popup-form .anycb-popup-form-input {  font-size: 0.875rem; } } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input::placeholder { color: rgba(255, 255, 255, 0.5); } .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:hover, .keyboard-user .anycb-popup-container .anycb-popup-form .anycb-popup-form-input:focus { background-color: rgba(255, 255, 255, 0.4); } .anycb-message-container .anycb-message-c.anycb-message-c-assistant { background-color: rgba(255, 255, 255, 0.2); color: var(--color-brand-white); backdrop-filter: blur(5px); } .anycb-message-container .anycb-message-c.anycb-message-c-user { background-color: var(--color-brand-yellow); color: var(--color-brand-black); } .anycb-popup-messages-replying { animation: blinking infinite 1s ease-in-out alternate; } @keyframes blinking { from {  opacity: 0; }  to {  opacity: 1; } } .anycb-container { padding: 0; } .anycb-message-container .anycb-message-c { max-width: 250px; }</style>
     </head>     
     <body>
