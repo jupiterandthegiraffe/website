@@ -4,6 +4,8 @@ import { Rive } from "@rive-app/canvas";
 
 require("./audio-elements");
 
+console.log("another test update");
+
 gsap.registerPlugin(SplitText, DrawSVGPlugin);
 
 let isSafari = false;
