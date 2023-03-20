@@ -2,8 +2,7 @@
   "repository": "#",
   "license": "UNLICENSED",
   "scripts": {
-    "generateSW": "npx workbox-cli generateSW workbox-config.js",
-    "build": "npm run generateSW && webpack --config ./bundler/webpack.prod.js",
+    "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack --config ./bundler/webpack.dev.js",
     "start": "npm run dev"
   },
