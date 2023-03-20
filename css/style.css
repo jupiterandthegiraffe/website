@@ -2108,7 +2108,6 @@ box {
   display: block;
   border-radius: 100px;
   position: relative;
-  margin: 0 auto;
 }
 .switch-label:after {
   content: "";
