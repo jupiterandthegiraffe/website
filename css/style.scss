@@ -1996,6 +1996,7 @@ box {
 .legacy-link {
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    visibility: hidden;
 }
 
 .chat-popup__popular-suggestions {

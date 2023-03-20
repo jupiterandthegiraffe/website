@@ -26,12 +26,16 @@ if (legacyMode) {
       legacyLinks.forEach((link) => {
         link.style.transition = "";
         link.style.opacity = 1;
+        link.style.visibility = "visible";
       });
     } else {
       sessionStorage.removeItem("legacy_mode");
       legacyLinks.forEach((link) => {
         link.style.transition = "";
         link.style.opacity = 0;
+        setTimeout(() => {
+          link.style.visibility = "hidden";
+        }, 1000);
       });
     }
   });
@@ -43,6 +47,7 @@ if (sessionStorage.getItem("legacy_mode")) {
   legacyLinks.forEach((link) => {
     link.style.transition = "none";
     link.style.opacity = 1;
+    link.style.visibility = "visible";
   });
 }
 
