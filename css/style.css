@@ -2162,3 +2162,33 @@ box {
 .chat-popup__suggestion:hover {
   background-color: #3b3b3b;
 }
+
+.chat-popup__status-indicator {
+  width: 5px;
+  height: 5px;
+  background-color: green;
+  border-radius: 50%;
+}
+.chat-popup__status-indicator--major, .chat-popup__status-indicator--critical {
+  background-color: red;
+}
+.chat-popup__status-indicator--minor {
+  background-color: var(--color-brand-yellow);
+}
+
+.chat-popup__status {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chat-popup__status-message {
+  font-size: 0.75rem;
+  margin-left: 5px;
+}

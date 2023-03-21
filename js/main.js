@@ -331,6 +331,32 @@ if (chat) {
       }, 0);
     });
   });
+
+  const status = document.querySelector(".chat-popup__status");
+  const getStatus = async () => {
+    try {
+      const response = await fetch(
+        "https://status.openai.com/api/v2/status.json",
+        {
+          method: "GET",
+        }
+      );
+
+      const data = await response.json();
+
+      status.querySelector(".chat-popup__status-message").innerHTML =
+        data.status.description;
+      status
+        .querySelector(".chat-popup__status-indicator")
+        .classList.add(
+          `chat-popup__status-indicator--${data.status.indicator}`
+        );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  getStatus();
 }
 
 // To do with pressing escape on detail pages
