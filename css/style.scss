@@ -186,12 +186,7 @@ html[data-pgc-master="masterpage-detail.html"] body {
 
 a {
     color: var(--color-brand-white);
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-        color: var(--color-brand-yellow);
-    }
+    text-decoration: none
 }
 
 .light-mode a {
@@ -1849,8 +1844,8 @@ small {
 }
 
 .chat__button {
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     width: 100%;
     border: 1px solid #b8b8b8;
     border-style: solid;
@@ -1859,9 +1854,17 @@ small {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+    transition: background-color 1s ease-in-out, color 1s ease-in-out, border-color 1s ease-in-out;
     backdrop-filter: blur(5px);
     color: var(--color-brand-white);
+    animation: glowing 5s ease-in-out infinite;
+}
+
+@media (min-width:576px) {
+    .chat__button {
+        padding-top: 0.25em;
+        padding-bottom: 0.25em;
+    }
 }
 
 .chat__text {
@@ -2046,4 +2049,23 @@ box {
 .chat-popup__status-message {
     font-size: 0.75rem;
     margin-left: 5px;
+}
+
+@keyframes glowing {
+    0%,
+    75%,
+    100% {
+        border-color: #b8b8b8;
+        box-shadow: 0 0 5px rgba(255, 255, 0, 0.7);
+    }
+
+    25% {
+        border-color: #ffff00;
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+    }
+
+    50% {
+        border-color: #b8b8b8;
+        box-shadow: 0 0 5px rgba(255, 255, 0, 0.7);
+    }
 }
