@@ -87,13 +87,18 @@ function initScene(canvas) {
   const pointLight = new THREE.PointLight(0xffffff, 0.2);
   pointLight.position.set(-0.04, -0.5, 0.083);
 
-  const pointLight2 = new THREE.PointLight(0xffffff);
-  pointLight2.position.set(0.78, 1.114, 1.284);
-  pointLight2.decay = 2;
-  pointLight2.intensity = 8;
-  pointLight2.distance = 5;
-  pointLight2.castShadow = true;
-  scene.add(pointLight, pointLight2);
+  // const pointLight2 = new THREE.PointLight(0xffffff);
+  const spotLight = new THREE.SpotLight(0xffffff, 5, 3, Math.PI / 3, 0.5, 1);
+  // pointLight2.position.set(0.78, 1.114, 1.284);
+  spotLight.position.set(0.75, 1, 1.5);
+  spotLight.shadow.mapSize.width = 1024;
+  spotLight.shadow.mapSize.height = 1024;
+
+  spotLight.shadow.camera.near = 500;
+  spotLight.shadow.camera.far = 1;
+  spotLight.shadow.camera.fov = 30;
+  spotLight.castShadow = true;
+  scene.add(pointLight, spotLight);
 
   const textureLoader = new THREE.TextureLoader();
   const backgroundTexture = textureLoader.load(
@@ -111,7 +116,7 @@ function initScene(canvas) {
   backgroundMaterial.normalScale = new THREE.Vector2(0.5, 0.5);
   backgroundMaterial.roughnessMap = backgroundRough;
   backgroundMaterial.metalnessMap = backgroundRough;
-  backgroundMaterial.roughness = 5;
+  backgroundMaterial.roughness = 1;
   backgroundMaterial.metalness = 0;
 
   const originalCameraPosition = new THREE.Vector2();
@@ -141,6 +146,7 @@ function initScene(canvas) {
       scene.add(logo, bg);
 
       bg.material = backgroundMaterial;
+      bg.receiveShadow = true;
 
       originalCameraPosition.x = logo.rotation._x;
       originalCameraPosition.y = logo.rotation._y;
