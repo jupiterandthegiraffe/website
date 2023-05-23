@@ -2168,3 +2168,53 @@ box {
     font-size: 0.75rem;
     margin-left: 5px;
 }
+
+.cta-prompt {
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+}
+
+@media (min-width:576px) {
+    .cta-prompt {
+        display: flex;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 50px;
+    }
+}
+
+.cta-prompt__header {
+    font-size: 3rem;
+    margin: 0;
+}
+
+@media (min-width:576px) {
+    .cta-prompt__col {
+        width: 50%;
+    }
+}
+
+.cta-prompt__button {
+    padding: 1em;
+    display: inline-block;
+    border: 1px solid var(--color-brand-white);
+    font-weight: bold;
+}
+
+.cta-prompt__col-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cta-prompt__button:hover {
+    background-color: var(--color-brand-white);
+    color: var(--color-brand-black);
+}
+
+.cta-prompt__header span {
+    color: var(--color-brand-yellow);
+}
