@@ -1956,7 +1956,7 @@ small {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    max-width: 400px;
+    max-width: 480px;
     width: 100%;
     right: auto;
   }
