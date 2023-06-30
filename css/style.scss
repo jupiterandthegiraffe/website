@@ -350,11 +350,10 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -1;
+    z-index: 100;
     pointer-events: none;
 }
 
@@ -2217,4 +2216,11 @@ box {
 
 .cta-prompt__header span {
     color: var(--color-brand-yellow);
+}
+
+.hero__heading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

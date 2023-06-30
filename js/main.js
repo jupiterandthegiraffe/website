@@ -733,11 +733,24 @@ function setFirstVisit() {
   triggerPointPopup("Welcome to the club", 1, "visit_one");
 }
 
+const homepageHeading = document.getElementById('intro-title')
+let homepageHeadingTimeline = gsap.timeline({paused: true})
+    if (homepageHeading) {
+        const headingSplit = new SplitText(homepageHeading, {type: 'chars'})
+        gsap.set(homepageHeading, {autoAlpha: 1})
+        homepageHeadingTimeline.from(headingSplit.chars, {
+            autoAlpha: 0,
+            y: '100%',
+            stagger: 0.025,
+        })
+    }
+
 window.finishIntro = function (el) {
   destroyIntro(el);
   setFirstVisit();
   document.querySelector("body").style.overflow = "";
   pgia.play(document.getElementById("chat"), "Chat Animate in");
+  homepageHeadingTimeline.play()
 };
 
 /*
@@ -767,6 +780,8 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         pgia.play(document.getElementById("chat"), "Chat Animate in");
 
         setFirstVisit();
+
+        homepageHeadingTimeline.play()
       }, 1000);
     });
   } else if (localStorage.getItem("repeat_visitor")) {
@@ -793,7 +808,10 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         setTimeout(() => {
           destroyIntro(document.querySelector(".splash-pages"));
 
+          homepageHeadingTimeline.play()
+
           pgia.play(document.getElementById("chat"), "Chat Animate in");
+
 
           triggerPointPopup("Do you come here often?", 1, "repeat_visit");
         }, 1000);
@@ -883,6 +901,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
   }
 
   setTimeout(() => {
+    homepageHeadingTimeline.play()
     pgia.play(document.getElementById("chat"), "Chat Animate in");
   }, 2000);
 } else {
