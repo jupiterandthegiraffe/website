@@ -183,7 +183,6 @@ html[data-pgc-master="masterpage-detail.html"] body {
 
 .header__menu-button,
 .menu__close-button {
-    animation: blink 1s infinite ease-in;
     background: transparent;
     appearance: none;
     border: none;
@@ -2240,4 +2239,5 @@ box {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    white-space: nowrap;
 }
