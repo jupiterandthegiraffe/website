@@ -1,3 +1,5 @@
+const { SplitText } = require("gsap/dist/SplitText");
+
 function swing(p) {
   return 0.5 - Math.cos(p * Math.PI) / 2;
 }

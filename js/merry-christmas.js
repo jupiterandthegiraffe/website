@@ -1,4 +1,5 @@
 const { triggerPopup } = require("./helpers");
+const { SplitText } = require("gsap/dist/SplitText");
 
 exports.default = function () {
   triggerPopup("You're extra special. Merry Christmas!", 3, "merry_chrismas");

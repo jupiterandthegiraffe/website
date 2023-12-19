@@ -1,3 +1,5 @@
+const { SplitText } = require("gsap/dist/SplitText");
+
 exports.default = function () {
   const sections = gsap.utils.toArray(
     ".page-overlay > .page-overlay__content-container"

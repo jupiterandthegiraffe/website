@@ -1,6 +1,8 @@
 const constants = require("./constants");
 const helpers = require("./helpers");
 
+const { SplitText } = require("gsap/dist/SplitText");
+
 exports.default = function () {
   const { adjustVolume, playTransitionText, triggerPopup } = helpers;
   const { TRANSITIONTEXT } = constants;
