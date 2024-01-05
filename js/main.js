@@ -198,12 +198,20 @@ const footer = document.querySelector(".footer");
 /*
  * Scroll down button trigger
  */
+<<<<<<< Updated upstream
 const scrollDownButton = document.querySelector(
   ".splash-page-one__scroll-down"
 );
 if (scrollDownButton) {
   scrollDownButton.addEventListener("click", (e) => {
     e.preventDefault();
+=======
+window.removeEl = (elementToDelete) => {
+    if (elementToDelete) {
+        elementToDelete.parentNode.removeChild(elementToDelete);
+    }
+};
+>>>>>>> Stashed changes
 
     if (!isSafari) {
       sessionStorage.setItem("audio_on", "true");

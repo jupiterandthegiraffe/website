@@ -1475,13 +1475,14 @@ button[type="submit"] {
     }
 }
 
-.menu:focus-within {
-    transform: translateX(0);
+.keyboard-user .menu:focus-within {
+    transform: translateX(0) !important;
     opacity: 1;
 }
 
-.main-menu__list:focus-within {
-    transform: translateX(0);
+.keyboard-user .menu:focus-within .main-menu__list,
+.keyboard-user .menu:focus-within nav {
+    transform: translateX(0) !important;
 }
 
 #budget {

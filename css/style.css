@@ -1542,17 +1542,18 @@ button[type=submit]:hover, button[type=submit]:focus {
     padding-left: 10vw;
   }
 }
-.menu:focus-within {
-  -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-          transform: translateX(0);
+.keyboard-user .menu:focus-within {
+  -webkit-transform: translateX(0) !important;
+      -ms-transform: translateX(0) !important;
+          transform: translateX(0) !important;
   opacity: 1;
 }
 
-.main-menu__list:focus-within {
-  -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-          transform: translateX(0);
+.keyboard-user .menu:focus-within .main-menu__list,
+.keyboard-user .menu:focus-within nav {
+  -webkit-transform: translateX(0) !important;
+      -ms-transform: translateX(0) !important;
+          transform: translateX(0) !important;
 }
 
 #budget {
