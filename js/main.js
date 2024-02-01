@@ -232,10 +232,6 @@ if (scrollDownButton) {
     }
 
     window.scrollTo({ top: window.innerHeight, behaviour: "smooth" });
-
-    setTimeout(() => {
-      pgia.play(document.getElementById("chat"), "Chat Animate in");
-    }, 2000);
   });
 }
 
@@ -751,7 +747,6 @@ window.finishIntro = function (el) {
   destroyIntro(el);
   setFirstVisit();
   document.querySelector("body").style.overflow = "";
-  pgia.play(document.getElementById("chat"), "Chat Animate in");
   homepageHeadingTimeline.play();
 };
 
@@ -779,8 +774,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
       });
 
       setTimeout(() => {
-        pgia.play(document.getElementById("chat"), "Chat Animate in");
-
         setFirstVisit();
 
         homepageHeadingTimeline.play();
@@ -811,8 +804,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
           destroyIntro(document.querySelector(".splash-pages"));
 
           homepageHeadingTimeline.play();
-
-          pgia.play(document.getElementById("chat"), "Chat Animate in");
 
           triggerPointPopup("Do you come here often?", 1, "repeat_visit");
         }, 1000);
@@ -903,7 +894,6 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
 
   setTimeout(() => {
     homepageHeadingTimeline.play();
-    pgia.play(document.getElementById("chat"), "Chat Animate in");
   }, 2000);
 } else {
   // to any other page

@@ -2432,3 +2432,7 @@ input[type=range]:focus::-ms-fill-upper {
         display: block;
     }
 }
+
+.main-menu__links:hover {
+    opacity: .8;
+}

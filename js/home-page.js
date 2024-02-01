@@ -82,10 +82,6 @@ exports.default = function () {
       }
 
       window.scrollTo({ top: window.innerHeight, behaviour: "smooth" });
-
-      setTimeout(() => {
-        pgia.play(document.getElementById("chat"), "Chat Animate in");
-      }, 2000);
     });
   }
 
@@ -359,10 +355,9 @@ exports.default = function () {
   }
 
   window.finishIntro = function (el) {
-    destroyIntro(document.querySelector('.splash-pages'));
+    destroyIntro(document.querySelector(".splash-pages"));
     setFirstVisit();
     document.querySelector("body").style.overflow = "";
-    pgia.play(document.getElementById("chat"), "Chat Animate in");
     homepageHeadingTimeline.play();
   };
 
@@ -381,7 +376,6 @@ exports.default = function () {
   if (sessionStorage.getItem("has_navigated")) {
     setTimeout(() => {
       homepageHeadingTimeline.play();
-      pgia.play(document.getElementById("chat"), "Chat Animate in");
     }, 2000);
   }
 
