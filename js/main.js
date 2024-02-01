@@ -731,15 +731,33 @@ function setFirstVisit() {
   triggerPointPopup("Welcome to the club", 1, "visit_one");
 }
 
-const homepageHeading = document.getElementById("intro-title");
+const homepageHeading = gsap.utils.selector("#intro-title");
 let homepageHeadingTimeline = gsap.timeline({ paused: true });
 if (homepageHeading) {
-  const headingSplit = new SplitText(homepageHeading, { type: "chars" });
-  gsap.set(homepageHeading, { autoAlpha: 1 });
-  homepageHeadingTimeline.from(headingSplit.chars, {
+  const weBuild = homepageHeading(".we-build");
+  const immersiveWebsites = homepageHeading(".immersive-websites");
+  const experiences = homepageHeading(".experiences");
+
+  const headingSplit = new SplitText(immersiveWebsites, { type: "chars" });
+  gsap.set("#intro-title", { autoAlpha: 1 });
+
+  homepageHeadingTimeline.from(weBuild, {
     autoAlpha: 0,
     y: "100%",
-    stagger: 0.025,
+  });
+
+  homepageHeadingTimeline.from(
+    headingSplit.chars,
+    {
+      autoAlpha: 0,
+      y: "100%",
+      stagger: 0.025,
+    },
+    "<"
+  );
+
+  homepageHeadingTimeline.from(experiences, {
+    autoAlpha: 0,
   });
 }
 
@@ -777,7 +795,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
         setFirstVisit();
 
         homepageHeadingTimeline.play();
-      }, 1000);
+      }, 500);
     });
   } else if (localStorage.getItem("repeat_visitor")) {
     document.querySelector(".loader").style.display = "none";
@@ -806,7 +824,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
           homepageHeadingTimeline.play();
 
           triggerPointPopup("Do you come here often?", 1, "repeat_visit");
-        }, 1000);
+        }, 500);
       }
     );
   } else {
@@ -894,7 +912,7 @@ if (!sessionStorage.getItem("has_navigated") && isHomePage) {
 
   setTimeout(() => {
     homepageHeadingTimeline.play();
-  }, 2000);
+  }, 1000);
 } else {
   // to any other page
   sessionStorage.setItem("has_navigated", "true");
