@@ -1,8 +1,9 @@
 import type { Context } from "@netlify/functions"
+import twilio from "twilio";
 
 const accountSid = Netlify.env.get("TWILIO_ACCOUNT_SID");
 const authToken = Netlify.env.get("TWILIO_AUTH_TOKEN");
-const client = require('twilio')(accountSid, authToken);
+const client = twilio(accountSid, authToken);
 const CURRENT_NUMBER = Netlify.env.get("CURRENT_NUMBER");
 const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 
