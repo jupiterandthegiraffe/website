@@ -18,7 +18,7 @@ const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 
 export default async (req: any, context: Context) => {
   console.log('Received message:', req);
-  const POSTData: any = querystring.parse(req.body.source);
+  const POSTData: any = querystring.parse(req.body);
   console.log('POSTData:', POSTData);
   
   try {
