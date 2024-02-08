@@ -15,7 +15,7 @@ type Response = {
 }
 
 export default async (req: Response, context: Context) => {
-  console.log('Received message:', req.body);
+  console.log('Received message:', req);
   
   try {
     const message = await client.messages.create({
