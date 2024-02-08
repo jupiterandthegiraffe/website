@@ -17,8 +17,8 @@ type Response = {
 }
 
 export default async (req: Response, context: Context) => {
+  console.log('Received message:', req);
   const POSTData: any = querystring.parse(req.body.source);
-  console.log('Received message:', POSTData);
   
   try {
     const message = await client.messages.create({
