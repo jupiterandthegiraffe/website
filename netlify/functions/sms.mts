@@ -1,5 +1,6 @@
 import type { Context } from "@netlify/functions"
 import twilio from "twilio";
+import querystring from "querystring"
 
 const accountSid = Netlify.env.get("TWILIO_ACCOUNT_SID");
 const authToken = Netlify.env.get("TWILIO_AUTH_TOKEN");
@@ -9,19 +10,21 @@ const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 
 type Response = {
   body: {
-    Body: string,
-    From: string
+    stream: string | undefined,
+    source: string,
+    length: number,
   }
 }
 
 export default async (req: Response, context: Context) => {
-  console.log('Received message:', req);
+  const POSTData: any = querystring.parse(req.body.source);
+  console.log('Received message:', POSTData);
   
   try {
     const message = await client.messages.create({
-      body: req.body.Body,
-      from: req.body.From || TWILIO_NUMBER,
-      to: CURRENT_NUMBER,
+      body: POSTData.Body,
+      from: POSTData.From || TWILIO_NUMBER,
+      to: CURRENT_NUMBER as string,
     });
 
     console.log(message.sid); // Log the call SID for reference
