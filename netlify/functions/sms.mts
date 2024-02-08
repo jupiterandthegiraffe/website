@@ -10,12 +10,12 @@ const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 type Response = {
   body: {
     Body: string,
-    From: number
+    From: string
   }
 }
 
 export default async (req: Response, context: Context) => {
-  console.log('Received message:', req.body.Body, req.body.From);
+  console.log('Received message:', req.body);
   
   try {
     const message = await client.messages.create({
