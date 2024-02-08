@@ -8,15 +8,15 @@ const client = twilio(accountSid, authToken);
 const CURRENT_NUMBER = Netlify.env.get("CURRENT_NUMBER");
 const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 
-type Response = {
-  body: {
-    stream: string | undefined,
-    source: string,
-    length: number,
-  }
-}
+// type Response = {
+//   body: {
+//     stream: string | undefined,
+//     source: string,
+//     length: number,
+//   }
+// }
 
-export default async (req: Response, context: Context) => {
+export default async (req: any, context: Context) => {
   console.log('Received message:', req);
   const POSTData: any = querystring.parse(req.body.source);
   
