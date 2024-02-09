@@ -22,21 +22,19 @@ exports.handler = async (event, context, callback) => {
       html: `<p>New Text Code</p><strong>${params.Body}</strong>`,
     });
 
-    return Response.json({
-      success: true,
-      message: "Message sent successfully",
-      status: 200,
-    });
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Text sent successfully!" }),
+    };
 
     // return new Response(twiml.toString(), {
     //   headers: { "Content-Type": "text/xml" },
     // });
   } catch (error) {
     console.log(error);
-    return Response.json({
-      success: false,
-      message: "Failed to send message",
-      status: 500,
-    });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: error.message }),
+    };
   }
 };
