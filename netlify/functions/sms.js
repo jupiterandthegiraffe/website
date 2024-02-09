@@ -1,10 +1,10 @@
 const twilio = require("twilio");
 
-const accountSid = Netlify.env.get("TWILIO_ACCOUNT_SID");
-const authToken = Netlify.env.get("TWILIO_AUTH_TOKEN");
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
-const CURRENT_NUMBER = Netlify.env.get("CURRENT_NUMBER");
-const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
+const CURRENT_NUMBER = process.env.CURRENT_NUMBER;
+const TWILIO_NUMBER = process.env.TWILIO_NUMBER;
 
 exports.handler = async (event, context, callback) => {
   const body = JSON.parse(event.body);
