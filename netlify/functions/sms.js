@@ -1,10 +1,5 @@
-const twilio = require("twilio");
-
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = twilio(accountSid, authToken);
-const CURRENT_NUMBER = process.env.CURRENT_NUMBER;
-const TWILIO_NUMBER = process.env.TWILIO_NUMBER;
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.handler = async (event, context, callback) => {
   const urlParams = new URLSearchParams(event.body);
@@ -19,13 +14,13 @@ exports.handler = async (event, context, callback) => {
   }
 
   try {
-    const message = await client.messages.create({
-      body: params.Body,
-      from: params.From || TWILIO_NUMBER,
-      to: CURRENT_NUMBER,
+    await sgMail.send({
+      to: process.env.EMAIL,
+      from: "ToobSquid <bot@toobsquid.com>",
+      subject: "Text Code!",
+      text: params.Body,
+      html: `<p>New Text Code</p><strong>${params.body}</strong>`,
     });
-
-    console.log(message.sid); // Log the call SID for reference
 
     return Response.json({
       success: true,
