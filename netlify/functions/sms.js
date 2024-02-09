@@ -1,6 +1,4 @@
-import type { Context } from "@netlify/functions"
-import twilio from "twilio";
-import bodyParser from 'body-parser'
+const twilio = require("twilio");
 
 const accountSid = Netlify.env.get("TWILIO_ACCOUNT_SID");
 const authToken = Netlify.env.get("TWILIO_AUTH_TOKEN");
@@ -8,30 +6,24 @@ const client = twilio(accountSid, authToken);
 const CURRENT_NUMBER = Netlify.env.get("CURRENT_NUMBER");
 const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 
-// type Response = {
-//   body: {
-//     stream: string | undefined,
-//     source: string,
-//     length: number,
-//   }
-// }
+exports.handler = async (event, context, callback) => {
+  const body = JSON.parse(event.body);
 
-export default async (req: any, context: Context) => {
-  const { Body, From } = context.params
+  console.log(body);
 
-  if (!Body || !From) {
+  if (!body.body || !body.from) {
     return Response.json({
       success: false,
       message: "Invalid request",
       status: 400,
     });
   }
-  
+
   try {
     const message = await client.messages.create({
-      body: Body,
-      from: From || TWILIO_NUMBER,
-      to: CURRENT_NUMBER as string,
+      body: body.body,
+      from: body.from || TWILIO_NUMBER,
+      to: CURRENT_NUMBER,
     });
 
     console.log(message.sid); // Log the call SID for reference
@@ -53,4 +45,4 @@ export default async (req: any, context: Context) => {
       status: 500,
     });
   }
-}
+};
