@@ -7,6 +7,7 @@ const CURRENT_NUMBER = process.env.CURRENT_NUMBER;
 const TWILIO_NUMBER = process.env.TWILIO_NUMBER;
 
 exports.handler = async (event, context, callback) => {
+  console.log(event);
   const body = JSON.parse(event.body);
 
   console.log(body);
