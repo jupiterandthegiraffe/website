@@ -5,8 +5,6 @@ exports.handler = async (event, context, callback) => {
   const urlParams = new URLSearchParams(event.body);
   const params = Object.fromEntries(urlParams);
 
-  console.log(params, urlParams.get("Body"));
-
   if (!params.Body || !params.From) {
     return Response.json({
       success: false,
@@ -21,7 +19,7 @@ exports.handler = async (event, context, callback) => {
       from: "ToobSquid <bot@toobsquid.com>",
       subject: "Text Code!",
       text: params.Body,
-      html: `<p>New Text Code</p><strong>${params.body}</strong>`,
+      html: `<p>New Text Code</p><strong>${params.Body}</strong>`,
     });
 
     return Response.json({
