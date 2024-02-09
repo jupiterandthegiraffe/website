@@ -19,17 +19,13 @@ exports.handler = async (event, context, callback) => {
       from: "ToobSquid <bot@toobsquid.com>",
       subject: "Text Code!",
       text: params.Body,
-      html: `<p>New Text Code</p><strong>${params.Body}</strong>`,
+      html: `<p>New Text Code from ${params.From} (${params.FromCountry}):</p><strong>"${params.Body}"</strong>`,
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: "Text sent successfully!" }),
+      body: "Text sent successfully!",
     };
-
-    // return new Response(twiml.toString(), {
-    //   headers: { "Content-Type": "text/xml" },
-    // });
   } catch (error) {
     console.log(error);
     return {
