@@ -7,12 +7,11 @@ const CURRENT_NUMBER = process.env.CURRENT_NUMBER;
 const TWILIO_NUMBER = process.env.TWILIO_NUMBER;
 
 exports.handler = async (event, context, callback) => {
-  console.log(event);
-  const body = JSON.parse(event.body);
+  const params = new URLSearchParams(event.body);
 
-  console.log(body);
+  console.log(params);
 
-  if (!body.body || !body.from) {
+  if (!params.get("body") || !params.get("from")) {
     return Response.json({
       success: false,
       message: "Invalid request",
@@ -22,8 +21,8 @@ exports.handler = async (event, context, callback) => {
 
   try {
     const message = await client.messages.create({
-      body: body.body,
-      from: body.from || TWILIO_NUMBER,
+      body: params.get("body"),
+      from: params.get("from") || TWILIO_NUMBER,
       to: CURRENT_NUMBER,
     });
 
