@@ -1,6 +1,6 @@
 import type { Context } from "@netlify/functions"
 import twilio from "twilio";
-import querystring from "querystring"
+import bodyParser from 'body-parser'
 
 const accountSid = Netlify.env.get("TWILIO_ACCOUNT_SID");
 const authToken = Netlify.env.get("TWILIO_AUTH_TOKEN");
@@ -17,14 +17,20 @@ const TWILIO_NUMBER = Netlify.env.get("TWILIO_NUMBER");
 // }
 
 export default async (req: any, context: Context) => {
-  console.log('Received message:', req);
-  const POSTData: any = querystring.parse(req.body);
-  console.log('POSTData:', POSTData);
+  const { Body, From } = context.params
+
+  if (!Body || !From) {
+    return Response.json({
+      success: false,
+      message: "Invalid request",
+      status: 400,
+    });
+  }
   
   try {
     const message = await client.messages.create({
-      body: POSTData.Body,
-      from: POSTData.From || TWILIO_NUMBER,
+      body: Body,
+      from: From || TWILIO_NUMBER,
       to: CURRENT_NUMBER as string,
     });
 
