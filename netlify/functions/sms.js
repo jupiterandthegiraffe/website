@@ -5,6 +5,8 @@ exports.handler = async (event, context, callback) => {
   const urlParams = new URLSearchParams(event.body);
   const params = Object.fromEntries(urlParams);
 
+  console.log(params);
+
   if (!params.Body || !params.From) {
     return Response.json({
       success: false,
