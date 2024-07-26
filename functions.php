@@ -1,18 +1,4 @@
 <?php
-$pinegrow_run_code = true;
-
-/* Begin - Prevent broken project from crashing the Pinegrow editor */
-if(defined('DOING_AJAX') && DOING_AJAX && !empty($_REQUEST['action']) && strpos($_REQUEST['action'], 'pinegrow_api') === 0) {
-    $pinegrow_run_code = false; //do not run during Pinegrow API calls
-}
-if(strpos($_SERVER['REQUEST_URI'], '/wp-admin/admin.php?page=pinegrow-projects') === 0 || strpos($_SERVER['REQUEST_URI'], '/wp-login') === 0 || (strpos($_SERVER['REQUEST_URI'], '/wp-admin/plugins.php') === 0 && strpos($_SERVER['REQUEST_URI'], '/wp-admin/plugins.php?action=activate') === false)) {
-    //do not load when editor is loading, during login and plugin manipulation in admin, except when plugin is being activated
-    $pinegrow_run_code = false;
-}
-if( $pinegrow_run_code ) :
-
-/* End - Prevent broken project from crashing the Pinegrow editor */            
-?><?php
 if ( ! function_exists( 'jupiter_and_the_giraffe_setup' ) ) :
 
 function jupiter_and_the_giraffe_setup() {
@@ -683,5 +669,4 @@ if( !class_exists( 'PG_Helper_v2' ) ) { require_once "inc/wp_pg_helpers.php"; }
 if( !class_exists( 'PG_Smart_Walker_Nav_Menu' ) ) { require_once "inc/wp_smart_navwalker.php"; }
 
     /* Pinegrow generated Include Resources End */
-?><?php
-endif; //end if ( $pinegrow_run_plugin )
+?>

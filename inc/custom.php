@@ -1,9 +1,7 @@
 <?php
-/* 
+    /* 
     Use this file to add custom PHP code to your theme or plugin 
     */
-?><?php
-    
     function contact_form_process() {
         // do whatever you need in order to process the form.
         $name = ($_POST['name']);
