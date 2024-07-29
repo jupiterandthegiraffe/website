@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" wp-template wp-template-define-master-page wp-template-export-as="page-187.php" data-pgc-master="page.html" data-pgc-field="page_settings">
+<html lang="en" wp-template wp-template-export-as="page-187.php" wp-template-master="index.html">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>New page</title>
         <link href="css/theme.css" rel="stylesheet" type="text/css">
         <link href="css/style.css" rel="stylesheet">
+        <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>
     </head>
     <body>
         <header class="main-nav" data-pgc="jtg.main-nav">
@@ -15,7 +16,7 @@
                             <path d="M56.8923 10.1575H48.8707V14.8874H35.5155V9.93106L38.7921 6.53504H56.8256V0H36.274L29.0352 7.50184V21.4286H50.4119L56.8923 14.8874V10.1575Z" fill="var(--dark)"/>
                             <path d="M20.263 7.5H12.7908V13.9715H20.263V16.2166V16.7329V18.6239L15.7822 22.9402L15.1181 23.5886H0.105469V30H8.48376H8.80648H17.8799L26.8912 21.2833V16.7329V16.2166V7.5H20.263Z" fill="var(--dark)"/>
                         </svg></a>
-                    <div class="main-nav__nav" data-main-nav>
+                    <div class="main-nav__nav" data-main-menu>
                         <ul class="main-nav__list" cms-menu="primary">
                             <li>
                                 <a href="" class="current_page_item main-nav__list-link">Featured</a>
@@ -874,23 +875,73 @@
                             </div>
                         </div>
                     </div>
-                    <section class="contact-us" id="contact-us" data-lets-connect data-pgc="jtg.contact_us">
+                    <section class="contact-us" id="contact-us" data-contact-us-section data-pgc="jtg.contact_us">
                         <div class="contact-us__content">
-                            <h2 class="contact-us__header">Contact <div class="contact-us__header-us">us</div></h2>
-                            <p class="contact-us__content-paragraph">Send a message regarding your immersive project or website and we&apos;ll get back to you as soon as possible.</p>
-                            <a href="" class="angled-button" data-pgc="jtg.angled_button" data-pgc-field="button_attr"> <span style="display: block;" data-pgc-field="angled_button_content">Send Transmition</span></a>
+                            <h2 class="contact-us__header" data-contact-us-header>Contact <div class="contact-us__header-us">us</div></h2>
+                            <p class="contact-us__content-paragraph" data-contact-us-paragraph>Send a message regarding your immersive project or website and we&apos;ll get back to you as soon as possible.</p>
+                            <button class="angled-button" data-contact-us-button="" data-pg-ia='{"l":[{"name":"Open Contact Us Dialog","t":"$.contact-us__dialog","a":{"l":[{"t":"","l":[{"t":"tween","p":0,"d":0.5,"l":{"autoAlpha":1,"display":"flex","attr":{"open":"true"},"pointerEvents":"auto"}}]},{"t":".contact-us__dialog-inner","l":[{"t":"set","p":0,"d":0,"l":{"y":"50px"}},{"t":"tween","p":0,"d":0.5,"l":{"y":0,"autoAlpha":1,"pgCall":{"complete":"focusEl"}}}]}]}}]}'> <span>Send Transmition</span>
+                            </button>
                         </div>
-                        <img src="/wp-content/uploads/2024/07/contact-us.webp" width="904px" height="619px" loading="lazy" class="contact-us__image">
+                        <img src="/wp-content/uploads/2024/07/contact-us.webp" width="904px" height="619px" loading="lazy" class="contact-us__image" data-contact-us-image/>
+                        <div class="contact-us__dialog" open="false">
+                            <div class="contact-us__dialog-inner">
+                                <button class="contact-us__dialog-close-button" aria-label="Close contact us dialog" data-pg-ia="{&quot;l&quot;:[{&quot;name&quot;:&quot;Close Contact Us Dialog&quot;,&quot;t&quot;:&quot;$.contact-us__dialog&quot;,&quot;a&quot;:{&quot;l&quot;:[{&quot;t&quot;:&quot;&quot;,&quot;l&quot;:[{&quot;t&quot;:&quot;tween&quot;,&quot;p&quot;:0,&quot;d&quot;:0.5,&quot;l&quot;:{&quot;autoAlpha&quot;:0,&quot;pgCall&quot;:{&quot;complete&quot;:&quot;clearDialogAttributes&quot;},&quot;attr&quot;:{&quot;open&quot;:&quot;false&quot;}}}]}]}}]}">
+                                    <svg width="29" height="27" viewBox="0 0 29 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="2.70711" y1="1.29289" x2="27.4558" y2="26.0416" stroke="#FF4D14" stroke-width="2"></line>
+                                        <line x1="1.29289" y1="26.2929" x2="26.0416" y2="1.54416" stroke="#FF4D14" stroke-width="2"></line>
+                                    </svg>
+                                </button>
+                                <div class="contact-us__dialog-column">
+                                    <h3 class="contact-us__dialog-title">Send message</h3>
+                                    <form>
+                                        <div class="contact-us__form-input-wrapper">
+                                            <label for="name">
+                                                Full name                                    
+</label>
+                                            <input id="name" name="name" type="text">
+                                        </div>
+                                        <div class="contact-us__form-input-wrapper">
+                                            <label for="email">
+                                                Email                                    
+</label>
+                                            <input id="email" name="email" type="email">
+                                        </div>
+                                        <div class="contact-us__form-input-wrapper">
+                                            <label for="company">
+                                                Company                                    
+</label>
+                                            <input id="company" name="company" type="text">
+                                        </div>
+                                        <div class="contact-us__form-input-wrapper">
+                                            <label for="message">
+                                                Message                                    
+</label>
+                                            <textarea id="message" name="message" rows="4"></textarea>
+                                        </div>
+                                        <button type="submit" class="angled-button"><span>Send transmission</span>
+                                        </button>
+                                        <div class="contact-us__error">
+                                            Your message was sent!                                
+</div>
+                                        <div class="contact-us__success">
+                                            There was a problem, try again                                
+</div>
+                                    </form>
+                                </div>
+                                <div class="contact-us__dialog-column">
+                                    <h3 class="contact-us__dialog-title contact-us__dialog-title--book">Book a call</h3>
+                                </div><span class="contact-us__dialog-inner-divide"></span>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </div>
         </main>
         <footer class="footer" data-pgc="jtg.footer">
-            <button id="btn">Click me!</button>
             <div class="container">
                 <div class="footer__main-wrap">
                     <div>
-                        <p class="footer__header">Let&apos;s Connect <a href="mailto:info@jupiterandthegiraffe.com" class="footer__header-link">info@jupiterandthegiraffe.com</a></p>
+                        <p class="footer__header" data-footer-lets-connect data-pg-ia-hide>Let&apos;s Connect <a href="mailto:info@jupiterandthegiraffe.com" class="footer__header-link">info@jupiterandthegiraffe.com</a></p>
                     </div>
                     <div>
                         <div class="footer__bottom" data-footer-bottom>
@@ -912,5 +963,482 @@
                 </div>
             </div>
         </footer>
+        <script src="libs/SplitText.js" wp-enqueue-script="split_text"></script>
+        <script wp-enqueue-script="main_javascript" wp-enqueue-script-deps="split_text" wp-enqueue-script-register="true">
+            gsap.registerPlugin(SplitText)
+
+            const aboutProfiles = Array.from(document.querySelectorAll('.about__team-list article'))
+            const aboutTarget = document.querySelectorAll('[data-about-target]')
+
+            window.onAboutProgress = function(element, progress) {
+                const activeItem = Math.round(progress * aboutProfiles.length)
+                const currentActive = element.querySelector('.active')
+
+                if (currentActive) {
+                    currentActive.classList.remove('active')
+                }
+
+                aboutProfiles[Math.max(0, activeItem - 1)].classList.add('active')
+
+                gsap.to(aboutTarget, {
+                    rotate: (360 / aboutProfiles.length) * Math.max(0, activeItem - 1),
+                    duration: 2,
+                    ease: 'power4.out'
+                })
+            }
+
+            window.clearDialogAttributes = function(element) {
+                element.removeAttribute('style')
+            }
+
+            window.focusEl = function(element) {
+                element.querySelector('input').focus()
+            }
+
+            window.addEventListener('keyup', function(e) {
+                const openDialog = document.querySelector('[open="true"] [data-contact-us-close]')
+                if (e.key === 'Escape' && openDialog) {
+                    pgia.play(openDialog, 'Close Contact Us Dialog')
+                }
+            })
+
+            const form = document.querySelector('[data-contact-form]')
+            if (form) {
+                const successMessage = form.querySelector('.contact-us__success')
+                const errorMessage = form.querySelector('.contact-us__error')
+
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault()
+
+                    const formData = new FormData(e.currentTarget);
+                    formData.append("action", "contact_form");
+                    formData.append("nonce", formProcessing.nonce);
+
+                    try {
+                        const contactSend = await fetch(formProcessing.ajaxUrl, {
+                            method: 'POST',
+                            body: new URLSearchParams(formData)
+                        });
+
+                        const contactResponse = await contactSend.text()
+
+                        if (contactResponse !== '0') {
+                            throw new Error(contactResponse)
+                        }
+
+                        successMessage.style.display = 'flex'
+                    } catch(e) {
+                        console.log(e)
+                        errorMessage.style.display = 'flex'
+
+                        setTimeout(() => {
+                            gsap.to(errorMessage, {
+                                autoAlpha: 0,
+                                clearProps: 'all'
+                            })
+                        }, 2000)
+                    }
+                })
+            }
+
+            if (!window.sessionStorage.getItem('jatg:old-visitor')) {
+                const introTimeline = gsap.timeline({})
+
+                introTimeline.from(document.querySelector('.main-nav'), {
+                    y: '-100%'
+                })
+
+                introTimeline.from(document.querySelectorAll('[data-main-menu] li'), {
+                    x: function(index, target, targets) {
+                        return Math.max(10 * index, 10)
+                    },
+                    stagger: {
+                        from: 'end',
+                        each: 0.03
+                    },
+                    autoAlpha: 0,
+                    onComplete: function() {
+                        window.sessionStorage.setItem('jatg:old-visitor', true)
+                    }
+                })
+
+                const footerLetsConnect = document.querySelector('[data-footer-lets-connect]')
+                if (footerLetsConnect) {
+                    const letsConnectTimeline = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: footerLetsConnect,
+                            start: 'top 80%',
+                        }
+                    })
+
+                    const emailSplitText = new SplitText(footerLetsConnect.querySelector('a'), { type: 'chars'})
+
+                    letsConnectTimeline.to(footerLetsConnect, { autoAlpha: 1, delay: 0.3, duration: 0.01 })
+                    letsConnectTimeline.to(footerLetsConnect, { autoAlpha: 0, delay: 0.3, duration: 0.01 })
+                    letsConnectTimeline.to(footerLetsConnect, { autoAlpha: 1, delay: 0.3, duration: 0.01 })
+                    letsConnectTimeline.to(footerLetsConnect, { autoAlpha: 0, delay: 0.3, duration: 0.01 })
+                    letsConnectTimeline.to(footerLetsConnect, { autoAlpha: 1, delay: 0.3, duration: 0.01 })
+
+                    letsConnectTimeline.set(footerLetsConnect.querySelector('a'), { autoAlpha: 1 })
+
+                    letsConnectTimeline.from(emailSplitText.chars, { 
+                        autoAlpha: 0,
+                        stagger: 0.02,
+                        duration: 0.01
+                    })
+
+                    const footerBottom = document.querySelector('[data-footer-bottom]')
+                    gsap.set(footerBottom, { clipPath: 'inset(0)'})
+                }
+            } else {
+                const footer = document.querySelector('[data-footer-lets-connect]')
+                gsap.set(footer.querySelector('a'), { autoAlpha: 1 })
+                gsap.set(footer, { autoAlpha: 1 })
+            }
+
+            const aboutPageTimeline = gsap.timeline({})
+
+            const aboutPageTitle = document.querySelector('[data-about-page-title]')
+            if (aboutPageTitle) {
+                const aboutPageSplitText = new SplitText(aboutPageTitle, {type: 'chars,words'})
+                aboutPageTimeline.set(aboutPageTitle, { autoAlpha: 1 })
+                aboutPageTimeline.fromTo(aboutPageSplitText.chars, {
+                    y: '100%'
+                }, {
+                    y: 0,
+                    ease: "elastic.out(1,0.5)",
+                    stagger: 0.025,
+                    duration: 2.5
+                })
+            }
+
+            const aboutPageIntro = document.querySelector('[data-about-page-intro]')
+            if (aboutPageIntro) {
+                const aboutPageSplitText = new SplitText(aboutPageIntro, {type: 'chars,words'})
+                aboutPageTimeline.set(aboutPageIntro, {autoAlpha: 1}, "<")
+                aboutPageTimeline.fromTo(aboutPageSplitText.chars, {
+                    autoAlpha: 0
+                }, {
+                    autoAlpha: 1,
+                    duration: .1,
+                    stagger: 0.01
+                }, "<10%")
+            }
+
+            const aboutPageLead = document.querySelector('[data-about-page-lead]')
+            if (aboutPageLead) {
+                const aboutPageLeadSplitText = new SplitText(aboutPageLead, {type: 'chars,words'})
+                aboutPageTimeline.set(aboutPageLead, {autoAlpha: 1}, "<")
+                aboutPageTimeline.fromTo(aboutPageLeadSplitText.chars, {
+                    autoAlpha: 0
+                }, {
+                    autoAlpha: 1,
+                    duration: .1,
+                    stagger: 0.01
+                }, "<10%")
+            }
+
+            const homeSections = Array.from(document.querySelectorAll('[home-section-header]'))
+            if (homeSections.length) {
+                homeSections.forEach(section => {
+                    gsap.from(section.querySelector('h2'), {
+                        y: 50,
+                        autoAlpha: 0,
+                        scrollTrigger: {
+                            trigger: section,
+                            start: 'top bottom', 
+                            scrub: .5,
+                            once: true
+                        }
+                    })
+                })
+            }
+
+            /*
+             * HOME HERO SECTION
+             */
+            const homeHero = document.querySelector('[data-home-hero]')
+            if (homeHero) {
+                const homeHeroHeading = homeHero.querySelector('[data-home-hero-heading]')
+                const homeHeroTimeline = gsap.timeline({})
+                if (!window.sessionStorage.getItem('jatg:old-visitor')) {
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .5
+                    }, "<", 'start')
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                        delay: .5
+                    }, ">")
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .3
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                        delay: .3
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .2
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                        delay: .2
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 1,
+                        delay: .1
+                    })
+                    homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                        opacity: 0,
+                        delay: .1
+                    })
+                }
+                homeHeroTimeline.set(homeHero.querySelector('[data-home-hero-v4]'), {
+                    opacity: 1,
+                    delay: .1
+                })
+
+                const homeHeroDate = homeHero.querySelector('[data-date-target]')
+
+                gsap.from(homeHeroDate, {
+                    textContent: '2018',
+                    ease: "power1.in",
+                    snap: { textContent: 1 },
+                }, "<")
+
+                const homeHeroSpaceAdventure = new SplitText(document.querySelector('[data-home-hero-adventure]'), { type: 'words'})
+                
+                homeHeroTimeline.fromTo(homeHeroSpaceAdventure.words, {
+                    y: '100%'
+                }, {
+                    y: 0,
+                    stagger: 0.05,
+                    ease: "elastic.out(1,0.5)",
+                    duration: 1
+                }, "<")
+
+                const homeHeroTopBar = new SplitText(document.querySelector('[data-home-hero-top-bar]'), { type: 'words'})
+                homeHeroTimeline.fromTo(homeHeroTopBar.words, {
+                    autoAlpha: 0,
+                }, {
+                    autoAlpha: 1,
+                    duration: 0.01,
+                    stagger: 0.05
+                }, "<")
+
+                homeHeroTimeline.fromTo(homeHeroHeading.querySelectorAll('div'), {
+                    x: function(index, target, targets) { //function-based value
+                        return index % 2 ? -50 : 50;
+                    },
+                },{
+                    stagger: 0.025,
+                    x: 0,
+                }, "<")
+
+                homeHeroTimeline.fromTo(homeHeroHeading.querySelector('[data-home-hero-title-line]'), {
+                    y: '-100%'
+                }, {
+                    y: 0
+                }, "<")
+
+                homeHeroTimeline.set(homeHeroHeading.querySelectorAll('div'), {
+                    clipPath: 'inset(0%)'
+                }, "<")
+                
+                homeHeroTimeline.set(homeHeroHeading.querySelectorAll('div'), {
+                    x: function(index, element, target) {
+                        return index % 2 ? -50 : 50
+                    }
+                }, "<")
+
+                const taglineSplitText = new SplitText(homeHero.querySelector('[data-hero-home-tagline]'), { type: 'chars,words'})
+
+                homeHeroTimeline.fromTo(taglineSplitText.chars, {
+                    autoAlpha: 0,
+                }, {
+                    autoAlpha: 1,
+                    duration: 0.01,
+                    stagger: 0.01
+                }, "<25%")
+
+                homeHeroTimeline.fromTo(homeHero.querySelector('[data-home-hero-bg-image]'), {
+                    x: -50,
+                    autoAlpha: 0,
+                    clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)'
+                }, {
+                    x: 0,
+                    autoAlpha: 1,
+                    clipPath: 'polygon(100% 0, 0 0, 0 100%, 100% 100%)'
+                }, "<50%")                
+
+                homeHeroTimeline.to(homeHero.querySelector('[home-hero-button-wrap]'), {
+                    autoAlpha: 1,
+                    duration: 1
+                }, "<50%")
+            }
+
+            /*
+             * HOME OUR PROCESS SECTION
+             */
+            const ourProcessSection = document.querySelector('[home-our-process-section]')
+            if (ourProcessSection) {
+                const ourProcessTimeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: document.querySelector('[home-our-process-section]'),
+                        start: 'start center',
+                        once: true,
+                    }
+                })
+
+                ourProcessTimeline.fromTo(ourProcessSection.querySelector('.our-process__content'), {
+                    scaleY: .2,
+                    scaleX: .2
+                }, {
+                    scaleY: 1,
+                    scaleX: .2
+                }, "<")
+                
+                ourProcessTimeline.to(ourProcessSection.querySelector('.our-process__content'), {
+                    scaleX: 1
+                })
+
+                ourProcessTimeline.set(ourProcessSection.querySelector('.our-process__content span'), {
+                    autoAlpha: 1,
+                    duration: 0.025
+                })
+
+                const contentSplit = new SplitText(ourProcessSection.querySelector('.our-process__content span'), { type: 'chars,words'})
+                
+                ourProcessTimeline.from(contentSplit.chars, {
+                    autoAlpha: 0,
+                    duration: 0.01,
+                    stagger: 0.01
+                }, "<") 
+
+                gsap.from(ourProcessSection.querySelector('.vertical-text-right [data-number]'), {
+                    textContent: 0,
+                    ease: "power1.in",
+                    snap: { textContent: 1 },
+                }, "<")
+
+                const codeSplitText = new SplitText(ourProcessSection.querySelector('code'), { type: 'chars'})
+                ourProcessTimeline.from(codeSplitText.chars, {
+                    autoAlpha: 0,
+                    duration: 0.01,
+                    stagger: 0.02,
+                }, "<")
+
+                ourProcessTimeline.from(ourProcessSection.querySelector('[data-graphic-center]'), {
+                    autoAlpha: 0,
+                    scale: 0.7
+                }, "<")
+                
+                ourProcessTimeline.from(ourProcessSection.querySelector('[data-graphic-top-right]'), {
+                    autoAlpha: 0,
+                    x: -50,
+                    y: 50
+                }, "<10%")
+                
+                ourProcessTimeline.from(ourProcessSection.querySelector('[data-graphic-bottom-left]'), {
+                    autoAlpha: 0,
+                    x: 50,
+                    y: -50
+                }, "<")
+
+                gsap.from(ourProcessSection.querySelector('.vertical-text-left [data-number]'), {
+                    textContent: 0,
+                    ease: "power1.in",
+                    snap: { textContent: 1 },
+                })
+            }
+
+            /*
+             * CONTACT US SECTION
+             */
+            const contactUsSection = document.querySelector('[data-contact-us-section]')
+            if (contactUsSection) {
+                const contactUsTimeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: contactUsSection,
+                        start: 'top 90%',
+                    }
+                })
+
+                contactUsTimeline.from(contactUsSection.querySelector('[data-contact-us-header]'), {
+                    x: 50,
+                    autoAlpha: 0,
+                })
+                
+                contactUsTimeline.from(contactUsSection.querySelector('[data-contact-us-image]'), {
+                    x: -50,
+                    autoAlpha: 0,
+                }, "<")
+
+                contactUsTimeline.from(contactUsSection.querySelector('[data-contact-us-header] div'), {
+                    x: 50,
+                    autoAlpha: 0,
+                }, "<50%")
+
+                const contactUsParagraphSplitText = new SplitText(contactUsSection.querySelector('[data-contact-us-paragraph]'), { type: 'chars' })
+
+                contactUsTimeline.from(contactUsParagraphSplitText.chars, {
+                    autoAlpha: 0,
+                    duration: 0.01,
+                    stagger: 0.03
+                }, "<10%")
+                
+                contactUsTimeline.fromTo(contactUsSection.querySelector('[data-contact-us-button]'), {
+                    y: -50,
+                    autoAlpha: 0,
+                }, {
+                    y: 0,
+                    autoAlpha: 1,
+                }, "")
+            }
+
+            const resultsList = Array.from(document.querySelectorAll('.results__item'))
+            if (resultsList.length) {
+                resultsList.forEach(result => {
+                    gsap.from(result, {
+                        y: 50,
+                        autoAlpha: 0,
+                        scrollTrigger: {
+                            trigger: result,
+                            start: 'top 90%'
+                        }
+                    })
+                })
+            }
+        </script>
+        <script src="pgia/lib/pgia.js"></script>
     </body>
 </html>

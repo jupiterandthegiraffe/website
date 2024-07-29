@@ -311,12 +311,16 @@ body.home {
     min-height: 100dvh;
 }
 
-@media (min-width:983px) {
+.home-hero__heading-stagger {
+    display: inline;
+}
+
+@media (min-width:769px) {
     .home-hero__heading-stagger {
         text-align: right;
-        clip-path: inset(0 0 0 100%);
         transition: all .3s ease-out;
-        display: inline;
+        display: block;
+        clip-path: inset(0 0 0 100%);
     }
 }
 
@@ -935,7 +939,7 @@ p + p {
     }
 }
 
-@media (min-width:983px) {
+@media (min-width:995px) {
     .home-hero__heading {
         font-size: 4rem;
         padding-bottom: 1.5rem;
@@ -946,9 +950,10 @@ p + p {
     }
 }
 
-@media (min-width:1125px) {
+@media (min-width:1315px) {
     .home-hero__heading {
         font-size: 5.37625rem;
+        border-bottom: 1px solid var(--dark);
     }
 }
 
@@ -1228,21 +1233,29 @@ p + p {
     right: 0;
     left: 0;
     z-index: 10;
-    display: none;
+
+    /* display: none */
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    opacity: 0;
+
+    /* opacity: 0 */
     pointer-events: none;
     backdrop-filter: blur(10px);
 }
 
 .contact-us__dialog-inner {
     background-color: #1F1C1D;
-    display: flex;
-    padding: 4.9375rem 4.1875rem;
+    padding: 1rem;
     position: relative;
-    gap: 14.125rem;
+}
+
+@media (min-width:640px) {
+    .contact-us__dialog-inner {
+        display: flex;
+        padding: 4.9375rem 4.1875rem;
+        gap: 14.125rem;
+    }
 }
 
 .contact-us__dialog-title {
@@ -1250,6 +1263,14 @@ p + p {
     text-transform: uppercase;
     color: #CECFCF;
     margin: 0 0 4.5625rem;
+}
+
+@media (max-width:639px) {
+    .contact-us__dialog-title {
+        margin-right: 3rem;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .contact-us__dialog-title--book {
@@ -1289,12 +1310,25 @@ p + p {
     margin-bottom: 3.75rem;
 }
 
+@media (max-width:639px) {
+    .contact-us__form-input-wrapper {
+        margin-bottom: 1.5rem;
+    }
+}
+
 .contact-us__dialog-close-button {
     background-color: transparent;
     position: absolute;
     top: 2.125rem;
     right: 2.125rem;
     border: 0;
+}
+
+@media (max-width:639px) {
+    .contact-us__dialog-close-button {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
 }
 
 .our-process__content {
@@ -1484,6 +1518,12 @@ p + p {
     bottom: 4.9375rem;
 }
 
+@media (max-width:639px) {
+    .contact-us__dialog-inner-divide {
+        display: none;
+    }
+}
+
 .about__team-list-target {
     display: none;
 }
@@ -1589,9 +1629,14 @@ p + p {
 }
 
 .home-hero__heading-text {
-    clip-path: inset(0 100% 0 0);
-    transition: all .3s ease-out;
     display: inline;
+}
+
+@media (min-width:769px) {
+    .home-hero__heading-text {
+        clip-path: inset(0 100% 0 0);
+        transition: all .3s ease-out;
+    }
 }
 
 .contact-us form {
@@ -1700,4 +1745,16 @@ p + p {
 } */
 .angled-button span {
     display: block;
+}
+
+@media (min-width:640px) {
+    .page__intro {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width:639px) {
+    .contact-us__dialog-inner .contact-us__dialog-column:nth-child(3) {
+        display: none;
+    }
 }
