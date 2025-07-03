@@ -1,1 +1,0 @@
-var crsaBoxShadowControl=function(){this.setValue=function(o){}};
