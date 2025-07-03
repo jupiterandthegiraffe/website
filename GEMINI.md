@@ -1,0 +1,3 @@
+- all files for Pinegrow are stored in src as html
+- all folders starting with \_ are Pinegrow configuration files and should mostly be ignored
+- You mostly want to ignore everything in wordpress folder as this is outputted from Pinegrow from contents in src directory
