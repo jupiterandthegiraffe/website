@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-User-agent: *
-Disallow: /thank-you
-
-Sitemap: https://jupiterandthegiraffe.com/sitemap.xml
