@@ -1,0 +1,7 @@
+/wordpress/
+.env*
+.cache/
+/src/_pgexport/
+/src/_pgbackup/
+/src/_pginfo/
+/src/css/font-awesome/

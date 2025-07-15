@@ -1,11 +1,12 @@
-// Global variables
-let currentQuestionIndex = 0;
-let currentSectionIndex = 0;
-let responses = {};
-let questionnaireData = null;
-let scoringData = null;
+// Global variables for managing the AI readiness assessment
+let currentQuestionIndex = 0;      // Tracks which question is currently being displayed
+let currentSectionIndex = 0;       // Tracks which section is currently active
+let responses = {};                // Stores user responses to questions
+let questionnaireData = null;      // Holds the questionnaire structure and questions
+let scoringData = null;            // Holds the scoring rules and result categories
 
-// Embedded fallback data
+// Embedded fallback data containing the complete questionnaire structure
+// Used when external data loading fails or is unavailable
 const FALLBACK_DATA = {
   questionnaire: {
     title: "AI Readiness & In-House Tool Development Assessment",
@@ -348,6 +349,7 @@ const FALLBACK_DATA = {
   },
 };
 
+// Fallback scoring system with category weights and result interpretations
 const FALLBACK_SCORING = {
   scoring: {
     categories: {
@@ -406,37 +408,40 @@ const FALLBACK_SCORING = {
   },
 };
 
-// Load questionnaire data
+// Load questionnaire data from external source or fallback
 async function loadQuestionnaireData() {
   // Start with fallback data immediately
+  // In a full implementation, this would attempt to fetch from external API
   questionnaireData = FALLBACK_DATA;
   scoringData = FALLBACK_SCORING;
 }
 
-// Initialize application
+// Initialize application when DOM is ready
 document.addEventListener("DOMContentLoaded", async function () {
   loadQuestionnaireData();
   showPage("welcome-page");
 });
 
-// Page management
+// Page management - handles navigation between different pages/screens
 function showPage(pageId) {
+  // Hide all pages by removing active class
   document.querySelectorAll(".question-page").forEach((page) => {
     page.classList.remove("active");
   });
+  // Show the requested page by adding active class
   document.getElementById(pageId).classList.add("active");
 }
 
-// Start assessment
+// Start assessment - initializes the assessment process
 function startAssessment() {
   showPage("assessment-page");
-  currentQuestionIndex = 0;
-  currentSectionIndex = 0;
-  responses = {};
-  displayQuestion();
+  currentQuestionIndex = 0;    // Reset to first question
+  currentSectionIndex = 0;     // Reset to first section
+  responses = {};              // Clear any previous responses
+  displayQuestion();           // Display the first question
 }
 
-// Get all questions from all sections
+// Get all questions from all sections - flattens the nested structure
 function getAllQuestions() {
   const allQuestions = [];
   if (
@@ -444,8 +449,11 @@ function getAllQuestions() {
     questionnaireData.questionnaire &&
     questionnaireData.questionnaire.sections
   ) {
+    // Iterate through each section
     questionnaireData.questionnaire.sections.forEach((section) => {
+      // Iterate through each question in the section
       section.questions.forEach((question) => {
+        // Add section metadata to each question for easy access
         allQuestions.push({
           ...question,
           section_id: section.section_id,
@@ -458,7 +466,7 @@ function getAllQuestions() {
   return allQuestions;
 }
 
-// Display current question
+// Display current question - main function for rendering the current question
 function displayQuestion() {
   const allQuestions = getAllQuestions();
   const currentQuestion = allQuestions[currentQuestionIndex];
@@ -473,13 +481,13 @@ function displayQuestion() {
 
   console.log("Displaying question:", currentQuestion);
 
-  // Update progress
+  // Update progress indicators
   updateProgress();
 
-  // Update section steps
+  // Update section navigation steps
   updateSectionSteps();
 
-  // Display section info
+  // Display section information
   const sectionTitle = document.getElementById("section-title");
   const sectionDescription = document.getElementById("section-description");
 
@@ -487,11 +495,11 @@ function displayQuestion() {
   if (sectionDescription)
     sectionDescription.textContent = currentQuestion.section_description;
 
-  // Display question
+  // Display the question text
   const questionText = document.getElementById("question-text");
   if (questionText) questionText.textContent = currentQuestion.question;
 
-  // Clear previous options
+  // Clear previous options and render new ones
   const optionsContainer = document.getElementById("question-options");
   if (optionsContainer) {
     optionsContainer.innerHTML = "";
@@ -506,19 +514,20 @@ function displayQuestion() {
     }
   }
 
-  // Update navigation buttons
+  // Update navigation button states
   updateNavigationButtons();
 
-  // Pre-fill existing responses
+  // Pre-fill any existing responses for this question
   prefillResponse(currentQuestion.id);
 }
 
-// Create single choice options
+// Create single choice options - generates radio buttons for single-select questions
 function createSingleChoiceOptions(question, container) {
   question.options.forEach((option, index) => {
     const optionDiv = document.createElement("div");
     optionDiv.className = "option-item";
 
+    // Create radio button input
     const input = document.createElement("input");
     input.type = "radio";
     input.name = question.id;
@@ -528,6 +537,7 @@ function createSingleChoiceOptions(question, container) {
       handleResponse(question.id, this.value);
     });
 
+    // Create label for the radio button
     const label = document.createElement("label");
     label.htmlFor = `${question.id}_${index}`;
     label.textContent = option;
@@ -538,9 +548,9 @@ function createSingleChoiceOptions(question, container) {
   });
 }
 
-// Create multiple choice options
+// Create multiple choice options - generates checkboxes for multi-select questions
 function createMultipleChoiceOptions(question, container) {
-  // Add instruction text
+  // Add instruction text for user guidance
   const instruction = document.createElement("p");
   instruction.textContent = question.max_selections
     ? `Please select up to ${question.max_selections} options:`
@@ -549,10 +559,12 @@ function createMultipleChoiceOptions(question, container) {
   instruction.style.fontWeight = "var(--font-weight-medium)";
   container.appendChild(instruction);
 
+  // Create checkbox options
   question.options.forEach((option, index) => {
     const optionDiv = document.createElement("div");
     optionDiv.className = "option-item";
 
+    // Create checkbox input
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = question.id;
@@ -562,6 +574,7 @@ function createMultipleChoiceOptions(question, container) {
       handleMultipleChoiceResponse(question, this);
     });
 
+    // Create label for the checkbox
     const label = document.createElement("label");
     label.htmlFor = `${question.id}_${index}`;
     label.textContent = option;
@@ -571,7 +584,7 @@ function createMultipleChoiceOptions(question, container) {
     container.appendChild(optionDiv);
   });
 
-  // Add warning div for max selections
+  // Add warning div for max selections enforcement
   if (question.max_selections) {
     const warningDiv = document.createElement("div");
     warningDiv.id = `warning_${question.id}`;
@@ -582,24 +595,27 @@ function createMultipleChoiceOptions(question, container) {
   }
 }
 
-// Create Likert scale options
+// Create Likert scale options - generates radio buttons for rating scale questions
 function createLikertScaleOptions(question, container) {
   const scaleContainer = document.createElement("div");
   scaleContainer.className = "likert-scale";
 
+  // Create radio buttons for each scale label
   question.labels.forEach((label, index) => {
     const optionDiv = document.createElement("div");
     optionDiv.className = "likert-option";
 
+    // Create radio input with numeric value (1-5)
     const input = document.createElement("input");
     input.type = "radio";
     input.name = question.id;
-    input.value = index + 1;
+    input.value = index + 1;  // Convert 0-based index to 1-based value
     input.id = `${question.id}_${index}`;
     input.addEventListener("change", function () {
       handleResponse(question.id, this.value);
     });
 
+    // Create label showing the scale description
     const labelElement = document.createElement("label");
     labelElement.htmlFor = `${question.id}_${index}`;
     labelElement.textContent = label;
@@ -612,19 +628,21 @@ function createLikertScaleOptions(question, container) {
   container.appendChild(scaleContainer);
 }
 
-// Handle single choice and Likert scale responses
+// Handle single choice and Likert scale responses - stores response and updates UI
 function handleResponse(questionId, value) {
   responses[questionId] = value;
   console.log(`Response recorded for ${questionId}:`, value);
-  updateNavigationButtons();
+  updateNavigationButtons();  // Enable/disable next button based on response
 }
 
-// Handle multiple choice responses
+// Handle multiple choice responses - manages checkbox selections with validation
 function handleMultipleChoiceResponse(question, inputElement) {
+  // Initialize array for this question if it doesn't exist
   if (!responses[question.id]) {
     responses[question.id] = [];
   }
 
+  // Add or remove selection based on checkbox state
   if (inputElement.checked) {
     responses[question.id].push(inputElement.value);
   } else {
@@ -633,17 +651,18 @@ function handleMultipleChoiceResponse(question, inputElement) {
     );
   }
 
-  // Check max selections
+  // Enforce maximum selections limit if specified
   if (question.max_selections) {
     const selected = responses[question.id].length;
     const warningDiv = document.getElementById(`warning_${question.id}`);
 
     if (selected > question.max_selections) {
-      // Uncheck this option
+      // Uncheck this option and remove from responses
       inputElement.checked = false;
       responses[question.id] = responses[question.id].filter(
         (val) => val !== inputElement.value
       );
+      // Show warning message temporarily
       if (warningDiv) {
         warningDiv.style.display = "block";
         setTimeout(() => {
@@ -662,13 +681,14 @@ function handleMultipleChoiceResponse(question, inputElement) {
   updateNavigationButtons();
 }
 
-// Prefill existing responses
+// Prefill existing responses - restores previously selected answers when navigating back
 function prefillResponse(questionId) {
   if (!responses[questionId]) return;
 
   const allQuestions = getAllQuestions();
   const question = allQuestions.find((q) => q.id === questionId);
 
+  // Handle multiple choice questions (restore all selected checkboxes)
   if (question && question.type === "multiple_choice") {
     responses[questionId].forEach((value) => {
       const input = document.querySelector(
@@ -677,6 +697,7 @@ function prefillResponse(questionId) {
       if (input) input.checked = true;
     });
   } else {
+    // Handle single choice and Likert scale questions (restore selected radio button)
     const input = document.querySelector(
       `input[name="${questionId}"][value="${responses[questionId]}"]`
     );
@@ -684,7 +705,7 @@ function prefillResponse(questionId) {
   }
 }
 
-// Update progress indicators
+// Update progress indicators - shows current question number and progress bar
 function updateProgress() {
   const totalQuestions = getAllQuestions().length;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
@@ -693,37 +714,42 @@ function updateProgress() {
   const currentSectionElement = document.getElementById("current-section");
   const progressFill = document.getElementById("progress-fill");
 
+  // Update question counter display
   if (currentQuestionElement)
     currentQuestionElement.textContent = currentQuestionIndex + 1;
+  // Update section counter display
   if (currentSectionElement)
     currentSectionElement.textContent = getCurrentSectionNumber();
+  // Update progress bar width
   if (progressFill) progressFill.style.width = `${progress}%`;
 }
 
-// Get current section number
+// Get current section number - returns the section ID of the current question
 function getCurrentSectionNumber() {
   const allQuestions = getAllQuestions();
   const currentQuestion = allQuestions[currentQuestionIndex];
   return currentQuestion ? currentQuestion.section_id : 1;
 }
 
-// Update section steps
+// Update section steps - manages the visual section progress indicators
 function updateSectionSteps() {
   const currentSectionNum = getCurrentSectionNumber();
 
+  // Update each step indicator based on current section
   document.querySelectorAll(".step").forEach((step, index) => {
     const sectionNum = index + 1;
     step.classList.remove("active", "completed");
 
     if (sectionNum < currentSectionNum) {
-      step.classList.add("completed");
+      step.classList.add("completed");    // Mark previous sections as completed
     } else if (sectionNum === currentSectionNum) {
-      step.classList.add("active");
+      step.classList.add("active");       // Mark current section as active
     }
+    // Future sections remain unmarked
   });
 }
 
-// Update navigation buttons
+// Update navigation buttons - manages previous/next button states and text
 function updateNavigationButtons() {
   const allQuestions = getAllQuestions();
   const currentQuestion = allQuestions[currentQuestionIndex];
@@ -732,10 +758,10 @@ function updateNavigationButtons() {
 
   if (!currentQuestion || !prevBtn || !nextBtn) return;
 
-  // Previous button
+  // Previous button - disabled on first question
   prevBtn.disabled = currentQuestionIndex === 0;
 
-  // Next button - check if response exists
+  // Next button - enabled only if current question has a response
   const hasResponse =
     responses[currentQuestion.id] !== undefined &&
     responses[currentQuestion.id] !== null &&
@@ -746,11 +772,11 @@ function updateNavigationButtons() {
 
   nextBtn.disabled = !hasResponse;
 
-  // Update next button text
+  // Update next button text based on position
   if (currentQuestionIndex === allQuestions.length - 1) {
-    nextBtn.textContent = "View Results";
+    nextBtn.textContent = "View Results";  // Last question
   } else {
-    nextBtn.textContent = "Next";
+    nextBtn.textContent = "Next";          // All other questions
   }
 
   console.log(
@@ -758,12 +784,15 @@ function updateNavigationButtons() {
   );
 }
 
-// Navigation functions
+// Navigation functions - handles moving to next question or showing results
 function nextQuestion() {
   const allQuestions = getAllQuestions();
 
+  // Track analytics event if dataLayer is available
   if (window.dataLayer) {
     const currentQuestion = allQuestions[currentQuestionIndex];
+
+    console.log("currentQuestion", currentQuestion);
     window.dataLayer.push({
       event: "competency_test_next",
       question_number: currentQuestionIndex + 1,
@@ -771,15 +800,17 @@ function nextQuestion() {
     });
   }
 
+  // Either advance to next question or show results
   if (currentQuestionIndex < allQuestions.length - 1) {
     currentQuestionIndex++;
     displayQuestion();
   } else {
-    // Show results
+    // Show results when all questions are complete
     calculateAndShowResults();
   }
 }
 
+// Handle navigation to previous question
 function previousQuestion() {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
@@ -787,7 +818,7 @@ function previousQuestion() {
   }
 }
 
-// Calculate scores and show results
+// Calculate scores and show results - orchestrates the final scoring and display
 function calculateAndShowResults() {
   const scores = calculateScores();
   const totalScore = Object.values(scores).reduce(
@@ -800,7 +831,7 @@ function calculateAndShowResults() {
   displayResults(scores, totalScore, category);
 }
 
-// Score calculation
+// Score calculation - computes scores for each assessment category based on responses
 function calculateScores() {
   const scores = {
     AI_Readiness: 0,
@@ -810,7 +841,7 @@ function calculateScores() {
     Strategic_Alignment: 0,
   };
 
-  // AI Readiness (Q4, Q5, Q6) - 30 points max
+  // AI Readiness scoring (Q4, Q5, Q6) - 30 points max
   if (responses.Q4) {
     scores.AI_Readiness += parseInt(responses.Q4) * 3; // 15 points max
   }
@@ -831,7 +862,7 @@ function calculateScores() {
     scores.AI_Readiness += usageMap[responses.Q6] || 0; // 5 points max
   }
 
-  // Technical Capability (Q7, Q8, Q9, Q19) - 25 points max
+  // Technical Capability scoring (Q7, Q8, Q9, Q19) - 25 points max
   if (responses.Q7) {
     scores.Technical_Capability += parseInt(responses.Q7) * 2; // 10 points max
   }
@@ -869,7 +900,7 @@ function calculateScores() {
     scores.Technical_Capability += devMap[responses.Q19] || 0; // 5 points max
   }
 
-  // Process Opportunity (Q10, Q11, Q12) - 20 points max
+  // Process Opportunity scoring (Q10, Q11, Q12) - 20 points max
   if (responses.Q10 && Array.isArray(responses.Q10)) {
     scores.Process_Opportunity += Math.min(responses.Q10.length * 2, 6); // 6 points max
   }
@@ -896,7 +927,7 @@ function calculateScores() {
     scores.Process_Opportunity += costMap[responses.Q12] || 0; // 7 points max
   }
 
-  // Resource Availability (Q13, Q14, Q15) - 15 points max
+  // Resource Availability scoring (Q13, Q14, Q15) - 15 points max
   if (responses.Q13) {
     const expMap = {
       "No AI experience": 0,
@@ -923,7 +954,7 @@ function calculateScores() {
     scores.Resource_Availability += budgetMap[responses.Q15] || 0; // 5 points max
   }
 
-  // Strategic Alignment (Q17, Q18, Q20) - 10 points max
+  // Strategic Alignment scoring (Q17, Q18, Q20) - 10 points max
   if (responses.Q17) {
     scores.Strategic_Alignment += parseInt(responses.Q17); // 5 points max
   }
@@ -955,7 +986,7 @@ function calculateScores() {
   return scores;
 }
 
-// Get score category
+// Get score category - determines readiness level based on total score
 function getScoreCategory(totalScore) {
   if (totalScore <= 35) return "0-35";
   if (totalScore <= 55) return "36-55";
@@ -963,12 +994,12 @@ function getScoreCategory(totalScore) {
   return "76-100";
 }
 
-// Display results
+// Display results - renders the final assessment results page
 function displayResults(scores, totalScore, categoryKey) {
   console.log("display results");
   const category = scoringData.scoring.results[categoryKey];
 
-  // Update score display
+  // Update main score display elements
   const totalScoreElement = document.getElementById("total-score");
   const categoryTitleElement = document.getElementById("score-category-title");
   const categoryDescElement = document.getElementById(
@@ -981,7 +1012,7 @@ function displayResults(scores, totalScore, categoryKey) {
   if (categoryDescElement)
     categoryDescElement.textContent = category.description;
 
-  // Display category scores
+  // Display detailed category scores breakdown
   const categoryScoresContainer = document.getElementById("category-scores");
   if (categoryScoresContainer) {
     categoryScoresContainer.innerHTML = "";
@@ -1005,7 +1036,7 @@ function displayResults(scores, totalScore, categoryKey) {
     });
   }
 
-  // Display recommendations
+  // Display recommendations based on score category
   const recommendationsList = document.getElementById("recommendations-list");
   if (recommendationsList) {
     recommendationsList.innerHTML = "";
@@ -1017,15 +1048,16 @@ function displayResults(scores, totalScore, categoryKey) {
     });
   }
 
-  // Create radar chart
+  // Create visual radar chart representation
   createRadarChart(scores);
 }
 
-// Create radar chart
+// Create radar chart - generates visual representation of assessment scores
 function createRadarChart(scores) {
   const canvas = document.getElementById("results-radar-chart");
   if (!canvas) return;
 
+  // Destroy existing chart if it exists
   const existingChart = Chart.getChart("results-radar-chart");
   if (existingChart) {
     existingChart.destroy();
@@ -1033,10 +1065,12 @@ function createRadarChart(scores) {
 
   const ctx = canvas.getContext("2d");
 
+  // Prepare data for chart
   const labels = Object.keys(scores).map((key) => key.replace("_", " "));
   const data = Object.values(scores);
   const maxValues = Object.values(scoringData.scoring.categories);
 
+  // Create Chart.js radar chart
   new Chart(ctx, {
     type: "radar",
     data: {
@@ -1086,7 +1120,7 @@ function createRadarChart(scores) {
   });
 }
 
-// Lead capture functions
+// Lead capture functions - manages the lead capture modal
 function showLeadCapture() {
   const modal = document.getElementById("lead-capture-modal");
   if (modal) modal.classList.add("active");
@@ -1097,7 +1131,7 @@ function hideLeadCapture() {
   if (modal) modal.classList.remove("active");
 }
 
-// Submit lead data to Webhook
+// Submit lead data to Webhook - sends assessment results and contact info to external system
 async function submitToWebhook(leadData) {
   const webhookUrl = 'https://n8n.jupiterandthegiraffe.com/webhook-test/df19fb64-909f-46ee-9b50-ccf18feb8c2e';
 
@@ -1109,6 +1143,7 @@ async function submitToWebhook(leadData) {
   const category = getScoreCategory(totalScore);
   const categoryData = scoringData.scoring.results[category];
 
+  // Prepare complete payload with contact info and assessment results
   const payload = {
     ...leadData,
     totalScore: Math.round(totalScore),
@@ -1134,14 +1169,14 @@ async function submitToWebhook(leadData) {
   }
 }
 
-// Handle lead form submission
+// Handle lead form submission - processes contact form and submits data
 document.addEventListener("DOMContentLoaded", function () {
   const leadForm = document.getElementById("lead-form");
   if (leadForm) {
     leadForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // Get form data
+      // Extract form data
       const formData = new FormData(this);
       const leadData = {
         name: formData.get("name"),
@@ -1156,8 +1191,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       console.log("Lead captured:", leadData);
 
-      // Submit to Webhook (fire and forget)
-      submitToWebhook(leadData);
+      // Submit to Webhook (fire and forget) - only on live site
+      if (window.location.hostname !== "localhost") {
+        submitToWebhook(leadData);
+      }
 
       // Hide modal and show thank you page immediately
       hideLeadCapture();
@@ -1166,7 +1203,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Show thank you page
+// Show thank you page - displays final thank you screen with score summary
 function showThankYouPage() {
   const totalScore = Object.values(calculateScores()).reduce(
     (sum, score) => sum + score,
@@ -1175,6 +1212,7 @@ function showThankYouPage() {
   const category = getScoreCategory(totalScore);
   const categoryData = scoringData.scoring.results[category];
 
+  // Update summary elements on thank you page
   const summaryScore = document.getElementById("summary-score");
   const summaryCategory = document.getElementById("summary-category");
 
@@ -1184,12 +1222,12 @@ function showThankYouPage() {
   showPage("thank-you-page");
 }
 
-// Print results
+// Print results - triggers browser print dialog
 function printResults() {
   window.print();
 }
 
-// Restart assessment
+// Restart assessment - resets all data and returns to welcome page
 function restartAssessment() {
   currentQuestionIndex = 0;
   currentSectionIndex = 0;
@@ -1197,7 +1235,7 @@ function restartAssessment() {
   showPage("welcome-page");
 }
 
-// Close modal when clicking outside
+// Close modal when clicking outside - handles modal backdrop click to close
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("lead-capture-modal");
   if (modal) {

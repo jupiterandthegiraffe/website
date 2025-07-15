@@ -86,6 +86,16 @@
             </li>
         </ul>
     </section>
+    <section class="bento-hero">
+        <div class="bento-hero__grid">
+            <div class="bento-hero__grid-item bento-hero__grid-item--large">
+                <div class="bento-hero__grid-item-content">
+                    <h1 class="bento-hero__heading"><?php _e( 'AI Competency Assessment', 'jupiter_and_the_giraffe' ); ?></h1>
+                    <p class="bento-hero__subheading"> <?php _e( 'Unlock your organization\'s AI potential. Take our', 'jupiter_and_the_giraffe' ); ?> <?php _e( 'comprehensive assessment to gain valuable insights into your', 'jupiter_and_the_giraffe' ); ?> <?php _e( 'AI readiness and identify key areas for growth.', 'jupiter_and_the_giraffe' ); ?> </p><a href="<?php echo esc_url( get_page_link( '7223' ) ); ?>" class="angled-button"> <span style="display: block"><?php _e( 'Take the test', 'jupiter_and_the_giraffe' ); ?></span></a>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="our-work" data-pg-ia-scene='{"s":"custom","s_t":"start","s_s":"end","l":[{"a":{"l":[{"t":".our-work__featured-item #gt# div:nth-of-type(1)","l":[{"t":"set","p":0,"d":0,"l":{"x":"-50px","autoAlpha":0}},{"t":"tween","p":0,"d":0.5,"l":{"x":0,"autoAlpha":1}}]},{"t":".our-work__featured-item-content-col","l":[{"t":"set","p":0,"d":0,"l":{"x":"50px","autoAlpha":0}},{"t":"tween","p":0.2,"d":0.5,"l":{"x":0,"autoAlpha":1}}]},{"t":".our-work__secondary-work-sections-item","l":[{"t":"tween","p":0.4,"d":0.5,"s":0.25,"l":{"autoAlpha":1}}]},{"t":"#gt# div:nth-of-type(3)","l":[{"t":"set","p":0,"d":0,"l":{"y":"-100%"}},{"t":"tween","p":0.6,"d":0.5,"l":{"autoAlpha":1,"y":0}}]}]},"p":"time"}],"s_o":"-100px"}' home-section-header id="our-work">
         <h2 class="home__section-header"><?php _e( 'Our work', 'jupiter_and_the_giraffe' ); ?></h2>
         <?php
@@ -209,8 +219,8 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/wp-content/uploads/2025/01/Process-Eye-Centre.png" width="675" height="675" data-graphic-center class="our-process__graphics-center"/>
                 <img src="<?php echo get_template_directory_uri(); ?>/wp-content/uploads/2025/01/Process-Eye-Top-Right.png" width="245" height="245" loading="lazy" class="our-process__graphics-top-right" data-graphic-top-right/>
             </div>
-        </div><span aria-hidden="true" class="vertical-text-right" style="color: var(--primary)"><?php _e( 'Our Process SECTION -----------------', 'jupiter_and_the_giraffe' ); ?> <span data-number><?php _e( '18', 'jupiter_and_the_giraffe' ); ?></span>%</span>
-        <span aria-hidden="true" class="vertical-text-left" style="color: var(--primary)"><?php _e( 'Our Process SECTION -----------------', 'jupiter_and_the_giraffe' ); ?> <span data-number><?php _e( '23', 'jupiter_and_the_giraffe' ); ?></span>%</span>
+        </div>
+        <span aria-hidden="true" class="vertical-text-right" style="color: var(--primary)"><?php _e( 'Our Process SECTION -----------------', 'jupiter_and_the_giraffe' ); ?> <span data-number><?php _e( '18', 'jupiter_and_the_giraffe' ); ?></span>%</span><span aria-hidden="true" class="vertical-text-left" style="color: var(--primary)"><?php _e( 'Our Process SECTION -----------------', 'jupiter_and_the_giraffe' ); ?> <span data-number><?php _e( '23', 'jupiter_and_the_giraffe' ); ?></span>%</span>
     </section>
     <section class="prices" home-section-header="[data-package-heading]">
         <h2 class="prices__title"><?php _e( 'Our Packages', 'jupiter_and_the_giraffe' ); ?></h2>
@@ -223,7 +233,8 @@
   " data-pg-ia-hide="desktop">
                 <div class="our-packages__package-strategy-header">
                     <h3 class="our-packages__package-title"><?php _e( 'Digital Strategy', 'jupiter_and_the_giraffe' ); ?></h3>
-                </div><span class="our-packages__package-price"><?php _e( '&pound;12,000', 'jupiter_and_the_giraffe' ); ?></span>
+                </div>
+                <span class="our-packages__package-price"><?php _e( '&pound;12,000', 'jupiter_and_the_giraffe' ); ?></span>
                 <p> <?php _e( 'A comprehensive, executive-level workshop we call', 'jupiter_and_the_giraffe' ); ?> <b><?php _e( 'Immersive', 'jupiter_and_the_giraffe' ); ?></b> <?php _e( 'designed to align your digital initiatives with', 'jupiter_and_the_giraffe' ); ?> <?php _e( 'your broader business goals.', 'jupiter_and_the_giraffe' ); ?> </p>
                 <div class="our-packages__package-break"></div>
                 <ul class="our-packages__package-benefit-list">
@@ -270,7 +281,8 @@
                 </button>
             </div>
             <div class="our-packages__package" style="--package-color: #6ab092; grid-area: 2 / 1 / 3 / 3" data-pg-ia-hide="desktop">
-                <h3 class="our-packages__package-title"><?php _e( 'Digital Experience', 'jupiter_and_the_giraffe' ); ?></h3><span class="our-packages__package-price"><?php _e( '&pound;30,000+', 'jupiter_and_the_giraffe' ); ?></span>
+                <h3 class="our-packages__package-title"><?php _e( 'Digital Experience', 'jupiter_and_the_giraffe' ); ?></h3>
+                <span class="our-packages__package-price"><?php _e( '&pound;30,000+', 'jupiter_and_the_giraffe' ); ?></span>
                 <p> <?php _e( 'Design and build of an online', 'jupiter_and_the_giraffe' ); ?> <a href="<?php echo esc_url( get_permalink( '6567' ) ); ?>"><?php _e( 'digital experience', 'jupiter_and_the_giraffe' ); ?></a><?php _e( ', game or app.', 'jupiter_and_the_giraffe' ); ?> </p>
                 <div class="our-packages__package-break"></div>
                 <ul class="our-packages__package-benefit-list">
@@ -414,7 +426,8 @@
                 </div>
                 <div class="contact-us__dialog-column" style="display: none">
                     <h3 class="contact-us__dialog-title contact-us__dialog-title--book"> <?php _e( 'Book a call', 'jupiter_and_the_giraffe' ); ?> </h3>
-                </div><span class="contact-us__dialog-inner-divide" style="display: none"></span>
+                </div>
+                <span class="contact-us__dialog-inner-divide" style="display: none"></span>
             </div>
         </div>
     </section>

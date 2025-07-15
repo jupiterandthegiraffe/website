@@ -1,68 +1,157 @@
-# WordPress Website with Custom Pinegrow Theme
+# Jupiter and the Giraffe - Website
 
-This repository contains a WordPress website featuring a custom theme developed with Pinegrow. The project is containerized using Docker for easy setup and development.
+A modern, AI-focused digital agency website built with Pinegrow and WordPress, featuring an interactive AI competency assessment tool.
 
-## Project Overview
+## Overview
 
-The core of this project is a WordPress installation. The custom theme is designed and developed in the `src` directory using Pinegrow, a visual web editor. The theme is then exported to the `wordpress/wp-content/themes/` directory for use in the WordPress instance.
+Jupiter and the Giraffe is a digital agency specializing in AI-powered web experiences, digital strategy, and custom development services. The website combines professional service offerings with innovative lead generation through an AI readiness assessment tool.
 
-A key feature of this website is an "AI Competency Test", a digital exam powered by custom JavaScript located in `src/scripts/app.js`.
+## Features
 
-## Technologies Used
+- **AI Competency Assessment**: Interactive 21-question assessment tool with radar chart visualization
+- **Service Packages**: Digital Strategy (£12,000) and Digital Experience (£30,000+) offerings
+- **Modern Design**: Space-themed branding with GSAP animations and responsive layout
+- **WordPress Integration**: Built with Pinegrow HTML framework that exports to WordPress
+- **Docker Development**: Local development environment with WordPress, MySQL, and phpMyAdmin
 
-*   **Backend:** WordPress, PHP
-*   **Frontend:** HTML, CSS, JavaScript
-*   **Theme Development:** Pinegrow
-*   **Database:** MySQL
-*   **Development Environment:** Docker
+## Services Offered
+
+### Digital Strategy (£12,000)
+- Strategic consultancy workshops ("Immersive")
+- Data-driven decision making
+- Digital roadmap for scalable growth
+- Executive-level strategic alignment
+
+### Digital Experience (£30,000+)
+- Custom app, game, and digital experience development
+- Hand-crafted solutions using latest technologies
+- Online/offline capabilities
+- No limits, no compromises approach
 
 ## Project Structure
 
--   `wordpress/`: Contains the live WordPress installation, including core files, themes, and plugins. This directory is mounted into the WordPress Docker container.
--   `src/`: Contains the Pinegrow project files for the custom theme. All development on the theme should be done here.
--   `docker-compose.yml`: Defines the Docker services for running the local development environment (WordPress, MySQL, phpMyAdmin).
--   `.gitignore`: Specifies files and directories to be ignored by Git.
+```
+├── src/                          # Source HTML files (Pinegrow project)
+│   ├── index.html               # Main template with base structure
+│   ├── home.html                # Homepage
+│   ├── about.html               # About page
+│   ├── process.html             # Process/workflow page
+│   ├── service.html             # Services page
+│   ├── page-ai-competency-test.html  # AI assessment tool
+│   ├── css/                     # Stylesheets
+│   │   ├── style.css           # Main styles
+│   │   ├── theme.css           # Theme configuration
+│   │   └── ai-assessment.css   # AI test specific styles
+│   ├── scripts/                 # JavaScript files
+│   │   ├── app.js              # Main application logic
+│   │   └── bento-grid-animation.js  # Animation scripts
+│   └── _pgexport/              # WordPress PHP exports
+├── wordpress/                   # WordPress installation
+│   └── wp-content/             # WordPress content
+└── docker-compose.yml          # Development environment
+```
 
-## Getting Started
+## Technology Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Framework**: Pinegrow (HTML to WordPress converter)
+- **CMS**: WordPress
+- **Animations**: GSAP (GreenSock Animation Platform)
+- **Charts**: Chart.js for data visualization
+- **Development**: Docker with WordPress, MySQL, phpMyAdmin
+- **Fonts**: FontAwesome, Custom web fonts via Yabe Webfont plugin
+
+## AI Competency Assessment
+
+The website features a comprehensive AI readiness assessment tool:
+
+- **7 sections, 21 questions, 10-15 minutes duration**
+- **Assessment Categories**:
+  1. Company Information & Context
+  2. Current AI Awareness & Usage
+  3. Technology Infrastructure Readiness
+  4. Process Automation Opportunities
+  5. Team Capabilities & Resources
+  6. Strategic Alignment for AI Initiatives
+  7. In-house Development Readiness
+
+- **Features**:
+  - Interactive quiz interface with progress tracking
+  - Radar chart visualization of results
+  - Personalized recommendations
+  - Lead capture for detailed reports
+  - Scoring system with categories like "AI Beginner," "AI Explorer," etc.
+
+## Development Setup
 
 ### Prerequisites
+- Docker and Docker Compose
+- Modern web browser
 
--   [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/) must be installed on your system.
+### Local Development
 
-### Local Development Setup
+1. **Start the development environment**:
+   ```bash
+   docker-compose up -d
+   ```
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd <repository-directory>
-    ```
+2. **Access services**:
+   - Website: http://localhost
+   - WordPress Admin: http://localhost/wp-admin
+   - phpMyAdmin: http://localhost:8080
 
-2.  **Start the services:**
-    Run the following command to build and start the Docker containers in detached mode:
-    ```bash
-    docker-compose up -d
-    ```
+3. **Environment Configuration**:
+   - MySQL Database: MySQLDatabaseName
+   - MySQL User: MySQLUsername
+   - MySQL Password: MySQLUserPassword
+   - Root Password: MySQLRootPassword
 
-3.  **Access the services:**
-    -   **WordPress Site:** [http://localhost](http://localhost)
-    -   **phpMyAdmin:** [http://localhost:8080](http://localhost:8080)
+### File Structure Notes
 
-    You can now proceed with the WordPress installation through your web browser.
+- `src/index.html` contains the base template structure where all JavaScript and styles are enqueued
+- Check `functions.php` for any dequeuing or deregistering of scripts/styles
+- Static HTML files in `src/` are converted to WordPress PHP templates in `src/_pgexport/`
+- WordPress theme files are synced to `wordpress/wp-content/themes/`
 
-### Database Credentials
+## Content Management
 
-The default database credentials are set in the `docker-compose.yml` file.
+The website uses WordPress for content management with:
+- Custom post types for services and case studies
+- Advanced Custom Fields for structured content
+- Yabe Webfont plugin for custom typography
+- All-in-One SEO for search optimization
 
--   **Host:** `db`
--   **Database Name:** `MySQLDatabaseName`
--   **User:** `MySQLUsername`
--   **Password:** `MySQLUserPassword`
--   **Root Password:** `MySQLRootPassword`
+## Design & Branding
 
-## Theme Development
+- **Theme**: Space/futuristic aesthetic with animations
+- **Colors**: Primary orange (#ff4d14), secondary gray (#cecfcf), dark (#2e2e2e)
+- **Typography**: Custom web fonts loaded via Yabe Webfont
+- **Animations**: GSAP-powered interactions and scroll animations
+- **Responsive**: Mobile-first design approach
 
-All custom theme development is done within the `src` directory using the Pinegrow application. After making changes in Pinegrow, you need to export the theme to the `wordpress/wp-content/themes/` directory to see the changes reflected on the live site.
+## Contact Information
 
-## AI Competency Test
+- **Email**: info@jupiterandthegiraffe.com, hello@jupiterandthegiraffe.com
+- **Website**: jupiterandthegiraffe.com
+- **Social**: LinkedIn, Behance, YouTube
 
-The "AI Competency Test" is a feature on this site. The logic for this exam is handled by `src/scripts/app.js`. For more details on the data structure and scoring, please refer to the documentation in `src/scripts/GEMINI.md`.
+## WordPress Plugins
+
+- Advanced Custom Fields
+- All-in-One SEO Pack
+- All-in-One WP Migration
+- Yabe Webfont
+- LiteSpeed Cache
+- WPForms Lite
+- Wordfence Security
+
+## Notes
+
+- This is a Pinegrow project where all files are written in HTML but output to WordPress
+- The AI competency test is a key lead generation tool for the business
+- The site targets organizations looking to integrate AI into their digital strategy
+- Development workflow: Edit HTML in Pinegrow → Export to WordPress PHP → Deploy
+
+## License
+
+Proprietary - Jupiter and the Giraffe Digital Agency

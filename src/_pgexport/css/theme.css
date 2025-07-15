@@ -14,10 +14,10 @@
     --dark: #2e2e2e;
 }
 body {
-    font-family: 'Supreme-Variable';
+    font-family: Supreme-Variable;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Orbitron';
+    font-family: Orbitron;
 }body, html {
     min-height: 100vh;
 }

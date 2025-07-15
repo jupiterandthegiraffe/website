@@ -764,6 +764,8 @@ function nextQuestion() {
 
   if (window.dataLayer) {
     const currentQuestion = allQuestions[currentQuestionIndex];
+
+    console.log("currentQuestion", currentQuestion);
     window.dataLayer.push({
       event: "competency_test_next",
       question_number: currentQuestionIndex + 1,
@@ -1157,7 +1159,9 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("Lead captured:", leadData);
 
       // Submit to Webhook (fire and forget)
-      submitToWebhook(leadData);
+      if (window.location.hostname !== "localhost") {
+        submitToWebhook(leadData);
+      }
 
       // Hide modal and show thank you page immediately
       hideLeadCapture();

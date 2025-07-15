@@ -160,6 +160,9 @@
                             <div class="score-category">
                                 <h3 id="score-category-title"></h3>
                                 <p id="score-category-description"></p>
+                                <button class="btn btn--primary btn--lg" onclick="showLeadCapture()">
+                                    <?php _e( 'Get Your Detailed Report', 'jupiter_and_the_giraffe' ); ?>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -174,16 +177,16 @@
                             <div class="category-scores" id="category-scores"></div>
                         </div>
                     </div>
-                    <div class="recommendations">
-                        <h3><?php _e( 'Personalized Recommendations', 'jupiter_and_the_giraffe' ); ?></h3>
-                        <ul id="recommendations-list"></ul>
-                    </div>
                     <div class="next-steps">
                         <h3><?php _e( 'Ready to take the next step?', 'jupiter_and_the_giraffe' ); ?></h3>
                         <p> <?php _e( 'Get a detailed analysis of your results and personalized AI', 'jupiter_and_the_giraffe' ); ?> <?php _e( 'strategy recommendations.', 'jupiter_and_the_giraffe' ); ?> </p>
                         <button class="btn btn--primary btn--lg" onclick="showLeadCapture()">
                             <?php _e( 'Get Your Detailed Report', 'jupiter_and_the_giraffe' ); ?>
                         </button>
+                    </div>
+                    <div class="recommendations">
+                        <h3><?php _e( 'Personalized Recommendations', 'jupiter_and_the_giraffe' ); ?></h3>
+                        <ul id="recommendations-list"></ul>
                     </div>
                 </div>
             </div>
