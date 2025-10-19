@@ -168,6 +168,16 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
 
         /* Pinegrow generated Enqueue Scripts Begin */
 
+    wp_register_script( 'inline-script-1', '', [], '1.0.1821', false );
+    wp_enqueue_script( 'inline-script-1' );
+    wp_add_inline_script( 'inline-script-1', '/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute(\'data-pg-ia-disabled\')) { window.pgia_small_mq=typeof pgia_small_mq==\'string\'?pgia_small_mq:\'(max-width:767px)\';window.pgia_large_mq=typeof pgia_large_mq==\'string\'?pgia_large_mq:\'(min-width:768px)\';var style = document.createElement(\'style\');var pgcss=\'html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}\';if(document.documentElement.hasAttribute(\'data-pg-id\') && document.documentElement.hasAttribute(\'data-pg-mobile\')) {pgia_small_mq=\'(min-width:0)\';pgia_large_mq=\'(min-width:99999px)\'} pgcss+=\'@media \' + pgia_small_mq + \'{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}\';pgcss+=\'@media \' + pgia_large_mq + \'{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}\';style.innerHTML=pgcss;document.querySelector(\'head\').appendChild(style);}}catch(e){console&&console.log(e);}})()');
+
+    wp_deregister_script( 'jupiter_and_the_giraffe-chartumd' );
+    wp_enqueue_script( 'jupiter_and_the_giraffe-chartumd', 'https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js', [], '1.0.1821', true);
+
+    wp_deregister_script( 'jupiter_and_the_giraffe-app' );
+    wp_enqueue_script( 'jupiter_and_the_giraffe-app', get_template_directory_uri() . '/scripts/app.js', [], '1.0.1821', true);
+
     wp_register_script( 'google_tag_manager', null, null, '1.0', false );
     wp_enqueue_script( 'google_tag_manager' );
 
@@ -182,13 +192,13 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-PC4ZCSK");');
 
-    wp_enqueue_script( 'pgia', get_template_directory_uri() . '/pgia/lib/pgia.js', null, '1.0.1742', true );
+    wp_enqueue_script( 'pgia', get_template_directory_uri() . '/pgia/lib/pgia.js', null, '1.0.1821', true );
 
-    wp_enqueue_script( 'split_text', get_template_directory_uri() . '/libs/SplitText.js', null, '1.0.1742', true );
+    wp_enqueue_script( 'split_text', get_template_directory_uri() . '/libs/SplitText.js', null, '1.0.1821', true );
 
-    wp_enqueue_script( 'bento-grid-animation', get_template_directory_uri() . '/scripts/bento-grid-animation.js', array( 'pgia', 'split_text' ), '1.0.1742', true );
+    wp_enqueue_script( 'bento-grid-animation', get_template_directory_uri() . '/scripts/bento-grid-animation.js', array( 'pgia', 'split_text' ), '1.0.1821', true );
 
-    wp_register_script( 'main_javascript', null, array( 'split_text' ), '1.0.1742', true );
+    wp_register_script( 'main_javascript', null, array( 'split_text' ), '1.0.1821', true );
     wp_enqueue_script( 'main_javascript' );
 
     wp_add_inline_script( 'main_javascript', 'gsap.registerPlugin(SplitText)
@@ -386,7 +396,7 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                         delay: 1,
                         scrollTrigger: {
                             trigger: \'main\',
-                            start: \'bottom 80%\'
+                            start: \'top bottom\'
                         }
                     })
                 }
@@ -496,10 +506,22 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                     })
 
                 if (window.innerWidth >= 768) {
-                    gsap.from(homeHero.querySelector(\'[data-home-hero-heading]\'), {
+                    const headingTextSplit = new SplitText(homeHeroHeading, { type: \'chars\'})
+                    const splitTextAnimation = gsap.from(headingTextSplit.chars, {
+                        y: 5,
+                        autoAlpha: 0,
+                        stagger: 0.025,
+                        duration: 0.01,
+                        ease: \'linear\',
+                        paused: true
+                    })
+                    gsap.from(homeHeroHeading, {
                         scaleX: 0,
                         ease: "slow(0.5,0.7,false)",
-                        duration: window.sessionStorage.getItem(\'jatg:old-visitor\') === null ? 3 : .2,
+                        duration: !window.sessionStorage.getItem(\'jatg:old-visitor\') ? 2 : .2,
+                        onComplete: () => {
+                            splitTextAnimation.play()
+                        }
                     })
                 }
 
@@ -560,27 +582,6 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                     stagger: 0.05
                 }, "<")
 
-                homeHeroTimeline.fromTo(homeHeroHeading.querySelectorAll(\'div\'), {
-                    x: function(index, target, targets) {
-                        return index % 2 ? -50 : 50;
-                    },
-                },{
-                    stagger: 0.025,
-                    x: 0,
-                }, "<")
-
-                if (window.innerWidth > 769) {
-                    homeHeroTimeline.set(homeHeroHeading.querySelectorAll(\'div\'), {
-                        clipPath: \'inset(0%)\'
-                    }, "<")
-                }
-
-                homeHeroTimeline.set(homeHeroHeading.querySelectorAll(\'div\'), {
-                    x: function(index, element, target) {
-                        return (index + 1) % 2 ? -50 : 50
-                    }
-                }, "<")
-
                 const taglineSplitText = new SplitText(homeHero.querySelector(\'[data-home-hero-tagline]\'), { type: \'chars,words\'})
 
                 homeHeroTimeline.fromTo(taglineSplitText.chars, {
@@ -597,7 +598,7 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                     clipPath: \'polygon(0 0, 0 0, 0 100%, 0 100%)\'
                 }, {
                     x: 0,
-                    autoAlpha: 1,
+                    autoAlpha: .2,
                     clipPath: \'polygon(100% 0, 0 0, 0 100%, 100% 100%)\'
                 }, "<50%")
 
@@ -653,33 +654,71 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
             if (ourProcessSection) {
                 const ourProcessTimeline = gsap.timeline({
                     scrollTrigger: {
-                        trigger: document.querySelector(\'[home-our-process-section]\'),
-                        start: \'top bottom-=100\',
+                        trigger: ourProcessSection,
+                        start: \'top center\',
                         once: true,
                     }
                 })
 
-                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'.our-process__content\'), {
+                // open upwards
+                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-our-process-content]\'), {
                     scaleY: .2,
-                    scaleX: .2
+                    scaleX: .2,
+                    autoAlpha: 0,
                 }, {
                     scaleY: 1,
-                    scaleX: .2
+                    scaleX: .2,
+                    autoAlpha: 1,
                 }, "<")
 
-                ourProcessTimeline.to(ourProcessSection.querySelector(\'.our-process__content\'), {
+                // open outwards
+                ourProcessTimeline.to(ourProcessSection.querySelector(\'[data-our-process-content]\'), {
                     scaleX: 1
                 })
 
-                ourProcessTimeline.set(ourProcessSection.querySelector(\'.our-process__content span\'), {
+                // fade text in
+                ourProcessTimeline.to(ourProcessSection.querySelector(\'[data-our-process-content] span\'), {
                     autoAlpha: 1,
-                    duration: 0.025
                 })
 
-                const ourProcessContent = ourProcessSection.querySelector(\'.our-process__content span\')
+                // code
+                const codeSplitText = new SplitText(ourProcessSection.querySelector(\'.code\'), { type: \'chars\'})
+                ourProcessTimeline.from(codeSplitText.chars, {
+                    autoAlpha: 0,
+                    duration: 0.01,
+                    stagger: 0.02,
+                }, "<")
 
-                ourProcessTimeline.to(ourProcessContent, {
+                // center graphic open
+                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-graphic-center]\'), {
+                    autoAlpha: 0,
+                    scale: 0.7
+                }, {
                     autoAlpha: 1,
+                    x: 0,
+                    y: 0,
+                },"<")
+
+                // top right graphic open
+                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-graphic-top-right]\'), {
+                    autoAlpha: 0,
+                    x: -50,
+                    y: 50
+                }, {
+                    autoAlpha: 1,
+                    x: 0,
+                    y: 0,
+                },"<10%")
+
+                // bottom left graphic open
+                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-graphic-bottom-left]\'), {
+                    autoAlpha: 0,
+                    x: 50,
+                    y: -50,
+                }, {
+                    autoAlpha: 1,
+                    x: 0,
+                    y: 0,
                 }, "<")
 
                 gsap.from(ourProcessSection.querySelector(\'.vertical-text-right [data-number]\'), {
@@ -692,43 +731,7 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                         end: \'top top\',
                         scrub: 0.5,
                     }
-                }, "<")
-
-                const codeSplitText = new SplitText(ourProcessSection.querySelector(\'.code\'), { type: \'chars\'})
-                ourProcessTimeline.from(codeSplitText.chars, {
-                    autoAlpha: 0,
-                    duration: 0.01,
-                    stagger: 0.02,
-                }, "<")
-
-                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-graphic-center]\'), {
-                    autoAlpha: 0,
-                    scale: 0.7
-                }, {
-                    autoAlpha: 1,
-                    x: 0,
-                    y: 0,
-                },"<")
-
-                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-graphic-top-right]\'), {
-                    autoAlpha: 0,
-                    x: -50,
-                    y: 50
-                }, {
-                    autoAlpha: 1,
-                    x: 0,
-                    y: 0,
-                },"<10%")
-
-                ourProcessTimeline.fromTo(ourProcessSection.querySelector(\'[data-graphic-bottom-left]\'), {
-                    autoAlpha: 0,
-                    x: 50,
-                    y: -50,
-                }, {
-                    autoAlpha: 1,
-                    x: 0,
-                    y: 0,
-                }, "<")
+                })
 
                 gsap.from(ourProcessSection.querySelector(\'.vertical-text-left [data-number]\'), {
                     textContent: 18,
@@ -743,6 +746,62 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                 })
             }
 
+            const processSections = Array.from(document.querySelectorAll(\'[data-process-section]\'))
+            if (processSections.length) {
+                let mm = gsap.matchMedia();
+
+                mm.add("(min-width: 768px)", () => {
+                    processSections.forEach(section => {
+                        const graphicSelector = section.getAttribute(\'data-process-section\')
+                        const sectionTitleSplit = new SplitText(section.querySelector(\'h2\'), {type: \'words\'})
+                        const sectionTextSplit = new SplitText(section.querySelector(\'[data-process-text]\'), {type: \'chars,words\'})
+
+                        gsap.set(section, {
+                            autoAlpha: 1
+                        });
+
+                        const processSectionTimeline = gsap.timeline({
+                            scrollTrigger: {
+                                trigger: section,
+                                start: \'top 10%\'
+                            }
+                        })
+
+                        processSectionTimeline.from(sectionTitleSplit.words, {
+                            autoAlpha: 0,
+                            y: 10,
+                            stagger: 0.025
+                        })
+
+                        processSectionTimeline.from(sectionTextSplit.chars, {
+                            autoAlpha: 0,
+                            duration: 0.01,
+                            stagger: 0.01
+                        }, "<25%")
+
+                        processSectionTimeline.fromTo(document.querySelector(graphicSelector), {
+                            autoAlpha: 0,
+                            x: -50
+                        }, {
+                            autoAlpha: 1,
+                            x: 0
+                        }, "<25%")
+                    })
+                })
+
+                mm.add("(max-width: 768px)", () => {
+                    const graphicSelector = processSections[0].getAttribute(\'data-process-section\')
+
+                    gsap.to(processSections[0], {
+                        autoAlpha: 1
+                    });
+
+                    gsap.to(document.querySelector(graphicSelector), {
+                        autoAlpha: 1
+                    })
+                })
+            }
+
             /*
             * CONTACT US SECTION
             */
@@ -751,7 +810,7 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                 const contactUsTimeline = gsap.timeline({
                     scrollTrigger: {
                         trigger: contactUsSection,
-                        start: \'top 90%\',
+                        start: \'top 25%\',
                     }
                 })
 
@@ -821,62 +880,6 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
                 })
             }
 
-            const processSections = Array.from(document.querySelectorAll(\'[data-process-section]\'))
-            if (processSections.length) {
-                let mm = gsap.matchMedia();
-
-                mm.add("(min-width: 768px)", () => {
-                    processSections.forEach(section => {
-                        const graphicSelector = section.getAttribute(\'data-process-section\')
-                        const sectionTitleSplit = new SplitText(section.querySelector(\'h2\'), {type: \'words\'})
-                        const sectionTextSplit = new SplitText(section.querySelector(\'[data-process-text]\'), {type: \'chars,words\'})
-
-                        gsap.set(section, {
-                            autoAlpha: 1
-                        });
-
-                        const processSectionTimeline = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: section,
-                                start: \'start 90%\'
-                            }
-                        })
-
-                        processSectionTimeline.from(sectionTitleSplit.words, {
-                            autoAlpha: 0,
-                            y: 10,
-                            stagger: 0.025
-                        })
-
-                        processSectionTimeline.from(sectionTextSplit.chars, {
-                            autoAlpha: 0,
-                            duration: 0.01,
-                            stagger: 0.01
-                        }, "<25%")
-
-                        processSectionTimeline.fromTo(document.querySelector(graphicSelector), {
-                            autoAlpha: 0,
-                            x: -50
-                        }, {
-                            autoAlpha: 1,
-                            x: 0
-                        }, "<25%")
-                    })
-                })
-
-                mm.add("(max-width: 768px)", () => {
-                    const graphicSelector = processSections[0].getAttribute(\'data-process-section\')
-
-                    gsap.to(processSections[0], {
-                        autoAlpha: 1
-                    });
-
-                    gsap.to(document.querySelector(graphicSelector), {
-                        autoAlpha: 1
-                    })
-                })
-            }
-
             const moons = document.querySelectorAll(\'[data-mobile-menu-moon]\')
             if (moons) {
                 Array.from(moons).forEach(moon => {
@@ -937,39 +940,29 @@ if ( ! function_exists( 'jupiter_and_the_giraffe_enqueue_scripts' ) ) :
             }
             /*');
 
-    wp_register_script( 'inline-script-1', '', [], '1.0.1742', false );
-    wp_enqueue_script( 'inline-script-1' );
-    wp_add_inline_script( 'inline-script-1', '/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute(\'data-pg-ia-disabled\')) { window.pgia_small_mq=typeof pgia_small_mq==\'string\'?pgia_small_mq:\'(max-width:767px)\';window.pgia_large_mq=typeof pgia_large_mq==\'string\'?pgia_large_mq:\'(min-width:768px)\';var style = document.createElement(\'style\');var pgcss=\'html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}\';if(document.documentElement.hasAttribute(\'data-pg-id\') && document.documentElement.hasAttribute(\'data-pg-mobile\')) {pgia_small_mq=\'(min-width:0)\';pgia_large_mq=\'(min-width:99999px)\'} pgcss+=\'@media \' + pgia_small_mq + \'{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}\';pgcss+=\'@media \' + pgia_large_mq + \'{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}\';style.innerHTML=pgcss;document.querySelector(\'head\').appendChild(style);}}catch(e){console&&console.log(e);}})()');
-
-    wp_deregister_script( 'jupiter_and_the_giraffe-chartumd' );
-    wp_enqueue_script( 'jupiter_and_the_giraffe-chartumd', 'https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js', [], '1.0.1742', true);
-
-    wp_deregister_script( 'jupiter_and_the_giraffe-app' );
-    wp_enqueue_script( 'jupiter_and_the_giraffe-app', get_template_directory_uri() . '/scripts/app.js', [], '1.0.1742', true);
-
     /* Pinegrow generated Enqueue Scripts End */
 
         /* Pinegrow generated Enqueue Styles Begin */
 
-    wp_enqueue_style( 'theme_styles', get_template_directory_uri() . '/css/theme.css', null, '1.0.1742', 'all' );
-
-    wp_enqueue_style( 'main_styles', get_template_directory_uri() . '/css/style.css', null, '1.0.1742', 'all' );
-
-    wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awsome/css/all.min.css', null, '1.0.1742', 'all' );
-
-    wp_enqueue_style( 'font_styles', get_template_directory_uri() . '/wp-content/uploads/yabe-webfont/cache/fonts.css', null, '1.0.1742', 'all' );
-
     wp_deregister_style( 'jupiter_and_the_giraffe-theme' );
-    wp_enqueue_style( 'jupiter_and_the_giraffe-theme', get_template_directory_uri() . '/css/theme.css', [], '1.0.1742', 'all');
+    wp_enqueue_style( 'jupiter_and_the_giraffe-theme', get_template_directory_uri() . '/css/theme.css', [], '1.0.1821', 'all');
 
     wp_deregister_style( 'jupiter_and_the_giraffe-style' );
-    wp_enqueue_style( 'jupiter_and_the_giraffe-style', get_template_directory_uri() . '/css/style.css', [], '1.0.1742', 'all');
+    wp_enqueue_style( 'jupiter_and_the_giraffe-style', get_template_directory_uri() . '/css/style.css', [], '1.0.1821', 'all');
 
     wp_deregister_style( 'jupiter_and_the_giraffe-aiassesment' );
-    wp_enqueue_style( 'jupiter_and_the_giraffe-aiassesment', get_template_directory_uri() . '/css/ai-assesment.css', [], '1.0.1742', 'all');
+    wp_enqueue_style( 'jupiter_and_the_giraffe-aiassesment', get_template_directory_uri() . '/css/ai-assesment.css', [], '1.0.1821', 'all');
+
+    wp_enqueue_style( 'theme_styles', get_template_directory_uri() . '/css/theme.css', null, '1.0.1821', 'all' );
+
+    wp_enqueue_style( 'main_styles', get_template_directory_uri() . '/css/style.css', null, '1.0.1821', 'all' );
+
+    wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awsome/css/all.min.css', null, '1.0.1821', 'all' );
+
+    wp_enqueue_style( 'font_styles', get_template_directory_uri() . '/wp-content/uploads/yabe-webfont/cache/fonts.css', null, '1.0.1821', 'all' );
 
     wp_deregister_style( 'jupiter_and_the_giraffe-style-1' );
-    wp_enqueue_style( 'jupiter_and_the_giraffe-style-1', get_bloginfo('stylesheet_url'), [], '1.0.1742', 'all');
+    wp_enqueue_style( 'jupiter_and_the_giraffe-style-1', get_bloginfo('stylesheet_url'), [], '1.0.1821', 'all');
 
     /* Pinegrow generated Enqueue Styles End */
 
@@ -1030,6 +1023,9 @@ function my_deregister_javascript() {
     wp_dequeue_style( 'main_styles' );
     wp_dequeue_style( 'theme_styles' );
     wp_dequeue_style( 'font_styles' );
+  } else {
+    wp_deregister_script( 'jupiter_and_the_giraffe-app' );
+    wp_deregister_script( 'app' );
   }
 }
 

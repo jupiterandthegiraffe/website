@@ -1,2 +1,5 @@
+## Considerations and file content
+
 - this is a Pinegrow project. All files are written in HTML but output to Wordpress
 - index.html contains all the base template structure and where all the javascript and styles are enqued into other pages (double check any dequeuing or deregistering in functions.php)
+- ignore all files in _pgbackup, _pgexport and _pginfo

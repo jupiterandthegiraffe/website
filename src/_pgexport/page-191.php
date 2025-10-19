@@ -2,6 +2,9 @@
 
 <div class="container page-container">
     <h1 class="page__title splt" data-about-page-title data-pg-ia-hide><?php the_title(); ?></h1>
+    <?php if ( get_field("lead_title") ) : ?>
+        <h2 class="page__subtitle"><?php echo get_field( 'lead_title' ); ?></h2>
+    <?php endif; ?>
     <div class="page__intro" data-about-page-intro data-pg-ia-hide>
         <?php the_content(); ?>
     </div>

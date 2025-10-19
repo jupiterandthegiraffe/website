@@ -15,10 +15,11 @@
         <nav data-mobile-menu-moon data-pg-ia-hide data-main-nav>
             <div class="main-nav">
                 <div class="container">
-                    <div class="main-nav-wrapper"><a class="main-nav-home" href="<?php echo esc_url( home_url() ); ?>"><svg width="57" height="30" viewBox="0 0 57 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="main-nav-wrapper">
+                        <a class="main-nav-home" href="<?php echo esc_url( home_url() ); ?>"><svg width="57" height="30" viewBox="0 0 57 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M56.8923 10.1575H48.8707V14.8874H35.5155V9.93106L38.7921 6.53504H56.8256V0H36.274L29.0352 7.50184V21.4286H50.4119L56.8923 14.8874V10.1575Z" fill="var(--dark)"/>
                                 <path d="M20.263 7.5H12.7908V13.9715H20.263V16.2166V16.7329V18.6239L15.7822 22.9402L15.1181 23.5886H0.105469V30H8.48376H8.80648H17.8799L26.8912 21.2833V16.7329V16.2166V7.5H20.263Z" fill="var(--dark)"/>
-                            </svg> </a>
+                            </svg></a>
                         <div class="main-nav__nav" data-main-menu>
                             <?php if ( has_nav_menu( 'primary' ) ) : ?>
                                 <?php

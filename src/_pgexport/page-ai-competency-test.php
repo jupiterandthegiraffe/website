@@ -39,14 +39,14 @@
                       border: 2px solid #909090;
                       border-radius: 26px;
                     ">
-                                        <div class="stat-item"><span class="stat-number"><?php _e( '7', 'jupiter_and_the_giraffe' ); ?></span>
-                                            <span class="stat-label"><?php _e( 'Sections', 'jupiter_and_the_giraffe' ); ?></span>
+                                        <div class="stat-item">
+                                            <span class="stat-number"><?php _e( '7', 'jupiter_and_the_giraffe' ); ?></span><span class="stat-label"><?php _e( 'Sections', 'jupiter_and_the_giraffe' ); ?></span>
                                         </div>
-                                        <div class="stat-item"><span class="stat-number"><?php _e( '21', 'jupiter_and_the_giraffe' ); ?></span>
-                                            <span class="stat-label"><?php _e( 'Questions', 'jupiter_and_the_giraffe' ); ?></span>
+                                        <div class="stat-item">
+                                            <span class="stat-number"><?php _e( '21', 'jupiter_and_the_giraffe' ); ?></span><span class="stat-label"><?php _e( 'Questions', 'jupiter_and_the_giraffe' ); ?></span>
                                         </div>
-                                        <div class="stat-item"><span class="stat-number"><?php _e( '10-15', 'jupiter_and_the_giraffe' ); ?></span>
-                                            <span class="stat-label"><?php _e( 'Minutes', 'jupiter_and_the_giraffe' ); ?></span>
+                                        <div class="stat-item">
+                                            <span class="stat-number"><?php _e( '10-15', 'jupiter_and_the_giraffe' ); ?></span><span class="stat-label"><?php _e( 'Minutes', 'jupiter_and_the_giraffe' ); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -91,8 +91,8 @@
                 <div class="assessment-container">
                     <!-- Progress Header -->
                     <div class="progress-header">
-                        <div class="progress-info"><span class="question-counter"><?php _e( 'Question', 'jupiter_and_the_giraffe' ); ?> <span id="current-question"><?php _e( '1', 'jupiter_and_the_giraffe' ); ?></span> <?php _e( 'of 21', 'jupiter_and_the_giraffe' ); ?></span>
-                            <span class="section-info"><?php _e( 'Section', 'jupiter_and_the_giraffe' ); ?> <span id="current-section"><?php _e( '1', 'jupiter_and_the_giraffe' ); ?></span> <?php _e( 'of 7', 'jupiter_and_the_giraffe' ); ?></span>
+                        <div class="progress-info">
+                            <span class="question-counter"><?php _e( 'Question', 'jupiter_and_the_giraffe' ); ?> <span id="current-question"><?php _e( '1', 'jupiter_and_the_giraffe' ); ?></span> <?php _e( 'of 21', 'jupiter_and_the_giraffe' ); ?></span><span class="section-info"><?php _e( 'Section', 'jupiter_and_the_giraffe' ); ?> <span id="current-section"><?php _e( '1', 'jupiter_and_the_giraffe' ); ?></span> <?php _e( 'of 7', 'jupiter_and_the_giraffe' ); ?></span>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" id="progress-fill"></div>
@@ -154,8 +154,8 @@
                     <div class="results-header">
                         <h2><?php _e( 'Your AI Readiness Assessment Results', 'jupiter_and_the_giraffe' ); ?></h2>
                         <div class="overall-score">
-                            <div class="score-circle"><span id="total-score"><?php _e( '0', 'jupiter_and_the_giraffe' ); ?></span>
-                                <span class="score-max"><?php _e( '/100', 'jupiter_and_the_giraffe' ); ?></span>
+                            <div class="score-circle">
+                                <span id="total-score"><?php _e( '0', 'jupiter_and_the_giraffe' ); ?></span><span class="score-max"><?php _e( '/100', 'jupiter_and_the_giraffe' ); ?></span>
                             </div>
                             <div class="score-category">
                                 <h3 id="score-category-title"></h3>
@@ -249,7 +249,8 @@
                     <p class="thank-you-message"> <?php _e( 'Your AI readiness assessment is complete. We\'ll send your detailed', 'jupiter_and_the_giraffe' ); ?> <?php _e( 'report to your email shortly.', 'jupiter_and_the_giraffe' ); ?> </p>
                     <div class="summary-card">
                         <h3><?php _e( 'Your Assessment Summary', 'jupiter_and_the_giraffe' ); ?></h3>
-                        <div class="summary-score"><span class="summary-number" id="summary-score"><?php _e( '0', 'jupiter_and_the_giraffe' ); ?></span>
+                        <div class="summary-score">
+                            <span class="summary-number" id="summary-score"><?php _e( '0', 'jupiter_and_the_giraffe' ); ?></span>
                             <?php _e( '/100', 'jupiter_and_the_giraffe' ); ?>
                         </div>
                         <p class="summary-category" id="summary-category"></p>
@@ -258,11 +259,12 @@
                         <h3><?php _e( 'Ready to discuss your AI strategy?', 'jupiter_and_the_giraffe' ); ?></h3>
                         <p> <?php _e( 'Our team at Jupiter and the Giraffe is here to help you transform', 'jupiter_and_the_giraffe' ); ?> <?php _e( 'your AI potential into reality.', 'jupiter_and_the_giraffe' ); ?> </p>
                         <div class="contact-details">
-                            <div class="contact-item"><strong><?php _e( 'Email:', 'jupiter_and_the_giraffe' ); ?></strong> 
+                            <div class="contact-item">
+                                <strong><?php _e( 'Email:', 'jupiter_and_the_giraffe' ); ?></strong> 
                                 <?php _e( 'hello@jupiterandthegiraffe.com', 'jupiter_and_the_giraffe' ); ?>
                             </div>
-                            <div class="contact-item"><strong><?php _e( 'Website:', 'jupiter_and_the_giraffe' ); ?> </strong>
-                                <a href="https://jupiterandthegiraffe.com" target="_blank"><?php _e( 'jupiterandthegiraffe.com', 'jupiter_and_the_giraffe' ); ?></a>
+                            <div class="contact-item">
+                                <strong><?php _e( 'Website:', 'jupiter_and_the_giraffe' ); ?> </strong><a href="https://jupiterandthegiraffe.com" target="_blank"><?php _e( 'jupiterandthegiraffe.com', 'jupiter_and_the_giraffe' ); ?></a>
                             </div>
                         </div>
                     </div>

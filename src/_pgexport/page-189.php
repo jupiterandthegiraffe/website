@@ -19,7 +19,8 @@
             <?php $featured_case_study_item_number = 0; ?>
             <?php while ( $featured_case_study->have_posts() && $featured_case_study_item_number++ < 1 ) : $featured_case_study->the_post(); ?>
                 <?php PG_Helper_v2::rememberShownPost(); ?>
-                <div class="results__list results__list--featured"><a class="results__item results__item--featured" target="_blank" href="<?php echo esc_url( get_field( 'link' ) ); ?>"> <div class="results__item-content">
+                <div class="results__list results__list--featured">
+                    <a class="results__item results__item--featured" target="_blank" href="<?php echo esc_url( get_field( 'link' ) ); ?>"> <div class="results__item-content">
                             <div class="results__item-header">
                                 <h2 class="results__item-title"><?php the_title(); ?></h2>
                                 <p style="
@@ -155,7 +156,7 @@
         <h2 class="results__heading"><?php _e( 'Content', 'jupiter_and_the_giraffe' ); ?></h2>
         <?php
             $result_query_content_args = array(
-                'post_type' => array( 'post', 'result' ),
+                'post_type' => 'post',
                 'nopaging' => true,
                 'order' => 'DESC',
                 'orderby' => 'date'
@@ -166,7 +167,7 @@
             <div class="results__list results__list--main">
                 <?php while ( $result_query_content->have_posts() ) : $result_query_content->the_post(); ?>
                     <?php PG_Helper_v2::rememberShownPost(); ?>
-                    <?php if ( get_field( "type" ) == "Tutorial" || get_field(&apos;type&apos;) === "Review" ||  get_post_type() === &apos;post&apos; ) : ?>
+                    <?php if ( get_field( "type" ) == "Tutorial" || get_field("type") == "Review" ||  get_post_type() == "post" ) : ?>
                         <div id="post-<?php the_ID(); ?>" <?php post_class( 'results__item' ); ?>>
                             <?php if ( get_post_type() == "post" ) : ?>
                                 <a href="<?php echo esc_url( get_permalink() ); ?>"> <div class="results__item-content">
